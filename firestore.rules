@@ -61,15 +61,15 @@ service cloud.firestore {
           // Write rules specific to the user's plan
           // By default this ensures only certain plans can update `featured`
           // Uncomment the following line after you've added your Stripe plans below
-          //&& validateWriteForPlan(affectedKeys)
+          && validateWriteForPlan(affectedKeys)
         );
       }
       
       function validateWriteForPlan(affectedKeys){
         // Add your Stripe plans here (also called "Price IDs") 
-        let starterPlan = 'price_xxxxxxxxxxxxxxx';
-        let proPlan = 'price_xxxxxxxxxxxxxxx';
-        let businessPlan = 'price_xxxxxxxxxxxxxxx';
+        let starterPlan = 'price_1KoDnSAFCj2vWApHmsKZxg6e';
+        let proPlan = 'price_1Ko1LGAFCj2vWApHjRvFbTiD';
+        let businessPlan = 'price_1Ko1OjAFCj2vWApHqKSyFUYk';
       
         // Specify protected keys for each plan
         // Currently we prevent updating of `featured` if user has no plan or is on starter plan
