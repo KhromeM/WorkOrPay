@@ -12,7 +12,7 @@ function ContactPage(props) {
         bgImage=""
         bgImageOpacity={1}
         title="Contact Us"
-        subtitle="Feel free to ask ANY question. We will answer!"
+        subtitle="Feel free to ask any question. We answer all questions."
         buttonText="Send message"
         buttonColor="primary"
         showNameField={true}
