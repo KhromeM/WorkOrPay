@@ -67,7 +67,7 @@ service cloud.firestore {
       
       function validateWriteForPlan(affectedKeys){
         // Add your Stripe plans here (also called "Price IDs") 
-        let starterPlan = 'price_1KoDnSAFCj2vWApHmsKZxg6e';
+        let starterPlan = 'price_1Ko1K2AFCj2vWApH7Cago6uk';
         let proPlan = 'price_1Ko1LGAFCj2vWApHjRvFbTiD';
         let businessPlan = 'price_1Ko1OjAFCj2vWApHqKSyFUYk';
       
