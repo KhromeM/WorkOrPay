@@ -156,7 +156,7 @@ function FeaturesSection(props) {
             >
               {props.buttonText}
             </Button>{" "}
-            <Button
+            {/* <Button
               style={{ width: 280, height: 75, fontSize: "35px" }}
               component={Link}
               to={props.button2Path}
@@ -165,7 +165,7 @@ function FeaturesSection(props) {
               color={props.buttonColor}
             >
               Contact Us
-            </Button>
+            </Button> */}
           </Box>
         </Box>
       </Container>
