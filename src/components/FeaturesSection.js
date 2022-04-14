@@ -155,6 +155,16 @@ function FeaturesSection(props) {
               color={props.buttonColor}
             >
               {props.buttonText}
+            </Button>{" "}
+            <Button
+              style={{ width: 280, height: 75, fontSize: "35px" }}
+              component={Link}
+              to={props.button2Path}
+              variant="contained"
+              size="large"
+              color={props.buttonColor}
+            >
+              Contact Us
             </Button>
           </Box>
         </Box>

@@ -44,6 +44,7 @@ function IndexPage(props) {
         buttonText="FAQ"
         buttonColor="primary"
         buttonPath="/faq"
+        button2Path="/contact"
       />
       {/* <TestimonialsSection
         bgColor="light"
