@@ -8,6 +8,7 @@ import NewsletterSection from "./../components/NewsletterSection";
 import { useDarkMode } from "../util/theme";
 import lost from "../resources/lost.svg";
 import "../resources/index.css";
+import FaqSection from "../components/FaqSection";
 function IndexPage(props) {
   const darkMode = useDarkMode();
   return (
@@ -54,6 +55,14 @@ function IndexPage(props) {
         title="Here's what people are saying"
         subtitle=""
       /> */}
+      <FaqSection
+        bgColor="default"
+        size="medium"
+        bgImage=""
+        bgImageOpacity={1}
+        title="Frequently Asked Questions"
+        subtitle=""
+      />
       {
         <NewsletterSection
           bgColor="default"

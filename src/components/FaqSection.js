@@ -8,6 +8,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
+import { Box, Button } from "@material-ui/core";
+import { Link } from "./../util/router";
 
 const useStyles = makeStyles((theme) => ({
   accordion: {
@@ -120,6 +122,23 @@ function FaqSection(props) {
             </AccordionDetails>
           </Accordion>
         ))}
+        <Box textAlign="center">
+          <Button
+            style={{
+              width: 182,
+              height: 50,
+              fontSize: "21px",
+              marginTop: "25px",
+            }}
+            component={Link}
+            to="/contact"
+            variant="contained"
+            size="large"
+            color="primary"
+          >
+            Contact Us
+          </Button>
+        </Box>
       </Container>
     </Section>
   );

@@ -140,7 +140,7 @@ function FeaturesSection(props) {
             </Grid>
           ))}
         </Container>
-        <Box
+        {/* <Box
           sx={{ fontSize: "50px", fontWeight: "500", mt: "60px" }}
           textAlign={{ xs: "center", md: "center" }}
         >
@@ -172,7 +172,7 @@ function FeaturesSection(props) {
           >
             Contact Us
           </Button>
-        </Box>
+        </Box> */}
       </Container>
     </Section>
   );
