@@ -159,9 +159,9 @@ function FeaturesSection(props) {
           </Box>
           <Button
             style={{
-              width: 280,
-              height: 75,
-              fontSize: "35px",
+              width: 182,
+              height: 50,
+              fontSize: "21px",
               marginTop: "25px",
             }}
             component={Link}
