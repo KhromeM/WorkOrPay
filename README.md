@@ -3,6 +3,7 @@
 
 ## Stack
 This project uses the following libraries and services:
+- Codebase Generator [DivJoy] (https://divjoy.com?via=khrome)
 - Hosting - [Vercel](https://vercel.com)
 - Payments - [Stripe](https://stripe.com)
 - Authentication - [Firebase Auth](https://firebase.google.com/products/auth)
