@@ -1,0 +1,165 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      // Validate write operations
+      function validateWrite(affectedKeys){
+        // Keys that the authenticated user should not be able to update
+        let protectedKeys = [
+          'admin',
+          'stripeCustomerId',
+          'stripeSubscriptionId',
+          'stripePriceId',
+          'stripeSubscriptionStatus'
+        ];
+
+        return (
+          // Make sure `email` is a string
+          futureData().email is string
+          // Require `email` be between 3 and 500 chars
+          // 254 is technically the limit but overshoot to be safe (stackoverflow.com/a/574698)
+          && futureData().email.trim().size() >= 3
+          && futureData().email.trim().size() <= 500
+          && (
+            // Make sure `name` either doesn't exist or ...
+            !('name' in futureData().keys()) 
+            || (
+              // Make sure `name` is a string
+              futureData().name is string
+              // And require that it's between 1 and 144 chars
+              && futureData().name.trim().size() >= 1
+              && futureData().name.trim().size() <= 144
+            ) 
+          )
+          // Make sure no protected keys were affected
+          && affectedKeys.hasAny(protectedKeys) == false
+          // Alternatively, instead of protected keys you could have an allow list
+          //&& futureData().keys().hasOnly(allowedKeys)
+        );
+      }
+
+      // The authenticated user can only read their own doc
+      allow read: if isUser(userId);
+      // For create/update we call a validation function and pass in affected keys
+      allow create: if isUser(userId) && validateWrite(futureData().keys());
+      allow update: if isUser(userId) && validateWrite(affectedKeys());
+      // The user doc can't be deleted (better to add an `isDeleted` field if that's needed)
+      allow delete: if false;
+    }
+    
+    match /items/{itemId} {
+      // Validate write operations
+      function validateWrite(affectedKeys){
+        return (
+          // Make sure `name` is a string
+          futureData().name is string
+          // Require `name` be between 1 and 144 chars
+          && futureData().name.trim().size() >= 1
+          && futureData().name.trim().size() <= 144
+          // Make sure `featured` is a bool if it exists
+          && (!('featured' in futureData().keys()) || futureData().featured is bool)
+          // Write rules specific to the user's plan
+          // By default this ensures only certain plans can update `featured`
+          // Uncomment the following line after you've added your Stripe plans below
+          //&& validateWriteForPlan(affectedKeys)
+        );
+      }
+      
+      function validateWriteForPlan(affectedKeys){
+        // Add your Stripe plans here (also called "Price IDs") 
+        let starterPlan = 'price_xxxxxxxxxxxxxxx';
+        let proPlan = 'price_xxxxxxxxxxxxxxx';
+        let businessPlan = 'price_xxxxxxxxxxxxxxx';
+      
+        // Specify protected keys for each plan
+        // Currently we prevent updating of `featured` if user has no plan or is on starter plan
+        let protectedKeysNoPlan = ['featured'];
+        let protectedKeysStarter = ['featured'];
+        // Add protected keys for the other plans if you'd like
+        //let protectedKeysPro = [];
+      
+        // Get extra user data
+        let user = getUserData();
+      
+        // Specify write conditions for each plan (currently just check each plan's protected keys)
+        // Note: There must be a `userHasPlan` check for each plan or write will fail for missing plans
+        return (
+          (userHasNoPlan(user) && affectedKeys.hasAny(protectedKeysNoPlan) == false)
+          || (userHasPlan(user, starterPlan) && affectedKeys.hasAny(protectedKeysStarter) == false)
+          || (userHasPlan(user, proPlan))
+          || (userHasPlan(user, businessPlan))
+          // Example: Here's how you'd require the name "divjoy is cool" under the business plan
+          //|| (userHasPlan(user, businessPlan) && futureData().name == "divjoy is cool")
+        );
+      }
+      
+      // Can only read item if the authenticated user is the owner
+      allow read: if isOwner();
+      // This would allow reads from any user
+      //allow read: if true; 
+      // For create/update we call a validation function and pass in affected keys
+      allow create: if wouldBeOwner() && validateWrite(futureData().keys());
+      // Notice when updating we need to make sure authenticated user is currently the owner
+      // and that they would still be the owner if the write is successful (aka they can't change the owner)
+      allow update: if isOwner() && wouldBeOwner() && validateWrite(affectedKeys());
+      // Users can delete their own items
+      allow delete: if isOwner();
+    }
+
+    // Helper functions that simplify our rules
+
+    // Check if authenticated user's `uid` matches the specified `userId`
+    function isUser(userId) {
+      return request.auth.uid != null && request.auth.uid == userId;
+    }
+
+    // Get current data
+    function currentData() {
+      return resource.data;
+    }
+
+    // Get future data (the final data set if update goes through)
+    function futureData() {
+      return request.resource.data;
+    }
+
+    // Check if authenticated user's `uid` matches data `owner`
+    function isOwner(){
+      return isUser(currentData().owner);
+    }
+
+    // Check if authenticated user's `uid` matches future data `owner`
+    function wouldBeOwner(){
+      return isUser(futureData().owner);
+    }
+
+    // Get keys affected by an update
+    // Requires a diff between `futureData` and `currentData`
+    function affectedKeys() {
+      return futureData().diff(currentData()).affectedKeys();
+    }
+
+    // Query for extra user data belonging to the authenticated user
+    function getUserData(){
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Check if user has an active plan
+    function planIsActive(user){
+      return 'stripeSubscriptionStatus' in user
+        && [user.stripeSubscriptionStatus].toSet().hasAny(['active', 'trialing']);
+    }
+    
+    // Check if user has the specified plan
+    function userHasPlan(user, plan){
+      return planIsActive(user) 
+        && 'stripePriceId' in user
+        && user.stripePriceId == plan
+    }
+    
+    // Check if user has no plan
+    function userHasNoPlan(user){
+      return planIsActive(user) == false;
+    }
+  }
+}
