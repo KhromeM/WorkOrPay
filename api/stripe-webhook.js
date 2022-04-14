@@ -7,13 +7,6 @@ export default async (req, res) => {
 
   try {
     const rawBody = await getRawBody(req);
-    return res.send({
-      status: "success",
-      rawBody: rawBody,
-      signature: headers["stripe-signature"],
-      webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
-      secretKey: process.env.STRIPE_SECRET_KEY,
-    });
 
     const stripeEvent = stripe.webhooks.constructEvent(
       rawBody,
