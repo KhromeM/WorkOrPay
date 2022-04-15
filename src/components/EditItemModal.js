@@ -84,6 +84,7 @@ function EditItemModal(props) {
                 type="text"
                 label="Name"
                 name="name"
+                autoComplete="off"
                 defaultValue={itemData && itemData.name}
                 error={errors.name ? true : false}
                 helperText={errors.name && errors.name.message}
