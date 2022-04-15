@@ -180,9 +180,10 @@ function Navbar(props) {
                     <MenuItem
                       onClick={(event) => {
                         setSpinner(true);
-                        setTimeout(() => {
-                          auth.signout();
-                        }, 1600);
+                        setTimeout(async () => {
+                          await auth.signout();
+                          setSpinner(false);
+                        }, 800);
                       }}
                     >
                       Sign out
