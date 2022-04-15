@@ -18,10 +18,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
-import { Link } from "./../util/router";
+import { history, Link } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { useDarkMode } from "./../util/theme";
 import { Box, Typography } from "@material-ui/core";
+import "./signout.css";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -44,6 +45,7 @@ function Navbar(props) {
   const darkMode = useDarkMode();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuState, setMenuState] = useState(null);
+  const [spinner, setSpinner] = useState(false);
 
   // Use inverted logo if specified
   // and we are in dark mode
@@ -135,7 +137,16 @@ function Navbar(props) {
                       handleOpenMenu(event, "account-menu");
                     }}
                   >
-                    Account
+                    {spinner ? (
+                      <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    ) : (
+                      "Account"
+                    )}
                     <ExpandMoreIcon className={classes.buttonIcon} />
                   </Button>
                   <Menu
@@ -168,10 +179,13 @@ function Navbar(props) {
                     <Divider />
                     <MenuItem
                       onClick={(event) => {
-                        auth.signout();
+                        setSpinner(true);
+                        setTimeout(() => {
+                          auth.signout();
+                        }, 1600);
                       }}
                     >
-                      Signout
+                      Sign out
                     </MenuItem>
                   </Menu>
                 </>
