@@ -62,7 +62,7 @@ function FeaturesSection(props) {
     {
       title: "Form A Contract",
       description:
-        "Once you decide on your specific goal, you and Envariance will form a contract. You will agree to meet atleast the minimum thresholds of the contract, and this can range anywhere from simply committing to a habit daily or a predefined weight loss number. You'd agree to deliver penalties if you fail to do so, but we will guide you throughout the whole journey to make sure you don't have to deliver such penalties.",
+        "Once you decide on your specific goal, you and Envariance will form a contract. You will agree to meet atleast the minimum thresholds of the contract. This can be anything from simply committing to a habit daily or a hitting a specific target such as losing 10lbs. You'd agree to deliver penalties if you fail to do so, but we will guide you throughout the whole journey to make sure you don't have to deliver such penalties.",
       image: contract,
     },
     {
@@ -140,7 +140,7 @@ function FeaturesSection(props) {
             </Grid>
           ))}
         </Container>
-        {/* <Box
+        <Box
           sx={{ fontSize: "50px", fontWeight: "500", mt: "60px" }}
           textAlign={{ xs: "center", md: "center" }}
         >
@@ -172,7 +172,7 @@ function FeaturesSection(props) {
           >
             Contact Us
           </Button>
-        </Box> */}
+        </Box>
       </Container>
     </Section>
   );
