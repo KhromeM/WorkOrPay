@@ -69,8 +69,8 @@ function IndexPage(props) {
           size="medium"
           bgImage=""
           bgImageOpacity={1}
-          title="Stay in the know"
-          subtitle="Receive our latest articles and feature updates"
+          title="Subscribe to stay updated on Envariance!"
+          subtitle="We promise to never spam you or sell your data."
           buttonText="Subscribe"
           buttonColor="primary"
           inputPlaceholder="Enter your email"

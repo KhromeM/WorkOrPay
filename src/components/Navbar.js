@@ -21,6 +21,7 @@ import Section from "./Section";
 import { Link } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { useDarkMode } from "./../util/theme";
+import { Box, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+const pages = ["Products", "Pricing", "FAQ"];
 
 function Navbar(props) {
   const classes = useStyles();
@@ -64,11 +66,43 @@ function Navbar(props) {
         <Container disableGutters={true}>
           <Toolbar>
             <Link to="/">
-              <img src={logo} width="300px" alt="Logo" className={classes.logo} />
+              <Box
+                style={{ height: "64px", marginTop: "0px", paddingTop: "16px" }}
+              >
+                <img
+                  src={logo}
+                  width="300px"
+                  alt="Logo"
+                  className={classes.logo}
+                />
+              </Box>{" "}
             </Link>
+
+            <Box
+              sx={{
+                marginLeft: "16px",
+                marginBottom: "5px",
+                display: { xs: "none", bsm: "flex" },
+              }}
+            >
+              <MenuItem component={Link} to="/">
+                <Typography textalign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem component={Link} to="/dashboard">
+                <Typography textalign="center">Products</Typography>
+              </MenuItem>
+              <MenuItem component={Link} to="/pricing">
+                <Typography textalign="center">Pricing</Typography>
+              </MenuItem>
+              <MenuItem component={Link} to="/faq">
+                <Typography textalign="center">FAQ</Typography>
+              </MenuItem>
+            </Box>
             <div className={classes.spacer} />
-            <Hidden smUp={true} implementation="css">
+
+            <Hidden xlUp={true} implementation="css">
               <IconButton
+                style={{ marginBottom: "8px" }}
                 onClick={() => {
                   setDrawerOpen(true);
                 }}
@@ -79,7 +113,12 @@ function Navbar(props) {
             </Hidden>
             <Hidden xsDown={true} implementation="css">
               {!auth.user && (
-                <Button component={Link} to="/auth/signin" color="inherit">
+                <Button
+                  style={{ marginBottom: "6px" }}
+                  component={Link}
+                  to="/auth/signin"
+                  color="inherit"
+                >
                   Sign in
                 </Button>
               )}
@@ -87,6 +126,7 @@ function Navbar(props) {
               {auth.user && (
                 <>
                   <Button
+                    style={{ marginBottom: "5px" }}
                     color="inherit"
                     aria-label="Account"
                     aria-controls="account-menu"
@@ -140,7 +180,7 @@ function Navbar(props) {
               <IconButton
                 color="inherit"
                 onClick={darkMode.toggle}
-                style={{ opacity: 0.6 }}
+                style={{ opacity: 0.6, marginBottom: "8px" }}
               >
                 {darkMode.value && <NightsStayIcon />}
 
@@ -160,15 +200,38 @@ function Navbar(props) {
           onClick={() => setDrawerOpen(false)}
         >
           {!auth.user && (
-            <ListItem component={Link} to="/auth/signin" button={true}>
-              <ListItemText>Sign in</ListItemText>
-            </ListItem>
+            <>
+              <ListItem component={Link} to="/" button={true}>
+                <ListItemText>Home</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/auth/signin" button={true}>
+                <ListItemText>Sign in</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/dashboard" button={true}>
+                <ListItemText>Products</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/pricing" button={true}>
+                <ListItemText>Pricing</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/faq" button={true}>
+                <ListItemText>FAQ</ListItemText>
+              </ListItem>
+            </>
           )}
 
           {auth.user && (
             <>
+              <ListItem component={Link} to="/" button={true}>
+                <ListItemText>Home</ListItemText>
+              </ListItem>
               <ListItem component={Link} to="/dashboard" button={true}>
-                <ListItemText>Dashboard</ListItemText>
+                <ListItemText>Products</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/pricing" button={true}>
+                <ListItemText>Pricing</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/faq" button={true}>
+                <ListItemText>FAQ</ListItemText>
               </ListItem>
               <ListItem component={Link} to="/settings/general" button={true}>
                 <ListItemText>Settings</ListItemText>
@@ -198,6 +261,7 @@ function Navbar(props) {
           </ListItem>
         </List>
       </Drawer>
+      <Divider />
     </Section>
   );
 }

@@ -69,9 +69,10 @@ const themeConfig = {
       values: {
         xs: 0,
         sm: 600,
+        bsm: 879,
         md: 960,
         lg: 1200,
-        xl: 1920,
+        xl: 879,
       },
     },
     // Override component styles
