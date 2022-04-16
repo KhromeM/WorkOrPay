@@ -7,11 +7,13 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import contact from "./../util/contact";
+import { useAuth } from "./../util/auth";
 
 function Contact(props) {
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
   const { handleSubmit, register, errors, reset } = useForm();
+  const auth = useAuth();
 
   const onSubmit = (data) => {
     // Show pending indicator
@@ -80,6 +82,7 @@ function Contact(props) {
               inputRef={register({
                 required: "Please enter your email",
               })}
+              value={auth.user ? auth.user.email : ""}
             />
           </Grid>
           <Grid item={true} xs={12}>
