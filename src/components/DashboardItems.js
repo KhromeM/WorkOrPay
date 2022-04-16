@@ -16,8 +16,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
-import { useAuth } from "./../util/auth";
-import { updateItem, deleteItem, useItemsByOwner } from "./../util/db";
+import { useAuth } from "../util/auth";
+import { updateItem, deleteItem, useItemsByOwner } from "../util/db";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
