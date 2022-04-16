@@ -39,7 +39,7 @@ function IndexPage(props) {
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-        title="Lock In Future Desired Behavior"
+        title="Lock In Desired Future Behavior"
         subtitle=""
         buttonAboveText="More questions?"
         buttonText="FAQ"
@@ -69,7 +69,7 @@ function IndexPage(props) {
           size="medium"
           bgImage=""
           bgImageOpacity={1}
-          title="Subscribe to stay updated on Envariance!"
+          title="Subscribe to stay updated!"
           subtitle="We promise to never spam you or sell your data."
           buttonText="Subscribe"
           buttonColor="primary"
