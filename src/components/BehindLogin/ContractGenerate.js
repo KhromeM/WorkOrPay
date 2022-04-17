@@ -158,7 +158,7 @@ function Contact(props) {
                 name="goal"
                 multiline={true}
                 rows={3}
-                error={errors.message ? true : false}
+                error={errors.goal ? true : false}
                 helperText={errors.goal && errors.goal.message}
                 fullWidth={true}
                 inputRef={register({
