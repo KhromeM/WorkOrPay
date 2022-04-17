@@ -173,7 +173,7 @@ function Contact(props) {
                   type="text"
                   name="dailyminutes"
                   label="dailyminutes"
-                  error={errors.dailyminutes ? true : false}
+                  error={errors?.dailyminutes ? true : false}
                   helperText={
                     errors.dailyminutes && errors.dailyminutes.message
                   }
