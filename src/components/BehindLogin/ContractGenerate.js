@@ -112,7 +112,7 @@ function Contact(props) {
                   inputRef={register({
                     required: "Please enter your name",
                   })}
-                  value={auth.user ? auth.user.displayName : ""}
+                  // value={auth.user ? auth.user.displayName : ""}
                 />
               </Grid>
             )}
@@ -129,7 +129,7 @@ function Contact(props) {
                 inputRef={register({
                   required: "Please enter your email",
                 })}
-                value={auth.user ? auth.user.email : ""}
+                // value={auth.user ? auth.user.email : ""}
               />
             </Grid>
             <Grid item={true} xs={12}>
@@ -172,7 +172,7 @@ function Contact(props) {
               <FormControl size="small" variant="filled" fullWidth>
                 <InputLabel id="dailyminutes">Daily Minutes</InputLabel>
                 <Select
-                  value={minutes}
+                  // value={minutes}
                   type="text"
                   name="dailyminutes"
                   label="dailyminutes"
@@ -180,7 +180,7 @@ function Contact(props) {
                   helperText={
                     errors.dailyminutes && errors.dailyminutes.message
                   }
-                  onChange={(e) => setMinutes(e.target.value)}
+                  // onChange={(e) => setMinutes(e.target.value)}
                   inputRef={register({
                     required: "Please enter your goal",
                   })}
@@ -205,11 +205,11 @@ function Contact(props) {
                 <InputLabel id="monthlyhours">Total Monthly Hours</InputLabel>
                 <Select
                   required
-                  value={hours}
+                  // value={hours}
                   type="text"
                   name="monthlyhours"
                   label="monthlyhours"
-                  onChange={(e) => setHours(e.target.value)}
+                  // onChange={(e) => setHours(e.target.value)}
                 >
                   <MenuItem value={10}>10 Hours</MenuItem>
                   <MenuItem value={20}>20 Hours</MenuItem>
@@ -223,11 +223,11 @@ function Contact(props) {
                 <InputLabel id="hours">Type of Penalty</InputLabel>
                 <Select
                   required
-                  value={penalty}
+                  // value={penalty}
                   type="text"
                   name="penalty"
                   label="penalty"
-                  onChange={(e) => setPenalty(e.target.value)}
+                  // onChange={(e) => setPenalty(e.target.value)}
                 >
                   <MenuItem value={"financial"}>Financial</MenuItem>
                   <MenuItem value={"social"}>Social Media Post</MenuItem>
