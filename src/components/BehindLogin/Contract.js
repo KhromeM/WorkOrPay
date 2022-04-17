@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Alert from "@material-ui/lab/Alert";
 import Paper from "@material-ui/core/Paper";
@@ -16,9 +16,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
-import { useAuth } from "../util/auth";
-import { updateItem, deleteItem, useItemsByOwner } from "../util/db";
-
+import { useAuth } from "../../util/auth";
+import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
+import { Card, CardContent } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -30,12 +30,12 @@ export default function Contract() {
   const classes = useStyles();
 
   const auth = useAuth();
+  useEffect(() => {});
   const {
     data: items,
     status: itemsStatus,
     error: itemsError,
   } = useItemsByOwner(auth.user.uid);
-
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -46,15 +46,11 @@ export default function Contract() {
 
   return (
     <Card>
-
       <Typography variant="h6" paragraph={true}>
         <strong> Your Contract</strong>
       </Typography>
 
-      <CardContent className={classes.cardContent}>
-
-      </CardContent>
+      <CardContent className={classes.cardContent}></CardContent>
     </Card>
   );
 }
-
