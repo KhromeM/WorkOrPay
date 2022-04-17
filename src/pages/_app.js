@@ -9,6 +9,7 @@ import DashboardPage from "./dashboard";
 import AuthPage from "./auth";
 import SettingsPage from "./settings";
 import LegalPage from "./legal";
+import ContractGenerate from "../components/BehindLogin/ContractGenerate";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Switch, Route, Router, useLocation } from "./../util/router";
@@ -43,6 +44,11 @@ function MiniApp() {
               <Route exact path="/contact" component={ContactPage} />
               <Route exact path="/pricing" component={PricingPage} />
               <Route exact path="/dashboard" component={DashboardPage} />
+              <Route
+                exact
+                path="/generatecontract"
+                component={ContractGenerate}
+              />
               <Route exact path="/auth/:type" component={AuthPage} />
               <Route exact path="/settings/:section" component={SettingsPage} />
               {/* <Route exact path="/legal/:section" component={LegalPage} /> */}
