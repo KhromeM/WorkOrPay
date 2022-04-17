@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import Alert from "@material-ui/lab/Alert";
+import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import LinkMui from "@material-ui/core/Link";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
+import StarIcon from "@material-ui/icons/Star";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, useRouter } from "../../util/router";
-import { useAuth } from "../../util/auth";
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
-import pdf from "../resources/example.pdf"
+import EditItemModal from "./EditItemModal";
+import { useAuth } from "../util/auth";
+import { updateItem, deleteItem, useItemsByOwner } from "../util/db";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,11 +26,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Contract() {
+export default function Contract() {
   const classes = useStyles();
 
   const auth = useAuth();
-  const router = useRouter();
+  const {
+    data: items,
+    status: itemsStatus,
+    error: itemsError,
+  } = useItemsByOwner(auth.user.uid);
+
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -40,17 +53,8 @@ function Contract() {
 
       <CardContent className={classes.cardContent}>
 
-        <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-          <Page height={300} pageNumber={pageNumber} />
-        </Document>
-        
-        <p>
-          Page {pageNumber} of {numPages}
-        </p>
-
       </CardContent>
     </Card>
   );
 }
 
-export default Contract;
