@@ -41,6 +41,7 @@ function EditItemModal(props) {
 
   const onSubmit = (data) => {
     setPending(true);
+    // firestore rules require a name property for all items
     data.name='default'
 
 
@@ -85,6 +86,7 @@ function EditItemModal(props) {
                 variant="outlined"
                 type="text"
                 label="Minutes"
+                // firestore rules requie a name prooperty for all items
                 name="minutes"
                 autoComplete="off"
                 defaultValue={itemData && itemData.name}

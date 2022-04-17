@@ -99,7 +99,6 @@ function DailySubmission(props) {
                 </ListItemSecondaryAction>
               </ListItem>
             ))}
-            <div>Add Total</div>
           </List>
         )}
       </Paper>
