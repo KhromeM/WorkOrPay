@@ -66,6 +66,8 @@ function Contact(props) {
                 inputRef={register({
                   required: "Please enter your name",
                 })}
+                value={auth.user ? auth.user.displayName : ""}
+
               />
             </Grid>
           )}

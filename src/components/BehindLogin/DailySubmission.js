@@ -21,6 +21,7 @@ import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
 const useStyles = makeStyles((theme) => ({
   paperItems: {
     minHeight: "300px",
+    paddingBottom: '10px'
   },
   featured: {
     backgroundColor:
@@ -43,6 +44,10 @@ function DailySubmission(props) {
   const [updatingItemId, setUpdatingItemId] = useState(null);
 
   const itemsAreEmpty = !items || items.length === 0;
+  let total = 0
+  if (items) {items.map((item) => {
+    total+= Number(item.minutes)
+  })}
   
 
   return (
@@ -53,7 +58,7 @@ function DailySubmission(props) {
         </Box>
       )}
 
-      <Paper className={classes.paperItems}>
+      <Paper className={classes.paperItems} >
         <Box
           display="flex"
           justifyContent="space-between"
@@ -98,9 +103,10 @@ function DailySubmission(props) {
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
-            ))}
+            ))}<Box sx={{fontSize: "1.75em", textAlign: 'center', marginTop: '10px'}}>Total minutes today: <strong>{total}</strong></Box>
           </List>
         )}
+        
       </Paper>
 
       {creatingItem && <EditItemModal onDone={() => setCreatingItem(false)} />}
