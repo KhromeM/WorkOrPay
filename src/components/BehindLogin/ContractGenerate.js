@@ -116,7 +116,6 @@ function Contact(props) {
                 />
               </Grid>
             )}
-
             <Grid item={true} xs={12} md={true ? 6 : 12}>
               <TextField
                 variant="outlined"
@@ -149,7 +148,6 @@ function Contact(props) {
               />
             </Grid>
             <Grid item={true} xs={12}></Grid>
-
             <Grid item={true} xs={12}>
               <TextField
                 variant="outlined"
@@ -167,7 +165,7 @@ function Contact(props) {
               />
             </Grid>
             <Grid item={true} xs={12}></Grid>
-
+            {/* 
             <Grid item={true} xs={8} md={4}>
               <FormControl size="small" variant="filled" fullWidth>
                 <InputLabel id="dailyminutes">Daily Minutes</InputLabel>
@@ -282,8 +280,8 @@ function Contact(props) {
                       pattern: /^[0-9]+(\.[0-9][0-9])?$/,
                     })}
                   />
-                </Grid>
-              ))}
+                </Grid> */}
+            ))}
             {/* <Grid item={true} xs={12}>
               <TextField
                 variant="outlined"
@@ -300,10 +298,8 @@ function Contact(props) {
                 })}
               />
             </Grid> */}
-
             {/* button below */}
             <Grid item={true} xs={12}></Grid>
-
             <Grid style={{ textAlign: "center" }} item={true} xs={12}>
               <Button
                 variant="contained"
