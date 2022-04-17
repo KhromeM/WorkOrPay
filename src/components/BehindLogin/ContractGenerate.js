@@ -35,8 +35,8 @@ function Contact(props) {
     // Show pending indicator
     setPending(true);
     console.log(data);
-    data.minutes = String(minutes);
-    data.hours = String(hours);
+    data.minutes = minutes.toString();
+    data.hours = hours.toString();
     data.penalty = penalty;
     data.type = "contract";
     console.log(data);
