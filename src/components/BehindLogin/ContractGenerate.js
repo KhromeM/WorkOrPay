@@ -167,7 +167,7 @@ function Contact(props) {
             <Grid item={true} xs={12}></Grid>
             <Grid item={true} xs={8} md={4}>
               <FormControl size="small" variant="filled" fullWidth>
-                <InputLabel id="dailyminutes">Daily Minutes</InputLabel>
+                {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
                 <Select
                   // value={minutes}
                   type="text"
