@@ -11,10 +11,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 import DashboardItems from "./DashboardItems.js";
-import DailySubmission from "./BehindLogin/DailySubmission.js"
+import DailySubmission from "./BehindLogin/DailySubmission.js";
 // import Streaks from "./Streaks";
 import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -59,25 +60,27 @@ function DashboardSection(props) {
         )}
 
         <Grid container={true} spacing={4}>
-        {/* <Grid item={true} xs={12} md={6}>
+          {/* <Grid item={true} xs={12} md={6}>
             <Streaks />
           </Grid> */}
           <Grid item={true} xs={12} md={6}>
             <DashboardItems />
           </Grid>
           <Grid item={true} xs={12} md={6}>
-            <DailySubmission/>
+            <DailySubmission />
           </Grid>
           <Grid item={true} xs={12} md={6}>
             <Card>
               <CardContent className={classes.cardContent}>
                 <Box>
                   <Typography variant="h6" paragraph={true}>
-                    <strong>{auth.user.displayName ? `Welcome back, ${auth.user.displayName}` : 'Welcome stranger! Go to settings to add your name!'}</strong>
+                    <strong>
+                      {auth.user.displayName
+                        ? `Welcome back, ${auth.user.displayName}`
+                        : "Welcome stranger! Go to settings to add your name!"}
+                    </strong>
                   </Typography>
-                  <Typography paragraph={true}>
-                    
-                  </Typography>
+                  <Typography paragraph={true}></Typography>
                   <Box mt={3}>
                     <Typography variant="h6" paragraph={true}>
                       <strong>User info</strong>
@@ -127,6 +130,24 @@ function DashboardSection(props) {
                 </Box>
               </CardContent>
             </Card>
+          </Grid>
+          {/* generate contract button below */}
+          <Grid
+            style={{ paddingTop: "80px", textAlign: "center" }}
+            item={true}
+            xs={12}
+            md={6}
+          >
+            <Button
+              style={{ marginTop: "20px" }}
+              variant="contained"
+              size="medium"
+              color="secondary"
+              component={Link}
+              to="/generatecontract"
+            >
+              <strong>Generate Contract</strong>
+            </Button>
           </Grid>
         </Grid>
       </Container>
