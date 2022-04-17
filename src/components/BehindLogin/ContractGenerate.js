@@ -175,6 +175,8 @@ function Contact(props) {
                 {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
                 <Select
                   // value={minutes}
+                  variant="filled"
+                  fullWidth
                   type="text"
                   name="dailyminutes"
                   label="dailyminutes"
@@ -183,6 +185,7 @@ function Contact(props) {
                     errors?.dailyminutes && errors.dailyminutes.message
                   }
                   // onChange={(e) => setMinutes(e.target.value)}
+                  value={10}
                   ref={register({
                     required: "Please enter your goal",
                   })}
