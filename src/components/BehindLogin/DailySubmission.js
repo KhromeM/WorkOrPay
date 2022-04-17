@@ -80,7 +80,7 @@ function DailySubmission(props) {
                 divider={index !== items.length - 1}
                 className={item.featured ? classes.featured : ""}
               >
-                <ListItemText>{item.name}</ListItemText>
+                <ListItemText>{item.minutes}</ListItemText>
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"

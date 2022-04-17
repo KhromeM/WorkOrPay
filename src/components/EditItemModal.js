@@ -42,6 +42,7 @@ function EditItemModal(props) {
   const onSubmit = (data) => {
     setPending(true);
 
+    console.log(auth.user)
     const query = props.id
       ? updateItem(props.id, data)
       : createItem({ owner: auth.user.uid, ...data });
@@ -84,39 +85,6 @@ function EditItemModal(props) {
                 type="text"
                 label="Name"
                 name="name"
-                autoComplete="off"
-                defaultValue={itemData && itemData.name}
-                error={errors.name ? true : false}
-                helperText={errors.name && errors.name.message}
-                fullWidth={true}
-                autoFocus={true}
-                inputRef={register({
-                  required: "Please enter a name",
-                })}
-              />
-            </Grid>
-            <Grid item={true} xs={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                type="submit"
-                disabled={pending}
-              >
-                {!pending && <span>Save</span>}
-
-                {pending && <CircularProgress size={28} />}
-              </Button>
-            </Grid>
-          </Grid>
-        </form><form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container={true} spacing={3}>
-            <Grid item={true} xs={12}>
-              <TextField
-                variant="outlined"
-                type="text"
-                label="fullname"
-                name="fullname"
                 autoComplete="off"
                 defaultValue={itemData && itemData.name}
                 error={errors.name ? true : false}

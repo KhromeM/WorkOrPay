@@ -41,10 +41,12 @@ function EditItemModal(props) {
 
   const onSubmit = (data) => {
     setPending(true);
+    data.name='default'
+
 
     const query = props.id
       ? updateItem(props.id, data)
-      : createItem({ owner: auth.user.uid, ...data });
+      : createItem({owner: auth.user.uid, ...data });
 
     query
       .then(() => {
@@ -83,7 +85,7 @@ function EditItemModal(props) {
                 variant="outlined"
                 type="text"
                 label="Minutes"
-                name="Minutes"
+                name="minutes"
                 autoComplete="off"
                 defaultValue={itemData && itemData.name}
                 error={errors.name ? true : false}
