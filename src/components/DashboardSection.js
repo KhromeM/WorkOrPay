@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 import DashboardItems from "./DashboardItems.js";
-// import Contract from "./Contract"
+import DailySubmission from "./BehindLogin/DailySubmission.js"
 // import Streaks from "./Streaks";
 import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
@@ -66,9 +66,9 @@ function DashboardSection(props) {
             <DashboardItems />
           </Grid>
           <Grid item={true} xs={12} md={6}>
-            {/* <Contract />
+            <DailySubmission/>
           </Grid>
-          <Grid item={true} xs={12} md={6}> */}
+          <Grid item={true} xs={12} md={6}>
             <Card>
               <CardContent className={classes.cardContent}>
                 <Box>

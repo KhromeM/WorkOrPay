@@ -10,8 +10,8 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
-import { useAuth } from "./../util/auth";
-import { useItem, updateItem, createItem } from "./../util/db";
+import { useAuth } from "../../util/auth";
+import { useItem, updateItem, createItem } from "../../util/db";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -82,8 +82,8 @@ function EditItemModal(props) {
               <TextField
                 variant="outlined"
                 type="text"
-                label="Name"
-                name="name"
+                label="Minutes"
+                name="Minutes"
                 autoComplete="off"
                 defaultValue={itemData && itemData.name}
                 error={errors.name ? true : false}
@@ -91,40 +91,7 @@ function EditItemModal(props) {
                 fullWidth={true}
                 autoFocus={true}
                 inputRef={register({
-                  required: "Please enter a name",
-                })}
-              />
-            </Grid>
-            <Grid item={true} xs={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                type="submit"
-                disabled={pending}
-              >
-                {!pending && <span>Save</span>}
-
-                {pending && <CircularProgress size={28} />}
-              </Button>
-            </Grid>
-          </Grid>
-        </form><form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container={true} spacing={3}>
-            <Grid item={true} xs={12}>
-              <TextField
-                variant="outlined"
-                type="text"
-                label="fullname"
-                name="fullname"
-                autoComplete="off"
-                defaultValue={itemData && itemData.name}
-                error={errors.name ? true : false}
-                helperText={errors.name && errors.name.message}
-                fullWidth={true}
-                autoFocus={true}
-                inputRef={register({
-                  required: "Please enter a name",
+                  required: "Please enter how many minutes you worked.",
                 })}
               />
             </Grid>
