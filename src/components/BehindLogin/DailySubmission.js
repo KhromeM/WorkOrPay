@@ -46,7 +46,8 @@ function DailySubmission(props) {
   const itemsAreEmpty = !items || items.length === 0;
   let total = 0
   if (items) {items.map((item) => {
-    total+= Number(item.minutes)
+     if(item.minutes)
+    {total+= Number(item.minutes)}
   })}
   
 
