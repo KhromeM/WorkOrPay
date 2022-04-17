@@ -169,7 +169,10 @@ function Contact(props) {
               {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
               <TextField
                 // value={minutes}
-
+                select
+                SelectProps={{
+                  native: true,
+                }}
                 type="text"
                 name="dailyminutes"
                 label="dailyminutes"
@@ -180,8 +183,8 @@ function Contact(props) {
                   required: "Please enter your goal",
                 })}
               >
-                <MenuItem value={10}>10 Minutes</MenuItem>
-                <MenuItem value={20}>20 Minutes</MenuItem>
+                <option value={10}>10 Minutes</option>
+                <option value={20}>20 Minutes</option>
                 <MenuItem value={30}>30 Minutes</MenuItem>
                 <MenuItem value={40}>40 Minutes</MenuItem>
                 <MenuItem value={50}>50 Minutes</MenuItem>
