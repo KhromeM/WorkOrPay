@@ -166,7 +166,12 @@ function Contact(props) {
             </Grid>
             <Grid item={true} xs={12}></Grid>
             <Grid item={true} xs={8} md={4}>
-              <FormControl size="small" variant="filled" fullWidth>
+              <FormControl
+                name="dailyminutes"
+                size="small"
+                variant="filled"
+                fullWidth
+              >
                 {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
                 <Select
                   // value={minutes}
@@ -178,7 +183,7 @@ function Contact(props) {
                     errors?.dailyminutes && errors.dailyminutes.message
                   }
                   // onChange={(e) => setMinutes(e.target.value)}
-                  inputRef={register({
+                  ref={register({
                     required: "Please enter your goal",
                   })}
                 >
