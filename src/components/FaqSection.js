@@ -51,7 +51,7 @@ function FaqSection(props) {
       answer:
         "If you really want extra motivation, you can agree to a financial penalty in your contract. A financial penalty requires you make a deposit at the begining of the month. We hold the money as the middleman temporarily until the end date specified in the contract. If you meet your targets and achieve your goal, you get the money back! However, if you fail to do so, we will send the money to charities or even causes you hate (anti-charities), to further motivate you to not fail.",
       answer2:
-        "NOTE: Because of transaction processing fees, we DEDUCT 5% from deposits before sending them back to you or sending them elsewhere. EXAMPLE: If you deposit $100, then fulfill your goals, you will get $95 back. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction.",
+        "NOTE: Because of transaction processing fees, we DEDUCT 3% from deposits before sending them back to you or sending them elsewhere. EXAMPLE: If you deposit $100, then fulfill your goals, you will get $97 back. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction.",
     },
     {
       question: "What are social media penalties?",
