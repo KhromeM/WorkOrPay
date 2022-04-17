@@ -166,39 +166,30 @@ function Contact(props) {
             </Grid>
             <Grid item={true} xs={12}></Grid>
             <Grid item={true} xs={8} md={4}>
-              <FormControl
+              {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
+              <TextField
+                // value={minutes}
+
+                type="text"
                 name="dailyminutes"
-                size="small"
-                variant="filled"
-                fullWidth
+                label="dailyminutes"
+                error={errors?.dailyminutes ? true : false}
+                helperText={errors?.dailyminutes && errors.dailyminutes.message}
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please enter your goal",
+                })}
               >
-                {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
-                <Select
-                  // value={minutes}
-                  defaultValue
-                  type="text"
-                  name="dailyminutes"
-                  label="dailyminutes"
-                  error={errors?.dailyminutes ? true : false}
-                  helperText={
-                    errors?.dailyminutes && errors.dailyminutes.message
-                  }
-                  // onChange={(e) => setMinutes(e.target.value)}
-                  // ref={register({
-                  //   required: "Please enter your goal",
-                  // })}
-                >
-                  <MenuItem value={10}>10 Minutes</MenuItem>
-                  <MenuItem value={20}>20 Minutes</MenuItem>
-                  <MenuItem value={30}>30 Minutes</MenuItem>
-                  <MenuItem value={40}>40 Minutes</MenuItem>
-                  <MenuItem value={50}>50 Minutes</MenuItem>
-                  <MenuItem value={60}>60 Minutes</MenuItem>
-                  <MenuItem value={70}>70 Minutes</MenuItem>
-                  <MenuItem value={80}>80 Minutes</MenuItem>
-                  <MenuItem value={90}>90 Minutes</MenuItem>
-                </Select>
-              </FormControl>
+                <MenuItem value={10}>10 Minutes</MenuItem>
+                <MenuItem value={20}>20 Minutes</MenuItem>
+                <MenuItem value={30}>30 Minutes</MenuItem>
+                <MenuItem value={40}>40 Minutes</MenuItem>
+                <MenuItem value={50}>50 Minutes</MenuItem>
+                <MenuItem value={60}>60 Minutes</MenuItem>
+                <MenuItem value={70}>70 Minutes</MenuItem>
+                <MenuItem value={80}>80 Minutes</MenuItem>
+                <MenuItem value={90}>90 Minutes</MenuItem>
+              </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
             {/* 
