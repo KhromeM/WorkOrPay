@@ -175,7 +175,7 @@ function Contact(props) {
                   label="dailyminutes"
                   error={errors?.dailyminutes ? true : false}
                   helperText={
-                    errors.dailyminutes && errors.dailyminutes.message
+                    errors?.dailyminutes && errors.dailyminutes.message
                   }
                   // onChange={(e) => setMinutes(e.target.value)}
                   inputRef={register({
