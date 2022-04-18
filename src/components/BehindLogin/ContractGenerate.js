@@ -180,11 +180,17 @@ function Contact(props) {
             </Grid>
             <Grid item={true} xs={12}></Grid>
             <Grid item={true} xs={8} md={2}>
-              <InputLabel id="dollars">Financial Penalty</InputLabel>
+              <InputLabel
+                style={{ textAlign: "center", marginBottom: "10px" }}
+                id="dollars"
+              >
+                Financial Penalty
+              </InputLabel>
               <TextField
                 // value={minutes}
                 fullWidth
                 select
+                variant="outlined"
                 SelectProps={{
                   native: true,
                 }}
@@ -220,12 +226,17 @@ function Contact(props) {
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={4} md={1}>
+            <Grid item={true} xs={4} md={3}>
+              <InputLabel
+                style={{ marginBottom: "10px", textAlign: "center" }}
+                id="days"
+              >
+                Days until Deadline
+              </InputLabel>
               <TextField
                 variant="outlined"
                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 
-                label="Days"
                 name="days"
                 multiline={true}
                 rows={1}
@@ -253,10 +264,16 @@ function Contact(props) {
             <Grid item={true} xs={12}></Grid>
 
             <Grid item={true} xs={12} md={5}>
-              <InputLabel id="beneficiary">Beneficiary of Donation</InputLabel>
+              <InputLabel
+                style={{ textAlign: "center", marginBottom: "10px" }}
+                id="beneficiary"
+              >
+                Beneficiary of Donation
+              </InputLabel>
               <TextField
                 // value={minutes}
                 fullWidth
+                variant="outlined"
                 select
                 size="large"
                 SelectProps={{
@@ -266,7 +283,7 @@ function Contact(props) {
                 InputProps={{
                   inputProps: {
                     style: {
-                      height: "50px",
+                      height: "20px",
                       fontSize: "18px",
                       textAlign: "center",
                     },
@@ -293,6 +310,44 @@ function Contact(props) {
                 <option value={250}>Climate Change Fund</option>
                 <option value={500}>Animal Welfare</option>
               </TextField>
+            </Grid>
+            <Grid item={true} xs={12}></Grid>
+
+            <Grid item={true} xs={4} md={4}>
+              <InputLabel
+                style={{ textAlign: "center", marginBottom: "10px" }}
+                id="phone"
+              >
+                Phone Number
+              </InputLabel>
+
+              <TextField
+                variant="outlined"
+                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+
+                name="phone"
+                multiline={true}
+                rows={1}
+                error={errors.phone ? true : false}
+                // value={dollars}
+                // onChange={(e) => setDollars(e.target.value)}
+                helperText={errors.phone && errors.phone.message}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
+                fullWidth={true}
+                defaultValue={8008008000}
+                inputRef={register({
+                  required: "Must enter a phone number",
+                  pattern: {
+                    value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
+                    message: "You must enter a valid 10 digit phone number.",
+                  },
+                })}
+              />
             </Grid>
             {/* save below
             <Grid item={true} xs={8} md={4}>

@@ -21,7 +21,7 @@ import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
 const useStyles = makeStyles((theme) => ({
   paperItems: {
     minHeight: "300px",
-    paddingBottom: '10px'
+    paddingBottom: "10px",
   },
   featured: {
     backgroundColor:
@@ -44,22 +44,24 @@ function DailySubmission(props) {
   const [updatingItemId, setUpdatingItemId] = useState(null);
 
   const itemsAreEmpty = !items || items.length === 0;
-  let total = 0
-  if (items) {items.map((item) => {
-     if(item.minutes)
-    {total+= Number(item.minutes)}
-  })}
-  
+  let total = 0;
+  if (items) {
+    items.map((item) => {
+      if (item.minutes) {
+        total += Number(item.minutes);
+      }
+    });
+  }
 
   return (
     <>
-       {itemsError && (
+      {itemsError && (
         <Box mb={3}>
           <Alert severity="error">{itemsError.message}</Alert>
         </Box>
       )}
 
-      <Paper className={classes.paperItems} >
+      <Paper className={classes.paperItems}>
         <Box
           display="flex"
           justifyContent="space-between"
@@ -80,34 +82,45 @@ function DailySubmission(props) {
 
         {itemsStatus !== "loading" && items && items.length > 0 && (
           <List disablePadding={true}>
-            {items.map((item, index) => (
-              <ListItem
-                key={index}
-                divider={index !== items.length - 1}
-                className={item.featured ? classes.featured : ""}
-              >
-                <ListItemText>{item.minutes}</ListItemText>
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="update"
-                    onClick={() => setUpdatingItemId(item.id)}
+            {items.map((item, index) => {
+              if (item.type === "dailysubmissions")
+                return (
+                  <ListItem
+                    key={index}
+                    divider={index !== items.length - 1}
+                    className={item.featured ? classes.featured : ""}
                   >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => deleteItem(item.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}<Box sx={{fontSize: "1.75em", textAlign: 'center', marginTop: '10px'}}>Total minutes today: <strong>{total}</strong></Box>
+                    <ListItemText>{item.minutes}</ListItemText>
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge="end"
+                        aria-label="update"
+                        onClick={() => setUpdatingItemId(item.id)}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => deleteItem(item.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+            })}
+            <Box
+              sx={{
+                fontSize: "1.75em",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Total minutes today: <strong>{total}</strong>
+            </Box>
           </List>
         )}
-        
       </Paper>
 
       {creatingItem && <EditItemModal onDone={() => setCreatingItem(false)} />}

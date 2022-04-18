@@ -42,12 +42,12 @@ function EditItemModal(props) {
   const onSubmit = (data) => {
     setPending(true);
     // firestore rules require a name property for all items
-    data.name='default'
-
+    data.name = "default";
+    data.type = "dailysubmissions";
 
     const query = props.id
       ? updateItem(props.id, data)
-      : createItem({owner: auth.user.uid, ...data });
+      : createItem({ owner: auth.user.uid, ...data });
 
     query
       .then(() => {
