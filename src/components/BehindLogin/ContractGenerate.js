@@ -237,6 +237,46 @@ function Contact(props) {
                 })}
               />
             </Grid>
+            <Grid item={true} xs={12}></Grid>
+
+            <Grid item={true} xs={10} md={5}>
+              <InputLabel id="beneficiary">Beneficiary of Donation</InputLabel>
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                size="large"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
+                InputProps={{
+                  inputProps: {
+                    style: { fontSize: "18px", textAlign: "center" },
+                  },
+                }}
+                type="text"
+                name="beneficiary"
+                // label="Daily Minutes"
+                error={errors?.beneficiary ? true : false}
+                helperText={errors?.beneficiary && errors.beneficiary.message}
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please choose your beneficiary.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select a choice{" "}
+                </option>
+                <option value={25}>(Anti-Charity) Trump Super PAC</option>
+                <option value={1000}>(Anti-Charity) Clinton Foundation</option>
+                <option value={50}>Doctors Without Border</option>
+                <option value={100}>Abortion</option>
+                <option value={150}>Against Malaria Foundation</option>
+                <option value={250}>Climate Change Fund</option>
+                <option value={500}>Animal Welfare</option>
+              </TextField>
+            </Grid>
             {/* save below
             <Grid item={true} xs={8} md={4}>
                <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
