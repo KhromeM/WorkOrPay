@@ -64,11 +64,7 @@ function MiniApp() {
               <Route
                 exact
                 path="/purchasesingle/:plan"
-<<<<<<< Updated upstream
-                component={PurchasePage}
-=======
                 component={PurchaseSinglePage}
->>>>>>> Stashed changes
               />
               <Route
                 exact

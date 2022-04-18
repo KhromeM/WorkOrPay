@@ -20,10 +20,7 @@ function PurchasePage(props) {
     else {
       // Otherwise go to checkout
       console.log(router.query, "router");
-<<<<<<< Updated upstream
-=======
       console.log("going here");
->>>>>>> Stashed changes
       redirectToCheckoutSingle(router.query.plan, true).catch((error) => {
         setFormAlert({
           type: "error",
