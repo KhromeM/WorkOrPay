@@ -239,7 +239,7 @@ function Contact(props) {
             </Grid>
             <Grid item={true} xs={12}></Grid>
 
-            <Grid item={true} xs={10} md={5}>
+            <Grid item={true} xs={12} md={5}>
               <InputLabel id="beneficiary">Beneficiary of Donation</InputLabel>
               <TextField
                 // value={minutes}
@@ -252,7 +252,11 @@ function Contact(props) {
                 InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
                 InputProps={{
                   inputProps: {
-                    style: { fontSize: "18px", textAlign: "center" },
+                    style: {
+                      height: "50px",
+                      fontSize: "18px",
+                      textAlign: "center",
+                    },
                   },
                 }}
                 type="text"
