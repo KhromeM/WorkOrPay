@@ -12,9 +12,10 @@ function PurchasePage(props) {
   const [formAlert, setFormAlert] = useState();
 
   useEffect(() => {
-    if (auth.user.planIsActive) {
+    if (auth.user.planIsActive ) {
       // If user already has an active plan
       // then take them to Stripe billing
+      console.log(router.query)
       router.push("/settings/billing");
     } else {
       // Otherwise go to checkout
