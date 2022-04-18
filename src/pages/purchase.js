@@ -12,6 +12,7 @@ function PurchasePage(props) {
   const [formAlert, setFormAlert] = useState();
 
   useEffect(() => {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     if (auth.user.planIsActive ) {
       // If user already has an active plan
@@ -20,13 +21,22 @@ function PurchasePage(props) {
 =======
     if (auth.user.planIsActive && router.query.plan === "starter")
 >>>>>>> 17cf8599994a23eb1b0af51c924f9770ae35b649
+=======
+    if (auth.user.planIsActive && router.query.plan === "starter")
+>>>>>>> Stashed changes
       router.push("/settings/billing");
     // If user already has an active plan
     // then take them to Stripe billing
     // console.log(router.query.plan);
     else {
       // Otherwise go to checkout
+<<<<<<< Updated upstream
       console.log(router.query, "router");
+=======
+      console.log(auth.user);
+      console.log(router.query, "router");
+      console.log("going wrong");
+>>>>>>> Stashed changes
       redirectToCheckout(router.query.plan).catch((error) => {
         setFormAlert({
           type: "error",

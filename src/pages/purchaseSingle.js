@@ -4,7 +4,11 @@ import Meta from "./../components/Meta";
 import PageLoader from "./../components/PageLoader";
 import { useAuth, requireAuth } from "./../util/auth";
 import { useRouter } from "./../util/router";
+<<<<<<< Updated upstream
 import { redirectToCheckout } from "./../util/stripe";
+=======
+import { redirectToCheckoutSingle } from "./../util/stripe";
+>>>>>>> Stashed changes
 
 function PurchasePage(props) {
   const router = useRouter();
@@ -20,6 +24,10 @@ function PurchasePage(props) {
     else {
       // Otherwise go to checkout
       console.log(router.query, "router");
+<<<<<<< Updated upstream
+=======
+      console.log("going here");
+>>>>>>> Stashed changes
       redirectToCheckoutSingle(router.query.plan, true).catch((error) => {
         setFormAlert({
           type: "error",

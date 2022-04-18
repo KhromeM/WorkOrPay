@@ -14,6 +14,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Switch, Route, Router, useLocation } from "./../util/router";
 import PurchasePage from "./purchase";
+import PurchaseSinglePage from "./purchaseSingle";
 import FirebaseActionPage from "./firebase-action";
 import NotFoundPage from "./404";
 import Footer from "./../components/Footer";
@@ -63,7 +64,11 @@ function MiniApp() {
               <Route
                 exact
                 path="/purchasesingle/:plan"
+<<<<<<< Updated upstream
                 component={PurchasePage}
+=======
+                component={PurchaseSinglePage}
+>>>>>>> Stashed changes
               />
               <Route
                 exact

@@ -51,7 +51,11 @@ export default requireAuth(async (req, res) => {
     });
 
     // Return success response
+<<<<<<< Updated upstream
     res.send({ status: "success", data: session });
+=======
+    res.send({ status: "success", data: sessionSingle });
+>>>>>>> Stashed changes
   } catch (error) {
     console.log("stripe-create-checkout-session-single error", error);
 
