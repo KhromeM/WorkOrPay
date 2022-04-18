@@ -81,6 +81,7 @@ export default function Contract() {
                   <ListItemText>{item.type}</ListItemText>
                   <ListItemText>{item.goal}</ListItemText>
                   <ListItemText>{item.message}</ListItemText>
+                  <ListItemText>{item.days}</ListItemText>
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"

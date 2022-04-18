@@ -167,9 +167,7 @@ function Contact(props) {
             </Grid>
             <Grid item={true} xs={12}></Grid>
             <Grid item={true} xs={8} md={2}>
-              <InputLabel name id="dollars">
-                Financial Penalty
-              </InputLabel>
+              <InputLabel id="dollars">Financial Penalty</InputLabel>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -209,25 +207,33 @@ function Contact(props) {
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={4}>
+            <Grid item={true} xs={4} md={1}>
               <TextField
                 variant="outlined"
                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 
-                label="Dollars"
-                name="financialpenalty"
+                label="Days"
+                name="days"
                 multiline={true}
                 rows={1}
-                error={errors.financialpenalty ? true : false}
+                error={errors.days ? true : false}
                 // value={dollars}
                 // onChange={(e) => setDollars(e.target.value)}
-                helperText={
-                  errors.financialpenalty && errors.financialpenalty.message
-                }
+                helperText={errors.days && errors.days.message}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
                 fullWidth={true}
+                defaultValue={7}
                 inputRef={register({
-                  required: "Must enter a dollar amount",
-                  pattern: /^[0-9]+(\.[0-9][0-9])?$/,
+                  required: "Must enter a value from 3 - 30 days",
+                  pattern: {
+                    value: /\b([3-9]|[12][0-9]|3[0])\b/,
+                    message: "You must enter a number from 3 days to 30 days.",
+                  },
                 })}
               />
             </Grid>
