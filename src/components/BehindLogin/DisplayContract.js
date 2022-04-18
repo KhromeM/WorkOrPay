@@ -3,11 +3,6 @@ import { useAuth } from "../../util/auth";
 
 function DisplayContract() {
   const auth = useAuth();
-  return (
-    <div>
-      {auth.user && <Contract />}
-      Hello
-    </div>
-  );
+  return <div>{auth.user && <Contract />}</div>;
 }
 export default DisplayContract;

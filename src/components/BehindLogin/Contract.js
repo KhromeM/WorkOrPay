@@ -37,8 +37,13 @@ export default function Contract() {
     error: itemsError,
   } = useItemsByOwner(auth.user.uid);
 
-  const itemsAreEmpty = !items || items.length === 0;
+  let hasContract = false;
+  items &&
+    items.forEach((item) => {
+      if (item.type === "contract") hasContract = true;
+    });
 
+  const itemsAreEmpty = !items || items.length === 0 || !hasContract;
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -51,60 +56,42 @@ export default function Contract() {
   }
 
   return (
-    <Card>
-      <Typography variant="h6" paragraph={true}>
-        <strong> Your Contract</strong>
-      </Typography>
+    <div style={{ padding: "0 10vw 0 10vw" }}>
+      <Card style={{ padding: "0 7vw 0 7vw" }}>
+        <Typography variant="h6" paragraph={true}>
+          <strong> Your Contract</strong>
+        </Typography>
 
-      {(itemsStatus === "loading" || itemsAreEmpty) && (
-        <Box py={5} px={3} align="center">
-          {itemsStatus === "loading" && <CircularProgress size={32} />}
+        {(itemsStatus === "loading" || itemsAreEmpty) && (
+          <Box py={5} px={3} align="center">
+            {itemsStatus === "loading" && <CircularProgress size={32} />}
 
-          {itemsStatus !== "loading" && itemsAreEmpty && (
-            <>Nothing yet. Click the button to add your first item.</>
-          )}
-        </Box>
-      )}
+            {itemsStatus !== "loading" && itemsAreEmpty && (
+              <>No contract found. Please create a contract.</>
+            )}
+          </Box>
+        )}
 
-      {itemsStatus !== "loading" && items && items.length > 0 && (
-        <List disablePadding={true}>
-          {items.map((item, index) => {
-            console.log(item);
-            if (item.type === "contract")
-              return (
-                <ListItem
-                  key={index}
-                  divider={index !== items.length - 1}
-                  className={item.featured ? classes.featured : ""}
-                >
-                  <ListItemText>{item.name}</ListItemText>
-                  <ListItemText>{item.type}</ListItemText>
-                  <ListItemText>{item.goal}</ListItemText>
-                  <ListItemText>{item.message}</ListItemText>
-                  <ListItemText>{item.days}</ListItemText>
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="update"
-                      onClick={() => setUpdatingItemId(item.id)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => deleteItem(item.id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              );
-          })}
-        </List>
-      )}
+        {itemsStatus !== "loading" && items && items.length > 0 && (
+          <List disablePadding={true}>
+            {items.map((item, index) => {
+              console.log(item);
+              if (item.type === "contract")
+                return (
+                  <>
+                    <ListItemText>{item.name}</ListItemText>
+                    <ListItemText>{item.type}</ListItemText>
+                    <ListItemText>{item.goal}</ListItemText>
+                    <ListItemText>{item.message}</ListItemText>
+                    <ListItemText>{item.days}</ListItemText>
+                  </>
+                );
+            })}
+          </List>
+        )}
 
-      <CardContent className={classes.cardContent}></CardContent>
-    </Card>
+        <CardContent className={classes.cardContent}></CardContent>
+      </Card>{" "}
+    </div>
   );
 }
