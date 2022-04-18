@@ -270,7 +270,7 @@ function Contact(props) {
                 })}
               >
                 <option selected disabled value="">
-                  Select a choice{" "}
+                  Select a beneficiary{" "}
                 </option>
                 <option value={25}>(Anti-Charity) Trump Super PAC</option>
                 <option value={1000}>(Anti-Charity) Clinton Foundation</option>
