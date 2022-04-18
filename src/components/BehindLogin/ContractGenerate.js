@@ -182,13 +182,13 @@ function Contact(props) {
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
-                  style: { fontSize: 30 },
+                  style: { fontSize: 25 },
                 }}
                 type="text"
                 name="dollars"
                 // label="Daily Minutes"
-                error={errors?.dailyminutes ? true : false}
-                helperText={errors?.dailyminutes && errors.dailyminutes.message}
+                error={errors?.dollars ? true : false}
+                helperText={errors?.dollars && errors.dollars.message}
                 // onChange={(e) => setMinutes(e.target.value)}
                 inputRef={register({
                   required: "Please enter your goal",
@@ -209,6 +209,28 @@ function Contact(props) {
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
+            <Grid item={true} xs={4}>
+              <TextField
+                variant="outlined"
+                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+
+                label="Dollars"
+                name="financialpenalty"
+                multiline={true}
+                rows={1}
+                error={errors.financialpenalty ? true : false}
+                // value={dollars}
+                // onChange={(e) => setDollars(e.target.value)}
+                helperText={
+                  errors.financialpenalty && errors.financialpenalty.message
+                }
+                fullWidth={true}
+                inputRef={register({
+                  required: "Must enter a dollar amount",
+                  pattern: /^[0-9]+(\.[0-9][0-9])?$/,
+                })}
+              />
+            </Grid>
             {/* save below
             <Grid item={true} xs={8} md={4}>
                <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
