@@ -1,6 +1,4 @@
 import React from "react";
-import LongContent from "./LongContent";
-import "./TermsOfService.css"
 
 function LegalPrivacy(props) {
   return (
