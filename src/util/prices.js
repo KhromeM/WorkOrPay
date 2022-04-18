@@ -3,6 +3,13 @@ const stripePriceIds = {
   starter: process.env.REACT_APP_STRIPE_PRICE_STARTER,
   pro: process.env.REACT_APP_STRIPE_PRICE_PRO,
   business: process.env.REACT_APP_STRIPE_PRICE_BUSINESS,
+  contract25: process.env.REACT_APP_STRIPE_PRICE_CONTRACT25,
+  contract50: process.env.REACT_APP_STRIPE_PRICE_CONTRACT50,
+  contract100: process.env.REACT_APP_STRIPE_PRICE_CONTRACT100,
+  contract150: process.env.REACT_APP_STRIPE_PRICE_CONTRACT150,
+  contract250: process.env.REACT_APP_STRIPE_PRICE_CONTRACT250,
+  contract500: process.env.REACT_APP_STRIPE_PRICE_CONTRACT500,
+  contract1000: process.env.REACT_APP_STRIPE_PRICE_CONTRACT1000,
 };
 
 // Get Stripe priceId
