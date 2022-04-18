@@ -62,6 +62,11 @@ function MiniApp() {
               <Route exact path="/purchase/:plan" component={PurchasePage} />
               <Route
                 exact
+                path="/purchasesingle/:plan"
+                component={PurchasePage}
+              />
+              <Route
+                exact
                 path="/firebase-action"
                 component={FirebaseActionPage}
               />

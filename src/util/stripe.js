@@ -30,6 +30,29 @@ export async function redirectToCheckout(planId) {
   });
 }
 
+//single
+export async function redirectToCheckoutSingle(planId) {
+  // Create a checkout session
+  const session = await apiRequest(
+    "stripe-create-checkout-session-single",
+    "POST",
+    {
+      priceId: getStripePriceId(planId),
+      successUrl: `${window.location.origin}/dashboard?paid=true`,
+      cancelUrl: `${window.location.origin}/pricing`,
+    }
+  );
+
+  // Ensure if user clicks browser back button from checkout they go to /pricing
+  // instead of this page or they'll redirect right back to checkout.
+  window.history.replaceState({}, "", "/pricing");
+
+  // Redirect to checkout
+  return stripe.redirectToCheckout({
+    sessionId: session.id,
+  });
+}
+
 export async function redirectToBilling() {
   // Create a billing session
   const session = await apiRequest("stripe-create-billing-session", "POST", {

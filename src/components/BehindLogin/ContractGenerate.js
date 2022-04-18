@@ -57,8 +57,8 @@ function Contact(props) {
           message2: "Redirecting you to make your deposit on Stripe...",
         });
         setTimeout(() => {
-          history.push(`/purchase/contract${data.dollars}`);
-        }, 3000);
+          history.push(`/purchasesingle/contract${data.dollars}`);
+        }, 1000);
       })
       .catch((error) => {
         // Show error alert message
