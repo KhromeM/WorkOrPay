@@ -58,7 +58,7 @@ function MiniApp() {
               />
               <Route exact path="/auth/:type" component={AuthPage} />
               <Route exact path="/settings/:section" component={SettingsPage} />
-              {/* <Route exact path="/legal/:section" component={LegalPage} /> */}
+              <Route exact path="/legal/:section" component={LegalPage} />
               <Route exact path="/purchase/:plan" component={PurchasePage} />
               <Route
                 exact
