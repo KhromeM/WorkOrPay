@@ -41,15 +41,17 @@ function FaqSection(props) {
   const items = [
     {
       question: "Why does this work?",
-      disclaimer: false,
-      answer:
-        "Two reasons. Loss aversion : Humans hate losing what they have and will go far out of their way to preserve their belongings. This is a scientific fact. Deadlines : Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procastinators become super efficient workers in the last minute.",
+      disclaimer: true,
+      answer2:
+        "Loss aversion: Humans hate losing what they have and will go far out of their way to preserve their current holdings. This is a scientific fact. ",
+      answer: "Deadlines: Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procastinators become super efficient workers in the last minute.",
     },
+      
     {
       question: "Who is this for?",
       disclaimer: false,
       answer:
-        "Some people have their lives in order. They stick to a shcedule, exercise regularly, maybe even do a bit of meditation and yoga. This site is not for them. It's for ambitious people who want to do great things. Who know they have the ability, but struggle to act once their intial burst of motivation disappears.",
+        "Some people have their lives in order. They stick to a shcedule, exercise regularly, maybe even do a bit of meditation and yoga. This site is not for them. It's for ambitious people who want to do great things. Who know they have the ability, but struggle to act once their intial burst of motivation disappears. Using this service, they can fuel themselves with external motivation. Until the next burst of internal motivation kicks in.",
     },
     {
       question: "What are the contracts?",
