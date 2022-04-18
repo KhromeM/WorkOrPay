@@ -39,7 +39,7 @@ function Contact(props) {
     // data.hours = hours.toString();
     data.penalty = penalty;
     data.type = "contract";
-    data.name = "hi";
+    data.name = "default";
     console.log(data);
 
     contact

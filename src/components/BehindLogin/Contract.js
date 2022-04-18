@@ -68,31 +68,38 @@ export default function Contract() {
 
       {itemsStatus !== "loading" && items && items.length > 0 && (
         <List disablePadding={true}>
-          {items.map((item, index) => (
-            <ListItem
-              key={index}
-              divider={index !== items.length - 1}
-              className={item.featured ? classes.featured : ""}
-            >
-              <ListItemText>{item.name}</ListItemText>
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  aria-label="update"
-                  onClick={() => setUpdatingItemId(item.id)}
+          {items.map((item, index) => {
+            console.log(item);
+            if (item.type === "contract")
+              return (
+                <ListItem
+                  key={index}
+                  divider={index !== items.length - 1}
+                  className={item.featured ? classes.featured : ""}
                 >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => deleteItem(item.id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
+                  <ListItemText>{item.name}</ListItemText>
+                  <ListItemText>{item.type}</ListItemText>
+                  <ListItemText>{item.goal}</ListItemText>
+                  <ListItemText>{item.message}</ListItemText>
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge="end"
+                      aria-label="update"
+                      onClick={() => setUpdatingItemId(item.id)}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => deleteItem(item.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+          })}
         </List>
       )}
 
