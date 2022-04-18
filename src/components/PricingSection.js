@@ -57,12 +57,12 @@ function PricingSection(props) {
     {
       id: "starter",
       name: "Tier 1: Pressure",
-      price: "7.99",
+      price: "15.99",
       perks: [
-        "Daily check ins via text / email / messages",
-        "Weekly verfication",
-        "Social media penalties",
-        "Monetary penalties",
+        "Daily check ins via text",
+        "Personalized Support",
+        "Financial penalties",
+        "One contract at a time",
         "30 day refund policy. No questions asked",
       ],
     },
@@ -72,7 +72,9 @@ function PricingSection(props) {
       price: false,
       perks: [
         "Everything from Tier 1",
-        "Facetime / Phone calls / Zoom checkins",
+        "Social Media Penalties",
+        "Up to 3 Contracts at a time",
+        "Facetime / Phone calls / Zoom check ins",
         "30 day refund policy. No questions asked",
       ],
     },
