@@ -25,7 +25,8 @@ import Logo1 from "../resources/Logos/black.png";
 import Logo2 from "../resources/Logos/white.png";
 
 import "./transition.css";
-import Contract from "../components/BehindLogin/Contract";
+import Contract from "../components/BehindLogin/DisplayContract";
+import DisplayContract from "../components/BehindLogin/DisplayContract";
 
 function MiniApp() {
   const location = useLocation();
@@ -50,7 +51,11 @@ function MiniApp() {
                 path="/generatecontract"
                 component={ContractGenerate}
               />
-              <Route exact path="/contract" component={Contract} />
+              <Route
+                exact
+                path="/displaycontract"
+                component={DisplayContract}
+              />
               <Route exact path="/auth/:type" component={AuthPage} />
               <Route exact path="/settings/:section" component={SettingsPage} />
               {/* <Route exact path="/legal/:section" component={LegalPage} /> */}

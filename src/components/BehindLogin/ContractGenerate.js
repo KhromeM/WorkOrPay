@@ -39,6 +39,7 @@ function Contact(props) {
     // data.hours = hours.toString();
     data.penalty = penalty;
     data.type = "contract";
+    data.name = "hi";
     console.log(data);
 
     contact
@@ -105,14 +106,14 @@ function Contact(props) {
                   variant="outlined"
                   type="text"
                   label="Name"
-                  name="name"
-                  error={errors.name ? true : false}
-                  helperText={errors.name && errors.name.message}
+                  name="displayName"
+                  error={errors.displayName ? true : false}
+                  helperText={errors.displayName && errors.displayName.message}
                   fullWidth={true}
                   inputRef={register({
                     required: "Please enter your name",
                   })}
-                  // value={auth.user ? auth.user.displayName : ""}
+                  value={auth.user ? auth.user.displayName : ""}
                 />
               </Grid>
             )}
@@ -128,7 +129,7 @@ function Contact(props) {
                 inputRef={register({
                   required: "Please enter your email",
                 })}
-                // value={auth.user ? auth.user.email : ""}
+                value={auth.user ? auth.user.email : ""}
               />
             </Grid>
             <Grid item={true} xs={12}>
@@ -165,8 +166,52 @@ function Contact(props) {
               />
             </Grid>
             <Grid item={true} xs={12}></Grid>
+            <Grid item={true} xs={8} md={2}>
+              <InputLabel name id="dollars">
+                Financial Penalty
+              </InputLabel>
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                  style: { fontSize: 30 },
+                }}
+                type="text"
+                name="dollars"
+                // label="Daily Minutes"
+                error={errors?.dailyminutes ? true : false}
+                helperText={errors?.dailyminutes && errors.dailyminutes.message}
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please enter your goal",
+                })}
+              >
+                <option disabled value="">
+                  Select an option{" "}
+                </option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option selected value={100}>
+                  100
+                </option>
+                <option value={150}>150</option>
+                <option value={250}>250</option>
+                <option value={500}>500</option>
+                <option value={1000}>1000</option>
+              </TextField>
+            </Grid>
+            <Grid item={true} xs={12}></Grid>
+            {/* save below
             <Grid item={true} xs={8} md={4}>
-              {/* <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> */}
+               <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
               <TextField
                 // value={minutes}
                 fullWidth
@@ -177,7 +222,7 @@ function Contact(props) {
                 InputLabelProps={{ shrink: true }}
                 type="text"
                 name="dailyminutes"
-                label="dailyminutes"
+                label="Daily Minutes"
                 error={errors?.dailyminutes ? true : false}
                 helperText={errors?.dailyminutes && errors.dailyminutes.message}
                 // onChange={(e) => setMinutes(e.target.value)}
@@ -185,7 +230,7 @@ function Contact(props) {
                   required: "Please enter your goal",
                 })}
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   Select an option{" "}
                 </option>
                 <option value={10}>10 Minutes</option>
@@ -200,6 +245,43 @@ function Contact(props) {
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
+            <Grid item={true} xs={8} md={4}>
+               <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+                type="text"
+                name="monthlyhours"
+                label="Monthly Hours"
+                error={errors?.dailyminutes ? true : false}
+                helperText={errors?.dailyminutes && errors.dailyminutes.message}
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please enter your goal",
+                })}
+              >
+                <option disabled value="">
+                  Select an option{" "}
+                </option>
+                <option value={10}>10 Minutes</option>
+                <option value={20}>20 Minutes</option>
+                <MenuItem value={30}>30 Minutes</MenuItem>
+                <MenuItem value={40}>40 Minutes</MenuItem>
+                <MenuItem value={50}>50 Minutes</MenuItem>
+                <MenuItem value={60}>60 Minutes</MenuItem>
+                <MenuItem value={70}>70 Minutes</MenuItem>
+                <MenuItem value={80}>80 Minutes</MenuItem>
+                <MenuItem value={90}>90 Minutes</MenuItem>
+              </TextField>
+            </Grid> 
+            */}
+
+            {/* save above */}
             {/* 
             <Grid item={true} xs={8} md={4}>
               <FormControl size="small" variant="filled" fullWidth>
@@ -284,7 +366,7 @@ function Contact(props) {
                     })}
                   />
                 </Grid> */}
-            ))}
+            {/* ))} */}
             {/* <Grid item={true} xs={12}>
               <TextField
                 variant="outlined"

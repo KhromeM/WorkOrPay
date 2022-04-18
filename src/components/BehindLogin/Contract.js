@@ -37,8 +37,14 @@ export default function Contract() {
     error: itemsError,
   } = useItemsByOwner(auth.user.uid);
 
+  const itemsAreEmpty = !items || items.length === 0;
+
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+
+  const [creatingItem, setCreatingItem] = useState(false);
+
+  const [updatingItemId, setUpdatingItemId] = useState(null);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -49,6 +55,46 @@ export default function Contract() {
       <Typography variant="h6" paragraph={true}>
         <strong> Your Contract</strong>
       </Typography>
+
+      {(itemsStatus === "loading" || itemsAreEmpty) && (
+        <Box py={5} px={3} align="center">
+          {itemsStatus === "loading" && <CircularProgress size={32} />}
+
+          {itemsStatus !== "loading" && itemsAreEmpty && (
+            <>Nothing yet. Click the button to add your first item.</>
+          )}
+        </Box>
+      )}
+
+      {itemsStatus !== "loading" && items && items.length > 0 && (
+        <List disablePadding={true}>
+          {items.map((item, index) => (
+            <ListItem
+              key={index}
+              divider={index !== items.length - 1}
+              className={item.featured ? classes.featured : ""}
+            >
+              <ListItemText>{item.name}</ListItemText>
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  aria-label="update"
+                  onClick={() => setUpdatingItemId(item.id)}
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => deleteItem(item.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+        </List>
+      )}
 
       <CardContent className={classes.cardContent}></CardContent>
     </Card>
