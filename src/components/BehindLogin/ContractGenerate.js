@@ -18,6 +18,7 @@ import {
 } from "@material-ui/core";
 import SectionHeader from "../SectionHeader";
 import { createItem } from "../../util/db";
+import { useHistory } from "../../util/router";
 
 function Contact(props) {
   const [pending, setPending] = useState(false);
@@ -25,8 +26,8 @@ function Contact(props) {
   const [minutes, setMinutes] = useState("");
   const [hours, setHours] = useState("");
   const [penalty, setPenalty] = useState("");
-  const [dollars, setDollars] = useState(0);
   const { handleSubmit, register, errors, reset } = useForm();
+  const history = useHistory();
 
   const auth = useAuth();
   // console.log(auth.user.displayName);
@@ -53,7 +54,11 @@ function Contact(props) {
           type: "success",
           message:
             "Your contract has been created! Get ready to achieve your goals!",
+          message2: "Redirecting you to make your deposit on Stripe...",
         });
+        setTimeout(() => {
+          history.push(`/purchase/contract${data.dollars}`);
+        }, 3000);
       })
       .catch((error) => {
         // Show error alert message
@@ -78,7 +83,12 @@ function Contact(props) {
           marginRight: "20vw",
         }}
       >
-        <Alert severity={formAlert.type}>{formAlert.message}</Alert>
+        <Alert severity={formAlert.type}>
+          {formAlert.message}
+          <br />
+          <br />
+          {formAlert.message2}
+        </Alert>
       </Box>
     );
 
@@ -94,7 +104,10 @@ function Contact(props) {
         />
         {formAlert && (
           <Box mb={3}>
-            <Alert severity={formAlert.type}>{formAlert.message}</Alert>
+            <Alert severity={formAlert.type}>
+              {formAlert.message}
+              <br />
+            </Alert>
           </Box>
         )}
 
