@@ -81,7 +81,7 @@ function FeaturesSection(props) {
     {
       title: "Verification",
       description:
-        "If you report you have achived your goal, we verify your claims. We are comitted to providing actual accountability.",
+        "If you report you have achieved your goal, we verify your claims. We are committed to providing actual accountability.",
       image: selfie,
     },
     {
