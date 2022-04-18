@@ -8,10 +8,11 @@ import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 import runner from "../resources/runner.svg";
 import contract from "../resources/contract.svg";
-import selfie from "../resources/selfie.svg";
+import cash from "../resources/cash.svg";
 import construction from "../resources/construction.svg";
 import checkup from "../resources/checkup.svg";
-import sleep from "../resources/sleep.svg";
+import selfie from "../resources/selfie.svg";
+import clock from "../resources/clock.svg"
 import { Button } from "@material-ui/core";
 import { Link } from "./../util/router";
 
@@ -48,39 +49,45 @@ function FeaturesSection(props) {
 
   const items = [
     {
-      title: "Motivation Is Variable",
+      title: "Form a Contract",
       description:
-        "Somedays you can run a marathon. Other days it's a struggle to get out of bed. We are here to provide an external source of motivation so you stay on target to meet your goals.",
-      image: sleep,
-    },
-    {
-      title: "Choose Goals",
-      description:
-        "Want to be more productive? Exercise daily? Study more? Envariance allows you choose any goal that you wish to work on.",
-      image: runner,
-    },
-    {
-      title: "Form A Contract",
-      description:
-        "Once you decide on your specific goal, you and Envariance will form a contract. You will agree to meet atleast the minimum thresholds of the contract. This can be anything from simply committing to a habit daily or a hitting a specific target such as losing 10lbs. You'd agree to deliver penalties if you fail to do so, but we will guide you throughout the whole journey to make sure you don't have to deliver such penalties.",
+        "Some days you can run a marathon. Other days it's a struggle to get out of bed. Our contracts provide an external source of motivation so you stay on track to meet your goals.",
       image: contract,
     },
     {
-      title: "Choose Your Penalty",
+      title: "Choose a Goal",
       description:
-        "Choose from a variety of possible penalties. What will motivate you the most? Losing money? Donating to a cause you hate? Being tagged in an embarassing post on social media? A stern lecture from one of our employees? Envariance has a multitude of options for you, modest to severe and everything in between. You decide.",
-      image: selfie,
+        "Want to be more productive? Exercise daily? Study more? We will help you pick a concrete goal that can be tracked.",
+      image: runner,
     },
     {
-      title: "Daily Check Up",
+      title: "Set a Deadline",
       description:
-        "Accountability to help you stick to your goals. Envariance has a system where you can report your progress everyday or every couple of days, just to let you check in with us and help you stay on track or get back on track when you struggle. We do this whether by text, online messaging, voice call, or even video chat- we cater to your preferred way to ensure you're still on the grind. Having someone look over your shoulder (virtually) significantly increases the chances of you hitting your targets.",
+        "How long do you have to achieve your goal? Choose a deadline as short as 3 days or as long as a month!",
+      image: clock,
+    },
+    {
+      title: "Set the Stakes",
+      description:
+        "If you are serious about your goal, then put some stakes on it! Wager from $25 to $1000. If you fail to reach your target, your money is donated to a charity of your choosing.",
+      image: cash,
+    },
+    {
+      title: "Daily Check Ups",
+      description:
+        "We check up on you everyday to encourage you and make sure you are staying on track. Having someone hold you accountable significantly increases the chances of you hitting your targets.",
       image: checkup,
+    },
+    {
+      title: "Verification",
+      description:
+        "If you report you have achived your goal, we verify your claims. We are comitted to providing actual accountability.",
+      image: selfie,
     },
     {
       title: "Coming Soon",
       description:
-        "Daily check ups by FaceTime/Zoom/Phone calls. Customized plans. Progression tracking.",
+        "Multiple goals and contracts. Daily check ups by FaceTime/Zoom/Phone calls. Customized plans. Progression tracking. Periodic reminders.",
       image: construction,
     },
   ];

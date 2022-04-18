@@ -40,38 +40,62 @@ function FaqSection(props) {
 
   const items = [
     {
+      question: "Why does this work?",
+      disclaimer: false,
+      answer:
+        "Two reasons. Loss aversion : Humans hate losing what they have and will go far out of their way to preserve their belongings. This is a scientific fact. Deadlines : Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procastinators become super efficient workers in the last minute.",
+    },
+    {
+      question: "Who is this for?",
+      disclaimer: false,
+      answer:
+        "Some people have their lives in order. They stick to a shcedule, exercise regularly, maybe even do a bit of meditation and yoga. This site is not for them. It's for ambitious people who want to do great things. Who know they have the ability, but struggle to act once their intial burst of motivation disappears.",
+    },
+    {
       question: "What are the contracts?",
       disclaimer: false,
       answer:
-        "Contracts are monthly agreements you form with us that outline the specifics of your goals and how we are going to hold you accountable, as well as the penalties that you will face if you do not reach your goal. The contract discusses our method of verification, so we can confirm you really did hit your target- as well as the penalties you want us to enforce if you fail to meet your minimum targets.",
+        "Contracts are agreements you form that outline the specifics of your goal, the deadline to meet it, and the amount of money you lose if you fail. You also pick the potential recipient of your money in your contract.",
     },
     {
       question: "What are financial penalties?",
       disclaimer: true,
       answer:
-        "If you really want extra motivation, you can agree to a financial penalty in your contract. A financial penalty requires you make a deposit at the begining of the month. We hold the money as the middleman temporarily until the end date specified in the contract. If you meet your targets and achieve your goal, you get the money back! However, if you fail to do so, we will send the money to charities or even causes you hate (anti-charities), to further motivate you to not fail.",
+        "A financial penalty requires you make a deposit. If you achieve your goal before the deadline, you get your money back. However, if you fail to do so, we will send the money to the charity you picked in your contract.",
       answer2:
-        "NOTE: Because of transaction processing fees, we DEDUCT 3% from deposits before sending them back to you or sending them elsewhere. EXAMPLE: If you deposit $100, then fulfill your goals, you will get $97 back. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction.",
+        "NOTE: Because of transaction processing fees, we DEDUCT 3% from deposits before sending them back to you or sending them elsewhere. EXAMPLE: If you deposit $100, then fulfill your goals, you will get $97 back. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction. Furthermore, we wait 180 days before making the donation to the chairty of your choice. This is to minimize losses from chargebacks.",
     },
     {
-      question: "What are social media penalties?",
-      disclaimer: true,
+      question: "Why can't you deduct financial penalties only after I fail?",
+      disclaimer: false,
       answer:
-        "You can agree to social media penalties in your contract for extra motivation. Choose which social media platform(s) to potentially receive the penalty and the type of penalty. Social media penalties include but are not limited to: Our team tagging you on a post detailing which goals you failed to meet. We can post an embarassing picture of you (would require you to give us access to the picture when forming the contract). We can tag your friends on a facebook post to let them know you failed your goal.",
-      answer2:
-        "We want to simply nudge you towards hitting your goals with social pressure. If there's anything you are extremely uncomfortable with regarding social media posts that would cause immense mental anguish for you, there is no need to go with this option. Having respect and integrity for you as a human being is the foremost objective- so please make sure you pick a penalty that you'd be uncomfortable with but only to the extent of helping you hit your goals.",
+        "The short answer is that users are simply not motivated if they do not see the money leave their account. We have tested charging before and charging after. The difference in attitudes of the group who still had their money in their accounts compared to the group who were charged in the begining were staggering. This is a service for people who are serious about achieving their goals. We believe losing 3% to transaction fees is worth the massive increase in motivation.",
     },
+    {
+      question: "How are daily check ups done?",
+      disclaimer: false,
+      answer:"We have real humans message you by text everyday. If you do not want this, you can turn it off by responding to the texts."
+    },
+    
+    // {
+    //   question: "What are social media penalties?",
+    //   disclaimer: true,
+    //   answer:
+    //     "You can agree to social media penalties in your contract for extra motivation. Choose which social media platform(s) to potentially receive the penalty and the type of penalty. Social media penalties include but are not limited to: Our team tagging you on a post detailing which goals you failed to meet. We can post an embarassing picture of you (would require you to give us access to the picture when forming the contract). We can tag your friends on a facebook post to let them know you failed your goal.",
+    //   answer2:
+    //     "We want to simply nudge you towards hitting your goals with social pressure. If there's anything you are extremely uncomfortable with regarding social media posts that would cause immense mental anguish for you, there is no need to go with this option. Having respect and integrity for you as a human being is the foremost objective- so please make sure you pick a penalty that you'd be uncomfortable with but only to the extent of helping you hit your goals.",
+    // },
     {
       question: "How are my claims verified?",
       disclaimer: false,
       answer:
-        "We perform weekly verfications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method may be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. You can fool us, and we will always give you the benefit of doubt. We trust that you will be repulsed by the idea of putting in effort to forge a proof of something that you willingly signed yourself up to do, and thus have an incentive honest with us.",
+        "We perform verfications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method may be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. You can fool us, and we will always give you the benefit of doubt. We trust that you will be repulsed by the idea of putting in effort to forge a proof of something that you willingly signed yourself up to do, and thus have an incentive honest with us.",
     },
     {
       question: "What if I want a refund?",
       disclaimer: false,
       answer:
-        "We are certain that you will LOVE our service. However, if our service is unable to provide you with worthwhile value, just send us a message and we will refund you for the whole month. No questions asked. We will make sure that you love our service though!",
+        "We are certain that you will love our service. However, if we are unable to provide you with worthwhile value, just send us a message and we will refund you for the whole month. No questions asked. We will make sure that you love our service though!",
     },
   ];
 
