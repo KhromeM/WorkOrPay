@@ -78,8 +78,8 @@ function MiniApp() {
               size="normal"
               bgImage=""
               bgImageOpacity={1}
-              description="A short description of what you do here"
-              copyright={`© ${new Date().getFullYear()} Envariable`}
+              description="Providing actual accountability"
+              copyright={`© ${new Date().getFullYear()} WorkOrPay`}
               logo={Logo1}
               logoInverted={Logo2}
               sticky={true}

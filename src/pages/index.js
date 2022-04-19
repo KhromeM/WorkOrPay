@@ -69,8 +69,8 @@ function IndexPage(props) {
           size="medium"
           bgImage=""
           bgImageOpacity={1}
-          title="Subscribe to stay updated!"
-          subtitle="We promise to never spam you or sell your data."
+          title="Subscribe to our newsletter!"
+          subtitle="Be the first to know when we release new features"
           buttonText="Subscribe"
           buttonColor="primary"
           inputPlaceholder="Enter your email"
