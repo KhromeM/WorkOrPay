@@ -18,37 +18,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: `1px 1px 0 0 ${emphasize(theme.palette.background.paper, 0.08)}`,
     textAlign: "center",
   },
-  imageContainer: {
-    margin: "0 auto",
-    maxWidth: "200px",
-    marginBottom: "30px",
-    "& img": {
-      width: "100%",
-    },
-  },
 }));
 
 function HowItWorks(props) {
   const classes = useStyles();
-
-  const items = [
-    {
-      title: "1) Sign Up",
-      body: "First sign up for an account and purchase the monthly membership. Once you have a membership you will be able to form contracts.",
-    },
-    {
-      title: "2) Form A Contract",
-      body: 'Concretely define your goal. Make it  measurable. Set a hard deadline. Give yourself enough time to complete your objectives, but not enough time for you to slack off. Example: "I will finish creating and launch my website in 8 days!',
-    },
-    {
-      title: "3) Set Financial Penalties ",
-      body: "If just making goals was enough, you wouldn't be here. Create extra motivation for yourself by wagering your money. Choose an amount from $25-$1000. Choose the charity or anti-charity that gets your money if you fail and deposit the amount.",
-    },
-    {
-      title: "4) Follow Through",
-      body: "Now you have until your deadline to reach your goal. Once you do, send us proof so we can verify it and send your deposit back. If you fail to complete your goal by the deadline, your deposit is donated.",
-    },
-  ];
 
   return (
     <Section
@@ -59,34 +32,71 @@ function HowItWorks(props) {
     >
       <Container>
         <SectionHeader
-          title="How It Works"
-          subtitle=""
+          title='How It Works'
+          subtitle=''
           size={4}
           textAlign="center"
         />
-        <Card raised={false}>
-          <Grid container={true}>
-            {items.map((item, index) => (
-              <Grid
-                item={true}
-                xs={12}
-                md={6}
-                className={classes.gridItem}
-                key={index}
-              >
-                <Box p={6}>
-                  <Typography variant="h5" gutterBottom={true}>
-                    {item.title}
+        <Container
+          maxWidth="md"
+          disableGutters={true}
+          className={classes.itemsContainer}
+        >
+            <Grid
+              className={classes.row}
+              container={true}
+              item={true}
+              alignItems="center"
+              spacing={4}
+            >
+              <Grid item={true} xs={12} md={6}>
+                <Box
+                  textAlign={{
+                    xs: "center",
+                    md: "left",
+                  }}
+                >
+                  <Typography variant="h4" gutterBottom={true}>
+                  1) Sign Up
                   </Typography>
-                  <Typography variant="subtitle1">{item.body}</Typography>
+                  <Typography className={classes.description} variant="h6">
+                  First sign up for an account and purchase the monthly membership. Once you have a membership you will be able to form contracts.
+                  </Typography>
+
+                  <Typography variant="h4" gutterBottom={true}>
+                  2) Form A Contract
+                  </Typography>
+                  <Typography className={classes.description} variant="h6">
+                  Concretely define your goal. Make it  measurable. Set a hard deadline. Give yourself enough time to complete your objectives, but not enough time for you to slack off. Example: "I will finish creating and launch my website in 8 days!
+                  </Typography>
+
+                  <Typography variant="h4" gutterBottom={true}>
+                  3) Set Financial Penalties 
+                  </Typography>
+                  <Typography className={classes.description} variant="h6">
+                  If just making goals was enough, you wouldn't be here. Create extra motivation for yourself by wagering your money. Choose an amount from $25-$1000. Choose the charity or anti-charity that gets your money if you fail and deposit the amount.
+                  </Typography>
+
+                  <Typography variant="h4" gutterBottom={true}>
+                    Follow Through
+                  </Typography>
+                  <Typography className={classes.description} variant="h6">
+                  Now you have until your deadline to reach your goal. Once you do, send us proof so we can verify it and send your deposit back. If you fail to complete your goal by the deadline, your deposit is donated.
+                  </Typography>
+
+                  
                 </Box>
               </Grid>
-            ))}
-          </Grid>
-        </Card>
+            </Grid>
+
+        </Container>
       </Container>
     </Section>
   );
 }
 
 export default HowItWorks;
+
+
+
+
