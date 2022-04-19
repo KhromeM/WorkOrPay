@@ -32,7 +32,7 @@ export default requireAuth(async (req, res) => {
     console.log("in here node");
     const sessionSingle = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "us_bank_account"],
 
       line_items: [
         {
