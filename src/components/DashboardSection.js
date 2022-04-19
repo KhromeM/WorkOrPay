@@ -63,12 +63,12 @@ function DashboardSection(props) {
           {/* <Grid item={true} xs={12} md={6}>
             <Streaks />
           </Grid> */}
-          <Grid item={true} xs={12} md={6}>
+          {/* <Grid item={true} xs={12} md={6}>
             <DashboardItems />
-          </Grid>
-          <Grid item={true} xs={12} md={6}>
+          </Grid> */}
+          {/* <Grid item={true} xs={12} md={6}>
             <DailySubmission />
-          </Grid>
+          </Grid> */}
           <Grid item={true} xs={12} md={6}>
             <Card>
               <CardContent className={classes.cardContent}>
