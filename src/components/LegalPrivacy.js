@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function LegalPrivacy(props) {
   return (
     <>
