@@ -13,9 +13,9 @@ function LegalPrivacy(props) {
 <p><strong>&nbsp;</strong></p>
 <p>Welcome to <strong>Envariable LLC</strong>.</p>
 <p>&nbsp;</p>
-<p>Envariable LLC&nbsp;(&ldquo;us&rdquo;, &ldquo;we&rdquo;, or &ldquo;our&rdquo;) operates&nbsp;https://www.envariable.com/&nbsp;(hereinafter referred to as &ldquo;<strong>Service</strong>&rdquo;).</p>
+<p>Envariable LLC&nbsp;(&ldquo;us&rdquo;, &ldquo;we&rdquo;, or &ldquo;our&rdquo;) operates&nbsp;https://www.workorpay.com/&nbsp;(hereinafter referred to as &ldquo;<strong>Service</strong>&rdquo;).</p>
 <p>&nbsp;</p>
-<p>Our Privacy Policy governs your visit to&nbsp;https://www.envariable.com/, and explains how we collect, safeguard and disclose information that results from your use of our Service.&nbsp;</p>
+<p>Our Privacy Policy governs your visit to&nbsp;https://www.workorpay.com/, and explains how we collect, safeguard and disclose information that results from your use of our Service.&nbsp;</p>
 <p>&nbsp;</p>
 <p>We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
 <p>&nbsp;</p>
@@ -25,7 +25,7 @@ function LegalPrivacy(props) {
     <li><strong>Definitions</strong></li>
 </ul>
 <p><strong>&nbsp;</strong></p>
-<p><strong>SERVICE&nbsp;</strong>means the&nbsp;https://www.envariable.com/ website&nbsp;operated by&nbsp;Envariable LLC.</p>
+<p><strong>SERVICE&nbsp;</strong>means the&nbsp;https://www.workorpay.com/ website&nbsp;operated by&nbsp;Envariable LLC.</p>
 <p>&nbsp;</p>
 <p><strong>PERSONAL DATA</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p>
 <p>&nbsp;</p>
@@ -515,7 +515,7 @@ function LegalPrivacy(props) {
 <p>&nbsp;</p>
 <p>By email: support@envariable.com.</p>
 <p>&nbsp;</p>
-<p>By visiting this page on our website: https://www.envariable.com/contact.</p>
+<p>By visiting this page on our website: https://www.workorpay.com/contact.</p>
 <p>&nbsp;</p>
     </>
   );

@@ -13,9 +13,9 @@ function LegalTerms(props) {
 </ul>
 <p className="p6">Welcome to <span className="s2"><strong>Envariable LLC</strong> (&ldquo;<strong>Company</strong>&rdquo;, &ldquo;<strong>we</strong>&rdquo;, &ldquo;<strong>our</strong>&rdquo;, &ldquo;<strong>us</strong>&rdquo;)</span>! As you have just clicked our Terms of Service, please pause, grab a cup of coffee and carefully read the following pages. It will take you approximately 20&nbsp;minutes.</p>
 <p className="p7"><span className="Apple-converted-space">&nbsp;</span></p>
-<p className="p6">These Terms of Service (&ldquo;<strong>Terms</strong>&rdquo;, &ldquo;<strong>Terms of Service</strong>&rdquo;) govern your use of&nbsp;our web pages located at https://www.envariable.com/<span className="s2">&nbsp;operated by Envariable LLC.</span></p>
+<p className="p6">These Terms of Service (&ldquo;<strong>Terms</strong>&rdquo;, &ldquo;<strong>Terms of Service</strong>&rdquo;) govern your use of&nbsp;our web pages located at https://www.workorpay.com/<span className="s2">&nbsp;operated by Envariable LLC.</span></p>
 <p className="p7"><span className="Apple-converted-space">&nbsp;</span></p>
-<p className="p6">Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Please read it here https://www.envariable.com/legal/privacy-policy.</p>
+<p className="p6">Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Please read it here https://www.workorpay.com/legal/privacy-policy.</p>
 <p className="p7"><span className="Apple-converted-space">&nbsp;</span></p>
 <p className="p6">Your agreement with us includes these Terms&nbsp;and our Privacy Policy&nbsp;(&ldquo;<strong>Agreements</strong>&rdquo;). You acknowledge that you have read and understood Agreements, and agree to be bound of them.</p>
 <p className="p7"><span className="Apple-converted-space">&nbsp;</span></p>
@@ -365,7 +365,7 @@ function LegalTerms(props) {
 </ul>
 <p className="p6">Please send your feedback, comments, requests for technical support:</p>
 <p className="p6">By email: support@envariable.com.</p>
-<p className="p6">By visiting this page on our website: https://www.envariable.com/contact.</p>
+<p className="p6">By visiting this page on our website: https://www.workorpay.com/contact.</p>
   </>
   );
 }
