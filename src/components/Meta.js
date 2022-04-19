@@ -9,9 +9,9 @@ function Meta(props) {
   // Meta values that are the same across all pages
   const globalMeta = {
     // Site name
-    siteName: "Envariable",
+    siteName: "WorkOrPay",
     // Your production domain (example: https://myapp.com)
-    domain: "https://envariable.com",
+    domain: "https://workorpay.com",
     // Your Twitter handle (example: @divjoy)
     twitterHandle: "",
   };
@@ -19,9 +19,9 @@ function Meta(props) {
   // Default meta values for current page (override with props)
   const defaultPageMeta = {
     // Page title
-    title: "Envariable",
+    title: "Work Or Pay",
     // Page description
-    description: "Motivation Is Variable. We're Envariable.",
+    description: "Work Or Pay. Choose goals. Form contracts. Pay the price if you fail. A service guaranteed to keep you accountable for your goals",
     // Social share image (create this file in /public/images/)
     image: "/images/social.png",
     // Page type (see https://ogp.me/#types)
