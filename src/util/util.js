@@ -19,6 +19,7 @@ export async function apiRequest(path, method = "GET", data) {
     .then((response) => response.json())
     .then((response) => {
       if (response.status === "error") {
+        console.log(response, "error util.js");
         // Automatically signout user if accessToken is no longer valid
         if (response.code === "auth/invalid-user-token") {
           signOut(auth);
@@ -26,6 +27,7 @@ export async function apiRequest(path, method = "GET", data) {
 
         throw new CustomError(response.code, response.message);
       } else {
+        console.log(response, "response in util");
         return response.data;
       }
     });

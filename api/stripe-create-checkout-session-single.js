@@ -49,6 +49,7 @@ export default requireAuth(async (req, res) => {
       success_url: body.successUrl,
       cancel_url: body.cancelUrl,
     });
+    console.log(sessionSingle, "session single bois");
 
     // Return success response
     res.send({ status: "success", data: sessionSingle });
@@ -56,6 +57,10 @@ export default requireAuth(async (req, res) => {
     console.log("stripe-create-checkout-session-single error", error);
 
     // Return error response
-    res.send({ status: "error", code: error.code, message: error.message });
+    res.send({
+      status: "error",
+      code: error.code,
+      message: error.message,
+    });
   }
 });
