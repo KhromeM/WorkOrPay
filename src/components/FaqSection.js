@@ -43,7 +43,7 @@ function FaqSection(props) {
       question: "How does this work?",
       disclaimer: false,
       answer:
-        'First sign up for an account, purchase the monthly membership for $15.99. Once you have a membership you will be able to form contracts. Contracts define your goals, gives you deadlines to reach them, and sets financial penalties if you fail to do so. An example of a contract is this: "I will work 100 hours in the next 7 days. If I fail then WorkOrPay will donate my $500 deposit to Doctors Without Borders.',
+        'First sign up for an account, purchase the monthly membership for $15.99. Once you have a membership you will be able to form contracts. Contracts define your goals, gives you deadlines to reach them, and sets financial penalties if you fail to do so. An example of a contract is this: "I will work 100 hours in the next 7 days. If I fail then WorkOrPay will donate my $500 deposit to Doctors Without Borders."',
     },
     {
       question: "Why does this work?",
