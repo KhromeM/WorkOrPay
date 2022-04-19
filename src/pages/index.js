@@ -44,11 +44,9 @@ function IndexPage(props) {
         bgImageOpacity={1}
         title="Lock In Desired Future Behavior"
         subtitle=""
-        buttonAboveText="More questions?"
-        buttonText="FAQ"
+        buttonText="Pricing"
         buttonColor="primary"
-        buttonPath="/faq"
-        button2Path="/contact"
+        buttonPath="/pricing"
       />
 
       <HowItWorks

@@ -147,14 +147,9 @@ function FeaturesSection(props) {
             </Grid>
           ))}
         </Container>
-        {/* <Box
-          sx={{ fontSize: "50px", fontWeight: "500", mt: "60px" }}
-          textAlign={{ xs: "center", md: "center" }}
-        >
-          {props.buttonAboveText}
           <Box sx={{ mt: "20px" }} textAlign={{ xs: "center", md: "center" }}>
             <Button
-              style={{ width: 150, height: 75, fontSize: "35px" }}
+              style={{ width: 160, height: 60, fontSize: "27px" }}
               component={Link}
               to={props.buttonPath}
               variant="contained"
@@ -162,24 +157,9 @@ function FeaturesSection(props) {
               color={props.buttonColor}
             >
               {props.buttonText}
-            </Button>{" "}
+            </Button>
           </Box>
-          <Button
-            style={{
-              width: 182,
-              height: 50,
-              fontSize: "21px",
-              marginTop: "25px",
-            }}
-            component={Link}
-            to={props.button2Path}
-            variant="contained"
-            size="large"
-            color={props.buttonColor}
-          >
-            Contact Us
-          </Button>
-        </Box> */}
+
       </Container>
     </Section>
   );
