@@ -9,6 +9,8 @@ import { useDarkMode } from "../util/theme";
 import lost from "../resources/lost.svg";
 import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
+import HowItWorks from "../components/HowItWorks";
+
 function IndexPage(props) {
   const darkMode = useDarkMode();
   return (
@@ -46,6 +48,12 @@ function IndexPage(props) {
         buttonColor="primary"
         buttonPath="/faq"
         button2Path="/contact"
+      />
+      <HowItWorks
+        bgColor="default"
+        size="medium"
+        bgImage=""
+        bgImageOpacity={1}
       />
       {/* <TestimonialsSection
         bgColor="light"

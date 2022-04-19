@@ -1,0 +1,92 @@
+import React from "react";
+import Container from "@material-ui/core/Container";
+import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { emphasize } from "@material-ui/core/styles/colorManipulator";
+import Section from "./Section";
+import SectionHeader from "./SectionHeader";
+
+
+const useStyles = makeStyles((theme) => ({
+  gridItem: {
+    // Add border that contrasts lightly with background color.
+    // We use boxShadow so that it's hidden around outer edge
+    // due to container <Card> having overflow: hidden
+    boxShadow: `1px 1px 0 0 ${emphasize(theme.palette.background.paper, 0.08)}`,
+    textAlign: "center",
+  },
+  imageContainer: {
+    margin: "0 auto",
+    maxWidth: "200px",
+    marginBottom: "30px",
+    "& img": {
+      width: "100%",
+    },
+  },
+}));
+
+function HowItWorks(props) {
+  const classes = useStyles();
+
+  const items = [
+    {
+      title: "Sign Up",
+      body: "First sign up for an account and purchase the monthly membership. Once you have a membership you will be able to form contracts.",
+    },
+    {
+      title: "Form A Contract",
+      body: 'Concretely define your goal. Make it  measurable. Set a hard deadline. Give yourself enough time to complete your objectives, but not enough time for you to slack off. Example: "I will finish creating and launch my website in 8 days!',
+    },
+    {
+      title: "Set Financial Penalties ",
+      body: "If just making goals was enough, you wouldn't be here. Create extra motivation for yourself by wagering your money. Choose an amount from $25-$1000. Choose the charity or anti-charity that gets your money if you fail and deposit the amount.",
+    },
+    {
+      title: "Follow Through",
+      body: "Now you have until your deadline to reach your goal. Once you do, send us proof so we can verify it and send your deposit back. If you fail to complete your goal by the deadline, your deposit is donated.",
+    },
+  ];
+
+  return (
+    <Section
+      bgColor={props.bgColor}
+      size={props.size}
+      bgImage={props.bgImage}
+      bgImageOpacity={props.bgImageOpacity}
+    >
+      <Container>
+        <SectionHeader
+          title="How It Works"
+          subtitle=""
+          size={4}
+          textAlign="center"
+        />
+        <Card raised={false}>
+          <Grid container={true}>
+            {items.map((item, index) => (
+              <Grid
+                item={true}
+                xs={12}
+                md={6}
+                className={classes.gridItem}
+                key={index}
+              >
+                <Box p={6}>
+                  <Typography variant="h5" gutterBottom={true}>
+                    {item.title}
+                  </Typography>
+                  <Typography variant="subtitle1">{item.body}</Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
+      </Container>
+    </Section>
+  );
+}
+
+export default HowItWorks;

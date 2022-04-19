@@ -40,11 +40,12 @@ function FaqSection(props) {
 
   const items = [
     {
-      question: "How does this work?",
+      question: "Who is this for?",
       disclaimer: false,
       answer:
-        'First sign up for an account, purchase the monthly membership for $15.99. Once you have a membership you will be able to form contracts. Contracts define your goals, gives you deadlines to reach them, and sets financial penalties if you fail to do so. An example of a contract is this: "I will work 100 hours in the next 7 days. If I fail then WorkOrPay will donate my $500 deposit to Doctors Without Borders."',
+        "Some people have their lives in order. They stick to a schedule, exercise regularly, maybe even do a bit of meditation and yoga. This site is not for them. It's for ambitious people who want to do great things. Who know they have the ability, but struggle to act once their initial burst of motivation disappears. Using this service, they can fuel themselves with external motivation. Until the next burst of internal motivation kicks in.",
     },
+
     {
       question: "Why does this work?",
       disclaimer: true,
@@ -53,12 +54,6 @@ function FaqSection(props) {
       answer: "Deadlines: Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procrastinators become super efficient workers in the last minute.",
     },
       
-    {
-      question: "Who is this for?",
-      disclaimer: false,
-      answer:
-        "Some people have their lives in order. They stick to a schedule, exercise regularly, maybe even do a bit of meditation and yoga. This site is not for them. It's for ambitious people who want to do great things. Who know they have the ability, but struggle to act once their initial burst of motivation disappears. Using this service, they can fuel themselves with external motivation. Until the next burst of internal motivation kicks in.",
-    },
     {
       question: "What are the contracts?",
       disclaimer: false,
