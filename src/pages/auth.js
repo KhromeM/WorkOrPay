@@ -16,8 +16,7 @@ function AuthPage(props) {
         bgImageOpacity={1}
         type={router.query.type}
         providers={["google"]}
-        // afterAuthPath={router.query.next || "/dashboard"}
-        afterAuthPath="/dashboard"
+        afterAuthPath={router.query.next || "/dashboard"}
       />
     </>
   );
