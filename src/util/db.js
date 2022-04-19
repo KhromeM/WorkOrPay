@@ -115,6 +115,14 @@ export function deleteItem(id) {
   return deleteDoc(doc(db, "items", id));
 }
 
+/**** Stripe / Contract Creation ****/
+export function createContract(data) {
+  return addDoc(collection(db, "contract"), {
+    ...data,
+    createdAt: serverTimestamp(),
+  });
+}
+
 /**** HELPERS ****/
 
 // Store Firestore unsubscribe functions

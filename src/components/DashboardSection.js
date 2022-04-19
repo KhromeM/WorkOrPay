@@ -58,7 +58,7 @@ function DashboardSection(props) {
             </Alert>
           </Box>
         )}
-
+        {JSON.stringify(auth.user.stripeSubscriptionId)}
         <Grid container={true} spacing={4}>
           {/* <Grid item={true} xs={12} md={6}>
             <Streaks />

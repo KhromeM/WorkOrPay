@@ -34,13 +34,13 @@ export default requireAuth(async (req, res) => {
       customer: stripeCustomerId,
       payment_method_types: ["card", "us_bank_account"],
 
+      mode: "payment",
       line_items: [
         {
           price: body.priceId,
           quantity: 1,
         },
       ],
-      mode: "payment",
       // Uncomment to allow user to enter a promotional code
       //allow_promotion_codes: true,
       // Uncomment if you need address collection

@@ -18,14 +18,52 @@ export default async (req, res) => {
 
     // Get the object from stripeEvent
     const object = stripeEvent.data.object;
+    console.log("HELLO GOAT22 BEFOr.");
 
     switch (stripeEvent.type) {
       case "checkout.session.completed":
+        console.log("HELLO GOAT BEFORE.");
+        console.log(object);
+        console.log(object.payment_status);
+        if (object.mode === "payment") {
+          console.log("it's a single payment");
+        }
+        if (object.mode === "subscription") {
+          console.log("it's a subscription");
+        }
+
+        if (object.mode === "payment") {
+          console.log('breaking cuz it"s a payment');
+          console.log(object.amount_total);
+          console.log(object.customer, "customer");
+
+          const session = await stripe.checkout.sessions.retrieve(object.id, {
+            expand: ["line_items"],
+          });
+          var datetime = new Date();
+          console.log(datetime.toISOString().slice(0, 10));
+          console.log(session.line_items.data[0].price);
+          await updateUserByCustomerId(object.customer, {
+            hasContract: "true",
+            // payment intent id (stripe.com > payments > descriptions)
+            stripeContractPaymentIntentId: object.id,
+            // Store the Price ID for this subscription (env variable for your product)
+            stripeContractPriceId: session.line_items.data[0].price.id,
+            // Store the date of this purchase (so you can know when the contract started)
+            stripeContractPurchaseDate: datetime.toISOString().slice(0, 10),
+            // paid? mutafa warning: don't change shit though, this is cosmetic
+            stripeContractPaidOrNot: object.payment_status,
+          });
+          break;
+        }
+        // need contract created day,
+
         // Fetch subscription
+
         const subscription = await stripe.subscriptions.retrieve(
           object.subscription
         );
-        console.log(subscription);
+        console.log(subscription, "subscription");
         console.log("HELLO ITS HERE THE GOAT");
         // Update the current user
         await updateUserByCustomerId(object.customer, {
@@ -99,6 +137,7 @@ export default async (req, res) => {
       status: "error",
       code: error.code,
       message: error.message,
+
       testinglol: "lolol",
     });
   }

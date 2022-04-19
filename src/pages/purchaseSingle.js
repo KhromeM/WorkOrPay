@@ -22,6 +22,7 @@ function PurchasePage(props) {
       console.log(router.query, "router");
       console.log("going here");
       redirectToCheckoutSingle(router.query.plan).catch((error) => {
+        console.log("cancelled");
         console.log(error, "error inside redirectocheckout");
         setFormAlert({
           type: "error",

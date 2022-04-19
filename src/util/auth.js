@@ -211,6 +211,9 @@ function useFormatUser(user) {
       planIsActive: ["active", "trialing"].includes(
         user.stripeSubscriptionStatus
       ),
+      // OBTAIN CONTRACT
+      // getContract:
+      testingbubba: "testin",
     };
   }, [user]);
 }
