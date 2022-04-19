@@ -46,13 +46,13 @@ function FaqSection(props) {
         "Some people have their lives in order. They stick to a schedule, exercise regularly, maybe even do a bit of meditation and yoga. This site is not for them. It's for ambitious people who want to do great things. Who know they have the ability, but struggle to act once their initial burst of motivation disappears. Using this service, they can fuel themselves with external motivation. Until the next burst of internal motivation kicks in.",
     },
 
-    {
-      question: "Why does this work?",
-      disclaimer: true,
-      answer2:
-        "Loss aversion: Humans hate losing what they have and will go far out of their way to preserve their current holdings. This is a scientific fact. ",
-      answer: "Deadlines: Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procrastinators become super efficient workers in the last minute.",
-    },
+    // {
+    //   question: "Why does this work?",
+    //   disclaimer: true,
+    //   answer2:
+    //     "Loss aversion: Humans hate losing what they have and will go far out of their way to preserve their current holdings. This is a scientific fact. ",
+    //   answer: "Deadlines: Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procrastinators become super efficient workers in the last minute.",
+    // },
       
     {
       question: "What are the contracts?",
@@ -66,7 +66,7 @@ function FaqSection(props) {
       answer:
         "A financial penalty requires you make a deposit. If you achieve your goal before the deadline, you get your money back. However, if you fail to do so, we will send the money to the charity you picked in your contract.",
       answer2:
-        "NOTE: Because of transaction processing fees, we DEDUCT 3% from deposits before sending them back to you or sending them elsewhere. EXAMPLE: If you deposit $100, then fulfill your goals, you will get $97 back. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction. Furthermore, we wait 180 days before making the donation to the charity of your choice. This is to minimize losses from chargebacks.",
+        "NOTE: Because of transaction processing fees, we DEDUCT a small percentage from deposits before sending them back to you or sending them elsewhere. If you pay for your contract with a credit or debit card the fee is 3%. If you use your bank to pay, it is only 1%. We strongly recomend using your bank to pay if you can. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction. Furthermore, we wait 180 days before making the donation to the charity of your choice. This is to prevent taking huge losses from chargebacks. Once the 180 days are up, we will email you a proof of donation.",
     },
     {
       question: "Why can't you deduct financial penalties only after I fail?",

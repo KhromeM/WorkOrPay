@@ -84,12 +84,12 @@ function FeaturesSection(props) {
         "If you report you have achieved your goal, we verify your claims. We are committed to providing actual accountability.",
       image: selfie,
     },
-    {
-      title: "Coming Soon",
-      description:
-        "Multiple goals and contracts. Daily check ups by FaceTime/Zoom/Phone calls. Customized plans. Progression tracking. Periodic reminders.",
-      image: construction,
-    },
+    // {
+    //   title: "Coming Soon",
+    //   description:
+    //     "Multiple goals and contracts. Daily check ups by FaceTime/Zoom/Phone calls. Customized plans. Progression tracking. Periodic reminders.",
+    //   image: construction,
+    // },
   ];
 
   return (
@@ -103,7 +103,7 @@ function FeaturesSection(props) {
         <SectionHeader
           title={props.title}
           subtitle={props.subtitle}
-          size={4}
+          size={3}
           textAlign="center"
         />
         <Container

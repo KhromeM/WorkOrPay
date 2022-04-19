@@ -10,7 +10,7 @@ import lost from "../resources/lost.svg";
 import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
-import IsThisForMe from "../components/IsThisForMe";
+
 
 function IndexPage(props) {
   const darkMode = useDarkMode();
@@ -29,18 +29,6 @@ function IndexPage(props) {
         buttonColor="primary"
         buttonPath="/pricing"
       />
-      <HowItWorks
-        bgColor="default"
-        size="medium"
-        bgImage=""
-        bgImageOpacity={1}
-      />
-      {/* <IsThisForMe
-        bgColor="default"
-        size="medium"
-        bgImage=""
-        bgImageOpacity={1}
-      /> */}
       {/* <ClientsSection
         bgColor="light"
         size="normal"
@@ -62,6 +50,14 @@ function IndexPage(props) {
         buttonPath="/faq"
         button2Path="/contact"
       />
+
+      <HowItWorks
+        bgColor="default"
+        size="medium"
+        bgImage=""
+        bgImageOpacity={1}
+      />
+
       {/* <TestimonialsSection
         bgColor="light"
         size="medium"
