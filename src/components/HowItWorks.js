@@ -33,19 +33,19 @@ function HowItWorks(props) {
 
   const items = [
     {
-      title: "Sign Up",
+      title: "1) Sign Up",
       body: "First sign up for an account and purchase the monthly membership. Once you have a membership you will be able to form contracts.",
     },
     {
-      title: "Form A Contract",
+      title: "2) Form A Contract",
       body: 'Concretely define your goal. Make it  measurable. Set a hard deadline. Give yourself enough time to complete your objectives, but not enough time for you to slack off. Example: "I will finish creating and launch my website in 8 days!',
     },
     {
-      title: "Set Financial Penalties ",
+      title: "3) Set Financial Penalties ",
       body: "If just making goals was enough, you wouldn't be here. Create extra motivation for yourself by wagering your money. Choose an amount from $25-$1000. Choose the charity or anti-charity that gets your money if you fail and deposit the amount.",
     },
     {
-      title: "Follow Through",
+      title: "4) Follow Through",
       body: "Now you have until your deadline to reach your goal. Once you do, send us proof so we can verify it and send your deposit back. If you fail to complete your goal by the deadline, your deposit is donated.",
     },
   ];
