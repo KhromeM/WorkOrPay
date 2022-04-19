@@ -42,6 +42,7 @@ export async function redirectToCheckoutSingle(planId) {
       cancelUrl: `${window.location.origin}/pricing`,
     }
   );
+  console.log(session, "session in stripe.js");
 
   // Ensure if user clicks browser back button from checkout they go to /pricing
   // instead of this page or they'll redirect right back to checkout.

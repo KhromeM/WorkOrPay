@@ -25,7 +25,8 @@ export default async (req, res) => {
         const subscription = await stripe.subscriptions.retrieve(
           object.subscription
         );
-
+        console.log(subscription);
+        console.log("HELLO ITS HERE THE GOAT");
         // Update the current user
         await updateUserByCustomerId(object.customer, {
           stripeSubscriptionId: subscription.id,
@@ -94,6 +95,11 @@ export default async (req, res) => {
     console.log("stripe webhook error", error);
 
     // Send error response
-    res.send({ status: "error", code: error.code, message: error.message });
+    res.send({
+      status: "error",
+      code: error.code,
+      message: error.message,
+      testinglol: "lolol",
+    });
   }
 };
