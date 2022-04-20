@@ -72,6 +72,8 @@ function Contact(props) {
         setPending(false);
       });
   };
+
+
   if (formAlert)
     return (
       <Box
