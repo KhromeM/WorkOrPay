@@ -32,6 +32,34 @@ function Contact(props) {
   const auth = useAuth();
   // console.log(auth.user.displayName);
 
+  if (!auth.user || auth.user.planIsActive == false) {
+    return (
+      <>
+        <div
+          style={{
+            marginTop: "30vh",
+            marginBottom: "30vh",
+            textAlign: "center",
+            fontSize: "30px",
+          }}
+        >
+          You don't have a subscription. You need to buy a subscription to
+          create a contract.
+          <br />
+          <Button
+            variant="filled"
+            style={{ backgroundColor: "gray", marginTop: "20px" }}
+            onClick={() => {
+              history.push("/pricing");
+            }}
+          >
+            Buy Now
+          </Button>
+        </div>
+      </>
+    );
+  }
+
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
@@ -43,10 +71,12 @@ function Contact(props) {
     data.name = "default";
     console.log(data);
 
-    contact
-      .submit(data)
+    // remove google sheets
+    //
+    //
+
+    createItem({ owner: auth.user.uid, ...data })
       .then(() => {
-        createItem({ owner: auth.user.uid, ...data });
         // Clear form
         reset();
         // Show success alert message
@@ -58,7 +88,7 @@ function Contact(props) {
         });
         setTimeout(() => {
           history.push(`/purchasesingle/contract${data.dollars}`);
-        }, 1000);
+        }, 2000);
       })
       .catch((error) => {
         // Show error alert message
