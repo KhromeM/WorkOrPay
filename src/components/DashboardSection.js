@@ -17,6 +17,7 @@ import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { Button } from "@material-ui/core";
 import contact from "../util/contact";
+import { updateUser } from "../util/db";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -36,6 +37,9 @@ function DashboardSection(props) {
 
     contact
       .submit(data)
+      .then(()=>{
+        updateUser(auth.user.uid, {'button':'disbale'})
+      })
       .then(() => {
         // Clear form
         //reset();
@@ -161,7 +165,7 @@ function DashboardSection(props) {
             xs={12}
             md={6}
           >
-            {auth.user.hasContract ? (
+            {(!auth.user.button && auth.user.hasContract ) && (
               <div>
                 Press this button when you have achieved your goal as stated in
                 the contract:
@@ -176,8 +180,9 @@ function DashboardSection(props) {
                 >
                   <strong>Submit for verification</strong>
                 </Button>
-              </div>
-            ) : (
+              </div>)}
+
+             {(!auth.user.button && !auth.user.hasContract ) && (
               <Button
                 style={{ marginTop: "20px" }}
                 variant="contained"
