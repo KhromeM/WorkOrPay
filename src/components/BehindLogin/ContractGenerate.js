@@ -8,6 +8,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import contact from "../../util/contact";
 import { useAuth } from "../../util/auth";
+import { ReactComponent as InfoIcon } from "../../resources/infoicon.svg";
+
 import {
   Container,
   FormControl,
@@ -15,6 +17,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Tooltip,
+  tooltipClasses,
 } from "@material-ui/core";
 import SectionHeader from "../SectionHeader";
 import { createItem } from "../../util/db";
@@ -237,13 +241,45 @@ function Contact(props) {
               />
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={8} md={2}>
+            <Grid item={true} xs={8} md={3}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="dollars"
               >
-                Financial Penalty
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ paddingTop: "5px" }}>Financial Penalty</div>
+                  <Tooltip
+                    placement="right"
+                    style={{
+                      marginBottom: "5px",
+                      marginLeft: "5px",
+                      paddingTop: "4px",
+                    }}
+                    title={
+                      <p
+                        style={{
+                          fontFamily: "Inter",
+                          lineHeight: "1.5",
+                          fontSize: "17px",
+                        }}
+                      >
+                        This is the amount of money you put down towards your
+                        contract. If you pass your goals, you will get this
+                        amount back. If you don't pass your goals, this money
+                        gets donated to your chosen beneficiary below. (Please
+                        note there is a <strong>3%</strong> transaction fee owed
+                        to our payment processor Stripe.com! You will get back
+                        97% of your funds. We tried to avoid it!)
+                      </p>
+                    }
+                    arrow
+                  >
+                    <InfoIcon />
+                  </Tooltip>
+                </div>
+                <div style={{ fontSize: "16px" }}>(3% charge)</div>
               </InputLabel>
+
               <TextField
                 // value={minutes}
                 fullWidth
@@ -289,7 +325,21 @@ function Contact(props) {
                 style={{ marginBottom: "10px", textAlign: "center" }}
                 id="days"
               >
-                Days until Deadline
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ paddingTop: "5px" }}>Days Until Deadline</div>
+                  <Tooltip
+                    placement="right"
+                    style={{
+                      marginBottom: "5px",
+                      marginLeft: "5px",
+                      paddingTop: "4px",
+                    }}
+                    title="Add"
+                    arrow
+                  >
+                    <InfoIcon />
+                  </Tooltip>
+                </div>
               </InputLabel>
               <TextField
                 variant="outlined"
@@ -326,7 +376,23 @@ function Contact(props) {
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="beneficiary"
               >
-                Beneficiary of Donation
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ paddingTop: "5px" }}>
+                    Beneficiary of Donation
+                  </div>
+                  <Tooltip
+                    placement="right"
+                    style={{
+                      marginBottom: "5px",
+                      marginLeft: "5px",
+                      paddingTop: "4px",
+                    }}
+                    title="Add"
+                    arrow
+                  >
+                    <InfoIcon />
+                  </Tooltip>
+                </div>{" "}
               </InputLabel>
               <TextField
                 // value={minutes}
@@ -376,7 +442,21 @@ function Contact(props) {
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="phone"
               >
-                Phone Number
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ paddingTop: "5px" }}>Phone Number</div>
+                  <Tooltip
+                    placement="right"
+                    style={{
+                      marginBottom: "5px",
+                      marginLeft: "5px",
+                      paddingTop: "4px",
+                    }}
+                    title="Add"
+                    arrow
+                  >
+                    <InfoIcon />
+                  </Tooltip>
+                </div>{" "}
               </InputLabel>
 
               <TextField
