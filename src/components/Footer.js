@@ -105,9 +105,9 @@ function Footer(props) {
             className={`${classes.item} ${classes.right} ${classes.smallLinks}`}
           >
             <Typography>
-              {/* <LinkMui component={Link} to="/about" className={classes.link}>
-                About
-              </LinkMui> */}
+              <LinkMui component={Link} to="/about" className={classes.link}>
+                About Us
+              </LinkMui>
               <LinkMui component={Link} to="/faq" className={classes.link}>
                 FAQ
               </LinkMui>
