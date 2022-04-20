@@ -91,7 +91,6 @@ function DashboardSection(props) {
                 🥳
               </span>
             </Alert>
-            }
           </Box>
         )}
         {JSON.stringify(auth.user.stripeContractPurchaseDate)}
