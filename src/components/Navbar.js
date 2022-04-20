@@ -61,7 +61,13 @@ function Navbar(props) {
   const handleCloseMenu = () => {
     setMenuState(null);
   };
-
+  const scroll = () => {
+    history.push("/");
+    setTimeout(() => {
+      const section = document.querySelector("#howitworks");
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 200);
+  };
   return (
     <Section bgColor={props.color} size="auto">
       <AppBar position="static" color="transparent" elevation={0}>
@@ -95,7 +101,7 @@ function Navbar(props) {
                   <Typography textalign="center">Dashboard</Typography>
                 </MenuItem>
               )}
-              <MenuItem component="a" href="#howitworks">
+              <MenuItem onClick={scroll}>
                 <Typography textalign="center">How It Works</Typography>
               </MenuItem>
               <MenuItem component={Link} to="/pricing">
