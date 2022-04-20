@@ -334,7 +334,23 @@ function Contact(props) {
                       marginLeft: "5px",
                       paddingTop: "4px",
                     }}
-                    title="Add"
+                    title={
+                      <p
+                        style={{
+                          fontFamily: "Inter",
+                          lineHeight: "1.5",
+                          fontSize: "17px",
+                        }}
+                      >
+                        This is the amount of money you put down towards your
+                        contract. If you pass your goals, you will get this
+                        amount back. If you don't pass your goals, this money
+                        gets donated to your chosen beneficiary below. (Please
+                        note there is a <strong>3%</strong> transaction fee owed
+                        to our payment processor Stripe.com! You will get back
+                        97% of your funds. We tried to avoid it!)
+                      </p>
+                    }
                     arrow
                   >
                     <InfoIcon />
@@ -387,7 +403,23 @@ function Contact(props) {
                       marginLeft: "5px",
                       paddingTop: "4px",
                     }}
-                    title="Add"
+                    title={
+                      <p
+                        style={{
+                          fontFamily: "Inter",
+                          lineHeight: "1.5",
+                          fontSize: "17px",
+                        }}
+                      >
+                        This is the amount of money you put down towards your
+                        contract. If you pass your goals, you will get this
+                        amount back. If you don't pass your goals, this money
+                        gets donated to your chosen beneficiary below. (Please
+                        note there is a <strong>3%</strong> transaction fee owed
+                        to our payment processor Stripe.com! You will get back
+                        97% of your funds. We tried to avoid it!)
+                      </p>
+                    }
                     arrow
                   >
                     <InfoIcon />
@@ -451,7 +483,23 @@ function Contact(props) {
                       marginLeft: "5px",
                       paddingTop: "4px",
                     }}
-                    title="Add"
+                    title={
+                      <p
+                        style={{
+                          fontFamily: "Inter",
+                          lineHeight: "1.5",
+                          fontSize: "17px",
+                        }}
+                      >
+                        This is the amount of money you put down towards your
+                        contract. If you pass your goals, you will get this
+                        amount back. If you don't pass your goals, this money
+                        gets donated to your chosen beneficiary below. (Please
+                        note there is a <strong>3%</strong> transaction fee owed
+                        to our payment processor Stripe.com! You will get back
+                        97% of your funds. We tried to avoid it!)
+                      </p>
+                    }
                     arrow
                   >
                     <InfoIcon />
