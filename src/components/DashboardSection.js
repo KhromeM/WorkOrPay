@@ -16,6 +16,7 @@ import DailySubmission from "./BehindLogin/DailySubmission.js";
 import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { Button } from "@material-ui/core";
+import contact from "../util/contact";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -28,6 +29,28 @@ function DashboardSection(props) {
 
   const auth = useAuth();
   const router = useRouter();
+  const data = {name:auth.user.name, email:auth.user.email, message:'User has completed their contract. Verify it.',}
+  const onSubmit = () => {
+    // Show pending indicator
+    //setPending(true);
+
+    contact
+      .submit(data)
+      .then(() => {
+        // Clear form
+        //reset();
+        // Show success alert message
+        alert('Great Job! We will contact you for verification shortly.');
+      })
+      .catch((error) => {
+        // Show error alert message
+        alert(error.message);
+      })
+      .finally(() => {
+        // Hide pending indicator
+       // setPending(false);
+      });
+  };
 
   return (
     <Section
@@ -148,8 +171,8 @@ function DashboardSection(props) {
                   variant="contained"
                   size="medium"
                   color="secondary"
-                  component={Link}
-                  to="/verficiationsubmit"
+                  // component={Link}
+                  onClick={onSubmit}
                 >
                   <strong>Submit for verification</strong>
                 </Button>
