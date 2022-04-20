@@ -19,6 +19,7 @@ import { Button } from "@material-ui/core";
 import contact from "../util/contact";
 import { updateUser } from "../util/db";
 
+
 const useStyles = makeStyles((theme) => ({
   cardContent: {
     padding: theme.spacing(3),
@@ -56,6 +57,9 @@ function DashboardSection(props) {
       });
   };
 
+  const message = `You are now subscribed to the ${auth.user.planId} plan `
+  const message2 = 'You have formed a contract. Good Luck!'
+
   return (
     <Section
       bgColor={props.bgColor}
@@ -73,8 +77,10 @@ function DashboardSection(props) {
 
         {router.query.paid && auth.user.planIsActive && (
           <Box mx="auto" mb={4} maxWidth={400}>
+
+
             <Alert severity="success">
-              You are now subscribed to the {auth.user.planId} plan
+              {auth.user.hasContract ? message2:message}
               <span
                 role="img"
                 aria-label="party"
@@ -82,7 +88,7 @@ function DashboardSection(props) {
               >
                 🥳
               </span>
-            </Alert>
+            </Alert>}
           </Box>
         )}
         {JSON.stringify(auth.user.stripeContractPurchaseDate)}
