@@ -7,7 +7,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
-import { Link } from "./../util/router";
+import { Link, useHistory } from "./../util/router";
 import { useDarkMode } from "./../util/theme";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,12 +71,20 @@ const useStyles = makeStyles((theme) => ({
 
 function Footer(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   const darkMode = useDarkMode();
   // Use inverted logo if specified
   // and we are in dark mode
   const logo =
     props.logoInverted && darkMode.value ? props.logoInverted : props.logo;
+
+  const scroll = () => {
+    history.push("/");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 200);
+  };
 
   return (
     <Section
@@ -88,7 +96,7 @@ function Footer(props) {
     >
       <Container>
         <div className={classes.wrapper}>
-          <div className={`${classes.item} ${classes.left}`}>
+          <div onClick={scroll} className={`${classes.item} ${classes.left}`}>
             <Link to="/">
               <img src={logo} alt="Logo" className={classes.brand} />
             </Link>
@@ -144,16 +152,22 @@ function Footer(props) {
             </a>
           </div>
           <span className={`${classes.item} ${classes.legal} ${classes.left}`}>
-            {props.copyright}
+            <LinkMui component={Link} to="/legal/terms-of-service">
+              {props.copyright}
+            </LinkMui>
             <LinkMui component={Link} to="/legal/terms-of-service">
               Terms
             </LinkMui>
             <LinkMui component={Link} to="/legal/privacy-policy">
               Privacy
             </LinkMui>
+            <br />
           </span>
         </div>
       </Container>
+      <LinkMui style={{ marginLeft: "10px" }} component={Link} onClick={scroll}>
+        Return to home page top{" "}
+      </LinkMui>
     </Section>
   );
 }

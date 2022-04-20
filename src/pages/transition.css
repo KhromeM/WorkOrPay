@@ -11,7 +11,3 @@
 .transition-exit.transition-exit-active {
   display: none;
 }
-
-html {
-  scroll-behavior: smooth;
-}

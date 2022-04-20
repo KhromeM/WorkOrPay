@@ -10,6 +10,7 @@ import logo from "../resources/logo.svg";
 import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
+import ScrollToTop from "../components/ScrollToTop";
 
 function IndexPage(props) {
   const darkMode = useDarkMode();
@@ -47,14 +48,12 @@ function IndexPage(props) {
         buttonColor="primary"
         buttonPath="/pricing"
       />
-
       <HowItWorks
         bgColor="default"
         size="medium"
         bgImage=""
         bgImageOpacity={1}
       />
-
       {/* <TestimonialsSection
         bgColor="light"
         size="medium"
@@ -85,6 +84,7 @@ function IndexPage(props) {
           subscribedMessage="You are now subscribed!"
         />
       }
+      <ScrollToTop />
     </>
   );
 }
