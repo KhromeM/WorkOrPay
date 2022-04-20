@@ -23,21 +23,22 @@ function ScrollToTop() {
   return (
     <Button
       style={{
-        borderRadius: 35,
+        borderRadius: 55,
         border: "2px solid black",
-        fontSize: "9px",
+        fontSize: "8px",
         padding: "8px",
         backgroundColor: "#00B0FF",
         display: "block",
         position: "fixed",
-        bottom: "9px",
+        bottom: "13px",
         left: "9px",
       }}
       onClick={topFunction}
     >
-      <img src="https://img.icons8.com/material/24/000000/chevron--v1.png" />
-      <br></br>
-      Top
+      <img
+        width="20"
+        src="https://img.icons8.com/material/24/000000/chevron--v1.png"
+      />
     </Button>
   );
 }

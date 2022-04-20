@@ -233,9 +233,11 @@ function Navbar(props) {
               <ListItem component={Link} to="/auth/signin" button={true}>
                 <ListItemText>Sign in</ListItemText>
               </ListItem>
-              <ListItem component={Link} to="/dashboard" button={true}>
-                <ListItemText>Products</ListItemText>
-              </ListItem>
+              <Divider />
+
+              <MenuItem onClick={scroll}>
+                <Typography textalign="center">How It Works</Typography>
+              </MenuItem>
               <ListItem component={Link} to="/pricing" button={true}>
                 <ListItemText>Pricing</ListItemText>
               </ListItem>
@@ -251,18 +253,24 @@ function Navbar(props) {
                 <ListItemText>Home</ListItemText>
               </ListItem>
               <ListItem component={Link} to="/dashboard" button={true}>
-                <ListItemText>Products</ListItemText>
+                <ListItemText>Dashboard</ListItemText>
               </ListItem>
+              <Divider />
+
+              <MenuItem onClick={scroll}>
+                <Typography textalign="center">How It Works</Typography>
+              </MenuItem>
               <ListItem component={Link} to="/pricing" button={true}>
                 <ListItemText>Pricing</ListItemText>
               </ListItem>
               <ListItem component={Link} to="/faq" button={true}>
                 <ListItemText>FAQ</ListItemText>
               </ListItem>
+              <Divider />
+
               <ListItem component={Link} to="/settings/general" button={true}>
                 <ListItemText>Settings</ListItemText>
               </ListItem>
-              <Divider />
               <ListItem
                 button={true}
                 onClick={(event) => {
