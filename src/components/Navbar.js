@@ -90,8 +90,13 @@ function Navbar(props) {
               <MenuItem component={Link} to="/">
                 <Typography textalign="center">Home</Typography>
               </MenuItem>
-              <MenuItem component={Link} to="/dashboard">
-                <Typography textalign="center">Products</Typography>
+              {auth.user && (
+                <MenuItem component={Link} to="/dashboard">
+                  <Typography textalign="center">Dashboard</Typography>
+                </MenuItem>
+              )}
+              <MenuItem component="a" href="#howitworks">
+                <Typography textalign="center">How It Works</Typography>
               </MenuItem>
               <MenuItem component={Link} to="/pricing">
                 <Typography textalign="center">Pricing</Typography>
