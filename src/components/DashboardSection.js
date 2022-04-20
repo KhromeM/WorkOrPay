@@ -58,7 +58,7 @@ function DashboardSection(props) {
             </Alert>
           </Box>
         )}
-        {JSON.stringify(auth.user.stripeSubscriptionId)}
+        {JSON.stringify(auth.user.stripeContractPurchaseDate)}
         <Grid container={true} spacing={4}>
           {/* <Grid item={true} xs={12} md={6}>
             <Streaks />
@@ -138,16 +138,34 @@ function DashboardSection(props) {
             xs={12}
             md={6}
           >
-            <Button
-              style={{ marginTop: "20px" }}
-              variant="contained"
-              size="medium"
-              color="secondary"
-              component={Link}
-              to="/generatecontract"
-            >
-              <strong>Generate Contract</strong>
-            </Button>
+            {auth.user.hasContract ? (
+              <div>
+                Press this button when you have achieved your goal as stated in
+                the contract:
+                <br />
+                <Button
+                  style={{ marginTop: "20px" }}
+                  variant="contained"
+                  size="medium"
+                  color="secondary"
+                  component={Link}
+                  to="/verficiationsubmit"
+                >
+                  <strong>Submit for verification</strong>
+                </Button>
+              </div>
+            ) : (
+              <Button
+                style={{ marginTop: "20px" }}
+                variant="contained"
+                size="medium"
+                color="secondary"
+                component={Link}
+                to="/generatecontract"
+              >
+                <strong>Generate Contract</strong>
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Container>
