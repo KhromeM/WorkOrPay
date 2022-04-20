@@ -174,9 +174,9 @@ function DashboardSection(props) {
             md={6}
           >
             {!auth.user.button && auth.user.hasContract && (
-              <div>
-                Press this button when you have achieved your goal as stated in
-                the contract:
+              <div style={{ color: "red", fontSize: "25px" }}>
+                <strong>ONLY</strong> press this button when you have achieved
+                your goal as stated in the contract:
                 <br />
                 <Button
                   style={{ marginTop: "20px" }}
@@ -189,7 +189,9 @@ function DashboardSection(props) {
                   {pending ? (
                     <CircularProgress color="success" />
                   ) : (
-                    <strong>Submit for verification</strong>
+                    <div>
+                      <strong>Submit for verification</strong>
+                    </div>
                   )}
                 </Button>
               </div>

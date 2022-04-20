@@ -11,7 +11,6 @@ import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
 
-
 function IndexPage(props) {
   const darkMode = useDarkMode();
   return (
