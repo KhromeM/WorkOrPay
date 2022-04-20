@@ -6,7 +6,7 @@ import FeaturesSection from "./../components/FeaturesSection";
 import TestimonialsSection from "./../components/TestimonialsSection";
 import NewsletterSection from "./../components/NewsletterSection";
 import { useDarkMode } from "../util/theme";
-import lost from "../resources/lost.svg";
+import logo from "../resources/logo.svg";
 import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
@@ -24,7 +24,7 @@ function IndexPage(props) {
         bgImageOpacity={1}
         title="Meet Your Goals Or Pay The Price"
         subtitle="Set goals. Form contracts. Pay the penalty if you fail."
-        image={lost}
+        image={logo}
         buttonText="Pricing"
         buttonColor="primary"
         buttonPath="/pricing"
