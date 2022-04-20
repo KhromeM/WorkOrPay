@@ -60,6 +60,33 @@ function Contact(props) {
     );
   }
 
+  if (auth.user.hasContract) {
+    return (
+      <div
+        style={{
+          marginTop: "30vh",
+          marginBottom: "30vh",
+          textAlign: "center",
+          fontSize: "30px",
+        }}
+      >
+        You currently have a contract that is live. Please wait till a site
+        admin refreshes your account or contact us by email or chat if you
+        believe this is an error.
+        <br />
+        <Button
+          variant="filled"
+          style={{ backgroundColor: "gray", marginTop: "20px" }}
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          Home{" "}
+        </Button>
+      </div>
+    );
+  }
+
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
@@ -102,7 +129,6 @@ function Contact(props) {
         setPending(false);
       });
   };
-
 
   if (formAlert)
     return (
