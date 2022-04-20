@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Alert from "@material-ui/lab/Alert";
@@ -15,10 +15,9 @@ import DailySubmission from "./BehindLogin/DailySubmission.js";
 // import Streaks from "./Streaks";
 import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import contact from "../util/contact";
 import { updateUser } from "../util/db";
-
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -28,24 +27,29 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardSection(props) {
   const classes = useStyles();
+  const [pending, setPending] = useState(false);
 
   const auth = useAuth();
   const router = useRouter();
-  const data = {name:auth.user.name, email:auth.user.email, message:'User has completed their contract. Verify it.',}
+  const data = {
+    name: auth.user.name,
+    email: auth.user.email,
+    message: "User has completed their contract. Verify it.",
+  };
   const onSubmit = () => {
     // Show pending indicator
-    //setPending(true);
+    setPending(true);
 
     contact
       .submit(data)
-      .then(()=>{
-        updateUser(auth.user.uid, {'button':'disbale'})
+      .then(() => {
+        updateUser(auth.user.uid, { button: "disable" });
       })
       .then(() => {
         // Clear form
         //reset();
         // Show success alert message
-        alert('Great Job! We will contact you for verification shortly.');
+        alert("Great Job! We will contact you for verification shortly.");
       })
       .catch((error) => {
         // Show error alert message
@@ -53,12 +57,12 @@ function DashboardSection(props) {
       })
       .finally(() => {
         // Hide pending indicator
-       // setPending(false);
+        // setPending(false);
       });
   };
 
-  const message = `You are now subscribed to the ${auth.user.planId} plan `
-  const message2 = 'You have formed a contract. Good Luck!'
+  const message = `You are now subscribed to the ${auth.user.planId} plan `;
+  const message2 = "You have formed a contract. Good Luck!";
 
   return (
     <Section
@@ -77,10 +81,8 @@ function DashboardSection(props) {
 
         {router.query.paid && auth.user.planIsActive && (
           <Box mx="auto" mb={4} maxWidth={400}>
-
-
             <Alert severity="success">
-              {auth.user.hasContract ? message2:message}
+              {auth.user.hasContract ? message2 : message}
               <span
                 role="img"
                 aria-label="party"
@@ -88,7 +90,8 @@ function DashboardSection(props) {
               >
                 🥳
               </span>
-            </Alert>}
+            </Alert>
+            }
           </Box>
         )}
         {JSON.stringify(auth.user.stripeContractPurchaseDate)}
@@ -171,7 +174,7 @@ function DashboardSection(props) {
             xs={12}
             md={6}
           >
-            {(!auth.user.button && auth.user.hasContract ) && (
+            {!auth.user.button && auth.user.hasContract && (
               <div>
                 Press this button when you have achieved your goal as stated in
                 the contract:
@@ -184,11 +187,16 @@ function DashboardSection(props) {
                   // component={Link}
                   onClick={onSubmit}
                 >
-                  <strong>Submit for verification</strong>
+                  {pending ? (
+                    <CircularProgress color="success" />
+                  ) : (
+                    <strong>Submit for verification</strong>
+                  )}
                 </Button>
-              </div>)}
+              </div>
+            )}
 
-             {(!auth.user.button && !auth.user.hasContract ) && (
+            {!auth.user.button && !auth.user.hasContract && (
               <Button
                 style={{ marginTop: "20px" }}
                 variant="contained"
