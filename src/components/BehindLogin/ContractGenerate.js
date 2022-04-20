@@ -263,13 +263,8 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        This is the amount of money you put down towards your
-                        contract. If you pass your goals, you will get this
-                        amount back. If you don't pass your goals, this money
-                        gets donated to your chosen beneficiary below. (Please
-                        note there is a <strong>3%</strong> transaction fee owed
-                        to our payment processor Stripe.com! You will get back
-                        97% of your funds. We tried to avoid it!)
+                        
+                        <strong>Questions? Ask us using the chat icon located in the bottom right of your screen.</strong>
                       </p>
                     }
                     arrow
@@ -277,7 +272,12 @@ function Contact(props) {
                     <InfoIcon />
                   </Tooltip>
                 </div>
-                <div style={{ fontSize: "16px" }}>(3% charge)</div>
+                <br/> <br/>
+                <div style={{ fontSize: "16px" }}>This is the amount of money you put on the line in your
+                        contract. If you pass your goals, you will get your deposit back (besides the transaction processing fee from Stripe). If you fail reach your goal by the deadline, this money
+                        will be donated to your chosen beneficiary below. </div>
+                <br/> <br/>
+                <div style={{ fontSize: "16px" }}><strong>Stripe's US Transaction Processing Fees: 0.8% fee if paid using bank. 2.9% + $0.30 with all other payment methods. We do not profit from this.</strong></div>
               </InputLabel>
 
               <TextField
@@ -342,13 +342,7 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        This is the amount of money you put down towards your
-                        contract. If you pass your goals, you will get this
-                        amount back. If you don't pass your goals, this money
-                        gets donated to your chosen beneficiary below. (Please
-                        note there is a <strong>3%</strong> transaction fee owed
-                        to our payment processor Stripe.com! You will get back
-                        97% of your funds. We tried to avoid it!)
+                        This is how many days you have to complete your goal. Make sure to give yourself adequate time, but not enough for you to procrastinate!
                       </p>
                     }
                     arrow
@@ -357,6 +351,10 @@ function Contact(props) {
                   </Tooltip>
                 </div>
               </InputLabel>
+              
+              
+                <div style={{ fontSize: "16px" }}>This is how many days you have to complete your goal. Make sure to give yourself adequate time, but not enough for you to procrastinate. The countdown starts as soon as you submit the contract!</div>
+             <br/> 
               <TextField
                 variant="outlined"
                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
@@ -384,7 +382,9 @@ function Contact(props) {
                   },
                 })}
               />
+              
             </Grid>
+            
             <Grid item={true} xs={12}></Grid>
 
             <Grid item={true} xs={12} md={5}>
@@ -411,13 +411,7 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        This is the amount of money you put down towards your
-                        contract. If you pass your goals, you will get this
-                        amount back. If you don't pass your goals, this money
-                        gets donated to your chosen beneficiary below. (Please
-                        note there is a <strong>3%</strong> transaction fee owed
-                        to our payment processor Stripe.com! You will get back
-                        97% of your funds. We tried to avoid it!)
+                        
                       </p>
                     }
                     arrow
@@ -425,6 +419,10 @@ function Contact(props) {
                     <InfoIcon />
                   </Tooltip>
                 </div>{" "}
+                <br/>
+                <div style={{ fontSize: "16px" }}>This is where your deposit is sent if you fail to reach your goal by the deadline. Choose a charity if you want your money going to a good cause. 
+                        Or choose an <strong>anti-charity</strong>, a cause you hate, to further motivate yourself to not fail.</div>
+             <br/> 
               </InputLabel>
               <TextField
                 // value={minutes}
@@ -457,14 +455,17 @@ function Contact(props) {
               >
                 <option selected disabled value="">
                   Select a beneficiary{" "}
-                </option>
-                <option value={25}>(Anti-Charity) Trump Super PAC</option>
-                <option value={1000}>(Anti-Charity) Clinton Foundation</option>
-                <option value={50}>Doctors Without Border</option>
-                <option value={100}>Abortion</option>
-                <option value={150}>Against Malaria Foundation</option>
-                <option value={250}>Climate Change Fund</option>
-                <option value={500}>Animal Welfare</option>
+                </option> 
+                
+                <option value={50}>Humanitarian: GiveWell Maximum Impact fund (Top-rated on Charitywatch.com) </option>
+                {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
+                <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
+                <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
+                <option value={250}>Enviromental: The Conservation Fund (Top-rated on Charitywatch.com)</option>
+                <option value={500}>Animal Welfare Institute (Top-rated on Charitywatch.com)</option>
+                <option value={25}>ANTI-CHARITY: The Republican National Party (RNC)</option>
+                <option value={1000}>ANTI-CHARITY: The Democratic National Party (DNC)</option>
+                <option value={100}>OTHER: Send us a message and tell us the cause you would like to send your money to.</option>
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
@@ -491,13 +492,8 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        This is the amount of money you put down towards your
-                        contract. If you pass your goals, you will get this
-                        amount back. If you don't pass your goals, this money
-                        gets donated to your chosen beneficiary below. (Please
-                        note there is a <strong>3%</strong> transaction fee owed
-                        to our payment processor Stripe.com! You will get back
-                        97% of your funds. We tried to avoid it!)
+                        We check in with you daily via text to make sure you are staying on track. 
+                        You can opt out of this by simply leaving this blank. If you want to later opt in, just send us a message using chat or the contact us page.
                       </p>
                     }
                     arrow
@@ -505,6 +501,10 @@ function Contact(props) {
                     <InfoIcon />
                   </Tooltip>
                 </div>{" "}
+                <br/>
+                <div style={{ fontSize: "16px" }}>We check in with you daily via text to make sure you are staying on track. 
+                        You can opt out of this by simply leaving this blank. If you want to opt-in later, just send us a message using chat or the contact us page.</div>
+             <br/> 
               </InputLabel>
 
               <TextField
