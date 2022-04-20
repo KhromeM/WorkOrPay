@@ -66,7 +66,7 @@ function Contact(props) {
                 inputRef={register({
                   required: "Please enter your name",
                 })}
-                value={auth.user ? auth.user.displayName : ""}
+              defaultValue={auth.user ? auth.user.displayName : ""}
 
               />
             </Grid>
@@ -84,7 +84,7 @@ function Contact(props) {
               inputRef={register({
                 required: "Please enter your email",
               })}
-              value={auth.user ? auth.user.email : ""}
+              defaultValue={auth.user ? auth.user.email : ""}
             />
           </Grid>
           <Grid item={true} xs={12}>
