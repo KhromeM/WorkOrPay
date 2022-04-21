@@ -12,6 +12,7 @@ import { ReactComponent as InfoIcon } from "../../resources/infoicon.svg";
 
 import {
   Container,
+  Divider,
   FormControl,
   InputAdornment,
   InputLabel,
@@ -74,9 +75,9 @@ function Contact(props) {
           fontSize: "30px",
         }}
       >
-        You currently have a contract that is live. Please wait till a site
-        admin refreshes your account or contact us by email or chat if you
-        believe this is an error.
+        You currently have a contract that is already valid. Please wait till a
+        site admin refreshes your account or contact us by email or chat if you
+        believe this message is an error.
         <br />
         <Button
           variant="filled"
@@ -157,7 +158,7 @@ function Contact(props) {
   return (
     <>
       {/* // this container is max width medium is good */}
-      <Container maxWidth="md" style={{ paddingTop: "30px" }}>
+      <Container maxWidth="sm" style={{ paddingTop: "30px" }}>
         <SectionHeader
           title="Generate your contract"
           subtitle="Contract stuff"
@@ -207,7 +208,7 @@ function Contact(props) {
                 value={auth.user ? auth.user.email : ""}
               />
             </Grid>
-            <Grid item={true} xs={12}>
+            {/* <Grid item={true} xs={12}>
               <TextField
                 variant="outlined"
                 type="text"
@@ -223,7 +224,7 @@ function Contact(props) {
                 })}
               />
             </Grid>
-            <Grid item={true} xs={12}></Grid>
+            <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
               <TextField
                 variant="outlined"
@@ -240,21 +241,45 @@ function Contact(props) {
                 })}
               />
             </Grid>
+            {/* <Grid item={true} xs={12}></Grid> */}
+            <Grid item={true} xs={12}>
+              <TextField
+                variant="outlined"
+                type="text"
+                label="Preferred Contact Method (Put anything you want: email, text, Messenger, Telegram, Whatsapp, or any other way! We will cater to you!)"
+                name="contactinfo"
+                multiline={true}
+                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                rows={5}
+                error={errors.contactinfo ? true : false}
+                helperText={errors.contactinfo && errors.contactinfo.message}
+                fullWidth={true}
+                inputRef={register({
+                  required: "Please enter your contact info",
+                })}
+              />
+            </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={8} md={3}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              Continue below...
+            </div>
+            <Divider
+              style={{
+                width: "100%",
+                marginTop: "5vh",
+                marginBottom: "5vh",
+              }}
+            />{" "}
+            <Grid item={true} xs={12} md={12}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="dollars"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div style={{ paddingTop: "5px" }}>Financial Penalty</div>
+                  <h2 style={{ paddingTop: "5px" }}>Financial Penalty</h2>
                   <Tooltip
                     placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
+                    style={{}}
                     title={
                       <p
                         style={{
@@ -263,8 +288,10 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        
-                        <strong>Questions? Ask us using the chat icon located in the bottom right of your screen.</strong>
+                        <strong>
+                          Questions? Ask us using the chat icon located in the
+                          bottom right of your screen.
+                        </strong>
                       </p>
                     }
                     arrow
@@ -272,12 +299,21 @@ function Contact(props) {
                     <InfoIcon />
                   </Tooltip>
                 </div>
-                <br/> <br/>
-                <div style={{ fontSize: "16px" }}>This is the amount of money you put on the line in your
-                        contract. If you pass your goals, you will get your deposit back (besides the transaction processing fee from Stripe). If you fail reach your goal by the deadline, this money
-                        will be donated to your chosen beneficiary below. </div>
-                <br/> <br/>
-                <div style={{ fontSize: "16px" }}><strong>Stripe's US Transaction Processing Fees: 0.8% fee if paid using bank. 2.9% + $0.30 with all other payment methods. We do not profit from this.</strong></div>
+                <div style={{ fontSize: "16px" }}>
+                  This is the amount of money you put on the line in your
+                  contract. If you pass your goals, you will get your deposit
+                  back (besides the transaction processing fee from Stripe). If
+                  you fail reach your goal by the deadline, this money will be
+                  donated to your chosen beneficiary below.{" "}
+                </div>
+                <br /> <br />
+                <div style={{ fontSize: "16px" }}>
+                  <strong>
+                    Stripe's US Transaction Processing Fees: 0.8% fee if paid
+                    using bank. 2.9% + $0.30 with all other payment methods. We
+                    do not profit from this.
+                  </strong>
+                </div>
               </InputLabel>
 
               <TextField
@@ -320,13 +356,16 @@ function Contact(props) {
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={4} md={3}>
+            <Divider
+              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
+            />{" "}
+            <Grid item={true} xs={12} md={12}>
               <InputLabel
                 style={{ marginBottom: "10px", textAlign: "center" }}
                 id="days"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div style={{ paddingTop: "5px" }}>Days Until Deadline</div>
+                  <h3 style={{ paddingTop: "5px" }}>Days Until Deadline</h3>
                   <Tooltip
                     placement="right"
                     style={{
@@ -342,7 +381,9 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        This is how many days you have to complete your goal. Make sure to give yourself adequate time, but not enough for you to procrastinate!
+                        This is how many days you have to complete your goal.
+                        Make sure to give yourself adequate time, but not enough
+                        for you to procrastinate!
                       </p>
                     }
                     arrow
@@ -351,10 +392,14 @@ function Contact(props) {
                   </Tooltip>
                 </div>
               </InputLabel>
-              
-              
-                <div style={{ fontSize: "16px" }}>This is how many days you have to complete your goal. Make sure to give yourself adequate time, but not enough for you to procrastinate. The countdown starts as soon as you submit the contract!</div>
-             <br/> 
+
+              <div style={{ fontSize: "16px" }}>
+                This is how many days you have to complete your goal. Make sure
+                to give yourself adequate time, but not enough for you to
+                procrastinate. The countdown starts as soon as you submit the
+                contract!
+              </div>
+              <br />
               <TextField
                 variant="outlined"
                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
@@ -382,21 +427,19 @@ function Contact(props) {
                   },
                 })}
               />
-              
             </Grid>
-            
             <Grid item={true} xs={12}></Grid>
-
-            <Grid item={true} xs={12} md={5}>
+            <Divider
+              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
+            />
+            <Grid item={true} xs={12} md={12}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="beneficiary"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div style={{ paddingTop: "5px" }}>
-                    Beneficiary of Donation
-                  </div>
-                  <Tooltip
+                  <h3 style={{ paddingTop: "5px" }}>Beneficiary of Donation</h3>
+                  {/* <Tooltip
                     placement="right"
                     style={{
                       marginBottom: "5px",
@@ -410,19 +453,22 @@ function Contact(props) {
                           lineHeight: "1.5",
                           fontSize: "17px",
                         }}
-                      >
-                        
-                      </p>
+                      ></p>
                     }
                     arrow
                   >
                     <InfoIcon />
-                  </Tooltip>
+                  </Tooltip> */}
                 </div>{" "}
-                <br/>
-                <div style={{ fontSize: "16px" }}>This is where your deposit is sent if you fail to reach your goal by the deadline. Choose a charity if you want your money going to a good cause. 
-                        Or choose an <strong>anti-charity</strong>, a cause you hate, to further motivate yourself to not fail.</div>
-             <br/> 
+                <br />
+                <div style={{ fontSize: "16px" }}>
+                  This is where your deposit is sent if you fail to reach your
+                  goal by the deadline. Choose a charity if you want your money
+                  going to a good cause. Or choose an{" "}
+                  <strong>anti-charity</strong>, a cause you hate, to further
+                  motivate yourself to not fail.
+                </div>
+                <br />
               </InputLabel>
               <TextField
                 // value={minutes}
@@ -455,28 +501,45 @@ function Contact(props) {
               >
                 <option selected disabled value="">
                   Select a beneficiary{" "}
-                </option> 
-                
-                <option value={50}>Humanitarian: GiveWell Maximum Impact fund (Top-rated on Charitywatch.com) </option>
+                </option>
+
+                <option value={50}>
+                  Humanitarian: GiveWell Maximum Impact fund (Top-rated on
+                  Charitywatch.com){" "}
+                </option>
                 {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
                 <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
                 <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
-                <option value={250}>Enviromental: The Conservation Fund (Top-rated on Charitywatch.com)</option>
-                <option value={500}>Animal Welfare Institute (Top-rated on Charitywatch.com)</option>
-                <option value={25}>ANTI-CHARITY: The Republican National Party (RNC)</option>
-                <option value={1000}>ANTI-CHARITY: The Democratic National Party (DNC)</option>
-                <option value={100}>OTHER: Send us a message and tell us the cause you would like to send your money to.</option>
+                <option value={250}>
+                  Enviromental: The Conservation Fund (Top-rated on
+                  Charitywatch.com)
+                </option>
+                <option value={500}>
+                  Animal Welfare Institute (Top-rated on Charitywatch.com)
+                </option>
+                <option value={25}>
+                  ANTI-CHARITY: The Republican National Party (RNC)
+                </option>
+                <option value={1000}>
+                  ANTI-CHARITY: The Democratic National Party (DNC)
+                </option>
+                <option value={100}>
+                  OTHER: Send us a message and tell us the cause you would like
+                  to send your money to.
+                </option>
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
-
-            <Grid item={true} xs={4} md={4}>
+            <Divider
+              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
+            />
+            <Grid item={true} xs={10} md={8}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="phone"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div style={{ paddingTop: "5px" }}>Phone Number</div>
+                  <h3 style={{ paddingTop: "5px" }}>Phone Number</h3>
                   <Tooltip
                     placement="right"
                     style={{
@@ -492,8 +555,10 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        We check in with you daily via text to make sure you are staying on track. 
-                        You can opt out of this by simply leaving this blank. If you want to later opt in, just send us a message using chat or the contact us page.
+                        We check in with you daily via text to make sure you are
+                        staying on track. You can opt out of this by simply
+                        leaving this blank. If you want to later opt in, just
+                        send us a message using chat or the contact us page.
                       </p>
                     }
                     arrow
@@ -501,10 +566,16 @@ function Contact(props) {
                     <InfoIcon />
                   </Tooltip>
                 </div>{" "}
-                <br/>
-                <div style={{ fontSize: "16px" }}>We check in with you daily via text to make sure you are staying on track. 
-                        You can opt out of this by simply leaving this blank. If you want to opt-in later, just send us a message using chat or the contact us page.</div>
-             <br/> 
+                <div>(Optional)</div>
+                <br />
+                <div style={{ fontSize: "16px" }}>
+                  We check in with you daily via text to make sure you are
+                  staying on track. You can opt out of this by simply leaving
+                  this blank. <br />
+                  <br></br>If you want to opt-in later, just send us a message
+                  using chat or the contact us page.
+                </div>
+                <br />
               </InputLabel>
 
               <TextField
@@ -525,9 +596,10 @@ function Contact(props) {
                   },
                 }}
                 fullWidth={true}
-                defaultValue={8008008000}
+                // defaultValue={8008008000}
                 inputRef={register({
-                  required: "Must enter a phone number",
+                  // required: "Must enter a phone number",
+                  // not required
                   pattern: {
                     value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
                     message: "You must enter a valid 10 digit phone number.",
@@ -535,6 +607,9 @@ function Contact(props) {
                 })}
               />
             </Grid>
+            <Divider
+              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
+            />
             {/* save below
             <Grid item={true} xs={8} md={4}>
                <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
@@ -606,7 +681,6 @@ function Contact(props) {
               </TextField>
             </Grid> 
             */}
-
             {/* save above */}
             {/* 
             <Grid item={true} xs={8} md={4}>
