@@ -46,14 +46,15 @@ function Milestones(props) {
 
   const itemsAreEmpty = !items || items.length === 0;
 
-  let earliest = 100000000000000
-  let Eid
-  items && items.map((item)=> {
-    if (Date.parse(item.date) < earliest) {
-      earliest = Date.parse(item.date)
-      Eid = item
-    }
-  })
+  let earliest = 100000000000000;
+  let Eid;
+  items &&
+    items.map((item) => {
+      if (Date.parse(item.date) < earliest) {
+        earliest = Date.parse(item.date);
+        Eid = item;
+      }
+    });
 
   return (
     <>
@@ -88,13 +89,18 @@ function Milestones(props) {
               if (item.type === "milestone")
                 return (
                   <ListItem
-                    key={index} 
+                    key={index}
                     divider={index !== items.length - 1}
                     className={item.featured ? classes.featured : ""}
                   >
-                    <div style={{marginBottom: '14px'}} >
-                    <ListItemText style={{marginBottom: '8px'}}><strong> Reach Milestone: </strong>{item.milestones}</ListItemText>
-                    <ListItemText><strong>By: {item.date} </strong></ListItemText>
+                    <div style={{ marginBottom: "14px" }}>
+                      <ListItemText style={{ marginBottom: "8px" }}>
+                        <strong> Reach Milestone: </strong>
+                        {item.milestones}
+                      </ListItemText>
+                      <ListItemText>
+                        <strong>By: {item.date} </strong>
+                      </ListItemText>
                     </div>
                     <ListItemSecondaryAction>
                       <IconButton
@@ -112,8 +118,7 @@ function Milestones(props) {
                         <DeleteIcon />
                       </IconButton>
                     </ListItemSecondaryAction>
-                  </ListItem>                    
-
+                  </ListItem>
                 );
             })}
             <Box
@@ -123,7 +128,8 @@ function Milestones(props) {
                 marginTop: "10px",
               }}
             >
-              Upcoming milestone: <strong>{Eid.milestones} by {Eid.date}</strong>
+              {Eid &&
+                `Upcoming milestone: <strong>${Eid.milestones} by ${Eid.date}</strong>`}
             </Box>
           </List>
         )}
