@@ -20,6 +20,7 @@ import { useAuth } from "../../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
 import { Card, CardContent } from "@material-ui/core";
 import Time from "./Time";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -65,46 +66,49 @@ export default function Contract() {
   }
 
   return (
-    <div style={{ padding: "0 10vw 0 10vw" }}>
-      <Card style={{ padding: "0 7vw 0 7vw" }}>
-        <Typography variant="h6" paragraph={true}>
-          <strong> Your Contract:</strong>
-        </Typography>
+      <Grid item={true} xs={12} md={6}>
+        <Card>
+        <CardContent className={classes.cardContent}>
+          <Box>
+              <Typography variant="h6" paragraph={true}>
+                <strong> Your Contract:</strong>
+              </Typography>
 
-        {(itemsStatus === "loading" || itemsAreEmpty) && (
-          <Box py={5} px={3} align="center">
-            {itemsStatus === "loading" && <CircularProgress size={32} />}
+              {(itemsStatus === "loading" || itemsAreEmpty) && (
+                <Box py={5} px={3} align="center">
+                  {itemsStatus === "loading" && <CircularProgress size={32} />}
 
-            {itemsStatus !== "loading" && itemsAreEmpty && (
-              <>No contract found. Please create a contract.</>
-            )}
-          </Box>
-        )}
-
-        {itemsStatus !== "loading" && items && items.length > 0 && (
-          <List disablePadding={true}>
-            {items.map((item, index) => {
-              if (item.type === "contract")
-                return (
-                  <>
-                    <div >
-                      <ListItemText>Goal: {item.goal}</ListItemText>
-                    </div>
-                    <div>
-                      <ListItemText>By: {timestampToDeadline(item.createdAt, item.days).toString()}</ListItemText>
-                    </div>
-                    <br/> <br/>
-                    <div>
-                    <ListItemText>Time left: <Time deadline={timestampToDeadline(item.createdAt, item.days)}/> </ListItemText>
-                    </div>
-                  </>
-                );
-            })}
-          </List>
-        )}
-
-        <CardContent className={classes.cardContent}></CardContent>
-      </Card>{" "}
-    </div>
+                  {itemsStatus !== "loading" && itemsAreEmpty && (
+                    <>No contract found. Please create a contract.</>
+                  )}
+                </Box>
+              )}
+                <Box mt={3}>
+                  {itemsStatus !== "loading" && items && items.length > 0 && (
+                    <List disablePadding={true}>
+                      {items.map((item, index) => {
+                        if (item.type === "contract")
+                          return (
+                            <>
+                              <div >
+                                <ListItemText>Goal: {item.goal}</ListItemText>
+                              </div>
+                              <div>
+                                <ListItemText>By: {timestampToDeadline(item.createdAt, item.days).toString()}</ListItemText>
+                              </div>
+                              <br/> <br/>
+                              <div>
+                              <ListItemText>Time left: <Time deadline={timestampToDeadline(item.createdAt, item.days)}/> </ListItemText>
+                              </div>
+                            </>
+                          );
+                      })}
+                    </List>
+                  )}
+                </Box>
+              </Box>
+            </CardContent>
+        </Card>{" "}
+      </Grid>
   );
 }
