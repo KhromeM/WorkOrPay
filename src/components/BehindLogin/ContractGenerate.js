@@ -572,27 +572,27 @@ function Contact(props) {
                   Select a beneficiary{" "}
                 </option>
 
-                <option value={50}>
+                <option value={"Humanitarian: GiveWell Maximum Impact fund"}>
                   Humanitarian: GiveWell Maximum Impact fund (Top-rated on
                   Charitywatch.com){" "}
                 </option>
                 {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
                 <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
                 <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
-                <option value={250}>
+                <option value={"Enviromental: The Conservation Fund"}>
                   Enviromental: The Conservation Fund (Top-rated on
                   Charitywatch.com)
                 </option>
-                <option value={500}>
+                <option value={"Animal Welfare Institute"}>
                   Animal Welfare Institute (Top-rated on Charitywatch.com)
                 </option>
-                <option value={25}>
+                <option value={"The Republican National Party"}>
                   ANTI-CHARITY: The Republican National Party (RNC)
                 </option>
-                <option value={1000}>
+                <option value={"The Democratic National Party"}>
                   ANTI-CHARITY: The Democratic National Party (DNC)
                 </option>
-                <option value={100}>
+                <option value={"CustomRequest"}>
                   OTHER: Send us a message and tell us the cause you would like
                   to send your money to.
                 </option>
