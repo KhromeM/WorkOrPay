@@ -357,10 +357,24 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
+                        Stripe's US Transaction Processing Fees: 0.8% fee if
+                        paid using bank. 3% with all other payment methods. We
+                        do not profit from this.
+                        <br />
+                        <br />
                         <strong>
-                          Questions? Ask us using the chat icon located in the
-                          bottom right of your screen.
+                          Depositing $100 means you will get back $97.00 upon
+                          reaching your goals if you paid with credit card, and
+                          you will get back $99.20 if you paid with bank.
                         </strong>
+                        <br />
+                        <br />
+                        We really, really, didn't want to have a fee at all!
+                        It's completely out of our control- banks and payment
+                        processors have to make money off of their services.
+                        <br />
+                        Questions? Ask us using the chat icon located in the
+                        bottom right of your screen.
                       </p>
                     }
                     arrow
@@ -371,16 +385,23 @@ function Contact(props) {
                 <div style={{ fontSize: "16px" }}>
                   This is the amount of money you put on the line in your
                   contract. If you pass your goals, you will get your deposit
-                  back (besides the transaction processing fee from Stripe). If
-                  you fail reach your goal by the deadline, this money will be
-                  donated to your chosen beneficiary below.{" "}
+                  back (besides the 3% transaction processing fee from our
+                  payment processor). If you fail reach your goal by the
+                  deadline, the money will be donated to your chosen beneficiary
+                  below.{" "}
                 </div>
                 <br /> <br />
-                <div style={{ fontSize: "16px" }}>
+                <div style={{ fontSize: "14px", lineHeight: 1.3 }}>
+                  <div style={{ color: "red" }}>
+                    Payment Processors Transaction Processing Fees: 3% with
+                    credit card. 1% with bank.
+                  </div>{" "}
                   <strong>
-                    Stripe's US Transaction Processing Fees: 0.8% fee if paid
-                    using bank. 2.9% + $0.30 with all other payment methods. We
-                    do not profit from this.
+                    {" "}
+                    Deposit <u>$100 with credit card</u>, get back <u>$97.00</u>
+                    . <br /> Deposit <u>$100 with bank transfer</u>, get back{" "}
+                    <u>$99.20</u>. <br />
+                    We do not profit from this.
                   </strong>
                 </div>
               </InputLabel>
@@ -393,7 +414,7 @@ function Contact(props) {
                 SelectProps={{
                   native: true,
                 }}
-                InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
+                InputLabelProps={{ fontSize: 50 }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
@@ -410,14 +431,12 @@ function Contact(props) {
                   required: "Please enter your goal",
                 })}
               >
-                <option disabled value="">
+                <option selected disabled value="">
                   Select an option{" "}
                 </option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
-                <option selected value={100}>
-                  100
-                </option>
+                <option value={100}>100</option>
                 <option value={150}>150</option>
                 <option value={250}>250</option>
                 <option value={500}>500</option>
@@ -445,8 +464,6 @@ function Contact(props) {
                     title={
                       <p
                         style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
                           fontSize: "17px",
                         }}
                       >
@@ -460,14 +477,14 @@ function Contact(props) {
                     <InfoIcon />
                   </Tooltip>
                 </div>
+                <div style={{ fontSize: "16px" }}>
+                  This is how many days you have to complete your goal. Make
+                  sure to give yourself adequate time, but not enough for you to
+                  procrastinate. The countdown starts as soon as you submit the
+                  contract!
+                </div>
               </InputLabel>
 
-              <div style={{ fontSize: "16px" }}>
-                This is how many days you have to complete your goal. Make sure
-                to give yourself adequate time, but not enough for you to
-                procrastinate. The countdown starts as soon as you submit the
-                contract!
-              </div>
               <br />
               <TextField
                 variant="outlined"
