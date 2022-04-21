@@ -79,7 +79,31 @@ function DashboardSection(props) {
           size={4}
           textAlign="center"
         />
-
+        <Grid style={{ textAlign: "center" }} item={true} xs={12} md={12}>
+          {!auth.user.button && !auth.user.hasContract && (
+            <div style={{ margin: "-1em", marginBottom: "1em" }}>
+              <div style={{ color: "#D2042D", marginBottom: "9px" }}>
+                <strong>To get started, form a contract</strong>
+              </div>
+              <div>
+                <Button
+                  style={{
+                    marginBottom: "20px",
+                    flex: "0",
+                    fontSize: "1.35em",
+                    backgroundColor: "#FAA0A0",
+                  }}
+                  variant="contained"
+                  size="medium"
+                  component={Link}
+                  to="/generatecontract"
+                >
+                  <strong>Generate Contract</strong>
+                </Button>
+              </div>
+            </div>
+          )}
+        </Grid>
         {router.query.paid && auth.user.planIsActive && (
           <Box mx="auto" mb={4} maxWidth={400}>
             <Alert severity="success">
@@ -199,19 +223,6 @@ function DashboardSection(props) {
                   )}
                 </Button>
               </div>
-            )}
-
-            {!auth.user.button && !auth.user.hasContract && (
-              <Button
-                style={{ marginTop: "20px" }}
-                variant="contained"
-                size="medium"
-                color="secondary"
-                component={Link}
-                to="/generatecontract"
-              >
-                <strong>Generate Contract</strong>
-              </Button>
             )}
           </Grid>
         </Grid>
