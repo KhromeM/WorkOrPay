@@ -129,7 +129,7 @@ function Milestones(props) {
               }}
             >
               {Eid && (
-                <div>
+                <div style={{ padding: "2vw" }}>
                   Upcoming milestone:{" "}
                   <strong>
                     {Eid.milestones} by {Eid.date}
