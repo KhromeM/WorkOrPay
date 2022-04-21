@@ -57,58 +57,76 @@ export default function Contract() {
     setNumPages(numPages);
   }
 
-  function timestampToDeadline(timestamp,days){
-    timestamp = timestamp.seconds
-    days = Number(days)
-    let date = new Date(timestamp*1000)
-    date.setDate(date.getDate() + days)
-    return (date)
+  function timestampToDeadline(timestamp, days) {
+    timestamp = timestamp.seconds;
+    days = Number(days);
+    let date = new Date(timestamp * 1000);
+    date.setDate(date.getDate() + days);
+    return date;
   }
 
   return (
-      <Grid item={true} xs={12} md={6}>
-        <Card>
+    <Grid item={true} xs={12} md={12}>
+      <Card>
         <CardContent className={classes.cardContent}>
           <Box>
-              <Typography variant="h6" paragraph={true}>
-                <strong> Your Contract:</strong>
-              </Typography>
+            <Typography variant="h6" paragraph={true}>
+              <strong> Your Contract:</strong>
+            </Typography>
 
-              {(itemsStatus === "loading" || itemsAreEmpty) && (
-                <Box py={5} px={3} align="center">
-                  {itemsStatus === "loading" && <CircularProgress size={32} />}
+            {(itemsStatus === "loading" || itemsAreEmpty) && (
+              <Box py={5} px={3} align="center">
+                {itemsStatus === "loading" && <CircularProgress size={32} />}
 
-                  {itemsStatus !== "loading" && itemsAreEmpty && (
-                    <>No contract found. Please create a contract.</>
-                  )}
-                </Box>
-              )}
-                <Box mt={3}>
-                  {itemsStatus !== "loading" && items && items.length > 0 && (
-                    <List disablePadding={true}>
-                      {items.map((item, index) => {
-                        if (item.type === "contract")
-                          return (
-                            <>
-                              <div >
-                                <ListItemText>Goal: {item.goal}</ListItemText>
-                              </div>
-                              <div>
-                                <ListItemText>By: {timestampToDeadline(item.createdAt, item.days).toString()}</ListItemText>
-                              </div>
-                              <br/> <br/>
-                              <div>
-                              <ListItemText>Time left: <Time deadline={timestampToDeadline(item.createdAt, item.days)}/> </ListItemText>
-                              </div>
-                            </>
-                          );
-                      })}
-                    </List>
-                  )}
-                </Box>
+                {itemsStatus !== "loading" && itemsAreEmpty && (
+                  <>No contract found. Please create a contract.</>
+                )}
               </Box>
-            </CardContent>
-        </Card>{" "}
-      </Grid>
+            )}
+            {auth.user.stripeContractPaidOrNot !== "paid" && (
+              <>No contract found. Please create a contract.</>
+            )}
+            <Box mt={3}>
+              {itemsStatus !== "loading" && items && items.length > 0 && (
+                <List disablePadding={true}>
+                  {auth.user.stripeContractPaidOrNot === "paid" &&
+                    items.map((item, index) => {
+                      if (item.type === "contract")
+                        return (
+                          <>
+                            <div>
+                              <ListItemText>Goal: {item.goal}</ListItemText>
+                            </div>
+                            <div>
+                              <ListItemText>
+                                By:{" "}
+                                {timestampToDeadline(
+                                  item.createdAt,
+                                  item.days
+                                ).toString()}
+                              </ListItemText>
+                            </div>
+                            <br /> <br />
+                            <div>
+                              <ListItemText>
+                                Time left:{" "}
+                                <Time
+                                  deadline={timestampToDeadline(
+                                    item.createdAt,
+                                    item.days
+                                  )}
+                                />{" "}
+                              </ListItemText>
+                            </div>
+                          </>
+                        );
+                    })}
+                </List>
+              )}
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>{" "}
+    </Grid>
   );
 }
