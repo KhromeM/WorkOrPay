@@ -248,7 +248,7 @@ function Contact(props) {
               <TextField
                 variant="outlined"
                 type="text"
-                label="Try to be specific!"
+                label="Try to be specific! Make it measureable. Don't just say 'I want to lose weight', instead, say 'I want to lose 7.5 pounds'."
                 name="goal"
                 multiline={true}
                 rows={3}
@@ -313,7 +313,7 @@ function Contact(props) {
               <TextField
                 variant="outlined"
                 type="text"
-                label="Everyone has a different life- and we are extremely flexible, so please don't be shy to tell us ANY verification method that you think is the best for you! Examples: Picture of you on the weight scale if your goal is weight related, Strava running app data if you want to run..."
+                label=" Examples: Picture of you on the weight scale if your goal is weight related, Strava running app data if you want to run..."
                 name="verificationmethod"
                 multiline={true}
                 InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
