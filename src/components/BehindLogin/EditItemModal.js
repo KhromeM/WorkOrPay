@@ -43,7 +43,7 @@ function EditItemModal(props) {
     setPending(true);
     // firestore rules require a name property for all items
     data.name = "default";
-    data.type = "dailysubmissions";
+    data.type = "milestone";
 
     const query = props.id
       ? updateItem(props.id, data)
@@ -85,20 +85,41 @@ function EditItemModal(props) {
               <TextField
                 variant="outlined"
                 type="text"
-                label="Minutes"
+                label="Milestone"
                 // firestore rules requie a name prooperty for all items
-                name="minutes"
+                name="milestones"
                 autoComplete="off"
-                defaultValue={itemData && itemData.name}
+                defaultValue={itemData && itemData.milestones}
                 error={errors.name ? true : false}
                 helperText={errors.name && errors.name.message}
                 fullWidth={true}
                 autoFocus={true}
                 inputRef={register({
-                  required: "Please enter how many minutes you worked.",
+                  required: "Please enter a milestone",
                 })}
               />
             </Grid>
+
+            <Grid item={true} xs={12}>
+              <TextField
+                variant="outlined"
+                type="date"
+                label="To be reached by:"
+                // firestore rules requie a name prooperty for all items
+                name="date"
+                autoComplete="off"
+                efaultValue={itemData && itemData.date}
+                InputLabelProps={{shrink: true}}
+                error={errors.name ? true : false}
+                helperText={errors.name && errors.name.message}
+                fullWidth={true}
+                autoFocus={true}
+                inputRef={register({
+                  required: "Please enter when you plan to reach this milestone",
+                })}
+              />
+            </Grid>
+
             <Grid item={true} xs={12}>
               <Button
                 variant="contained"

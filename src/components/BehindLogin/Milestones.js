@@ -17,6 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
+import { map } from "@firebase/util";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
@@ -45,6 +46,15 @@ function Milestones(props) {
 
   const itemsAreEmpty = !items || items.length === 0;
 
+  let earliest = 100000000000000
+  let Eid
+  items && items.map((item)=> {
+    if (Date.parse(item.date) < earliest) {
+      earliest = Date.parse(item.date)
+      Eid = item
+    }
+  })
+
   return (
     <>
       {itemsError && (
@@ -67,7 +77,7 @@ function Milestones(props) {
             color="primary"
             onClick={() => setCreatingItem(true)}
           >
-            Update
+            Add
           </Button>
         </Box>
         <Divider />
@@ -75,18 +85,21 @@ function Milestones(props) {
         {itemsStatus !== "loading" && items && items.length > 0 && (
           <List disablePadding={true}>
             {items.map((item, index) => {
-              if (item.type === "milestones")
+              if (item.type === "milestone")
                 return (
                   <ListItem
-                    key={index}
+                    key={index} 
                     divider={index !== items.length - 1}
                     className={item.featured ? classes.featured : ""}
                   >
-                    <ListItemText>{item.minutes}</ListItemText>
+                    <div style={{marginBottom: '14px'}} >
+                    <ListItemText style={{marginBottom: '8px'}}><strong> Reach Milestone: </strong>{item.milestones}</ListItemText>
+                    <ListItemText><strong>By: {item.date} </strong></ListItemText>
+                    </div>
                     <ListItemSecondaryAction>
                       <IconButton
                         edge="end"
-                        aria-label="update"
+                        aria-label="Update"
                         onClick={() => setUpdatingItemId(item.id)}
                       >
                         <EditIcon />
@@ -99,7 +112,8 @@ function Milestones(props) {
                         <DeleteIcon />
                       </IconButton>
                     </ListItemSecondaryAction>
-                  </ListItem>
+                  </ListItem>                    
+
                 );
             })}
             <Box
@@ -109,7 +123,7 @@ function Milestones(props) {
                 marginTop: "10px",
               }}
             >
-              Upcoming milestone: <strong>{}</strong>
+              Upcoming milestone: <strong>{Eid.milestones} by {Eid.date}</strong>
             </Box>
           </List>
         )}
