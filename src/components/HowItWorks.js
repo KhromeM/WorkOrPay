@@ -76,7 +76,7 @@ function HowItWorks(props) {
                       hard deadline. Give yourself enough time to complete your
                       objectives, but not enough time for you to slack off.
                       Example: "I will finish creating and launch my website in
-                      8 days!
+                      8 days!"
                     </Typography>
                   </Box>
                   <Box style={{ marginBottom: "60px" }}>
