@@ -86,7 +86,11 @@ function DashboardSection(props) {
               </div>
               <div>
                 <Button
-                  style={{ marginBottom: "20px", flex: "0" }}
+                  style={{
+                    marginBottom: "20px",
+                    flex: "0",
+                    fontSize: "1.35em",
+                  }}
                   variant="contained"
                   size="medium"
                   color="secondary"
