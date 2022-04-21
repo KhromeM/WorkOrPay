@@ -53,7 +53,7 @@ function FaqSection(props) {
     //     "Loss aversion: Humans hate losing what they have and will go far out of their way to preserve their current holdings. This is a scientific fact. ",
     //   answer: "Deadlines: Societal programming has engrained in our minds, the importance of not missing deadlines no matter what. Think of how many procrastinators become super efficient workers in the last minute.",
     // },
-      
+
     {
       question: "What are the contracts?",
       disclaimer: false,
@@ -77,15 +77,18 @@ function FaqSection(props) {
     {
       question: "Are we going to run off with your money?",
       disclaimer: true,
-      answer:"Fair question. It is pointless to say we find that idea reprehensible. Instead we will show why it is not in our financial interest: ",
-      answer2:"The creators of this website, Khurram Mustafa and William Chan, are young professonals at the begining of their careers. Their LinkedIn Profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits."
+      answer:
+        "Fair question. It is pointless to say we find that idea reprehensible. Instead we will show why it is not in our financial interest: ",
+      answer2:
+        "The creators of this website, Khurram Mustafa and William Chan, are young professonals at the beginning of their careers. Their LinkedIn Profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits.",
     },
     {
       question: "How are daily check ups done?",
       disclaimer: false,
-      answer:"We have real humans message you via text everyday. If you do not want this, you can turn it off by responding to the texts."
+      answer:
+        "We have real humans message you via text everyday. If you do not want this, you can turn it off by responding to the texts.",
     },
-    
+
     // {
     //   question: "What are social media penalties?",
     //   disclaimer: true,
@@ -100,7 +103,7 @@ function FaqSection(props) {
       answer:
         "We perform verifications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method may be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. You can fool us, and we will always give you the benefit of doubt. We trust that you will be repulsed by the idea of putting in effort to forge a proof of something that you willingly signed yourself up to do, and thus have an incentive honest with us.",
     },
-    
+
     {
       question: "What if I want a refund?",
       disclaimer: false,
