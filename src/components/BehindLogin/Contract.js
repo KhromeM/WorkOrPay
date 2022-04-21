@@ -83,7 +83,7 @@ export default function Contract() {
                 )}
               </Box>
             )}
-            {auth.user.stripeContractPaidOrNot !== "paid" && (
+            {auth.user && auth.user.stripeContractPaidOrNot !== "paid" && (
               <>No contract found. Please create a contract.</>
             )}
             <Box mt={3}>
