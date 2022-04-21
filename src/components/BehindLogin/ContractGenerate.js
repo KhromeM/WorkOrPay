@@ -225,11 +225,30 @@ function Contact(props) {
               />
             </Grid>
             <Grid item={true} xs={12}></Grid> */}
+            <Divider
+              style={{
+                width: "100%",
+                marginTop: "1vh",
+                marginBottom: "1vh",
+              }}
+            />
             <Grid item={true} xs={12}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "3px",
+                  marginTop: "16px",
+                }}
+              >
+                <div style={{ fontSize: "17px" }}>
+                  <strong>Your Goal</strong>
+                </div>
+                (The thing that you want to accomplish with us.)
+              </div>
               <TextField
                 variant="outlined"
                 type="text"
-                label="Goal"
+                label="Try to be specific!"
                 name="goal"
                 multiline={true}
                 rows={3}
@@ -243,10 +262,25 @@ function Contact(props) {
             </Grid>
             {/* <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "3px",
+                  marginTop: "35px",
+                }}
+              >
+                <div style={{ fontSize: "17px" }}>
+                  <strong>
+                    Preferred Regular Accountability Contact Method
+                  </strong>
+                </div>
+                (We're gonna try to contact you regularly (daily or every few
+                days) <strong>in the midst of your contract period.</strong>)
+              </div>
               <TextField
                 variant="outlined"
                 type="text"
-                label="Preferred Contact Method (Put anything you want: email, text, Messenger, Telegram, Whatsapp, or any other way! We will cater to you!)"
+                label="Put anything you want: email, text, Messenger, Telegram, Whatsapp, or any other way! We will cater to you!"
                 name="contactinfo"
                 multiline={true}
                 InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
@@ -260,8 +294,43 @@ function Contact(props) {
               />
             </Grid>
             <Grid item={true} xs={12}></Grid>
+            <Grid item={true} xs={12}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "9px",
+                  marginTop: "15px",
+                }}
+              >
+                <div style={{ fontSize: "17px" }}>
+                  <strong>Suggest a Final Verification Method </strong>
+                </div>
+                (How we would verify that you reached your goal at{" "}
+                <strong>the end of your deadline</strong>. Don't worry if you're
+                not sure right now, put something and we will contact you by
+                email later and make a plan together! )
+              </div>
+              <TextField
+                variant="outlined"
+                type="text"
+                label="Everyone has a different life- and we are extremely flexible, so please don't be shy to tell us ANY verification method that you think is the best for you! Examples: Picture of you on the weight scale if your goal is weight related, Strava running app data if you want to run..."
+                name="verificationmethod"
+                multiline={true}
+                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                rows={5}
+                error={errors.verificationmethod ? true : false}
+                helperText={
+                  errors.verificationmethod && errors.verificationmethod.message
+                }
+                fullWidth={true}
+                inputRef={register({
+                  required: "Please enter a verification method",
+                })}
+              />
+            </Grid>
+            <Grid item={true} xs={12}></Grid>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              Continue below...
+              <i>Continue below...</i>
             </div>
             <Divider
               style={{
@@ -538,7 +607,13 @@ function Contact(props) {
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="phone"
               >
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div
+                  style={{
+                    marginLeft: "22px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <h3 style={{ paddingTop: "5px" }}>Phone Number</h3>
                   <Tooltip
                     placement="right"
@@ -555,10 +630,13 @@ function Contact(props) {
                           fontSize: "17px",
                         }}
                       >
-                        We check in with you daily via text to make sure you are
-                        staying on track. You can opt out of this by simply
-                        leaving this blank. If you want to later opt in, just
-                        send us a message using chat or the contact us page.
+                        Remember that entering your Phone Number is OPTIONAL.
+                        <strong>
+                          Don't enter your phone if you don't want to talk via
+                          phone or text.
+                        </strong>
+                        You can keep in touch with us with email, Whatsapp,
+                        Messenger, or any other messaging app you have.
                       </p>
                     }
                     arrow
