@@ -90,10 +90,10 @@ function DashboardSection(props) {
                     marginBottom: "20px",
                     flex: "0",
                     fontSize: "1.35em",
+                    backgroundColor: "#FAA0A0",
                   }}
                   variant="contained"
                   size="medium"
-                  color="secondary"
                   component={Link}
                   to="/generatecontract"
                 >
