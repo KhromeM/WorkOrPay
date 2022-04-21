@@ -250,6 +250,7 @@ function Contact(props) {
                 type="text"
                 label="Try to be specific! Make it measureable. Don't just say 'I want to lose weight', instead, say 'I want to lose 7.5 pounds'."
                 name="goal"
+                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
                 multiline={true}
                 rows={3}
                 error={errors.goal ? true : false}
