@@ -18,6 +18,7 @@ import { useAuth } from "./../util/auth";
 import { Button, CircularProgress } from "@material-ui/core";
 import contact from "../util/contact";
 import { updateUser } from "../util/db";
+import Contract from "./BehindLogin/Contract";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -103,6 +104,9 @@ function DashboardSection(props) {
           </Grid> */}
           <Grid item={true} xs={12} md={6}>
             <Milestones />
+          </Grid>
+          <Grid item={true} xs={12} md={6}>
+            <Contract />
           </Grid>
           <Grid item={true} xs={12} md={6}>
             <Card>

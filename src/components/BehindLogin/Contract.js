@@ -19,6 +19,7 @@ import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
 import { Card, CardContent } from "@material-ui/core";
+import Time from "./Time";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -55,11 +56,19 @@ export default function Contract() {
     setNumPages(numPages);
   }
 
+  function timestampToDeadline(timestamp,days){
+    timestamp = timestamp.seconds
+    days = Number(days)
+    let date = new Date(timestamp*1000)
+    date.setDate(date.getDate() + days)
+    return (date)
+  }
+
   return (
     <div style={{ padding: "0 10vw 0 10vw" }}>
       <Card style={{ padding: "0 7vw 0 7vw" }}>
         <Typography variant="h6" paragraph={true}>
-          <strong> Your Contract</strong>
+          <strong> Your Contract:</strong>
         </Typography>
 
         {(itemsStatus === "loading" || itemsAreEmpty) && (
@@ -75,15 +84,19 @@ export default function Contract() {
         {itemsStatus !== "loading" && items && items.length > 0 && (
           <List disablePadding={true}>
             {items.map((item, index) => {
-              console.log(item);
               if (item.type === "contract")
                 return (
                   <>
-                    <ListItemText>{item.name}</ListItemText>
-                    <ListItemText>{item.type}</ListItemText>
-                    <ListItemText>{item.goal}</ListItemText>
-                    <ListItemText>{item.message}</ListItemText>
-                    <ListItemText>{item.days}</ListItemText>
+                    <div >
+                      <ListItemText>Goal: {item.goal}</ListItemText>
+                    </div>
+                    <div>
+                      <ListItemText>By: {timestampToDeadline(item.createdAt, item.days).toString()}</ListItemText>
+                    </div>
+                    <br/> <br/>
+                    <div>
+                    <ListItemText>Time left: <Time deadline={timestampToDeadline(item.createdAt, item.days)}/> </ListItemText>
+                    </div>
                   </>
                 );
             })}
