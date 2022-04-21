@@ -6,7 +6,7 @@ import TeamBiosSection from "./../components/TeamBiosSection";
 function AboutPage(props) {
   return (
     <>
-      <Meta title="About" description="Learn about our company and team" />
+      <Meta title="About" description="About Us" />
       <TeamBiosSection
         bgColor="default"
         size="medium"
