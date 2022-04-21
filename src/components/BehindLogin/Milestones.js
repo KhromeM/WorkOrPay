@@ -128,8 +128,14 @@ function Milestones(props) {
                 marginTop: "10px",
               }}
             >
-              {Eid &&
-                `Upcoming milestone: <strong>${Eid.milestones} by ${Eid.date}</strong>`}
+              {Eid && (
+                <div>
+                  Upcoming milestone:{" "}
+                  <strong>
+                    {Eid.milestones} by {Eid.date}
+                  </strong>
+                </div>
+              )}
             </Box>
           </List>
         )}

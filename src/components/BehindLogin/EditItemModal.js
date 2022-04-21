@@ -109,15 +109,19 @@ function EditItemModal(props) {
                 name="date"
                 autoComplete="off"
                 efaultValue={itemData && itemData.date}
-                InputLabelProps={{shrink: true}}
+                InputLabelProps={{ shrink: true }}
                 error={errors.name ? true : false}
                 helperText={errors.name && errors.name.message}
                 fullWidth={true}
                 autoFocus={true}
                 inputRef={register({
-                  required: "Please enter when you plan to reach this milestone",
+                  required:
+                    "Please enter when you plan to reach this milestone",
                 })}
               />
+              <div style={{ marginLeft: "5px", marginTop: "5px" }}>
+                Click on calender logo on the right to choose date
+              </div>
             </Grid>
 
             <Grid item={true} xs={12}>
