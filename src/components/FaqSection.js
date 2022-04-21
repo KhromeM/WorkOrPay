@@ -101,7 +101,7 @@ function FaqSection(props) {
       question: "How are my claims verified?",
       disclaimer: false,
       answer:
-        "We perform verifications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method may be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. You can fool us, and we will always give you the benefit of doubt. We trust that you will be repulsed by the idea of putting in effort to forge a proof of something that you willingly signed yourself up to do, and thus have an incentive honest with us.",
+        "We perform verifications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method may be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. Of course, if you put in effort to forge proof, you can fool us. But we trust you will be repulsed by the idea of putting in work to forge a proof of something that you willingly signed yourself up to do.",
     },
 
     {

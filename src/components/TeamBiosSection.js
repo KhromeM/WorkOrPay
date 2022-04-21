@@ -31,13 +31,13 @@ function TeamBiosSection(props) {
 
   const items = [
     {
-      avatar: "https://uploads.divjoy.com/pravatar-150x-68.jpeg",
+      avatar: "",
       name: "Khurram Mustafa",
       role: "Creator",
       bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum consequatur numquam aliquam tenetur ad amet inventore hic beatae, quas accusantium perferendis sapiente explicabo.",
     },
     {
-      avatar: "https://uploads.divjoy.com/pravatar-150x-35.jpeg",
+      avatar: "",
       name: "William Chan",
       role: "Creator",
       bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum consequatur numquam aliquam tenetur ad amet inventore hic beatae, quas accusantium perferendis sapiente explicabo, corporis totam! Labore reprehenderit beatae magnam animi!",
