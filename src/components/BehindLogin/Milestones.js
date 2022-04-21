@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DailySubmission(props) {
+function Milestones(props) {
   const classes = useStyles();
 
   const auth = useAuth();
@@ -117,7 +117,7 @@ function DailySubmission(props) {
                 marginTop: "10px",
               }}
             >
-              Total minutes today: <strong>{total}</strong>
+              Upcoming milestone: <strong>{total}</strong>
             </Box>
           </List>
         )}
@@ -135,4 +135,4 @@ function DailySubmission(props) {
   );
 }
 
-export default DailySubmission;
+export default Milestones;
