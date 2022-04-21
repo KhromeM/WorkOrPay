@@ -385,10 +385,9 @@ function Contact(props) {
                 <div style={{ fontSize: "16px" }}>
                   This is the amount of money you put on the line in your
                   contract. If you pass your goals, you will get your deposit
-                  back (besides the 3% transaction processing fee from our
-                  payment processor). If you fail reach your goal by the
-                  deadline, the money will be donated to your chosen beneficiary
-                  below.{" "}
+                  back (besides the transaction processing fee from our payment
+                  processor). If you fail reach your goal by the deadline, the
+                  money will be donated to your chosen beneficiary below.{" "}
                 </div>
                 <br /> <br />
                 <div style={{ fontSize: "14px", lineHeight: 1.3 }}>
