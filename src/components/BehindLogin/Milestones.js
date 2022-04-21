@@ -44,14 +44,6 @@ function Milestones(props) {
   const [updatingItemId, setUpdatingItemId] = useState(null);
 
   const itemsAreEmpty = !items || items.length === 0;
-  let total = 0;
-  if (items) {
-    items.map((item) => {
-      if (item.minutes) {
-        total += Number(item.minutes);
-      }
-    });
-  }
 
   return (
     <>
@@ -68,7 +60,7 @@ function Milestones(props) {
           alignItems="center"
           padding={2}
         >
-          <Typography variant="h5">Update Your Progress</Typography>
+          <Typography variant="h5">Add Milestones</Typography>
           <Button
             variant="contained"
             size="medium"
@@ -83,7 +75,7 @@ function Milestones(props) {
         {itemsStatus !== "loading" && items && items.length > 0 && (
           <List disablePadding={true}>
             {items.map((item, index) => {
-              if (item.type === "dailysubmissions")
+              if (item.type === "milestones")
                 return (
                   <ListItem
                     key={index}
@@ -117,7 +109,7 @@ function Milestones(props) {
                 marginTop: "10px",
               }}
             >
-              Upcoming milestone: <strong>{total}</strong>
+              Upcoming milestone: <strong>{}</strong>
             </Box>
           </List>
         )}
