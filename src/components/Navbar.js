@@ -126,14 +126,24 @@ function Navbar(props) {
             </Hidden>
             <Hidden xsDown={true} implementation="css">
               {!auth.user && (
-                <Button
-                  style={{ marginBottom: "6px" }}
-                  component={Link}
-                  to="/auth/signin"
-                  color="inherit"
-                >
-                  Sign in
-                </Button>
+                <>
+                  <Button
+                    style={{ marginBottom: "6px" }}
+                    component={Link}
+                    to="/auth/signin"
+                    color="inherit"
+                  >
+                    Sign in
+                  </Button>{" "}
+                  <Button
+                    style={{ marginBottom: "6px" }}
+                    component={Link}
+                    to="/auth/signup"
+                    color="inherit"
+                  >
+                    Create Account
+                  </Button>
+                </>
               )}
 
               {auth.user && (
@@ -232,6 +242,9 @@ function Navbar(props) {
               </ListItem>
               <ListItem component={Link} to="/auth/signin" button={true}>
                 <ListItemText>Sign in</ListItemText>
+              </ListItem>
+              <ListItem component={Link} to="/auth/signup" button={true}>
+                <ListItemText>Create Account</ListItemText>
               </ListItem>
               <Divider />
 

@@ -19,6 +19,7 @@ import { Button, CircularProgress } from "@material-ui/core";
 import contact from "../util/contact";
 import { updateUser } from "../util/db";
 import Contract from "./BehindLogin/Contract";
+import SimpleAccordion from "./SimpleAccordion";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -64,7 +65,12 @@ function DashboardSection(props) {
 
   const message = `You are now subscribed to the ${auth.user.planId} plan `;
   const message2 = "You have formed a contract. Good Luck!";
-
+  const milestoneText = `Milestones let you add mini goals and targets on the path towards your end goal.`;
+  const milestoneText2 = `Example: If
+  your main goal is to study for a total of 45 hours in 3 weeks. You
+  may want to set up 2 milestones: "Study for 15 hours by the end of
+  week 1" and "Study for 30 hours by the end of week 2". We contact
+  you after the milestone dates to make sure you are staying on track.`;
   return (
     <Section
       bgColor={props.bgColor}
@@ -126,6 +132,17 @@ function DashboardSection(props) {
           {/* <Grid item={true} xs={12} md={6}>
             <DashboardItems />
           </Grid> */}
+          <Grid item={true} xs={12} md={12}>
+            <Grid item={true} xs={12} md={6}>
+              {auth.user.planIsActive && (
+                <SimpleAccordion
+                  title="What are milestones? 🤔"
+                  text={milestoneText}
+                  secondtext={milestoneText2}
+                />
+              )}
+            </Grid>
+          </Grid>
           <Grid item={true} xs={12} md={6}>
             <Milestones />
           </Grid>
