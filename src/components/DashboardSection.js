@@ -162,11 +162,11 @@ function DashboardSection(props) {
                   <Typography paragraph={true}></Typography>
                   <Box mt={3}>
                     <Typography variant="h6" paragraph={true}>
-                      <strong>User info</strong>
+                      <strong>User info:</strong>
                     </Typography>
                     <Typography component="div">
                       <div>
-                        You are signed in as <strong>{auth.user.email}</strong>.
+                        You are signed in as: <strong>{auth.user.email}</strong>.
                       </div>
 
                       {auth.user.stripeSubscriptionId && (
