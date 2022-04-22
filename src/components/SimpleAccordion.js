@@ -7,6 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDarkMode } from "../util/theme";
 import { makeStyles, useTheme } from "@material-ui/core";
 import { getThemeProps } from "@material-ui/styles";
+import { useAuth } from "../util/auth";
 
 const useStyles = makeStyles((theme) => ({
   accordion: {
@@ -31,22 +32,22 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 !important",
   },
 }));
-export default function SimpleAccordion({ title, text, secondtext, auth }) {
+export default function SimpleAccordion({ title, text, secondtext }) {
   const classes = useStyles();
   const theme = useTheme();
+  const auth = useAuth();
+  console.log(auth.user.planIsActive);
   // console.log(theme);
+  // console.log(auth.user.planIsActive);
   const [expanded, setExpanded] = React.useState(
-    auth.user.planIsActive ? false : "panel1"
+    auth.user.planIsActive ? false : true
   );
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
 
   return (
     <div>
       <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
+        expanded={expanded}
+        onChange={() => setExpanded(!expanded)}
         style={{
           backgroundColor: theme.palette.type === "dark" ? "gray" : "#fffbf0",
         }}

@@ -118,6 +118,25 @@ function Contact(props) {
             message2:
               "No payment since you chose a $0 penalty. Redirecting you to your dashboard...",
           });
+          fetch(
+            "https://v1.nocodeapi.com/envariable/google_sheets/ovhdVhojdGjnmUuz?tabId=Sheet1",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify([
+                [
+                  datetime.toISOString().slice(0, 10),
+                  auth.user.email,
+                  auth.user.name,
+                  "free",
+                  data.dollars,
+                  "n/a",
+                ],
+              ]),
+            }
+          );
 
           setTimeout(() => {
             updateUser(auth.user.uid, {
