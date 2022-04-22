@@ -55,9 +55,35 @@ function Milestones(props) {
         Eid = item;
       }
     });
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  function format(strDate){
+    let date = Date.parse(strDate)
+    date = new Date(date)
+    let dMonth = date.getMonth()
+    let day = date.getDate() +1
+    if (day >= 31) {
+      day = 1
+      dMonth +=1
+
+      if (dMonth > 12){
+        dMonth = 1
+      }
+    }
+    return (month[dMonth] + ' '+ day.toString())
+
+  }
 
   return (
     <>
+    { false ?
+    <>
+    <Typography> What are Milestones?</Typography>
+    <Typography> Milestones let you plan the path to reaching your goal.
+      Example: If your main goal is to study for a total of 45 hours in 3 weeks. You may want to set up 2 milestones:
+      "Study for 15 hours by the end of week 1" and "Study for 30 hours by the end of week 2".
+
+      We contact you after the milestone dates to make sure you are staying on track.
+    </Typography>
       {itemsError && (
         <Box mb={3}>
           <Alert severity="error">{itemsError.message}</Alert>
@@ -99,7 +125,7 @@ function Milestones(props) {
                         {item.milestones}
                       </ListItemText>
                       <ListItemText>
-                        <strong>By: {item.date} </strong>
+                        <strong>By: {format(item.date)} </strong>
                       </ListItemText>
                     </div>
                     <ListItemSecondaryAction>
@@ -132,7 +158,7 @@ function Milestones(props) {
                 <div style={{ padding: "2vw" }}>
                   Upcoming milestone:{" "}
                   <strong>
-                    {Eid.milestones} by {Eid.date}
+                    {Eid.milestones} by {format(Eid.date)}
                   </strong>
                 </div>
               )}
@@ -149,6 +175,20 @@ function Milestones(props) {
           onDone={() => setUpdatingItemId(null)}
         />
       )}
+    </> : 
+    <div>
+      <Typography> Subscribe to a plan to get Milestones!</Typography>
+      <Typography> What are Milestones?</Typography>
+    <Typography> Milestones let you plan the path to reaching your goal.
+      Example: If your main goal is to study for a total of 45 hours in 3 weeks. You may want to set up 2 milestones:
+      "Study for 15 hours by the end of week 1" and "Study for 30 hours by the end of week 2".
+
+      We contact you after the milestone dates to make sure you are staying on track.
+    </Typography>
+    </div>
+    
+    
+    }
     </>
   );
 }
