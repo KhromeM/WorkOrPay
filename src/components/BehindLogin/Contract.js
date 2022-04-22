@@ -64,6 +64,30 @@ export default function Contract() {
     date.setDate(date.getDate() + days);
     return date;
   }
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  function format(date) {
+    let dMonth = date.getMonth();
+    let day = date.getDate();
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    if (hours<10) {hours= '0'+hours.toString()} 
+    if (minutes<10) {minutes = '0'+minutes.toString()}
+    
+    return (month[dMonth] + " " + day.toString() + " "+ hours + ':'+minutes);
+  }
 
   return (
     <Grid item={true} xs={12} md={12}>
@@ -100,10 +124,10 @@ export default function Contract() {
                             <div>
                               <ListItemText>
                                 By:{" "}
-                                {timestampToDeadline(
+                                {format(timestampToDeadline(
                                   item.createdAt,
                                   item.days
-                                ).toString()}
+                                ))}
                               </ListItemText>
                             </div>
                             <div>
