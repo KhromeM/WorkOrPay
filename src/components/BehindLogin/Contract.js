@@ -18,7 +18,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardActions, CardContent } from "@material-ui/core";
 import Time from "./Time";
 import { Grid } from "@material-ui/core";
 
@@ -122,35 +122,49 @@ export default function Contract() {
                       if (item.type === "contract") {
                         return (
                           <>
-                            <div>
-                              <ListItemText>Goal: {item.goal}</ListItemText>
-                            </div>
+                            <Card variant="outlined">
+                              {" "}
+                              <CardContent>
+                                <div>
+                                  <ListItemText>
+                                    <h2>Goal: {item.goal}</h2>
+                                  </ListItemText>
+                                </div>
+                                <div>
+                                  <ListItemText>
+                                    <h3>
+                                      By:{" "}
+                                      {format(
+                                        timestampToDeadline(
+                                          item.createdAt,
+                                          item.days
+                                        )
+                                      )}
+                                    </h3>
+                                  </ListItemText>
+                                </div>
+                              </CardContent>
+                              <CardContent>
+                                <div>
+                                  <ListItemText>
+                                    <h4>
+                                      <strong>
+                                        {" "}
+                                        Penalty if you fail:{" "}
+                                        <span style={{ color: "#FF0000" }}>
+                                          ${item.dollars}
+                                        </span>{" "}
+                                      </strong>
+                                    </h4>
+                                  </ListItemText>
+                                </div>
+                              </CardContent>
+                            </Card>
                             <div>
                               <ListItemText>
-                                By:{" "}
-                                {format(
-                                  timestampToDeadline(item.createdAt, item.days)
-                                )}
-                              </ListItemText>
-                            </div>
-                            <div>
-                              <ListItemText>
-                                <h2>
-                                  <strong>
-                                    {" "}
-                                    Penalty if you fail:{" "}
-                                    <span style={{ color: "#FF0000" }}>
-                                      ${item.dollars}
-                                    </span>{" "}
-                                  </strong>
-                                </h2>
-                              </ListItemText>
-                            </div>
-                            <div>
-                              <ListItemText>
-                                <h2>
+                                <h4>
                                   <strong>Time left: </strong>
-                                </h2>
+                                </h4>
                                 <Time
                                   deadline={timestampToDeadline(
                                     item.createdAt,

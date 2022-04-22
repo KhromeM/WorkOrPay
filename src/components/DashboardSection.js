@@ -147,9 +147,7 @@ function DashboardSection(props) {
           <Grid item={true} xs={12} md={6}>
             <Milestones />
           </Grid>
-          <Grid item={true} xs={12} md={6}>
-            <Contract />
-          </Grid>
+
           <Grid item={true} xs={12} md={6}>
             <Card>
               <CardContent className={classes.cardContent}>
@@ -211,6 +209,9 @@ function DashboardSection(props) {
                 </Box>
               </CardContent>
             </Card>
+          </Grid>
+          <Grid item={true} xs={12} md={6}>
+            <Contract />
           </Grid>
           {/* generate contract button below */}
           <Grid
