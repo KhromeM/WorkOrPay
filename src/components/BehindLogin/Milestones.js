@@ -86,7 +86,7 @@ function Milestones(props) {
     return month[dMonth] + " " + day.toString();
   }
 
-  const milestoneText = `Milestones let you plan the path to reaching your goal.`;
+  const milestoneText = `Milestones let you add mini goals and targets on the path towards your end goal.`;
   const milestoneText2 = `Example: If
   your main goal is to study for a total of 45 hours in 3 weeks. You
   may want to set up 2 milestones: "Study for 15 hours by the end of
@@ -97,11 +97,6 @@ function Milestones(props) {
     <>
       {auth.user.stripeSubscriptionStatus ? (
         <>
-          <SimpleAccordion
-            title="What are milestones? 🤔"
-            text={milestoneText}
-            secondtext={milestoneText2}
-          />
           {itemsError && (
             <Box mb={3}>
               <Alert severity="error">{itemsError.message}</Alert>
@@ -198,16 +193,15 @@ function Milestones(props) {
         </>
       ) : (
         <div>
-          <Typography> Subscribe to a plan to get Milestones!</Typography>
-          <Typography> What are Milestones?</Typography>
-          <Typography>
+          <Typography style={{ marginLeft: "10px" }}>
             {" "}
-            Milestones let you plan the path to reaching your goal. Example: If
-            your main goal is to study for a total of 45 hours in 3 weeks. You
-            may want to set up 2 milestones: "Study for 15 hours by the end of
-            week 1" and "Study for 30 hours by the end of week 2". We contact
-            you after the milestone dates to make sure you are staying on track.
+            Subscribe to a plan to get Milestones!
           </Typography>
+          <SimpleAccordion
+            title="What are milestones? 🤔"
+            text={milestoneText}
+            secondtext={milestoneText2}
+          />
         </div>
       )}
     </>

@@ -51,7 +51,10 @@ export default function SimpleAccordion({ title, text, secondtext }) {
           <Typography>{title}</Typography>
         </AccordionSummary>
         <AccordionDetails id={`faq-panel-${1}`}>
-          <Typography>{<pre>{text}</pre>}</Typography>
+          <Typography>
+            <strong>{text}</strong>
+          </Typography>
+          <br />
           <Typography>{secondtext}</Typography>
         </AccordionDetails>
       </Accordion>
