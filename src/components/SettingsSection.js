@@ -9,11 +9,14 @@ import SettingsGeneral from "./SettingsGeneral";
 import SettingsPassword from "./SettingsPassword";
 import SettingsBilling from "./SettingsBilling";
 import { useAuth } from "./../util/auth";
+import { useRouter } from "../util/router";
 
 function SettingsSection(props) {
   const auth = useAuth();
+  const router = useRouter();
   const [formAlert, setFormAlert] = useState(null);
 
+  console.log(router.query.signedup);
   // State to control whether we show a re-authentication flow
   // Required by some security sensitive actions, such as changing password.
   const [reauthState, setReauthState] = useState({
@@ -49,6 +52,7 @@ function SettingsSection(props) {
       });
     }
   };
+  console.log(auth.user.name);
 
   return (
     <Section
@@ -57,6 +61,18 @@ function SettingsSection(props) {
       bgImage={props.bgImage}
       bgImageOpacity={props.bgImageOpacity}
     >
+      {router.query.signedup && auth.user.name == null && (
+        <Box mx="auto" mb={4} maxWidth={400}>
+          <Alert severity="success">
+            Thank you for joining WorkOrPay.
+            <br /> We're so excited to get you started!
+            <br /> Please add a name below!
+            <span role="img" aria-label="party" style={{ marginLeft: "10px" }}>
+              🥳
+            </span>
+          </Alert>
+        </Box>
+      )}
       {reauthState.show && (
         <ReauthModal
           callback={reauthState.callback}

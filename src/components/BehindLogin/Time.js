@@ -61,7 +61,7 @@ const Time = ({ deadline }) => {
 
   return (
     <div>
-      <h2 style={{ color: "firebrick " }}>{timer}</h2>
+      <h2 style={{ color: "#FF0000" }}>{timer}</h2>
     </div>
   );
 };

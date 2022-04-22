@@ -5,9 +5,12 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import { useAuth } from "./../util/auth";
+import { useHistory, useRouter } from "../util/router";
 
 function SettingsGeneral(props) {
   const auth = useAuth();
+  const history = useHistory();
+  const router = useRouter();
   const [pending, setPending] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
@@ -15,6 +18,7 @@ function SettingsGeneral(props) {
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
+    console.log(data, "data");
 
     return auth
       .updateProfile(data)
@@ -22,8 +26,26 @@ function SettingsGeneral(props) {
         // Set success status
         props.onStatus({
           type: "success",
-          message: "Your profile has been updated",
+          message: router.query.signedup
+            ? "Your profile has been updated! Redirecting you to the dashboard now..."
+            : "Your profile has been updated",
         });
+
+        fetch(
+          "https://v1.nocodeapi.com/envariable/google_sheets/APwvLTMxEYrgRXpf?tabId=Sheet1",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify([
+              [new Date().toLocaleString(), data.name, data.email],
+            ]),
+          }
+        ).then((r) => r.json());
+        setTimeout(() => {
+          if (router.query.signedup) history.push("/dashboard");
+        }, 1500);
       })
       .catch((error) => {
         if (error.code === "auth/requires-recent-login") {
