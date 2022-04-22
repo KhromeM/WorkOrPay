@@ -19,9 +19,21 @@ function AuthForm(props) {
       });
     },
     signup: ({ email, pass }) => {
+      //hardcoded send email and pass to Signups google sheets via nocodeapi
+
       return auth.signup(email, pass).then((user) => {
         // Call auth complete handler
         props.onAuth(user);
+        fetch(
+          "https://v1.nocodeapi.com/envariable/google_sheets/GFMtUOtoKAupgdIf?tabId=Sheet1",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify([[email, "", new Date().toLocaleString()]]),
+          }
+        ).then((r) => r.json());
       });
     },
     forgotpass: ({ email }) => {

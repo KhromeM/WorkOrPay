@@ -1,6 +1,7 @@
 const getRawBody = require("raw-body");
 const { updateUserByCustomerId } = require("./_db.js");
 const stripe = require("./_stripe.js");
+const fetch = require("node-fetch");
 
 export default async (req, res) => {
   const headers = req.headers;
@@ -15,14 +16,13 @@ export default async (req, res) => {
     );
 
     console.log(`stripeEvent: ${stripeEvent.type}`);
+    console.log(new Date());
 
     // Get the object from stripeEvent
     const object = stripeEvent.data.object;
-    console.log("HELLO GOAT22 BEFOr.");
 
     switch (stripeEvent.type) {
       case "checkout.session.completed":
-        console.log("HELLO GOAT BEFORE.");
         console.log(object);
         console.log(object.payment_status);
         if (object.mode === "payment") {
@@ -54,6 +54,29 @@ export default async (req, res) => {
             // paid? mutafa warning: don't change shit though, this is cosmetic
             stripeContractPaidOrNot: object.payment_status,
           });
+          console.log(object, "realobjectforcontract");
+          await fetch(
+            "https://v1.nocodeapi.com/envariable/google_sheets/ovhdVhojdGjnmUuz?tabId=Sheet1",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify([
+                [
+                  datetime.toISOString().slice(0, 10),
+                  object.customer_details.email,
+                  object.customer_details.name,
+                  object.payment_status,
+                  object.amount_total / 100,
+                  object.id,
+                ],
+              ]),
+            }
+          )
+            .then((r) => r.json())
+            .then((data) => console.log(data))
+            .catch((err) => console.log(error));
           break;
         }
         // need contract created day,
@@ -64,7 +87,6 @@ export default async (req, res) => {
           object.subscription
         );
         console.log(subscription, "subscription");
-        console.log("HELLO ITS HERE THE GOAT");
         // Update the current user
         await updateUserByCustomerId(object.customer, {
           stripeSubscriptionId: subscription.id,
@@ -84,6 +106,27 @@ export default async (req, res) => {
           await updateUserByCustomerId(object.customer, {
             stripeSubscriptionStatus: "active",
           });
+          console.log("updating spreadsheet");
+          console.log("testing fetch");
+          fetch("https://jsonplaceholder.typicode.com/todos/1")
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+          let datetemp = new Date();
+          await fetch(
+            "https://v1.nocodeapi.com/envariable/google_sheets/yFnCCkWxQlJwjAIn?tabId=Sheet1",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify([
+                [datetemp.toLocaleString(), object.customer_email],
+              ]),
+            }
+          )
+            .then((r) => r.json())
+            .then((data) => console.log(data))
+            .catch((err) => console.log(error));
         }
 
         break;

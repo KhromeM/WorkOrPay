@@ -26,8 +26,6 @@ function updateUser(uid, data) {
 
 // Update a user by their stripeCustomerId
 function updateUserByCustomerId(customerId, data) {
-  console.log("hello i am in db btw");
-
   return getUserByCustomerId(customerId).then((user) => {
     return updateUser(user.id, data);
   });

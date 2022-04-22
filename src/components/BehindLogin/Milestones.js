@@ -18,6 +18,7 @@ import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
 import { map } from "@firebase/util";
+import SimpleAccordion from "../SimpleAccordion";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
@@ -55,140 +56,160 @@ function Milestones(props) {
         Eid = item;
       }
     });
-  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  function format(strDate){
-    let date = Date.parse(strDate)
-    date = new Date(date)
-    let dMonth = date.getMonth()
-    let day = date.getDate() +1
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  function format(strDate) {
+    let date = Date.parse(strDate);
+    date = new Date(date);
+    let dMonth = date.getMonth();
+    let day = date.getDate() + 1;
     if (day >= 31) {
-      day = 1
-      dMonth +=1
+      day = 1;
+      dMonth += 1;
 
-      if (dMonth > 12){
-        dMonth = 1
+      if (dMonth > 12) {
+        dMonth = 1;
       }
     }
-    return (month[dMonth] + ' '+ day.toString())
-
+    return month[dMonth] + " " + day.toString();
   }
+
+  const milestoneText = `Milestones let you plan the path to reaching your goal.`;
+  const milestoneText2 = `Example: If
+  your main goal is to study for a total of 45 hours in 3 weeks. You
+  may want to set up 2 milestones: "Study for 15 hours by the end of
+  week 1" and "Study for 30 hours by the end of week 2". We contact
+  you after the milestone dates to make sure you are staying on track.`;
 
   return (
     <>
-    { auth.user.stripeSubscriptionStatus ?
-    <>
-    <Typography> What are Milestones?</Typography>
-    <Typography> Milestones let you plan the path to reaching your goal.
-      Example: If your main goal is to study for a total of 45 hours in 3 weeks. You may want to set up 2 milestones:
-      "Study for 15 hours by the end of week 1" and "Study for 30 hours by the end of week 2".
-
-      We contact you after the milestone dates to make sure you are staying on track.
-    </Typography>
-      {itemsError && (
-        <Box mb={3}>
-          <Alert severity="error">{itemsError.message}</Alert>
-        </Box>
-      )}
-
-      <Paper className={classes.paperItems}>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          padding={2}
-        >
-          <Typography variant="h5">Add Milestones</Typography>
-          <Button
-            variant="contained"
-            size="medium"
-            color="primary"
-            onClick={() => setCreatingItem(true)}
-          >
-            Add
-          </Button>
-        </Box>
-        <Divider />
-
-        {itemsStatus !== "loading" && items && items.length > 0 && (
-          <List disablePadding={true}>
-            {items.map((item, index) => {
-              if (item.type === "milestone")
-                return (
-                  <ListItem
-                    key={index}
-                    divider={index !== items.length - 1}
-                    className={item.featured ? classes.featured : ""}
-                  >
-                    <div style={{ marginBottom: "14px" }}>
-                      <ListItemText style={{ marginBottom: "8px" }}>
-                        <strong> Reach Milestone: </strong>
-                        {item.milestones}
-                      </ListItemText>
-                      <ListItemText>
-                        <strong>By: {format(item.date)} </strong>
-                      </ListItemText>
-                    </div>
-                    <ListItemSecondaryAction>
-                      <IconButton
-                        edge="end"
-                        aria-label="Update"
-                        onClick={() => setUpdatingItemId(item.id)}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => deleteItem(item.id)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
-            })}
-            <Box
-              sx={{
-                fontSize: "1.75em",
-                textAlign: "center",
-                marginTop: "10px",
-              }}
-            >
-              {Eid && (
-                <div style={{ padding: "2vw" }}>
-                  Upcoming milestone:{" "}
-                  <strong>
-                    {Eid.milestones} by {format(Eid.date)}
-                  </strong>
-                </div>
-              )}
+      {auth.user.stripeSubscriptionStatus ? (
+        <>
+          <SimpleAccordion
+            title="What are milestones? 🤔"
+            text={milestoneText}
+            secondtext={milestoneText2}
+          />
+          {itemsError && (
+            <Box mb={3}>
+              <Alert severity="error">{itemsError.message}</Alert>
             </Box>
-          </List>
-        )}
-      </Paper>
+          )}
 
-      {creatingItem && <EditItemModal onDone={() => setCreatingItem(false)} />}
+          <Paper className={classes.paperItems}>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              padding={2}
+            >
+              <Typography variant="h5">Add Milestones</Typography>
+              <Button
+                variant="contained"
+                size="medium"
+                color="primary"
+                onClick={() => setCreatingItem(true)}
+              >
+                Add
+              </Button>
+            </Box>
+            <Divider />
 
-      {updatingItemId && (
-        <EditItemModal
-          id={updatingItemId}
-          onDone={() => setUpdatingItemId(null)}
-        />
+            {itemsStatus !== "loading" && items && items.length > 0 && (
+              <List disablePadding={true}>
+                {items.map((item, index) => {
+                  if (item.type === "milestone")
+                    return (
+                      <ListItem
+                        key={index}
+                        divider={index !== items.length - 1}
+                        className={item.featured ? classes.featured : ""}
+                      >
+                        <div style={{ marginBottom: "14px" }}>
+                          <ListItemText style={{ marginBottom: "8px" }}>
+                            <strong> Reach Milestone: </strong>
+                            {item.milestones}
+                          </ListItemText>
+                          <ListItemText>
+                            <strong>By: {format(item.date)} </strong>
+                          </ListItemText>
+                        </div>
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="Update"
+                            onClick={() => setUpdatingItemId(item.id)}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => deleteItem(item.id)}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                })}
+                <Box
+                  sx={{
+                    fontSize: "1.75em",
+                    textAlign: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  {Eid && (
+                    <div style={{ padding: "2vw" }}>
+                      Upcoming milestone:{" "}
+                      <strong>
+                        {Eid.milestones} by {format(Eid.date)}
+                      </strong>
+                    </div>
+                  )}
+                </Box>
+              </List>
+            )}
+          </Paper>
+
+          {creatingItem && (
+            <EditItemModal onDone={() => setCreatingItem(false)} />
+          )}
+
+          {updatingItemId && (
+            <EditItemModal
+              id={updatingItemId}
+              onDone={() => setUpdatingItemId(null)}
+            />
+          )}
+        </>
+      ) : (
+        <div>
+          <Typography> Subscribe to a plan to get Milestones!</Typography>
+          <Typography> What are Milestones?</Typography>
+          <Typography>
+            {" "}
+            Milestones let you plan the path to reaching your goal. Example: If
+            your main goal is to study for a total of 45 hours in 3 weeks. You
+            may want to set up 2 milestones: "Study for 15 hours by the end of
+            week 1" and "Study for 30 hours by the end of week 2". We contact
+            you after the milestone dates to make sure you are staying on track.
+          </Typography>
+        </div>
       )}
-    </> : 
-    <div>
-      <Typography> Subscribe to a plan to get Milestones!</Typography>
-      <Typography> What are Milestones?</Typography>
-    <Typography> Milestones let you plan the path to reaching your goal.
-      Example: If your main goal is to study for a total of 45 hours in 3 weeks. You may want to set up 2 milestones:
-      "Study for 15 hours by the end of week 1" and "Study for 30 hours by the end of week 2".
-
-      We contact you after the milestone dates to make sure you are staying on track.
-    </Typography>
-    </div>
-    
-    
-    }
     </>
   );
 }
