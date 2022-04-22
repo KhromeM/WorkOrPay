@@ -106,10 +106,15 @@ export default function Contract() {
                                 ).toString()}
                               </ListItemText>
                             </div>
-                            <br /> <br />
+                            <div>
+                          
+                              <ListItemText>
+                               <h2 ><strong> Penalty if you fail: <span style={{color: "#FF0000"}}>${item.dollars}</span> </strong></h2> 
+                              </ListItemText>
+                            </div>
                             <div>
                               <ListItemText>
-                                Time left:{" "}
+                              <h2 ><strong>Time left:{" "}</strong></h2>
                                 <Time
                                   deadline={timestampToDeadline(
                                     item.createdAt,
