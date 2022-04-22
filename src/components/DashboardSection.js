@@ -134,11 +134,13 @@ function DashboardSection(props) {
           </Grid> */}
           <Grid item={true} xs={12} md={12}>
             <Grid item={true} xs={12} md={6}>
-              <SimpleAccordion
-                title="What are milestones? 🤔"
-                text={milestoneText}
-                secondtext={milestoneText2}
-              />
+              {auth.user.planIsActive && (
+                <SimpleAccordion
+                  title="What are milestones? 🤔"
+                  text={milestoneText}
+                  secondtext={milestoneText2}
+                />
+              )}
             </Grid>
           </Grid>
           <Grid item={true} xs={12} md={6}>
