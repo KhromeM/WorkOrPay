@@ -31,14 +31,22 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 !important",
   },
 }));
-export default function SimpleAccordion({ title, text, secondtext }) {
+export default function SimpleAccordion({ title, text, secondtext, auth }) {
   const classes = useStyles();
   const theme = useTheme();
   // console.log(theme);
+  const [expanded, setExpanded] = React.useState(
+    auth.user.planIsActive ? false : "panel1"
+  );
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
   return (
     <div>
       <Accordion
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
         style={{
           backgroundColor: theme.palette.type === "dark" ? "gray" : "#fffbf0",
         }}

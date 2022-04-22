@@ -139,6 +139,7 @@ function DashboardSection(props) {
                   title="What are milestones? 🤔"
                   text={milestoneText}
                   secondtext={milestoneText2}
+                  auth={auth}
                 />
               )}
             </Grid>
