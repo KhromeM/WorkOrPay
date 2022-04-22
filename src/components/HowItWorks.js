@@ -62,7 +62,7 @@ function HowItWorks(props) {
                       1) Sign Up
                     </Typography>
                     <Typography className={classes.description} variant="h6">
-                      First sign up for an account and purchase the monthly
+                      First, sign up for an account and purchase the monthly
                       membership. Once you have a membership you will be able to
                       form contracts.
                     </Typography>
@@ -97,7 +97,7 @@ function HowItWorks(props) {
                     </Typography>
                     <Typography className={classes.description} variant="h6">
                       Now you have until your deadline to reach your goal. Once
-                      you do, send us proof so we can verify it and send your
+                      you do, send us the proof so we can verify it and send your
                       deposit back. If you fail to complete your goal by the
                       deadline, your deposit is donated to the cause you picked
                       prior.
@@ -168,7 +168,7 @@ function HowItWorks(props) {
                       Ever notice just how efficient you become once deadlines
                       start approaching? What usually took you a day to do, now
                       takes only an hour. We let you easily create consequential
-                      deadlines and so you can go into superhuman mode more
+                      deadlines so you can go into superhuman mode more
                       often.
                     </Typography>
                   </Box>
@@ -191,7 +191,7 @@ function HowItWorks(props) {
                     <Typography className={classes.description} variant="h6">
                       It's one thing to give up when there are no stakes and no
                       accountability. It's entirely different when giving up
-                      means losing a significant amount of your hard earned
+                      means losing a significant amount of your hard-earned
                       money. Worse yet, that money being donated to a cause you
                       HATE. By choosing an anti-charity as the potential
                       beneficiary of your deposit you can generate even more

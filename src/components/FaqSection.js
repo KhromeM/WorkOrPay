@@ -64,29 +64,29 @@ function FaqSection(props) {
       question: "What are financial penalties?",
       disclaimer: true,
       answer:
-        "A financial penalty requires you make a deposit. If you achieve your goal before the deadline, you get your money back. However, if you fail to do so, we will send the money to the charity you picked in your contract.",
+        "A financial penalty requires you to make a deposit. If you achieve your goal before the deadline, you get your money back. However, if you fail to do so, we will send the money to the charity you picked in your contract.",
       answer2:
-        "NOTE: Because of transaction processing fees, we DEDUCT a small percentage from deposits before sending them back to you or sending them elsewhere. If you pay for your contract with a credit or debit card, the fee is 2.9% + $0.30. If you use your bank to pay, it is only 0.8%. We strongly recommend using your bank to pay if you can. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction. Furthermore, we wait 180 days before making the donation to the charity of your choice. This is to prevent taking huge losses from chargebacks. Once the 180 days are up, we will email you a proof of donation.",
+        "NOTE: Because of transaction processing fees, we DEDUCT a small percentage from deposits before sending them back to you or sending them elsewhere. If you pay for your contract with a credit or debit card, the fee is 2.9% + $0.30. If you use your bank to pay, it is only 0.8%. We strongly recommend using your bank to pay if you can. This is 100% not up to us and is the result of our payment processor Stripe who charges a fee for every transaction. Furthermore, we wait 180 days before making the donation to the charity of your choice. This is to prevent taking huge losses from chargebacks. Once the 180 days are up, we will email you proof of donation.",
     },
     {
       question: "Why can't you deduct financial penalties only after I fail?",
       disclaimer: false,
       answer:
-        "The short answer is that users are simply not motivated if they do not see the money leave their account. We have tested charging before and charging after. The difference in attitudes of the group who still had their money in their accounts compared to the group who were charged in the beginning were staggering. This is a service for people who are serious and ready to make major commitments to reach their goals. ",
+        "The short answer is that users are simply not motivated if they do not see the money leave their account. We have tested charging before and charging after. The difference in attitudes of the group who still had their money in their accounts compared to the group who were charged in the beginning was staggering. This is a service for people who are serious and ready to make major commitments to reach their goals. ",
     },
     {
       question: "Are we going to run off with your money?",
       disclaimer: true,
       answer:
-        "Fair question. It is pointless to say we find that idea reprehensible. Instead we will show why it is not in our financial interest: ",
+        "Fair question. It is pointless to say we find that idea reprehensible. Instead, we will show why it is not in our financial interest: ",
       answer2:
         "The creators of this website, Khurram Mustafa and William Chan, are young professionals at the beginning of their careers. Their LinkedIn profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits.",
     },
     {
-      question: "How are daily check ups done?",
+      question: "How are daily check-ups done?",
       disclaimer: false,
       answer:
-        "We have real humans message you via text everyday. If you do not want this, you can turn it off by responding to the texts.",
+        "We have real humans message you via text every day. If you do not want this, you can turn it off by responding to the texts.",
     },
 
     // {
@@ -101,7 +101,7 @@ function FaqSection(props) {
       question: "How are my claims verified?",
       disclaimer: false,
       answer:
-        "We perform verifications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method may be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. Of course, if you put in effort to forge proof, you can fool us. But we trust you will be repulsed by the idea of putting in work to forge a proof of something that you willingly signed yourself up to do.",
+        "We perform verifications to make sure you genuinely met your goal. The exact verification method depends on what your goal is. For example, if your goal is to lose weight, then the verification method might be you sending us a small video clip of getting on the scale and showing the result. The goal of verification is not to get incontrovertible proof of your actions, rather it is a measure to increase your accountability. Of course, if you put in the effort to forge plausible proof, you can fool us. But we trust you will be repulsed by the idea of putting in work to forge proof of something that you willingly signed yourself up to do.",
     },
 
     {

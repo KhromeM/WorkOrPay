@@ -51,7 +51,7 @@ function FeaturesSection(props) {
     {
       title: "Form a Contract",
       description:
-        "Some days you can run a marathon. Other days it's a struggle to get out of bed. Our contracts provide an external source of motivation so you stay on track to meet your goals.",
+        "Some days you can run a marathon. On other days it's a struggle to get out of bed. Our contracts provide an external source of motivation so you stay on track to meet your goals.",
       image: contract,
     },
     {
@@ -75,7 +75,7 @@ function FeaturesSection(props) {
     {
       title: "Daily Check Ups",
       description:
-        "We check up on you everyday to encourage you and make sure you are staying on track. Having someone hold you accountable significantly increases the chances of you hitting your targets.",
+        "We check up on you every day to encourage you and make sure you are staying on track. Having someone hold you accountable significantly increases the chances of you hitting your targets.",
       image: checkup,
     },
     {
