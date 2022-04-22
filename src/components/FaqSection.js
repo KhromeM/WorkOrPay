@@ -80,7 +80,7 @@ function FaqSection(props) {
       answer:
         "Fair question. It is pointless to say we find that idea reprehensible. Instead we will show why it is not in our financial interest: ",
       answer2:
-        "The creators of this website, Khurram Mustafa and William Chan, are young professonals at the beginning of their careers. Their LinkedIn profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits.",
+        "The creators of this website, Khurram Mustafa and William Chan, are young professionals at the beginning of their careers. Their LinkedIn profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits.",
     },
     {
       question: "How are daily check ups done?",
