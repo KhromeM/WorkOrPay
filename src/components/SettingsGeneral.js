@@ -15,6 +15,7 @@ function SettingsGeneral(props) {
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
+    console.log(data, "data");
 
     return auth
       .updateProfile(data)

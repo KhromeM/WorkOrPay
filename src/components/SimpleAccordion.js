@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleAccordion({ title, text, secondtext }) {
   const classes = useStyles();
   const theme = useTheme();
-  console.log(theme);
+  // console.log(theme);
 
   return (
     <div>
