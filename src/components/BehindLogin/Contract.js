@@ -81,12 +81,16 @@ export default function Contract() {
   function format(date) {
     let dMonth = date.getMonth();
     let day = date.getDate();
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    if (hours<10) {hours= '0'+hours.toString()} 
-    if (minutes<10) {minutes = '0'+minutes.toString()}
-    
-    return (month[dMonth] + " " + day.toString() + " "+ hours + ':'+minutes);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    if (hours < 10) {
+      hours = "0" + hours.toString();
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes.toString();
+    }
+
+    return month[dMonth] + " " + day.toString() + " " + hours + ":" + minutes;
   }
 
   return (
@@ -115,7 +119,7 @@ export default function Contract() {
                 <List disablePadding={true}>
                   {auth.user.stripeContractPaidOrNot === "paid" &&
                     items.map((item, index) => {
-                      if (item.type === "contract")
+                      if (item.type === "contract") {
                         return (
                           <>
                             <div>
@@ -124,21 +128,29 @@ export default function Contract() {
                             <div>
                               <ListItemText>
                                 By:{" "}
-                                {format(timestampToDeadline(
-                                  item.createdAt,
-                                  item.days
-                                ))}
-                              </ListItemText>
-                            </div>
-                            <div>
-                          
-                              <ListItemText>
-                               <h2 ><strong> Penalty if you fail: <span style={{color: "#FF0000"}}>${item.dollars}</span> </strong></h2> 
+                                {format(
+                                  timestampToDeadline(item.createdAt, item.days)
+                                )}
                               </ListItemText>
                             </div>
                             <div>
                               <ListItemText>
-                              <h2 ><strong>Time left:{" "}</strong></h2>
+                                <h2>
+                                  <strong>
+                                    {" "}
+                                    Penalty if you fail:{" "}
+                                    <span style={{ color: "#FF0000" }}>
+                                      ${item.dollars}
+                                    </span>{" "}
+                                  </strong>
+                                </h2>
+                              </ListItemText>
+                            </div>
+                            <div>
+                              <ListItemText>
+                                <h2>
+                                  <strong>Time left: </strong>
+                                </h2>
                                 <Time
                                   deadline={timestampToDeadline(
                                     item.createdAt,
@@ -149,6 +161,7 @@ export default function Contract() {
                             </div>
                           </>
                         );
+                      }
                     })}
                 </List>
               )}

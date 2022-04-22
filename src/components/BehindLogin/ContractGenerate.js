@@ -22,7 +22,7 @@ import {
   tooltipClasses,
 } from "@material-ui/core";
 import SectionHeader from "../SectionHeader";
-import { createItem } from "../../util/db";
+import { createItem, updateUser } from "../../util/db";
 import { useHistory } from "../../util/router";
 
 function Contact(props) {
@@ -33,8 +33,8 @@ function Contact(props) {
   const [penalty, setPenalty] = useState("");
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
-
   const auth = useAuth();
+
   // console.log(auth.user.displayName);
 
   if (!auth.user || auth.user.planIsActive == false) {
@@ -98,7 +98,6 @@ function Contact(props) {
     console.log(data);
     // data.minutes = minutes.toString();
     // data.hours = hours.toString();
-    data.penalty = penalty;
     data.type = "contract";
     data.name = "default";
     console.log(data);
@@ -106,33 +105,69 @@ function Contact(props) {
     // remove google sheets
     //
     //
+    if (data.dollars === "0") {
+      createItem({ owner: auth.user.uid, ...data })
+        .then(() => {
+          // Clear form
+          reset();
+          // Show success alert message
+          setFormAlert({
+            type: "success",
+            message:
+              "Your contract has been created! Get ready to achieve your goals!",
+            message2:
+              "No payment since you chose a $0 penalty. Redirecting you to your dashboard...",
+          });
 
-    createItem({ owner: auth.user.uid, ...data })
-      .then(() => {
-        // Clear form
-        reset();
-        // Show success alert message
-        setFormAlert({
-          type: "success",
-          message:
-            "Your contract has been created! Get ready to achieve your goals!",
-          message2: "Redirecting you to make your deposit on Stripe...",
+          setTimeout(() => {
+            updateUser(auth.user.uid, {
+              hasContract: "true",
+              stripeContractPaidOrNot: "paid",
+            });
+            history.push("/dashboard");
+          }, 1000);
+        })
+        .catch((error) => {
+          // Show error alert message
+          setFormAlert({
+            type: "error",
+            message: error.message,
+          });
+        })
+        .finally(() => {
+          // Hide pending indicator
+          setPending(false);
         });
-        setTimeout(() => {
-          history.push(`/purchasesingle/contract${data.dollars}`);
-        }, 2000);
-      })
-      .catch((error) => {
-        // Show error alert message
-        setFormAlert({
-          type: "error",
-          message: error.message,
+      return;
+    }
+    console.log(data.dollars === "0", "dollars data");
+    if (data.dollars !== "0")
+      createItem({ owner: auth.user.uid, ...data })
+        .then(() => {
+          // Clear form
+          reset();
+          // Show success alert message
+          setFormAlert({
+            type: "success",
+            message:
+              "Your contract has been created! Get ready to achieve your goals!",
+            message2: "Redirecting you to make your deposit on Stripe...",
+          });
+          setTimeout(() => {
+            history.push(`/purchasesingle/contract${data.dollars}`);
+          }, 2000);
+        })
+        .catch((error) => {
+          // Show error alert message
+          setFormAlert({
+            type: "error",
+            message: error.message,
+          });
+        })
+        .finally(() => {
+          // Hide pending indicator
+          setPending(false);
         });
-      })
-      .finally(() => {
-        // Hide pending indicator
-        setPending(false);
-      });
   };
 
   if (formAlert)
@@ -241,7 +276,9 @@ function Contact(props) {
                 }}
               >
                 <div style={{ fontSize: "17px" }}>
-                  <strong>Your Goal</strong>
+                  <strong>
+                    Your Goal <span style={{ color: "red" }}>*</span>
+                  </strong>
                 </div>
                 (The thing that you want to accomplish with us.)
               </div>
@@ -272,7 +309,8 @@ function Contact(props) {
               >
                 <div style={{ fontSize: "17px" }}>
                   <strong>
-                    Preferred Regular Accountability Contact Method
+                    Preferred Regular Accountability Contact Method{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </strong>
                 </div>
                 We're gonna try to contact you regularly (daily or every few
@@ -295,7 +333,71 @@ function Contact(props) {
                 })}
               />
             </Grid>
+            <Grid item={true} xs={12} md={12}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "5px",
+                  fontSize: "16px",
+                }}
+              >
+                <strong>
+                  How often do you want to be contacted?{" "}
+                  <span style={{ color: "red" }}>*</span>
+                </strong>
+              </div>
+              <TextField
+                // value={minutes}
+                fullWidth
+                variant="outlined"
+                select
+                size="large"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: {
+                      height: "20px",
+                      fontSize: "18px",
+                      textAlign: "center",
+                    },
+                  },
+                }}
+                type="text"
+                name="contactfrequency"
+                // label="Daily Minutes"
+                error={errors?.contactfrequency ? true : false}
+                helperText={
+                  errors?.contactfrequency && errors.contactfrequency.message
+                }
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please choose your contact frequency.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select Frequency
+                </option>
+
+                <option value={"daily"}>Daily</option>
+
+                <option value={"everythreedays"}>Every 3 Days</option>
+                <option value={"weekly"}>Weekly </option>
+                <option value={"everymilestone"}>
+                  Only after hitting a milestone (mini goals){" "}
+                </option>
+              </TextField>
+            </Grid>
             <Grid item={true} xs={12}></Grid>
+            <Divider
+              style={{
+                width: "100%",
+                marginTop: "5vh",
+                marginBottom: "5vh",
+              }}
+            />{" "}
             <Grid item={true} xs={12}>
               <div
                 style={{
@@ -309,10 +411,10 @@ function Contact(props) {
                     Suggest a Final Verification Method (Optional)
                   </strong>
                 </div>
-                (How we would verify that you reached your goal at{" "}
-                <strong>the end of your deadline</strong>. Don't worry if you're
-                not sure right now, put something and we will contact you by
-                email later and make a plan together! )
+                How we would verify that you reached your goal at{" "}
+                <strong>the end of your deadline</strong>. (Don't worry if
+                you're not sure right now, skip this and we will contact you by
+                email later and make a plan together!)
               </div>
               <TextField
                 variant="outlined"
@@ -347,7 +449,9 @@ function Contact(props) {
                 id="dollars"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h2 style={{ paddingTop: "5px" }}>Financial Penalty</h2>
+                  <h2 style={{ paddingTop: "5px" }}>
+                    Financial Penalty <span style={{ color: "red" }}>*</span>
+                  </h2>
                   <Tooltip
                     placement="right"
                     style={{}}
@@ -429,11 +533,14 @@ function Contact(props) {
                 helperText={errors?.dollars && errors.dollars.message}
                 // onChange={(e) => setMinutes(e.target.value)}
                 inputRef={register({
-                  required: "Please enter your goal",
+                  required: "Please enter your financial penalty.",
                 })}
               >
                 <option selected disabled value="">
                   Select an option{" "}
+                </option>
+                <option value={0}>
+                  0 (You don't want a financial penalty as motivation)
                 </option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
@@ -454,7 +561,9 @@ function Contact(props) {
                 id="days"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>Days Until Deadline</h3>
+                  <h3 style={{ paddingTop: "5px" }}>
+                    Days Until Deadline <span style={{ color: "red" }}>*</span>
+                  </h3>
                   <Tooltip
                     placement="right"
                     style={{
@@ -525,7 +634,10 @@ function Contact(props) {
                 id="beneficiary"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>Beneficiary of Donation</h3>
+                  <h3 style={{ paddingTop: "5px" }}>
+                    Beneficiary of Donation{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </h3>
                   {/* <Tooltip
                     placement="right"
                     style={{
