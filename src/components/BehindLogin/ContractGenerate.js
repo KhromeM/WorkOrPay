@@ -127,7 +127,7 @@ function Contact(props) {
               },
               body: JSON.stringify([
                 [
-                  datetime.toISOString().slice(0, 10),
+                  new Date().toISOString().slice(0, 10),
                   auth.user.email,
                   auth.user.name,
                   "free",
