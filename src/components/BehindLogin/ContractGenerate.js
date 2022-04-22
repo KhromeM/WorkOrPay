@@ -275,8 +275,9 @@ function Contact(props) {
                     Preferred Regular Accountability Contact Method
                   </strong>
                 </div>
-                (We're gonna try to contact you regularly (daily or every few
-                days) <strong>in the midst of your contract period.</strong>)
+                We're gonna try to contact you regularly (daily or every few
+                days) <strong>in the midst of your contract period.</strong>{" "}
+                Include your number or profile link or email.
               </div>
               <TextField
                 variant="outlined"
@@ -304,7 +305,9 @@ function Contact(props) {
                 }}
               >
                 <div style={{ fontSize: "17px" }}>
-                  <strong>Suggest a Final Verification Method </strong>
+                  <strong>
+                    Suggest a Final Verification Method (Optional)
+                  </strong>
                 </div>
                 (How we would verify that you reached your goal at{" "}
                 <strong>the end of your deadline</strong>. Don't worry if you're
@@ -324,9 +327,7 @@ function Contact(props) {
                   errors.verificationmethod && errors.verificationmethod.message
                 }
                 fullWidth={true}
-                inputRef={register({
-                  required: "Please enter a verification method",
-                })}
+                inputRef={register({})}
               />
             </Grid>
             <Grid item={true} xs={12}></Grid>
