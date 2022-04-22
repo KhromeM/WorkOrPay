@@ -75,7 +75,7 @@ function Milestones(props) {
 
   return (
     <>
-    { false ?
+    { auth.user.stripeSubscriptionStatus ?
     <>
     <Typography> What are Milestones?</Typography>
     <Typography> Milestones let you plan the path to reaching your goal.
