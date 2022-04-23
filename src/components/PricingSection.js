@@ -57,7 +57,7 @@ function PricingSection(props) {
     {
       id: "starter",
       name: "Tier 1: Pressure",
-      price: "15.99",
+      price: "9.99",
       perks: [
         "Daily check-ins via text",
         "Personalized Support",
