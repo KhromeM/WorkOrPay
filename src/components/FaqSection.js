@@ -74,14 +74,14 @@ function FaqSection(props) {
       answer:
         "The short answer is that users are simply not motivated if they do not see the money leave their account. We have tested charging before and charging after. The difference in attitudes of the group who still had their money in their accounts compared to the group who were charged in the beginning was staggering. This is a service for people who are serious and ready to make major commitments to reach their goals. ",
     },
-    {
-      question: "Are we going to run off with your money?",
-      disclaimer: true,
-      answer:
-        "Fair question. It is pointless to say we find that idea reprehensible. Instead, we will show why it is not in our financial interest: ",
-      answer2:
-        "The creators of this website, Khurram Mustafa and William Chan, are young professionals at the beginning of their careers. Their LinkedIn profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits.",
-    },
+    // {
+    //   question: "Are we going to run off with your money?",
+    //   disclaimer: true,
+    //   answer:
+    //     "Fair question. It is pointless to say we find that idea reprehensible. Instead, we will show why it is not in our financial interest: ",
+    //   answer2:
+    //     "The creators of this website, Khurram Mustafa and William Chan, are young professionals at the beginning of their careers. Their LinkedIn profiles can be seen in the About Us section. It would be extremely shortsighted of us to ruin our reputations trying to make off with your money. It would cost us far more in the long run than whatever sum we managed to take and not lose to chargebacks and lawsuits.",
+    // },
     {
       question: "How are daily check-ups done?",
       disclaimer: false,

@@ -33,13 +33,13 @@ function TeamBiosSection(props) {
     {
       avatar: "",
       name: "Khurram Mustafa",
-      role: "Creator",
+      role: "https://www.linkedin.com/in/khurram-mustafa-435b16177/",
       bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum consequatur numquam aliquam tenetur ad amet inventore hic beatae, quas accusantium perferendis sapiente explicabo.",
     },
     {
       avatar: "",
       name: "William Chan",
-      role: "Creator",
+      role: "Add your link",
       bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum consequatur numquam aliquam tenetur ad amet inventore hic beatae, quas accusantium perferendis sapiente explicabo, corporis totam! Labore reprehenderit beatae magnam animi!",
     },
   ];
