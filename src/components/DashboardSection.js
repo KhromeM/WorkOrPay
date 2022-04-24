@@ -88,7 +88,7 @@ function DashboardSection(props) {
         <Grid style={{ textAlign: "center" }} item={true} xs={12} md={12}>
           {!auth.user.button && !auth.user.hasContract && (
             <div style={{ margin: "-1em", marginBottom: "1em" }}>
-              <div style={{ color: "#D2042D", marginBottom: "9px" }}>
+              <div style={{  marginBottom: "9px" }}>
                 <strong>To get started, form a contract</strong>
               </div>
               <div>
@@ -97,7 +97,7 @@ function DashboardSection(props) {
                     marginBottom: "20px",
                     flex: "0",
                     fontSize: "1.35em",
-                    backgroundColor: "#FAA0A0",
+                    backgroundColor: "#00B0FF",
                   }}
                   variant="contained"
                   size="medium"
@@ -229,7 +229,7 @@ function DashboardSection(props) {
                   style={{ marginTop: "20px" }}
                   variant="contained"
                   size="medium"
-                  color="secondary"
+                  color="#00B0FF"
                   // component={Link}
                   onClick={onSubmit}
                 >
