@@ -42,7 +42,7 @@ function IndexPage(props) {
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-        title="Lock In Desired Future Behavior"
+        title="We do not profit if you fail"
         subtitle=""
         buttonText="Pricing"
         buttonColor="primary"
