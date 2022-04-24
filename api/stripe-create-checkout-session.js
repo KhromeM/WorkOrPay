@@ -45,7 +45,8 @@ export default requireAuth(async (req, res) => {
       ],
       mode: "subscription",
       // Uncomment to allow user to enter a promotional code
-      //allow_promotion_codes: true,
+      allow_promotion_codes: true,
+
       // Uncomment if you need address collection
       //billing_address_collection: "required",
       //shipping_address_collection: { allowed_countries: ['US'] },
