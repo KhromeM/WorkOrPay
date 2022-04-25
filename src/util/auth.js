@@ -87,6 +87,16 @@ function useAuthProvider() {
       if (EMAIL_VERIFICATION) {
         sendEmailVerification(auth.currentUser);
       }
+      fetch(
+        "https://v1.nocodeapi.com/envariable/google_sheets/GFMtUOtoKAupgdIf?tabId=Sheet1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([[user.email, "", new Date().toLocaleString()]]),
+        }
+      ).then((r) => r.json());
     }
 
     // Update user in state

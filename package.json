@@ -13,6 +13,7 @@
     "@material-ui/icons": "4.11.2",
     "@material-ui/lab": "4.0.0-alpha.60",
     "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.2",
     "@stripe/stripe-js": "1.11.0",
     "analytics": "0.3.1",
     "axios": "^0.26.1",
