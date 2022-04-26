@@ -16,7 +16,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
-import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
+import {
+  updateMilestone as updateItem,
+  deleteMilestone as deleteItem,
+  useMilestonesByOwner as useItemsByOwner,
+} from "../../util/db";
 import { map } from "@firebase/util";
 import SimpleAccordion from "../SimpleAccordion";
 

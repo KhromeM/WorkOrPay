@@ -17,7 +17,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
-import { updateItem, deleteItem, useItemsByOwner } from "../../util/db";
+import {
+  updateContract as updateItem,
+  deleteContract as deleteItem,
+  useContractsByOwner as useItemsByOwner,
+} from "../../util/db";
 import { Card, CardActions, CardContent } from "@material-ui/core";
 import Time from "./Time";
 import { Grid } from "@material-ui/core";

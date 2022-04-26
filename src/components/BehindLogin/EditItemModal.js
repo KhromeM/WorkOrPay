@@ -11,7 +11,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../util/auth";
-import { useItem, updateItem, createItem } from "../../util/db";
+import {
+  useMilestone as useItem,
+  updateMilestone as updateItem,
+  createMilestone as createItem,
+} from "../../util/db";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -108,7 +112,7 @@ function EditItemModal(props) {
                 // firestore rules requie a name prooperty for all items
                 name="date"
                 autoComplete="off"
-                efaultValue={itemData && itemData.date}
+                defaultValue={itemData && itemData.date}
                 InputLabelProps={{ shrink: true }}
                 error={errors.name ? true : false}
                 helperText={errors.name && errors.name.message}

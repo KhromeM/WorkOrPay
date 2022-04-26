@@ -115,12 +115,144 @@ export function deleteItem(id) {
   return deleteDoc(doc(db, "items", id));
 }
 
-/**** Stripe / Contract Creation ****/
-export function createContract(data) {
-  return addDoc(collection(db, "contract"), {
+// /**** Stripe / Contract Creation ****/
+// export function createContract(data) {
+//   return addDoc(collection(db, "contract"), {
+//     ...data,
+//     createdAt: serverTimestamp(),
+//   });
+// }
+
+//
+//
+//
+//  Custom code
+/**** Milestones ****/
+/* Example query functions (modify to your needs) */
+
+// Subscribe to item data
+export function useMilestone(id) {
+  return useQuery(
+    ["milestones", { id }],
+    createQuery(() => doc(db, "milestones", id)),
+    { enabled: !!id }
+  );
+}
+
+// Fetch item data once
+export function useMilestoneOnce(id) {
+  return useQuery(
+    ["milestones", { id }],
+    // When fetching once there is no need to use `createQuery` to setup a subscription
+    // Just fetch normally using `getDoc` so that we return a promise
+    () => getDoc(doc(db, "milestones", id)).then(format),
+    { enabled: !!id }
+  );
+}
+
+// Fetch item data once (non-hook)
+// Useful if you need to fetch data from outside of a component
+export function getMilestone(id) {
+  return getDoc(doc(db, "milestones", id)).then(format);
+}
+
+// Subscribe to all items by owner
+export function useMilestonesByOwner(owner) {
+  return useQuery(
+    ["milestones", { owner }],
+    createQuery(() =>
+      query(
+        collection(db, "milestones"),
+        where("owner", "==", owner),
+        orderBy("createdAt", "desc")
+      )
+    ),
+    { enabled: !!owner }
+  );
+}
+
+// Create a new item
+export function createMilestone(data) {
+  return addDoc(collection(db, "milestones"), {
     ...data,
     createdAt: serverTimestamp(),
   });
+}
+
+// Update an item
+export function updateMilestone(id, data) {
+  return updateDoc(doc(db, "milestones", id), data);
+}
+
+// Delete an item
+export function deleteMilestone(id) {
+  return deleteDoc(doc(db, "milestones", id));
+}
+
+//
+//
+//
+//  Custom code
+/**** Contracts ****/
+/* Example query functions (modify to your needs) */
+
+// Subscribe to item data
+export function useContract(id) {
+  return useQuery(
+    ["contracts", { id }],
+    createQuery(() => doc(db, "contracts", id)),
+    { enabled: !!id }
+  );
+}
+
+// Fetch item data once
+export function useContractOnce(id) {
+  return useQuery(
+    ["contracts", { id }],
+    // When fetching once there is no need to use `createQuery` to setup a subscription
+    // Just fetch normally using `getDoc` so that we return a promise
+    () => getDoc(doc(db, "contracts", id)).then(format),
+    { enabled: !!id }
+  );
+}
+
+// Fetch item data once (non-hook)
+// Useful if you need to fetch data from outside of a component
+export function getContract(id) {
+  return getDoc(doc(db, "contracts", id)).then(format);
+}
+
+// Subscribe to all items by owner
+export function useContractsByOwner(owner) {
+  return useQuery(
+    ["contracts", { owner }],
+    createQuery(() =>
+      query(
+        collection(db, "contracts"),
+        where("owner", "==", owner),
+        orderBy("createdAt", "desc")
+      )
+    ),
+    { enabled: !!owner }
+  );
+}
+
+// Create a new item
+export function createContract(data) {
+  return addDoc(collection(db, "contracts"), {
+    ...data,
+    createdAt: serverTimestamp(),
+  });
+}
+
+// Update an item
+export function updateContract(id, data) {
+  return updateDoc(doc(db, "contracts", id), data);
+}
+
+// Delete an item
+export function deleteContract(id) {
+  return deleteDoc(doc(db, "contracts", id));
 }
 
 /**** HELPERS ****/
