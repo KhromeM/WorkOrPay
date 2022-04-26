@@ -10,7 +10,8 @@ const Time = ({ deadline }) => {
   const [timer, setTimer] = useState("");
 
   const getTimeRemaining = (e) => {
-    let total = Math.floor((Date.parse(e) - Date.parse(new Date())) / 1000);
+    let total = (Math.floor((e.getTime() - (new Date).getTime())/1000))
+    if (total <= 0) {total = 0}
     const days = Math.floor(total / (60 * 60 * 24));
     total -= days * 60 * 60 * 24;
     const hours = Math.floor(total / (60 * 60));
