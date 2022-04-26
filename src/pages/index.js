@@ -22,7 +22,7 @@ function IndexPage(props) {
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-        title="Meet Your Goals Or Pay The Price"
+        title="Meet Your Goals Or Pay The Price!"
         subtitle="Set goals. Form contracts. Pay the penalty if you fail."
         image={logo}
         buttonText="Pricing"
