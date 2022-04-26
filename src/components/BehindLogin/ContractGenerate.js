@@ -22,7 +22,7 @@ import {
   tooltipClasses,
 } from "@material-ui/core";
 import SectionHeader from "../SectionHeader";
-import { createItem, updateUser } from "../../util/db";
+import { createContract as createItem, updateUser } from "../../util/db";
 import { useHistory } from "../../util/router";
 
 function Contact(props) {
