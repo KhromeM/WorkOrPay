@@ -454,41 +454,6 @@ function Contact(props) {
                   <h2 style={{ paddingTop: "5px" }}>
                     Financial Penalty <span style={{ color: "red" }}>*</span>
                   </h2>
-                  {/* <Tooltip
-                    placement="right"
-                    style={{}}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      >
-                        Stripe's US Transaction Processing Fees: 0.8% fee if
-                        paid using bank. 3% with all other payment methods. We
-                        do not profit from this.
-                        <br />
-                        <br />
-                        <strong>
-                          Depositing $100 means you will get back $97.00 upon
-                          reaching your goals if you paid with credit card, and
-                          you will get back $99.20 if you paid with bank.
-                        </strong>
-                        <br />
-                        <br />
-                        We really, really, didn't want to have a fee at all!
-                        It's completely out of our control- banks and payment
-                        processors have to make money off of their services.
-                        <br />
-                        Questions? Ask us using the chat icon located in the
-                        bottom right of your screen.
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip> */}
                 </div>
                 <div style={{ fontSize: "16px" }}>
                   This is the amount of money you put on the line in your
@@ -498,6 +463,7 @@ function Contact(props) {
                 <br /> <br />
 
               </InputLabel>
+              <h4>Dollar amount</h4>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -538,6 +504,38 @@ function Contact(props) {
                 <option value={1000}>1000</option>
               </TextField>
               <br/> <br/> <br/>
+              <h4>When will you be charged?</h4>
+              <Tooltip
+                    placement="right"
+                    style={{}}
+                    title={
+                      <p
+                        style={{
+                          fontFamily: "Inter",
+                          lineHeight: "1.5",
+                          fontSize: "17px",
+                        }}
+                      >
+
+                        <strong>If you choose to make the deposit now, 
+                        your deposit will be short the payment transaction fees when you get it back. </strong>
+                        <br/> 
+                        <p>This is completely unaviodable. We recommend choosing "No payment until you incur a penalty" to aviod these fees.</p>
+                        <br/> <br/>
+                        Stripe's US Transaction Processing Fees: 0.8% fee if
+                        paid using bank. 3% with all other payment methods. 
+                        Foreign transaction fees are even higher. Usually a extra 1-2%.
+                        We do not profit from this.
+                        <br />
+                        <br />
+                        Questions? Ask us using the chat icon located in the
+                        bottom right of your screen.
+                      </p>
+                    }
+                    arrow
+                  >
+                    <InfoIcon />
+                  </Tooltip>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -549,7 +547,7 @@ function Contact(props) {
                 InputLabelProps={{ fontSize: 50 }}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
+                    <InputAdornment position="start"></InputAdornment>
                   ),
                   style: { fontSize: 25 },
                 }}
@@ -571,7 +569,43 @@ function Contact(props) {
               </TextField>
 
               <br/> <br/>
+              <h4>Type of penalty</h4>
+              <Tooltip
+                    placement="right"
+                    style={{}}
+                    title={
+                      <p
+                        style={{
+                          fontFamily: "Inter",
+                          lineHeight: "1.5",
+                          fontSize: "17px",
+                        }}
+                      >
 
+                        <strong>Progressive Penalties: Instead of being charged the whole penalty
+                          as soon as you fail. You are charged a portion of it. </strong>
+                          <br/> <br/>
+                          Example: You form a contract to run every day for 30 days or lose $100.
+                          Sadly, you miss 3 days of running. Instead of losing the whole $100, you only lose $10. (3/30 * $100)
+                          <br/> <br/>
+                        <strong>Static Penalties: You are charged the whole penalty even if you miss your goal by a tiny bit.
+                          In the earlier example, you would be charged the whole $100 even if you missed just 1 day. </strong>
+                          <br/> <br/>
+                          <strong>Our Recommendation: <br/> </strong>
+                            Choose progressive penalties for habit forming and lifestyle changes.
+                            When you're forming a new habit such as going to the gym every day or switching to a new diet, its hard to
+                            not fail for even a single day. Choosing progressive penalties lets you take a day off, but at a cost.
+                            It also encourages you to get back on track ASAP before you lose even more money.
+                            <br/>
+                            Choose Static penalties for one off goals such as: Luanching your website. Starting a youtube channel Enrolling in a class. 
+                        
+                      </p>
+                    }
+                    arrow
+                  >
+                    <InfoIcon />
+                  </Tooltip>
+              
               <TextField
                 // value={minutes}
                 fullWidth
@@ -583,7 +617,7 @@ function Contact(props) {
                 InputLabelProps={{ fontSize: 50 }}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
+                    <InputAdornment position="start"></InputAdornment>
                   ),
                   style: { fontSize: 25 },
                 }}
@@ -601,8 +635,10 @@ function Contact(props) {
                 <option selected value={'progressive'}> Progressive Penalty</option>
                 <option value={'static'}> Static Penalty </option>
                 
+                
 
               </TextField>
+              
             </Grid>
             <Grid item={true} xs={12}></Grid>
             <Divider
@@ -672,7 +708,7 @@ function Contact(props) {
                   required: "Must enter a value from 1 - 30 days",
                   pattern: {
                     value: /\b([1-9]|[12][0-9]|3[0])\b/,
-                    message: "You must enter a number from 3 days to 30 days.",
+                    message: "You must enter a number from 1 days to 30 days.",
                   },
                 })}
               />
