@@ -36,14 +36,21 @@ function DashboardSection(props) {
   const data = {
     name: auth.user.name,
     email: auth.user.email,
-    contracts: '',
+    contract: '',
     message: `User has completed their contract(s). Verify it.`,
   };
+  const pickContract = () => {
+    //gonna make this a modal eventually
+    data.contract = prompt("Which contract have you completed? Example: The one where I had to run 10 miles.")
+  }
   const onSubmit = () => {
     // Show pending indicator
     setPending(true);
 
     //hideContacts()
+    if (auth.user.hasContract > 1) {
+      pickContract()
+    }
 
     contact
       .submit(data)
@@ -59,7 +66,7 @@ function DashboardSection(props) {
       })
       .finally(() => {
         // Hide pending indicator
-        // setPending(false);
+        setPending(false);
       });
   };
 
@@ -86,7 +93,7 @@ function DashboardSection(props) {
           textAlign="center"
         />
         <Grid style={{ textAlign: "center" }} item={true} xs={12} md={12}>
-          {!auth.user.button && !auth.user.hasContract && (
+          {( !auth.user.hasContract || (auth.user.hasContract < 3) ) && (
             <div style={{ margin: "-1em", marginBottom: "1em" }}>
               <div style={{  marginBottom: "9px" }}>
                 <strong>To get started, form a contract</strong>
@@ -220,7 +227,7 @@ function DashboardSection(props) {
             xs={12}
             md={6}
           >
-            {!auth.user.button && auth.user.hasContract && (
+            {auth.user.hasContract && (
             
                 <Button
                   style={{ marginTop: "20px" }}

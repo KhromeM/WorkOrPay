@@ -65,18 +65,20 @@ function Contact(props) {
     );
   }
 
-  if (auth.user.hasContract) {
+  if (auth.user.hasContract >= 3) {
     return (
       <div
         style={{
           marginTop: "30vh",
+          marginRight: "10vh",
+          marginLeft: "10vh",
           marginBottom: "30vh",
           textAlign: "center",
           fontSize: "30px",
         }}
       >
-        You currently have a contract that is already valid. Please wait till a
-        site admin refreshes your account or contact us by email or chat if you
+        You currently have 3 contracts that are already valid. If you have completed one, please submit for verification and 
+        wait untill an admin refreshes your account. Contact us by email or chat if you
         believe this message is an error.
         <br />
         <Button
@@ -140,8 +142,14 @@ function Contact(props) {
           );
 
           setTimeout(() => {
+            let hasContract
+            if (!auth.user.hasContract) {
+              hasContract = 0
+            } else {
+              hasContract = auth.user.hasContract}
+
             updateUser(auth.user.uid, {
-              hasContract: "true",
+              hasContract: hasContract+1,
               stripeContractPaidOrNot: "paid",
             });
             history.push("/dashboard");
