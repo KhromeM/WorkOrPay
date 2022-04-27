@@ -20,6 +20,7 @@ function AuthForm(props) {
     },
     signup: ({ email, pass }) => {
       //hardcoded send email and pass to Signups google sheets via nocodeapi
+      // test
 
       return auth.signup(email, pass).then((user) => {
         // Call auth complete handler
