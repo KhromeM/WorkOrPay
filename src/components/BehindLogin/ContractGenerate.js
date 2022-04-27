@@ -105,7 +105,7 @@ function Contact(props) {
     // remove google sheets
     //
     //
-    if (data.dollars === "0") {
+    if (data.dollars === "0" || data.mode ==='deferred') {
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
           // Clear form
@@ -115,8 +115,9 @@ function Contact(props) {
             type: "success",
             message:
               "Your contract has been created! Get ready to achieve your goals!",
-            message2:
-              "No payment since you chose a $0 penalty. Redirecting you to your dashboard...",
+            message2: ((data.dollars === '0') ? 
+            "No payment since you chose a $0 penalty. Redirecting you to your dashboard..." :
+            "null"),
           });
           fetch(
             "https://v1.nocodeapi.com/envariable/google_sheets/ovhdVhojdGjnmUuz?tabId=Sheet1",
@@ -262,23 +263,6 @@ function Contact(props) {
                 value={auth.user ? auth.user.email : ""}
               />
             </Grid>
-            {/* <Grid item={true} xs={12}>
-              <TextField
-                variant="outlined"
-                type="text"
-                label="Message"
-                name="message"
-                multiline={true}
-                rows={5}
-                error={errors.message ? true : false}
-                helperText={errors.message && errors.message.message}
-                fullWidth={true}
-                inputRef={register({
-                  required: "Please enter a message",
-                })}
-              />
-            </Grid>
-            <Grid item={true} xs={12}></Grid> */}
             <Divider
               style={{
                 width: "100%",
@@ -332,7 +316,7 @@ function Contact(props) {
                     <span style={{ color: "red" }}>*</span>
                   </strong>
                 </div>
-                We're gonna try to contact you regularly (daily or every few
+                We're going to try to contact you regularly (daily or every few
                 days) <strong>in the midst of your contract period.</strong>{" "}
                 Include your number or profile link or email.
               </div>
@@ -432,8 +416,7 @@ function Contact(props) {
                 </div>
                 How we would verify that you reached your goal at{" "}
                 <strong>the end of your deadline</strong>. (Don't worry if
-                you're not sure right now, skip this and we will contact you by
-                email later and make a plan together!)
+                you're not sure right now, skip this and we will contact you later and make a plan!)
               </div>
               <TextField
                 variant="outlined"
@@ -471,7 +454,7 @@ function Contact(props) {
                   <h2 style={{ paddingTop: "5px" }}>
                     Financial Penalty <span style={{ color: "red" }}>*</span>
                   </h2>
-                  <Tooltip
+                  {/* <Tooltip
                     placement="right"
                     style={{}}
                     title={
@@ -505,31 +488,16 @@ function Contact(props) {
                     arrow
                   >
                     <InfoIcon />
-                  </Tooltip>
+                  </Tooltip> */}
                 </div>
                 <div style={{ fontSize: "16px" }}>
                   This is the amount of money you put on the line in your
-                  contract. If you pass your goals, you will get your deposit
-                  back (besides the transaction processing fee from our payment
-                  processor). If you fail reach your goal by the deadline, the
+                  contract. If you fail reach your goal by the deadline, the
                   money will be donated to your chosen beneficiary below.{" "}
                 </div>
                 <br /> <br />
-                <div style={{ fontSize: "14px", lineHeight: 1.3 }}>
-                  <div style={{ color: "red" }}>
-                    Payment Processors Transaction Processing Fees: 3% with
-                    credit card. 1% with bank.
-                  </div>{" "}
-                  <strong>
-                    {" "}
-                    Deposit <u>$100 with credit card</u>, get back <u>$97.00</u>
-                    . <br /> Deposit <u>$100 with bank transfer</u>, get back{" "}
-                    <u>$99.20</u>. <br />
-                    We do not profit from this.
-                  </strong>
-                </div>
-              </InputLabel>
 
+              </InputLabel>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -552,7 +520,7 @@ function Contact(props) {
                 helperText={errors?.dollars && errors.dollars.message}
                 // onChange={(e) => setMinutes(e.target.value)}
                 inputRef={register({
-                  required: "Please enter your financial penalty.",
+                  required: "Please select your financial penalty.",
                 })}
               >
                 <option selected disabled value="">
@@ -568,6 +536,72 @@ function Contact(props) {
                 <option value={250}>250</option>
                 <option value={500}>500</option>
                 <option value={1000}>1000</option>
+              </TextField>
+              <br/> <br/> <br/>
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                variant="outlined"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ fontSize: 50 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                  style: { fontSize: 25 },
+                }}
+                type="text"
+                name="mode"
+                error={errors?.dollars ? true : false}
+                helperText={errors?.dollars && errors.dollars.message}
+                inputRef={register({
+                  required: "Please select when you would like to be charged.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select an option{" "}
+                </option>
+                <option value={'deferred'} selected>No payment until you incur a penalty</option>
+                <option value={'charge'}>Make the deposit now</option>
+                
+
+              </TextField>
+
+              <br/> <br/>
+
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                variant="outlined"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ fontSize: 50 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                  style: { fontSize: 25 },
+                }}
+                type="text"
+                name="finPenType"
+                error={errors?.dollars ? true : false}
+                helperText={errors?.dollars && errors.dollars.message}
+                inputRef={register({
+                  required: "Please select which penalty structure you want",
+                })}
+              >
+                <option disabled value="">
+                  Select an option{" "}
+                </option>
+                <option selected value={'progressive'}> Progressive Penalty</option>
+                <option value={'static'}> Static Penalty </option>
+                
+
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
@@ -635,9 +669,9 @@ function Contact(props) {
                 fullWidth={true}
                 defaultValue={7}
                 inputRef={register({
-                  required: "Must enter a value from 3 - 30 days",
+                  required: "Must enter a value from 1 - 30 days",
                   pattern: {
-                    value: /\b([3-9]|[12][0-9]|3[0])\b/,
+                    value: /\b([1-9]|[12][0-9]|3[0])\b/,
                     message: "You must enter a number from 3 days to 30 days.",
                   },
                 })}
@@ -657,26 +691,6 @@ function Contact(props) {
                     Beneficiary of Donation{" "}
                     <span style={{ color: "red" }}>*</span>
                   </h3>
-                  {/* <Tooltip
-                    placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      ></p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip> */}
                 </div>{" "}
                 <br />
                 <div style={{ fontSize: "16px" }}>

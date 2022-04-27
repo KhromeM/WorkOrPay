@@ -18,7 +18,7 @@ import { useAuth } from "./../util/auth";
 import { Button, CircularProgress } from "@material-ui/core";
 import contact from "../util/contact";
 import { updateUser } from "../util/db";
-import Contract from "./BehindLogin/Contract";
+import ContractGrid from "./BehindLogin/ContractGrid.js";
 import SimpleAccordion from "./SimpleAccordion";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,17 +36,17 @@ function DashboardSection(props) {
   const data = {
     name: auth.user.name,
     email: auth.user.email,
-    message: "User has completed their contract. Verify it.",
+    contracts: '',
+    message: `User has completed their contract(s). Verify it.`,
   };
   const onSubmit = () => {
     // Show pending indicator
     setPending(true);
 
+    //hideContacts()
+
     contact
       .submit(data)
-      .then(() => {
-        updateUser(auth.user.uid, { button: "disable" });
-      })
       .then(() => {
         // Clear form
         //reset();
@@ -211,7 +211,7 @@ function DashboardSection(props) {
             </Card>
           </Grid>
           <Grid item={true} xs={12} md={6}>
-            <Contract />
+            <ContractGrid />
           </Grid>
           {/* generate contract button below */}
           <Grid
@@ -221,10 +221,7 @@ function DashboardSection(props) {
             md={6}
           >
             {!auth.user.button && auth.user.hasContract && (
-              <div style={{ color: "red", fontSize: "25px" }}>
-                <strong>ONLY</strong> press this button when you have achieved
-                your goal as stated in the contract:
-                <br />
+            
                 <Button
                   style={{ marginTop: "20px" }}
                   variant="contained"
@@ -237,11 +234,11 @@ function DashboardSection(props) {
                     <CircularProgress color="success" />
                   ) : (
                     <div>
-                      <strong>Submit for verification</strong>
+                      <strong>Submit  a contract for verification</strong>
                     </div>
                   )}
                 </Button>
-              </div>
+              
             )}
           </Grid>
         </Grid>
