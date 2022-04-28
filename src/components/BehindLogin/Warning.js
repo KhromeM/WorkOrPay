@@ -49,7 +49,7 @@ export default function Warning({warning}) {
             )
     
     }
-    if (warning === 'charge') {
+    if (warning === 'charged') {
         output = (
         <div style={{ fontSize: "14px", lineHeight: 1.3 }}>
             <div style={{ color: "red" }}>

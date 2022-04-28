@@ -155,7 +155,6 @@ export default function Contract({contract}) {
                           </div>
                         </CardContent>
                         <CardContent>
-                          <div>
                             <ListItemText>
                               <h3>
                                 <strong>
@@ -167,23 +166,25 @@ export default function Contract({contract}) {
                                 </strong>
                               </h3>
                             </ListItemText>
-                          </div>
+
                         </CardContent>
+
+                        
+                        <CardContent>
+                          <ListItemText>
+                            <h4>
+                              <strong>Time left: </strong>
+                              <Time
+                              deadline={timestampToDeadline(
+                                contract.createdAt,
+                                contract.days
+                              )}
+                            />
+                            </h4>
+                          </ListItemText>
+                        </CardContent>
+                      
                       </Card>
-                      <div>
-                        <ListItemText>
-                          <h4>
-                            <strong>Time left: </strong>
-                          </h4>
-                          <Time
-                            deadline={timestampToDeadline(
-                              contract.createdAt,
-                              contract.days
-                            )}
-                          />{" "}
-                        </ListItemText>
-                      </div>
-                      <hr/> <br/>
                     </>
                 </List>
             </Box>

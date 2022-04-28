@@ -113,7 +113,7 @@ function ContractGenerate(props) {
     // remove google sheets
     //
     //
-    if (data.dollars === "0" || data.mode ==='deferred') {
+    if (data.dollars === "0" || data.contractPayment ==='deferred') {
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
           // Clear form
@@ -532,7 +532,7 @@ function ContractGenerate(props) {
                   style: { fontSize: 25 },
                 }}
                 type="text"
-                name="mode"
+                name="contractPayment"
                 error={errors?.dollars ? true : false}
                 helperText={errors?.dollars && errors.dollars.message}
                 onChange={ e => setWarning(e.target.value)}
@@ -545,7 +545,7 @@ function ContractGenerate(props) {
                   Select an option{" "}
                 </option>
                 <option value={'deferred'} selected>No payment until you incur a penalty</option>
-                <option value={'charge'}>Make the deposit now</option>
+                <option value={'charged'}>Make the deposit now</option>
 
               </TextField>
 
@@ -760,63 +760,3 @@ export default ContractGenerate;
 
 
 
-
-// <Divider
-//               style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-//             />
-//             <Grid item={true} xs={10} md={8}>
-//               <InputLabel
-//                 style={{ textAlign: "center", marginBottom: "10px" }}
-//                 id="phone"
-//               >
-//                 <div
-//                   style={{
-//                     marginLeft: "22px",
-//                     display: "flex",
-//                     justifyContent: "center",
-//                   }}
-//                 >
-//                   <h3 style={{ paddingTop: "5px" }}>Phone Number</h3>
-
-//                 </div>{" "}
-//                 <div>(Optional)</div>
-//                 <br />
-//                 <div style={{ fontSize: "16px" }}>
-//                   We check in with you daily via text to make sure you are
-//                   staying on track. You can opt out of this by simply leaving
-//                   this blank. <br />
-//                   <br></br>If you want to opt-in later, just send us a message
-//                   using chat or the contact us page.
-//                 </div>
-//                 <br />
-//               </InputLabel>
-
-//               <TextField
-//                 variant="outlined"
-//                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-
-//                 name="phone"
-//                 multiline={true}
-//                 rows={1}
-//                 error={errors.phone ? true : false}
-//                 // value={dollars}
-//                 // onChange={(e) => setDollars(e.target.value)}
-//                 helperText={errors.phone && errors.phone.message}
-//                 InputLabelProps={{ shrink: true }}
-//                 InputProps={{
-//                   inputProps: {
-//                     style: { textAlign: "center" },
-//                   },
-//                 }}
-//                 fullWidth={true}
-//                 // defaultValue={8008008000}
-//                 inputRef={register({
-//                   // required: "Must enter a phone number",
-//                   // not required
-//                   pattern: {
-//                     value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
-//                     message: "You must enter a valid 10 digit phone number.",
-//                   },
-//                 })}
-//               />
-//             </Grid>
