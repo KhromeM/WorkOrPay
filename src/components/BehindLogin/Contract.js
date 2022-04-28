@@ -169,6 +169,52 @@ export default function Contract({contract}) {
 
                         </CardContent>
 
+                        <CardContent>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  {" "}
+                                  Penalty type:{" "}
+                                  <span>
+                                    {contract.finPenType}
+                                  </span>{" "}
+                                </strong>
+                              </h3>
+                            </ListItemText>
+
+                        </CardContent>
+
+
+                        <CardContent>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  {" "}
+                                  When payment: {" "}
+                                  <span>
+                                    {contract.contractPayment}
+                                  </span>{" "}
+                                </strong>
+                              </h3>
+                            </ListItemText>
+
+                        </CardContent>
+
+                        <CardContent>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  {" "}
+                                  Beneficiary:{" "}
+                                  <span>
+                                    {contract.beneficiary}
+                                  </span>{" "}
+                                </strong>
+                              </h3>
+                            </ListItemText>
+
+                        </CardContent>
+
                         
                         <CardContent>
                           <ListItemText>
