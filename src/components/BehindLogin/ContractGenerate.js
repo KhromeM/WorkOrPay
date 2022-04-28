@@ -24,14 +24,8 @@ import {
 import SectionHeader from "../SectionHeader";
 import { createContract as createItem, updateUser } from "../../util/db";
 import { useHistory } from "../../util/router";
+import Warning from "./Warning";
 
-function Warning({warning}) {
-  return(
-    <div>
-      {warning}
-    </div>
-  )
-}
 
 
 
@@ -408,9 +402,6 @@ function ContractGenerate(props) {
 
                 <option value={"everythreedays"}>Every 3 Days</option>
                 <option value={"weekly"}>Weekly </option>
-                <option value={"everymilestone"}>
-                  Only after hitting a milestone (mini goals){" "}
-                </option>
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
@@ -525,37 +516,6 @@ function ContractGenerate(props) {
               </TextField>
               <br/> <br/> <br/>
               <h4>When will you be charged?</h4>
-              <Tooltip
-                    placement="right"
-                    style={{}}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      >
-
-                        <strong>If you choose to make the deposit now, 
-                        your deposit will be short the payment transaction fees when you get it back. </strong>
-                        <br/> 
-                        <p>This is completely unaviodable. We recommend choosing "No payment until you incur a penalty" to aviod these fees.</p>
-                        <br/> <br/>
-                        Stripe's US Transaction Processing Fees: 0.8% fee if
-                        paid using bank. 3% with all other payment methods. 
-                        Foreign transaction fees are even higher. Usually a extra 1-2%.
-                        We do not profit from this.
-                        <br />
-                        <br />
-                        Questions? Ask us using the chat icon located in the
-                        bottom right of your screen.
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -593,44 +553,6 @@ function ContractGenerate(props) {
 
               <br/> <br/>
               <h4>Type of penalty</h4>
-              <Tooltip
-                    placement="right"
-                    style={{}}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      >
-
-                        <strong>Progressive Penalties: Instead of being charged the whole penalty
-                          as soon as you fail. You are charged a percentage of it twice proportional to 
-                          how much you missed you goal by.</strong>
-                          <br/> <br/>
-                          Example: You form a contract to run every day for 10 days or lose $100.
-                          Sadly, you miss one day of running. Instead of losing the whole $100, you only lose $20. (1/10 * 2 * $100). 
-                          <br/>
-                          If you miss 50% or more of the goal, you lose your whole deposit.)
-                          <br/> <br/>
-                        <strong>Static Penalties: You are charged the whole penalty even if you miss your goal by a tiny bit.
-                          In the earlier example, you would be charged the whole $100 even if you missed just 1 day. </strong>
-                          <br/> <br/>
-                          <strong>Our Recommendation: <br/> </strong>
-                            Choose progressive penalties for habit forming and lifestyle changes.
-                            When you're forming a new habit such as going to the gym every day or switching to a new diet, its hard to
-                            not fail for even a single day. Choosing progressive penalties lets you take a day off, but at a cost.
-                            It also encourages you to get back on track ASAP before you lose even more money.
-                            <br/>
-                            Choose Static penalties for one off goals such as: Luanching your website. Starting a youtube channel Enrolling in a class. 
-                        
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
               
               <TextField
                 fullWidth
@@ -681,28 +603,7 @@ function ContractGenerate(props) {
                   <h3 style={{ paddingTop: "5px" }}>
                     Days Until Deadline <span style={{ color: "red" }}>*</span>
                   </h3>
-                  <Tooltip
-                    placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
-                    title={
-                      <p
-                        style={{
-                          fontSize: "17px",
-                        }}
-                      >
-                        This is how many days you have to complete your goal.
-                        Make sure to give yourself adequate time, but not enough
-                        for you to procrastinate!
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
+
                 </div>
                 <div style={{ fontSize: "16px" }}>
                   This is how many days you have to complete your goal. Make
@@ -826,92 +727,7 @@ function ContractGenerate(props) {
               </TextField>
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />
-            <Grid item={true} xs={10} md={8}>
-              <InputLabel
-                style={{ textAlign: "center", marginBottom: "10px" }}
-                id="phone"
-              >
-                <div
-                  style={{
-                    marginLeft: "22px",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <h3 style={{ paddingTop: "5px" }}>Phone Number</h3>
-                  <Tooltip
-                    placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      >
-                        Remember that entering your Phone Number is OPTIONAL.
-                        <strong>
-                          Don't enter your phone if you don't want to talk via
-                          phone or text.
-                        </strong>
-                        You can keep in touch with us with email, Whatsapp,
-                        Messenger, or any other messaging app you have.
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
-                </div>{" "}
-                <div>(Optional)</div>
-                <br />
-                <div style={{ fontSize: "16px" }}>
-                  We check in with you daily via text to make sure you are
-                  staying on track. You can opt out of this by simply leaving
-                  this blank. <br />
-                  <br></br>If you want to opt-in later, just send us a message
-                  using chat or the contact us page.
-                </div>
-                <br />
-              </InputLabel>
-
-              <TextField
-                variant="outlined"
-                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-
-                name="phone"
-                multiline={true}
-                rows={1}
-                error={errors.phone ? true : false}
-                // value={dollars}
-                // onChange={(e) => setDollars(e.target.value)}
-                helperText={errors.phone && errors.phone.message}
-                InputLabelProps={{ shrink: true }}
-                InputProps={{
-                  inputProps: {
-                    style: { textAlign: "center" },
-                  },
-                }}
-                fullWidth={true}
-                // defaultValue={8008008000}
-                inputRef={register({
-                  // required: "Must enter a phone number",
-                  // not required
-                  pattern: {
-                    value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
-                    message: "You must enter a valid 10 digit phone number.",
-                  },
-                })}
-              />
-            </Grid>
+            
             <Divider
               style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
             />
@@ -939,3 +755,68 @@ function ContractGenerate(props) {
 }
 
 export default ContractGenerate;
+
+
+
+
+
+
+// <Divider
+//               style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
+//             />
+//             <Grid item={true} xs={10} md={8}>
+//               <InputLabel
+//                 style={{ textAlign: "center", marginBottom: "10px" }}
+//                 id="phone"
+//               >
+//                 <div
+//                   style={{
+//                     marginLeft: "22px",
+//                     display: "flex",
+//                     justifyContent: "center",
+//                   }}
+//                 >
+//                   <h3 style={{ paddingTop: "5px" }}>Phone Number</h3>
+
+//                 </div>{" "}
+//                 <div>(Optional)</div>
+//                 <br />
+//                 <div style={{ fontSize: "16px" }}>
+//                   We check in with you daily via text to make sure you are
+//                   staying on track. You can opt out of this by simply leaving
+//                   this blank. <br />
+//                   <br></br>If you want to opt-in later, just send us a message
+//                   using chat or the contact us page.
+//                 </div>
+//                 <br />
+//               </InputLabel>
+
+//               <TextField
+//                 variant="outlined"
+//                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+
+//                 name="phone"
+//                 multiline={true}
+//                 rows={1}
+//                 error={errors.phone ? true : false}
+//                 // value={dollars}
+//                 // onChange={(e) => setDollars(e.target.value)}
+//                 helperText={errors.phone && errors.phone.message}
+//                 InputLabelProps={{ shrink: true }}
+//                 InputProps={{
+//                   inputProps: {
+//                     style: { textAlign: "center" },
+//                   },
+//                 }}
+//                 fullWidth={true}
+//                 // defaultValue={8008008000}
+//                 inputRef={register({
+//                   // required: "Must enter a phone number",
+//                   // not required
+//                   pattern: {
+//                     value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
+//                     message: "You must enter a valid 10 digit phone number.",
+//                   },
+//                 })}
+//               />
+//             </Grid>
