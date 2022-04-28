@@ -1,0 +1,13 @@
+.rainbow-text {
+    background-image: linear-gradient(to left, gold, pink, violet, lightblue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+
+    color: transparent;
+    -webkit-text-stroke-width: 0.25px;
+    -webkit-text-stroke-color: black;
+  }
+
+  .borderontext {
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: black;
+  }

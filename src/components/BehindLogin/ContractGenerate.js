@@ -29,19 +29,17 @@ import Warning from "./Warning";
 
 
 
-function ContractGenerate(props) {
+function ContractGenerate() {
+
+  const [type, setType] = useState('s') // f = financial s = social
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
-  const [minutes, setMinutes] = useState("");
-  const [hours, setHours] = useState("");
-  const [penalty, setPenalty] = useState("");
   const [warning, setWarning] = useState(false)
   const [warning2, setWarning2] = useState(false)
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
   const auth = useAuth();
 
-  // console.log(auth.user.displayName);
 
   if (!auth.user || auth.user.planIsActive == false) {
     return (
@@ -103,16 +101,9 @@ function ContractGenerate(props) {
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
-    console.log(data);
-    // data.minutes = minutes.toString();
-    // data.hours = hours.toString();
-    data.type = "contract";
+ 
     data.name = "default";
-    console.log(data);
-
-    // remove google sheets
-    //
-    //
+    
     if (data.dollars === "0" || data.contractPayment ==='deferred') {
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
@@ -121,11 +112,7 @@ function ContractGenerate(props) {
           // Show success alert message
           setFormAlert({
             type: "success",
-            message:
-              "Your contract has been created! Get ready to achieve your goals!",
-            message2: ((data.dollars === '0') ? 
-            "No payment since you chose a $0 penalty. Redirecting you to your dashboard..." :
-            "null"),
+            message: "Your contract has been created! Get ready to achieve your goals!"
           });
           fetch(
             "https://v1.nocodeapi.com/envariable/google_sheets/ovhdVhojdGjnmUuz?tabId=Sheet1",
@@ -174,7 +161,7 @@ function ContractGenerate(props) {
         });
       return;
     }
-    console.log(data.dollars === "0", "dollars data");
+
     if (data.dollars !== "0")
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
@@ -230,8 +217,11 @@ function ContractGenerate(props) {
       <Container maxWidth="sm" style={{ paddingTop: "30px" }}>
         <SectionHeader
           title="Generate your contract"
-          subtitle="Contract stuff"
+          subtitle={(type==='f'? ('Financial Contract') : ('Social Contract'))}
           size={4}
+          contractcolors={true}
+          money={type == 'f' ? "true" : 'false'}
+          rainbow={type == 's' ? "true" : 'false'}
           textAlign="center"
         />
         {formAlert && (
@@ -242,7 +232,27 @@ function ContractGenerate(props) {
             </Alert>
           </Box>
         )}
+         <Grid style={{ textAlign: "center" }} item={true} xs={12}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                type="submit"
+                onClick={()=> {(type==='s') ? (setType('f')) : (setType('s')) }}
+              >
+                {!pending && <span>{`Make A ${(type==='s'? ('Financial Contract') : ('Social Contract'))} Instead`}</span>}
 
+              </Button>
+            </Grid>
+
+            <Divider
+              style={{
+                width: "100%",
+                marginTop: "5vh",
+                marginBottom: "5vh",
+              }}
+            />{" "}
+   
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid justifyContent="center" container={true} spacing={2}>
             {true && (
