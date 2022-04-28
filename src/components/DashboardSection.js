@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import LinkMui from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 import DashboardItems from "./DashboardItems.js";
@@ -30,6 +31,7 @@ import {
   deleteContract as deleteItem,
   useContractsByOwner as useItemsByOwner,
 } from "../util/db";
+import { useDarkMode } from "../util/theme";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -43,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardSection(props) {
   const classes = useStyles();
-
+  const theme = useTheme();
   const auth = useAuth();
   const router = useRouter();
 
@@ -56,6 +58,8 @@ function DashboardSection(props) {
     error: itemsError,
   } = useItemsByOwner(auth.user.uid);
 
+  console.log(theme.palette.type, "theme");
+  console.log(theme.palette.type == "light", "light theme true?");
   const message = `You are now subscribed to the ${auth.user.planId} plan `;
   const message2 = "You have formed a contract. Good Luck!";
   // const milestoneText = `Milestones let you add mini goals and targets on the path towards your end goal.`;
@@ -97,14 +101,16 @@ function DashboardSection(props) {
               }}
             >
               {(!auth.user.hasContract || auth.user.hasContract < 3) && (
-                <div style={{ margin: "-1em", marginBottom: "1em" }}>
-                  <div style={{ marginBottom: "9px" }}>
+                <div style={{ margin: "-1em", marginBottom: "0.25em" }}>
+                  <div style={{ marginBottom: "9px", fontSize: "1.75em" }}>
                     <strong>
-                      Thank you so much for subscribing to WorkOrPay! <br />{" "}
-                      We're so excited to finally get you started on achieving
-                      your goals with us! <br /> To begin, please click the
-                      create contract button.
+                      Thank you so much for subscribing to WorkOrPay! <br />
+                      <br /> We're so excited to finally get you started on
+                      achieving your goals with us! <br />
+                      <br /> To begin, please click the create contract button.
                     </strong>
+                    <br />
+                    <br />
                   </div>
                   <div>
                     <Button
@@ -130,24 +136,26 @@ function DashboardSection(props) {
         <Backdrop
           className={classes.backdrop}
           open={openNewUser}
-          onClick={() => {
-            setOpenNewUser(false);
-          }}
+          // onClick={() => {
+          //   setOpenNewUser(false);
+          // }}
         >
           <Grid style={{ textAlign: "center" }} item={true} xs={12} md={12}>
             <div
               style={{
-                backgroundColor: "#1a1a1a",
+                backgroundColor:
+                  theme.palette.type == "light" ? "#1a1a1a" : "darkgray",
                 padding: "30px",
-                margin: "10vw",
+                margin: "5vw",
                 borderRadius: "30px",
               }}
             >
               <div style={{ margin: "-1em", marginBottom: "1em" }}>
-                <div style={{ marginBottom: "9px" }}>
+                <div style={{ marginBottom: "9px", fontSize: "1.5em" }}>
                   <strong>
-                    Thank you so much for signing up for WorkOrPay! <br />{" "}
-                    Please check out our pricing options:
+                    Thank you so much for signing up for WorkOrPay!
+                    <br />
+                    <br /> Please check out our pricing options:
                   </strong>
                 </div>
                 <div>
@@ -156,7 +164,7 @@ function DashboardSection(props) {
                       marginBottom: "20px",
                       flex: "0",
                       fontSize: "1.35em",
-                      backgroundColor: "#00B0FF",
+                      backgroundColor: "#00B0FF", //props.bgColor, //"#00B0FF",
                     }}
                     variant="contained"
                     size="medium"
@@ -166,7 +174,8 @@ function DashboardSection(props) {
                     <strong>Go to Pricing</strong>
                   </Button>
                 </div>
-                <strong>
+                <br />
+                <strong style={{ fontSize: "1.5em" }}>
                   You won't be able to use WorkOrPay without a subscription.
                 </strong>
               </div>
