@@ -31,6 +31,8 @@ function Contact(props) {
   const [minutes, setMinutes] = useState("");
   const [hours, setHours] = useState("");
   const [penalty, setPenalty] = useState("");
+  const [warning, setWarning] = iuseState(false)
+  const [warning2, setWarning2] = iuseState(false)
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
   const auth = useAuth();
@@ -618,7 +620,6 @@ function Contact(props) {
                   </Tooltip>
               
               <TextField
-                // value={minutes}
                 fullWidth
                 select
                 variant="outlined"
@@ -633,6 +634,7 @@ function Contact(props) {
                   style: { fontSize: 25 },
                 }}
                 type="text"
+                onChange={(e)=>console.log(e.target.value)}
                 name="finPenType"
                 error={errors?.dollars ? true : false}
                 helperText={errors?.dollars && errors.dollars.message}

@@ -108,12 +108,12 @@ function DashboardSection(props) {
         )}
         {/* {JSON.stringify(auth.user.stripeContractPurchaseDate)} */}
         <Grid container={true} spacing={4}>
-          {/* <Grid item={true} xs={12} md={6}>
+          
+          { //  STREAKS
+          /* <Grid item={true} xs={12} md={6}>
             <Streaks />
           </Grid> */}
-          {/* <Grid item={true} xs={12} md={6}>
-            <DashboardItems />
-          </Grid> */}
+
           {/* <Grid item={true} xs={12} md={12}>
             <Grid item={true} xs={12} md={6}>
               {auth.user.planIsActive && (
