@@ -25,14 +25,24 @@ import SectionHeader from "../SectionHeader";
 import { createContract as createItem, updateUser } from "../../util/db";
 import { useHistory } from "../../util/router";
 
-function Contact(props) {
+function Warning({warning}) {
+  return(
+    <div>
+      {warning}
+    </div>
+  )
+}
+
+
+
+function ContractGenerate(props) {
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
   const [minutes, setMinutes] = useState("");
   const [hours, setHours] = useState("");
   const [penalty, setPenalty] = useState("");
-  const [warning, setWarning] = iuseState(false)
-  const [warning2, setWarning2] = iuseState(false)
+  const [warning, setWarning] = useState(false)
+  const [warning2, setWarning2] = useState(false)
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
   const auth = useAuth();
@@ -565,6 +575,8 @@ function Contact(props) {
                 name="mode"
                 error={errors?.dollars ? true : false}
                 helperText={errors?.dollars && errors.dollars.message}
+                onChange={ e => setWarning(e.target.value)}
+
                 inputRef={register({
                   required: "Please select when you would like to be charged.",
                 })}
@@ -574,9 +586,10 @@ function Contact(props) {
                 </option>
                 <option value={'deferred'} selected>No payment until you incur a penalty</option>
                 <option value={'charge'}>Make the deposit now</option>
-                
 
               </TextField>
+
+              <Warning warning={warning}/>
 
               <br/> <br/>
               <h4>Type of penalty</h4>
@@ -634,7 +647,7 @@ function Contact(props) {
                   style: { fontSize: 25 },
                 }}
                 type="text"
-                onChange={(e)=>console.log(e.target.value)}
+                onChange={e => setWarning2(e.target.value)}
                 name="finPenType"
                 error={errors?.dollars ? true : false}
                 helperText={errors?.dollars && errors.dollars.message}
@@ -651,6 +664,8 @@ function Contact(props) {
                 
 
               </TextField>
+
+              <Warning warning={warning2}/>
               
             </Grid>
             <Grid item={true} xs={12}></Grid>
@@ -900,180 +915,7 @@ function Contact(props) {
             <Divider
               style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
             />
-            {/* save below
-            <Grid item={true} xs={8} md={4}>
-               <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-                type="text"
-                name="dailyminutes"
-                label="Daily Minutes"
-                error={errors?.dailyminutes ? true : false}
-                helperText={errors?.dailyminutes && errors.dailyminutes.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please enter your goal",
-                })}
-              >
-                <option disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={10}>10 Minutes</option>
-                <option value={20}>20 Minutes</option>
-                <MenuItem value={30}>30 Minutes</MenuItem>
-                <MenuItem value={40}>40 Minutes</MenuItem>
-                <MenuItem value={50}>50 Minutes</MenuItem>
-                <MenuItem value={60}>60 Minutes</MenuItem>
-                <MenuItem value={70}>70 Minutes</MenuItem>
-                <MenuItem value={80}>80 Minutes</MenuItem>
-                <MenuItem value={90}>90 Minutes</MenuItem>
-              </TextField>
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={8} md={4}>
-               <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-                type="text"
-                name="monthlyhours"
-                label="Monthly Hours"
-                error={errors?.dailyminutes ? true : false}
-                helperText={errors?.dailyminutes && errors.dailyminutes.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please enter your goal",
-                })}
-              >
-                <option disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={10}>10 Minutes</option>
-                <option value={20}>20 Minutes</option>
-                <MenuItem value={30}>30 Minutes</MenuItem>
-                <MenuItem value={40}>40 Minutes</MenuItem>
-                <MenuItem value={50}>50 Minutes</MenuItem>
-                <MenuItem value={60}>60 Minutes</MenuItem>
-                <MenuItem value={70}>70 Minutes</MenuItem>
-                <MenuItem value={80}>80 Minutes</MenuItem>
-                <MenuItem value={90}>90 Minutes</MenuItem>
-              </TextField>
-            </Grid> 
-            */}
-            {/* save above */}
-            {/* 
-            <Grid item={true} xs={8} md={4}>
-              <FormControl size="small" variant="filled" fullWidth>
-                <InputLabel id="monthlyhours">Total Monthly Hours</InputLabel>
-                <Select
-                  required
-                  // value={hours}
-                  type="text"
-                  name="monthlyhours"
-                  label="monthlyhours"
-                  // onChange={(e) => setHours(e.target.value)}
-                >
-                  <MenuItem value={10}>10 Hours</MenuItem>
-                  <MenuItem value={20}>20 Hours</MenuItem>
-                  <MenuItem value={30}>30 Hours</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}></Grid>
-            <Grid item={true} xs={8} md={4}>
-              <FormControl size="small" variant="filled" fullWidth>
-                <InputLabel id="hours">Type of Penalty</InputLabel>
-                <Select
-                  required
-                  // value={penalty}
-                  type="text"
-                  name="penalty"
-                  label="penalty"
-                  // onChange={(e) => setPenalty(e.target.value)}
-                >
-                  <MenuItem value={"financial"}>Financial</MenuItem>
-                  <MenuItem value={"social"}>Social Media Post</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            {penalty &&
-              (penalty === "social" ? (
-                <Grid item={true} xs={10}>
-                  <TextField
-                    variant="outlined"
-                    type="text"
-                    label="Please enter what type of social media post we should post if you fail to reach your goal."
-                    name="socialmediapenalty"
-                    multiline={true}
-                    rows={3}
-                    error={errors.socialmediapenalty ? true : false}
-                    helperText={
-                      errors.socialmediapenalty &&
-                      errors.socialmediapenalty.message
-                    }
-                    fullWidth={true}
-                    inputRef={register({
-                      required:
-                        "Please enter what social media post we will post if you fail to reach your goal.",
-                    })}
-                  />
-                </Grid>
-              ) : (
-                <Grid item={true} xs={4}>
-                  <TextField
-                    variant="outlined"
-                    // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                    }}
-                    label="Dollars"
-                    name="financialpenalty"
-                    multiline={true}
-                    rows={1}
-                    error={errors.financialpenalty ? true : false}
-                    // value={dollars}
-                    // onChange={(e) => setDollars(e.target.value)}
-                    helperText={
-                      errors.financialpenalty && errors.financialpenalty.message
-                    }
-                    fullWidth={true}
-                    inputRef={register({
-                      required: "Must enter a dollar amount",
-                      pattern: /^[0-9]+(\.[0-9][0-9])?$/,
-                    })}
-                  />
-                </Grid> */}
-            {/* ))} */}
-            {/* <Grid item={true} xs={12}>
-              <TextField
-                variant="outlined"
-                type="text"
-                label="Penalty"
-                name="penalty"
-                multiline={true}
-                rows={3}
-                error={errors.message ? true : false}
-                helperText={errors.message && errors.message.message}
-                fullWidth={true}
-                inputRef={register({
-                  required: "Please enter your penalty for failing.",
-                })}
-              />
-            </Grid> */}
-            {/* button below */}
+
             <Grid item={true} xs={12}></Grid>
             <Grid style={{ textAlign: "center" }} item={true} xs={12}>
               <Button
@@ -1096,4 +938,4 @@ function Contact(props) {
   );
 }
 
-export default Contact;
+export default ContractGenerate;
