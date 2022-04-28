@@ -315,6 +315,56 @@ function ContractGenerate(props) {
                 })}
               />
             </Grid>
+
+            <Grid item={true} xs={12} md={12}>
+              <InputLabel
+                style={{ marginBottom: "10px", textAlign: "center" }}
+                id="days"
+              >
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <h3 style={{ paddingTop: "5px" }}>
+                    Days Until Deadline <span style={{ color: "red" }}>*</span>
+                  </h3>
+
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  This is how many days you have to complete your goal. Make
+                  sure to give yourself adequate time, but not enough for you to
+                  procrastinate. The countdown starts as soon as you submit the
+                  contract!
+                </div>
+              </InputLabel>
+
+              <br />
+              <TextField
+                variant="outlined"
+                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+
+                name="days"
+                multiline={true}
+                rows={1}
+                error={errors.days ? true : false}
+                // value={dollars}
+                // onChange={(e) => setDollars(e.target.value)}
+                helperText={errors.days && errors.days.message}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
+                fullWidth={true}
+                defaultValue={7}
+                inputRef={register({
+                  required: "Must enter a value from 1 - 30 days",
+                  pattern: {
+                    value: /\b([1-9]|[12][0-9]|3[0])\b/,
+                    message: "You must enter a number from 1 days to 30 days.",
+                  },
+                })}
+              />
+            </Grid>
+
             {/* <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
               <div
@@ -590,62 +640,8 @@ function ContractGenerate(props) {
               <Warning warning={warning2}/>
               
             </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />{" "}
-            <Grid item={true} xs={12} md={12}>
-              <InputLabel
-                style={{ marginBottom: "10px", textAlign: "center" }}
-                id="days"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>
-                    Days Until Deadline <span style={{ color: "red" }}>*</span>
-                  </h3>
 
-                </div>
-                <div style={{ fontSize: "16px" }}>
-                  This is how many days you have to complete your goal. Make
-                  sure to give yourself adequate time, but not enough for you to
-                  procrastinate. The countdown starts as soon as you submit the
-                  contract!
-                </div>
-              </InputLabel>
 
-              <br />
-              <TextField
-                variant="outlined"
-                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-
-                name="days"
-                multiline={true}
-                rows={1}
-                error={errors.days ? true : false}
-                // value={dollars}
-                // onChange={(e) => setDollars(e.target.value)}
-                helperText={errors.days && errors.days.message}
-                InputLabelProps={{ shrink: true }}
-                InputProps={{
-                  inputProps: {
-                    style: { textAlign: "center" },
-                  },
-                }}
-                fullWidth={true}
-                defaultValue={7}
-                inputRef={register({
-                  required: "Must enter a value from 1 - 30 days",
-                  pattern: {
-                    value: /\b([1-9]|[12][0-9]|3[0])\b/,
-                    message: "You must enter a number from 1 days to 30 days.",
-                  },
-                })}
-              />
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />
             <Grid item={true} xs={12} md={12}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
@@ -726,13 +722,9 @@ function ContractGenerate(props) {
                 </option>
               </TextField>
             </Grid>
-            <Grid item={true} xs={12}></Grid>
+            <Grid item={true} xs={12}></Grid> <br/> <br/>
             
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />
 
-            <Grid item={true} xs={12}></Grid>
             <Grid style={{ textAlign: "center" }} item={true} xs={12}>
               <Button
                 variant="contained"
