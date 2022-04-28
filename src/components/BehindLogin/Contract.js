@@ -17,11 +17,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "../../util/auth";
-import {
-  updateContract as updateItem,
-  deleteContract as deleteItem,
-  useContractsByOwner as useItemsByOwner,
-} from "../../util/db";
 import { Card, CardActions, CardContent } from "@material-ui/core";
 import Time from "./Time";
 import { Grid } from "@material-ui/core";
@@ -32,34 +27,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Contract() {
+export default function Contract({contract}) {
   const classes = useStyles();
 
   const auth = useAuth();
   useEffect(() => {});
-  const {
-    data: items,
-    status: itemsStatus,
-    error: itemsError,
-  } = useItemsByOwner(auth.user.uid);
-
-  let hasContract = false;
-  items &&
-    items.forEach((item) => {
-      if (item.type === "contract") hasContract = true;
-    });
-
-  const itemsAreEmpty = !items || items.length === 0 || !hasContract;
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const [creatingItem, setCreatingItem] = useState(false);
-
-  const [updatingItemId, setUpdatingItemId] = useState(null);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
 
   function timestampToDeadline(timestamp, days) {
     timestamp = timestamp.seconds;
@@ -105,84 +77,66 @@ export default function Contract() {
             <Typography variant="h6" paragraph={true}>
               <strong> Your Contract:</strong>
             </Typography>
-
-            {(itemsStatus === "loading" || itemsAreEmpty) && (
-              <Box py={5} px={3} align="center">
-                {itemsStatus === "loading" && <CircularProgress size={32} />}
-
-                {itemsStatus !== "loading" && itemsAreEmpty && (
-                  <>No contract found. Please create a contract.</>
-                )}
-              </Box>
-            )}
-            {hasContract && auth.user.stripeContractPaidOrNot !== "paid" && (
-              <>No contract found. Please create a contract.</>
-            )}
             <Box mt={3}>
-              {itemsStatus !== "loading" && items && items.length > 0 && (
                 <List disablePadding={true}>
                   {auth.user.stripeContractPaidOrNot === "paid" &&
-                    items.map((item, index) => {
-                      if (item.type === "contract") {
-                        return (
-                          <>
-                            <Card variant="outlined">
-                              {" "}
-                              <CardContent>
-                                <div>
-                                  <ListItemText>
-                                    <h2>Goal: {item.goal}</h2>
-                                  </ListItemText>
-                                </div>
-                                <div>
-                                  <ListItemText>
-                                    <h3>
-                                      By:{" "}
-                                      {format(
-                                        timestampToDeadline(
-                                          item.createdAt,
-                                          item.days
-                                        )
-                                      )}
-                                    </h3>
-                                  </ListItemText>
-                                </div>
-                              </CardContent>
-                              <CardContent>
-                                <div>
-                                  <ListItemText>
-                                    <h4>
-                                      <strong>
-                                        {" "}
-                                        Penalty if you fail:{" "}
-                                        <span style={{ color: "#FF0000" }}>
-                                          ${item.dollars}
-                                        </span>{" "}
-                                      </strong>
-                                    </h4>
-                                  </ListItemText>
-                                </div>
-                              </CardContent>
-                            </Card>
-                            <div>
-                              <ListItemText>
-                                <h4>
-                                  <strong>Time left: </strong>
-                                </h4>
-                                <Time
-                                  deadline={timestampToDeadline(
-                                    item.createdAt,
-                                    item.days
-                                  )}
-                                />{" "}
-                              </ListItemText>
-                            </div>
-                          </>
-                        );
-                      }
-                    })}
+                    
+                    <>
+                      <Card variant="outlined">
+                        {" "}
+                        <CardContent>
+                          <div>
+                            <ListItemText>
+                              <h2>Goal: {contract.goal}</h2>
+                            </ListItemText>
+                          </div>
+                          <div>
+                            <ListItemText>
+                              <h3>
+                                By:{" "}
+                                {format(
+                                  timestampToDeadline(
+                                    contract.createdAt,
+                                    contract.days
+                                  )
+                                )}
+                              </h3>
+                            </ListItemText>
+                          </div>
+                        </CardContent>
+                        <CardContent>
+                          <div>
+                            <ListItemText>
+                              <h4>
+                                <strong>
+                                  {" "}
+                                  Penalty if you fail:{" "}
+                                  <span style={{ color: "#FF0000" }}>
+                                    ${contract.dollars}
+                                  </span>{" "}
+                                </strong>
+                              </h4>
+                            </ListItemText>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      <div>
+                        <ListItemText>
+                          <h4>
+                            <strong>Time left: </strong>
+                          </h4>
+                          <Time
+                            deadline={timestampToDeadline(
+                              contract.createdAt,
+                              contract.days
+                            )}
+                          />{" "}
+                        </ListItemText>
+                      </div>
+                      <hr/> <br/>
+                    </>
+                    }
                 </List>
-              )}
             </Box>
           </Box>
         </CardContent>

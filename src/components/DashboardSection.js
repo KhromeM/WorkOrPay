@@ -11,15 +11,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 import DashboardItems from "./DashboardItems.js";
-import Milestones from "./BehindLogin/Milestones.js";
+// import Milestones from "./BehindLogin/Milestones.js";
 // import Streaks from "./Streaks";
 import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { Button, CircularProgress } from "@material-ui/core";
 import contact from "../util/contact";
 import { updateUser } from "../util/db";
-import ContractGrid from "./BehindLogin/ContractGrid.js";
+import Contract from "./BehindLogin/Contract.js";
 import SimpleAccordion from "./SimpleAccordion";
+import {
+  updateContract as updateItem,
+  deleteContract as deleteItem,
+  useContractsByOwner as useItemsByOwner,
+} from "../util/db";
+
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -39,6 +45,12 @@ function DashboardSection(props) {
     contract: '',
     message: `User has completed their contract(s). Verify it.`,
   };
+  const {
+    data: items,
+    status: itemsStatus,
+    error: itemsError,
+  } = useItemsByOwner(auth.user.uid);
+
   const pickContract = () => {
     //gonna make this a modal eventually
     data.contract = prompt("Which contract have you completed? Example: The one where I had to run 10 miles.")
@@ -72,12 +84,12 @@ function DashboardSection(props) {
 
   const message = `You are now subscribed to the ${auth.user.planId} plan `;
   const message2 = "You have formed a contract. Good Luck!";
-  const milestoneText = `Milestones let you add mini goals and targets on the path towards your end goal.`;
-  const milestoneText2 = `Example: If
-  your main goal is to study for a total of 45 hours in 3 weeks. You
-  may want to set up 2 milestones: "Study for 15 hours by the end of
-  week 1" and "Study for 30 hours by the end of week 2". We contact
-  you after the milestone dates to make sure you are staying on track.`;
+  // const milestoneText = `Milestones let you add mini goals and targets on the path towards your end goal.`;
+  // const milestoneText2 = `Example: If
+  // your main goal is to study for a total of 45 hours in 3 weeks. You
+  // may want to set up 2 milestones: "Study for 15 hours by the end of
+  // week 1" and "Study for 30 hours by the end of week 2". We contact
+  // you after the milestone dates to make sure you are staying on track.`;
   return (
     <Section
       bgColor={props.bgColor}
@@ -139,7 +151,7 @@ function DashboardSection(props) {
           {/* <Grid item={true} xs={12} md={6}>
             <DashboardItems />
           </Grid> */}
-          <Grid item={true} xs={12} md={12}>
+          {/* <Grid item={true} xs={12} md={12}>
             <Grid item={true} xs={12} md={6}>
               {auth.user.planIsActive && (
                 <SimpleAccordion
@@ -153,6 +165,43 @@ function DashboardSection(props) {
           </Grid>
           <Grid item={true} xs={12} md={6}>
             <Milestones />
+          </Grid> */}
+
+
+        {items && items.map((contract)=>{
+          return(
+            <Grid item={true} xs={12} md={6}>
+              <Contract contract={contract} />
+            </Grid>
+          )
+        })}
+
+          <Grid
+            style={{ paddingTop: "80px", textAlign: "center" }}
+            item={true}
+            xs={12}
+            md={6}
+          >
+            {auth.user.hasContract && (
+            
+                <Button
+                  style={{ marginTop: "20px" }}
+                  variant="contained"
+                  size="medium"
+                  color="#00B0FF"
+                  // component={Link}
+                  onClick={onSubmit}
+                >
+                  {pending ? (
+                    <CircularProgress color="success" />
+                  ) : (
+                    <div>
+                      <strong>Submit  a contract for verification</strong>
+                    </div>
+                  )}
+                </Button>
+              
+            )}
           </Grid>
 
           <Grid item={true} xs={12} md={6}>
@@ -216,37 +265,6 @@ function DashboardSection(props) {
                 </Box>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item={true} xs={12} md={6}>
-            <ContractGrid />
-          </Grid>
-          {/* generate contract button below */}
-          <Grid
-            style={{ paddingTop: "80px", textAlign: "center" }}
-            item={true}
-            xs={12}
-            md={6}
-          >
-            {auth.user.hasContract && (
-            
-                <Button
-                  style={{ marginTop: "20px" }}
-                  variant="contained"
-                  size="medium"
-                  color="#00B0FF"
-                  // component={Link}
-                  onClick={onSubmit}
-                >
-                  {pending ? (
-                    <CircularProgress color="success" />
-                  ) : (
-                    <div>
-                      <strong>Submit  a contract for verification</strong>
-                    </div>
-                  )}
-                </Button>
-              
-            )}
           </Grid>
         </Grid>
       </Container>
