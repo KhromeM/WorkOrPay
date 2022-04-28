@@ -16,7 +16,6 @@ import DashboardItems from "./DashboardItems.js";
 import { Link, useRouter } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { Button, CircularProgress } from "@material-ui/core";
-import contact from "../util/contact";
 import { updateUser } from "../util/db";
 import Contract from "./BehindLogin/Contract.js";
 import SimpleAccordion from "./SimpleAccordion";
@@ -35,52 +34,16 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardSection(props) {
   const classes = useStyles();
-  const [pending, setPending] = useState(false);
 
   const auth = useAuth();
   const router = useRouter();
-  const data = {
-    name: auth.user.name,
-    email: auth.user.email,
-    contract: '',
-    message: `User has completed their contract(s). Verify it.`,
-  };
+
   const {
     data: items,
     status: itemsStatus,
     error: itemsError,
   } = useItemsByOwner(auth.user.uid);
 
-  const pickContract = () => {
-    //gonna make this a modal eventually
-    data.contract = prompt("Which contract have you completed? Example: The one where I had to run 10 miles.")
-  }
-  const onSubmit = () => {
-    // Show pending indicator
-    setPending(true);
-
-    //hideContacts()
-    if (auth.user.hasContract > 1) {
-      pickContract()
-    }
-
-    contact
-      .submit(data)
-      .then(() => {
-        // Clear form
-        //reset();
-        // Show success alert message
-        alert("Great Job! We will contact you for verification shortly.");
-      })
-      .catch((error) => {
-        // Show error alert message
-        alert(error.message);
-      })
-      .finally(() => {
-        // Hide pending indicator
-        setPending(false);
-      });
-  };
 
   const message = `You are now subscribed to the ${auth.user.planId} plan `;
   const message2 = "You have formed a contract. Good Luck!";
@@ -176,33 +139,6 @@ function DashboardSection(props) {
           )
         })}
 
-          <Grid
-            style={{ paddingTop: "80px", textAlign: "center" }}
-            item={true}
-            xs={12}
-            md={6}
-          >
-            {auth.user.hasContract && (
-            
-                <Button
-                  style={{ marginTop: "20px" }}
-                  variant="contained"
-                  size="medium"
-                  color="#00B0FF"
-                  // component={Link}
-                  onClick={onSubmit}
-                >
-                  {pending ? (
-                    <CircularProgress color="success" />
-                  ) : (
-                    <div>
-                      <strong>Submit  a contract for verification</strong>
-                    </div>
-                  )}
-                </Button>
-              
-            )}
-          </Grid>
 
           <Grid item={true} xs={12} md={6}>
             <Card>

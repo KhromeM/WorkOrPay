@@ -591,10 +591,13 @@ function Contact(props) {
                       >
 
                         <strong>Progressive Penalties: Instead of being charged the whole penalty
-                          as soon as you fail. You are charged a portion of it. </strong>
+                          as soon as you fail. You are charged a percentage of it twice proportional to 
+                          how much you missed you goal by.</strong>
                           <br/> <br/>
-                          Example: You form a contract to run every day for 30 days or lose $100.
-                          Sadly, you miss 3 days of running. Instead of losing the whole $100, you only lose $10. (3/30 * $100)
+                          Example: You form a contract to run every day for 10 days or lose $100.
+                          Sadly, you miss one day of running. Instead of losing the whole $100, you only lose $20. (1/10 * 2 * $100). 
+                          <br/>
+                          If you miss 50% or more of the goal, you lose your whole deposit.)
                           <br/> <br/>
                         <strong>Static Penalties: You are charged the whole penalty even if you miss your goal by a tiny bit.
                           In the earlier example, you would be charged the whole $100 even if you missed just 1 day. </strong>

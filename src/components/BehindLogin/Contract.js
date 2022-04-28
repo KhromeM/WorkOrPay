@@ -20,6 +20,8 @@ import { useAuth } from "../../util/auth";
 import { Card, CardActions, CardContent } from "@material-ui/core";
 import Time from "./Time";
 import { Grid } from "@material-ui/core";
+import contact from "../../util/contact";
+import {updateContract as updateItem} from "../../util/db";
 
 const useStyles = makeStyles((theme) => ({
   cardContent: {
@@ -32,6 +34,7 @@ export default function Contract({contract}) {
 
   const auth = useAuth();
   useEffect(() => {});
+  const [pending, setPending] = useState(false);
 
   function timestampToDeadline(timestamp, days) {
     timestamp = timestamp.seconds;
@@ -69,6 +72,40 @@ export default function Contract({contract}) {
     return month[dMonth] + " " + day.toString() + " " + hours + ":" + minutes;
   }
 
+  const data = {
+    name: auth.user.name,
+    email: auth.user.email,
+    contract: contract,
+    message: `User has completed their contract(s). Verify it.`,
+  };
+
+  const onSubmit = () => {
+    // Show pending indicator
+    setPending(true);
+
+    //hideContacts()
+
+    contact
+      .submit(data)
+      .then(() => {
+        // Clear form
+        //reset();
+        // Show success alert message
+        alert("Great Job! We will contact you for verification shortly.");
+      })
+      .then(()=>{
+        updateItem(contract.id,{'verificationRequested': 'true'})
+      })
+      .catch((error) => {
+        // Show error alert message
+        alert(error.message);
+      })
+      .finally(() => {
+        // Hide pending indicator
+        setPending(false);
+      });
+  };
+
   return (
     <Grid item={true} xs={12} md={12}>
       <Card>
@@ -79,8 +116,6 @@ export default function Contract({contract}) {
             </Typography>
             <Box mt={3}>
                 <List disablePadding={true}>
-                  {auth.user.stripeContractPaidOrNot === "paid" &&
-                    
                     <>
                       <Card variant="outlined">
                         {" "}
@@ -107,15 +142,30 @@ export default function Contract({contract}) {
                         <CardContent>
                           <div>
                             <ListItemText>
-                              <h4>
+                              <h3>
                                 <strong>
                                   {" "}
-                                  Penalty if you fail:{" "}
+                                  Maximum Possible Penalty:{" "}
                                   <span style={{ color: "#FF0000" }}>
                                     ${contract.dollars}
                                   </span>{" "}
                                 </strong>
-                              </h4>
+                              </h3>
+                            </ListItemText>
+                          </div>
+                        </CardContent>
+                        <CardContent>
+                          <div>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  {" "}
+                                  Penalties Incurred So Far:{" "}
+                                  <span style={{ color: "#FF0000" }}>
+                                    ${contract.penalty ? contract.penalty : 0}
+                                  </span>{" "}
+                                </strong>
+                              </h3>
                             </ListItemText>
                           </div>
                         </CardContent>
@@ -135,9 +185,42 @@ export default function Contract({contract}) {
                       </div>
                       <hr/> <br/>
                     </>
-                    }
                 </List>
             </Box>
+            
+            {!contract.verificationRequested ?
+              <Grid
+                  style={{ paddingTop: "80px", textAlign: "center" }}
+                  item={true}
+                  xs={12}
+                  md={6}
+                >
+                  
+                  
+                      <Button
+                        style={{ marginTop: "20px" }}
+                        variant="contained"
+                        size="medium"
+                        color="#00B0FF"
+                        onClick={onSubmit}
+                      >
+                        {pending ? (
+                          <CircularProgress color="success" />
+                        ) : (
+                          <div>
+                            <strong>Submit for verification</strong>
+                          </div>
+                        )}
+                      </Button>
+                </Grid>
+                :
+                <div>Congratulations! We will verify you have completed the contract
+                  and return your deposit if you made one.
+                </div>
+                }
+
+
+
           </Box>
         </CardContent>
       </Card>{" "}
