@@ -61,13 +61,13 @@ function Navbar(props) {
   const handleCloseMenu = () => {
     setMenuState(null);
   };
-  const scroll = () => {
-    history.push("/");
-    setTimeout(() => {
-      const section = document.querySelector("#howitworks");
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 200);
-  };
+  // const scroll = () => {
+  //   history.push("/");
+  //   setTimeout(() => {
+  //     const section = document.querySelector("#howitworks");
+  //     section.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }, 200);
+  // };
   return (
     <Section bgColor={props.color} size="auto">
       <AppBar position="static" color="transparent" elevation={0}>
@@ -101,7 +101,10 @@ function Navbar(props) {
                   <Typography textalign="center">Dashboard</Typography>
                 </MenuItem>
               )}
-              <MenuItem onClick={scroll}>
+              {/* <MenuItem onClick={scroll}>
+                <Typography textalign="center">How It Works</Typography>
+              </MenuItem> */}
+              <MenuItem component={Link} to="/howitworks">
                 <Typography textalign="center">How It Works</Typography>
               </MenuItem>
               <MenuItem component={Link} to="/pricing">
@@ -248,9 +251,12 @@ function Navbar(props) {
               </ListItem>
               <Divider />
 
-              <MenuItem onClick={scroll}>
+              {/* <MenuItem onClick={scroll}>
                 <Typography textalign="center">How It Works</Typography>
-              </MenuItem>
+              </MenuItem> */}
+              <ListItem component={Link} to="/howitworks" button={true}>
+                <ListItemText>How It Works</ListItemText>
+              </ListItem>
               <ListItem component={Link} to="/pricing" button={true}>
                 <ListItemText>Pricing</ListItemText>
               </ListItem>
@@ -270,9 +276,12 @@ function Navbar(props) {
               </ListItem>
               <Divider />
 
-              <MenuItem onClick={scroll}>
+              {/* <MenuItem onClick={scroll}>
                 <Typography textalign="center">How It Works</Typography>
-              </MenuItem>
+              </MenuItem> */}
+              <ListItem component={Link} to="/howitworks" button={true}>
+                <ListItemText>How It Works</ListItemText>
+              </ListItem>
               <ListItem component={Link} to="/pricing" button={true}>
                 <ListItemText>Pricing</ListItemText>
               </ListItem>

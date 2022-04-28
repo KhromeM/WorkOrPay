@@ -48,12 +48,12 @@ function IndexPage(props) {
         buttonColor="primary"
         buttonPath="/pricing"
       />
-      <HowItWorks
+      {/* <HowItWorks
         bgColor="default"
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-      />
+      /> */}
       {/* <TestimonialsSection
         bgColor="light"
         size="medium"

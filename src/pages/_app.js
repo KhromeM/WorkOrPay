@@ -26,7 +26,7 @@ import Logo1 from "../resources/Logos/black.png";
 import Logo2 from "../resources/Logos/white.png";
 
 import "./transition.css";
-
+import HowItWorks from "../components/HowItWorks";
 
 function MiniApp() {
   const location = useLocation();
@@ -46,6 +46,7 @@ function MiniApp() {
               <Route exact path="/contact" component={ContactPage} />
               <Route exact path="/pricing" component={PricingPage} />
               <Route exact path="/dashboard" component={DashboardPage} />
+              <Route exact path="/howitworks" component={HowItWorks} />
               <Route
                 exact
                 path="/generatecontract"
