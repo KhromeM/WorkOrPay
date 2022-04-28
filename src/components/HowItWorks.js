@@ -86,9 +86,9 @@ function HowItWorks(props) {
                     <Typography className={classes.description} variant="h6">
                       If just making goals was enough, you wouldn't be here.
                       Create extra motivation for yourself by wagering your
-                      money. Choose an amount from $25-$1000. Choose the charity
-                      or anti-charity that gets your money if you fail and
-                      deposit the amount.
+                      money. Choose an amount from $25-$1000 to set as your maximum penalty. 
+                      Then pick the charity
+                      or anti-charity that gets your money if you fail.
                     </Typography>
                   </Box>
                   <Box style={{ marginBottom: "60px" }}>
@@ -97,10 +97,8 @@ function HowItWorks(props) {
                     </Typography>
                     <Typography className={classes.description} variant="h6">
                       Now you have until your deadline to reach your goal. Once
-                      you do, send us the proof so we can verify it and send your
-                      deposit back. If you fail to complete your goal by the
-                      deadline, your deposit is donated to the cause you picked
-                      prior.
+                      you do, send us the proof so we can verify it. If you fail to complete your goal by the
+                      deadline, you are charged the penalty and it is donated to the cause you picked.
                     </Typography>
                   </Box>
                 </Box>
@@ -194,7 +192,7 @@ function HowItWorks(props) {
                       means losing a significant amount of your hard-earned
                       money. Worse yet, that money being donated to a cause you
                       HATE. By choosing an anti-charity as the potential
-                      beneficiary of your deposit you can generate even more
+                      beneficiary of your penalty, you can generate even more
                       motivation to not quit. Do you really want your money
                       going to [Insert Political Party]'s coffers? No? Then you
                       better get to work.
