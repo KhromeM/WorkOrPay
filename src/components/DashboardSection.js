@@ -86,9 +86,9 @@ function DashboardSection(props) {
           className={classes.backdrop}
           BackdropProps={{ style: { backgroundColor: "#cccccc" } }}
           open={open}
-          onClick={() => {
-            setOpen(false);
-          }}
+          // onClick={() => {
+          //   setOpen(false);
+          // }}
         >
           <Grid style={{ textAlign: "center" }} item={true} xs={12} md={12}>
             <div
