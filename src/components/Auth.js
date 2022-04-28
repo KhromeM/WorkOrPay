@@ -9,8 +9,10 @@ function Auth(props) {
   const router = useRouter();
   const [formAlert, setFormAlert] = useState(null);
 
-  const handleAuth = (user) => {
-    router.push(props.afterAuthPath);
+  const handleAuth = (user, newUser) => {
+    console.log(newUser);
+    if (newUser != "signup") router.push(props.afterAuthPath);
+    if (newUser == "signup") router.push("/dashboard?newuser=true");
   };
 
   const handleFormAlert = (data) => {
