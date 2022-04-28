@@ -516,6 +516,9 @@ function ContractGenerate() {
                 marginBottom: "5vh",
               }}
             />{" "}
+
+            {(type === 'f') ? 
+            <> 
             <Grid item={true} xs={12} md={12}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
@@ -731,7 +734,82 @@ function ContractGenerate() {
                   to send your money to.
                 </option>
               </TextField>
-            </Grid>
+            </Grid> </>
+            :
+            // social contract 
+            <div>
+                 <Grid item={true} xs={12}>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginBottom: "9px",
+                      marginTop: "15px",
+                    }}
+                  >
+                    <div style={{ fontSize: "17px" }}>
+                      <strong>
+                        What message should we post/send?
+                      </strong>
+                      <br/> <br/>
+                    </div>
+                    Choose the message we will text or post. It should state your goal and the fact you failed
+                    to reach it.<br/> <br/>
+                  </div>
+                  <TextField
+                    variant="outlined"
+                    type="text"
+                    label="Example: Jack failed to run one mile every other day even after making a serious commitment to do so."
+                    name="sMessage"
+                    multiline={true}
+                    InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                    rows={5}
+                    error={errors.verificationmethod ? true : false}
+                    helperText={
+                      errors.verificationmethod && errors.verificationmethod.message
+                    }
+                    fullWidth={true}
+                    inputRef={register({})}
+                  />
+                </Grid>
+
+                <Grid item={true} xs={12}>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginBottom: "9px",
+                      marginTop: "15px",
+                    }}
+                  >
+                    <div style={{ fontSize: "17px" }}>
+                      <strong>
+                        If you fail, where should we share it?
+                      </strong>
+                      <br/> <br/>
+                    </div>
+                    Choose the message we will text or post. It should state your goal and the fact you failed
+                    to reach it.<br/> <br/>
+                  </div>
+                  <TextField
+                    variant="outlined"
+                    type="text"
+                    label="Example: Jack failed to run one mile every other day even after making a serious commitment to do so."
+                    name="sPlatform"
+                    multiline={true}
+                    InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                    rows={5}
+                    error={errors.verificationmethod ? true : false}
+                    helperText={
+                      errors.verificationmethod && errors.verificationmethod.message
+                    }
+                    fullWidth={true}
+                    inputRef={register({})}
+                  />
+                </Grid>
+
+
+            </div>
+
+            }
             <Grid item={true} xs={12}></Grid> <br/> <br/>
             
 
