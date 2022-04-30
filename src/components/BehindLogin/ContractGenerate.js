@@ -8,8 +8,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../util/auth";
 import { ReactComponent as InfoIcon } from "../../resources/infoicon.svg";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 import {
+  Card,
+  CardContent,
   Container,
   Divider,
   FormControl,
@@ -133,12 +136,11 @@ function ContractGenerate() {
     } else {
       hasContract = auth.user.hasContract;
     }
-    
-    if (type==='s'){
-      data.name = 'social'
-    }
-    else {
-      data.name ='financial'
+
+    if (type === "s") {
+      data.name = "social";
+    } else {
+      data.name = "financial";
     }
 
     if (
@@ -324,14 +326,15 @@ function ContractGenerate() {
         {type === "f" ? (
           <>
             <Grid item={true} xs={12} md={12}>
+              <br />
+              <br />
+              <br />
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="dollars"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h2 style={{ paddingTop: "5px" }}>
-                    Financial Penalty <span style={{ color: "red" }}>*</span>
-                  </h2>
+                  <h1 style={{ paddingTop: "5px" }}>Financial Penalty</h1>
                 </div>
                 <br /> <br />
               </InputLabel>
@@ -345,11 +348,6 @@ function ContractGenerate() {
               >
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
                   <h2 style={{ marginBottom: "11px" }}>Dollar Amount </h2>
-                  <div style={{ fontSize: "16px" }}>
-                    This is the amount of money you put on the line in your
-                    contract. If you fail reach your goal by the deadline, the
-                    money will be donated to your chosen beneficiary below.{" "}
-                  </div>
                 </div>
               </InputLabel>
               <TextField
@@ -357,6 +355,7 @@ function ContractGenerate() {
                 fullWidth
                 select
                 variant="outlined"
+                style={{ marginBottom: "15px" }}
                 SelectProps={{
                   native: true,
                 }}
@@ -391,6 +390,13 @@ function ContractGenerate() {
                 <option value={500}>500</option>
                 <option value={1000}>1000</option>
               </TextField>
+              <Alert severity="info">
+                <div style={{ fontSize: "16px" }}>
+                  This is the amount of money you put on the line in your
+                  contract. If you fail reach your goal by the deadline, the
+                  money will be donated to your chosen beneficiary below.{" "}
+                </div>
+              </Alert>
               <br /> <br /> <br />
               <br /> <br /> <br />
               {/* <h2 style={{ textAlign: "center" }}>When will you be charged?</h2>
@@ -501,20 +507,11 @@ function ContractGenerate() {
                 id="beneficiary"
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px", marginBottom: "3px" }}>
+                  <h2 style={{ paddingTop: "5px", marginBottom: "3px" }}>
                     Beneficiary of Donation{" "}
                     <span style={{ color: "red" }}>*</span>
-                  </h3>
+                  </h2>
                 </div>{" "}
-                <br />
-                <div style={{ fontSize: "16px" }}>
-                  This is where your deposit is sent if you fail to reach your
-                  goal by the deadline. Choose a charity if you want your money
-                  going to a good cause. Or choose an{" "}
-                  <strong>anti-charity</strong>, a cause you hate, to further
-                  motivate yourself to not fail.
-                </div>
-                <br />
               </InputLabel>
               <TextField
                 // value={minutes}
@@ -525,6 +522,7 @@ function ContractGenerate() {
                 SelectProps={{
                   native: true,
                 }}
+                style={{ marginBottom: "15px" }}
                 InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
                 InputProps={{
                   inputProps: {
@@ -574,11 +572,23 @@ function ContractGenerate() {
                   to send your money to.
                 </option>
               </TextField>
+              <Alert severity="info">
+                <div style={{ fontSize: "16px" }}>
+                  This is where your deposit is sent if you fail to reach your
+                  goal by the deadline. Choose a charity if you want your money
+                  going to a good cause. Or choose an{" "}
+                  <strong>anti-charity</strong>, a cause you hate, to further
+                  motivate yourself to not fail.
+                </div>
+              </Alert>
             </Grid>{" "}
           </>
         ) : (
           // social contract 1111
           <div>
+            <br />
+            <br />
+            <br />
             <Grid item={true} xs={12}>
               {/* <div
                 style={{
@@ -597,14 +607,12 @@ function ContractGenerate() {
               </div> */}
               <InputLabel style={{ textAlign: "center", marginBottom: "10px" }}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h2 style={{ paddingTop: "5px" }}>
-                    Social Penalty <span style={{ color: "red" }}>*</span>
-                  </h2>
+                  <h1 style={{ paddingTop: "5px" }}>Social Penalty</h1>
                 </div>
-                <div style={{ fontSize: "16px" }}>
+                {/* <div style={{ fontSize: "16px" }}>
                   Choose the message we will text or post. It should state your
                   goal and the fact you failed to reach it.{" "}
-                </div>
+                </div> */}
                 <br /> <br />
               </InputLabel>
             </Grid>
@@ -638,6 +646,7 @@ function ContractGenerate() {
                 SelectProps={{
                   native: true,
                 }}
+                style={{ marginBottom: "15px" }}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
                   inputProps: {
@@ -667,7 +676,19 @@ function ContractGenerate() {
                 <option value={"fb"}>Facebook</option>
                 <option value={"text"}>Text a specific person </option>
               </TextField>
+              <Alert severity="info">
+                <div style={{ fontSize: "16px" }}>
+                  This is the way that we will create a post and tag you on. If
+                  you fail reach your goal by the deadline, the post will go
+                  live. If you do achieve your goal, you can decide to allow us
+                  to make a post to inform your friends that you succeeded or
+                  you can opt out and we won't make a post.{" "}
+                </div>
+              </Alert>
             </Grid>
+            <br />
+            <br />
+            <br />
             <br />
             <br />
 
@@ -715,6 +736,9 @@ function ContractGenerate() {
               />
               <br />
               <br />
+              <br />
+              <br />
+              <br />
               {/* <h2 style={{ textAlign: "center" }}>Extra Request</h2> */}
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "15px" }}
@@ -748,6 +772,9 @@ function ContractGenerate() {
         )}
         <br />
         <br />
+        <br />
+        <br />
+        <br />
         <Divider
           style={{
             width: "100%",
@@ -755,8 +782,23 @@ function ContractGenerate() {
             marginBottom: "4vh",
           }}
         />
-        <br /> <br />
         <form>
+          <Card
+            style={{
+              textAlign: "center",
+              marginBottom: "3vh",
+              paddingBottom: "8px",
+            }}
+          >
+            <CardContent style={{ paddingBottom: "2px", marginBottom: "10px" }}>
+              {" "}
+              <span style={{ fontSize: "20px" }}>
+                Just a few more details... You're almost done.
+              </span>{" "}
+            </CardContent>
+            <KeyboardDoubleArrowDownIcon />
+          </Card>
+          <br /> <br />
           <Grid justifyContent="center" container={true} spacing={2}>
             {true && (
               <Grid item={true} xs={12} md={6}>
@@ -798,7 +840,10 @@ function ContractGenerate() {
               }}
             />
             <Grid item={true} xs={12}>
-              <div
+              <br />
+              <br />
+              <br />
+              {/* <div
                 style={{
                   textAlign: "center",
                   marginBottom: "3px",
@@ -811,7 +856,17 @@ function ContractGenerate() {
                   </strong>
                 </div>
                 (The thing that you want to accomplish with us.)
-              </div>
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Your Goal <span style={{ color: "red" }}>*</span>{" "}
+                  </h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  (The thing that you want to accomplish with us.)
+                </div>
+              </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
@@ -827,9 +882,14 @@ function ContractGenerate() {
                   required: "Please enter your goal",
                 })}
               />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </Grid>
             <Grid item={true} xs={12} md={12}>
-              <InputLabel
+              {/* <InputLabel
                 style={{ marginBottom: "10px", textAlign: "center" }}
                 id="days"
               >
@@ -844,9 +904,23 @@ function ContractGenerate() {
                   procrastinate. The countdown starts as soon as you submit the
                   contract!
                 </div>
+
+                
+              </InputLabel> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Days Until Deadline <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  This is how many days you have to complete your goal. Make
+                  sure to give yourself adequate time, but not enough for you to
+                  procrastinate. The countdown starts as soon as you submit the
+                  contract!
+                </div>
               </InputLabel>
 
-              <br />
               <TextField
                 variant="outlined"
                 // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
@@ -874,10 +948,15 @@ function ContractGenerate() {
                   },
                 })}
               />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </Grid>
             {/* <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
-              <div
+              {/* <div
                 style={{
                   textAlign: "center",
                   marginBottom: "3px",
@@ -893,7 +972,21 @@ function ContractGenerate() {
                 We're going to try to contact you regularly (daily or every few
                 days) <strong>in the midst of your contract period.</strong>{" "}
                 Include your number or profile link or email.
-              </div>
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Preferred Contact Method{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  We're going to try to contact you regularly (daily or every
+                  few days){" "}
+                  <strong>in the midst of your contract period.</strong> Include
+                  your number or profile link or email.
+                </div>
+              </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
@@ -911,18 +1004,20 @@ function ContractGenerate() {
               />
             </Grid>
             <Grid item={true} xs={12} md={12}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "5px",
-                  fontSize: "16px",
-                }}
-              >
-                <strong>
-                  How often do you want to be contacted?{" "}
-                  <span style={{ color: "red" }}>*</span>
-                </strong>
-              </div>
+              <InputLabel style={{ textAlign: "center", marginBottom: "10px" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "5px",
+                    fontSize: "16px",
+                  }}
+                >
+                  <strong>
+                    How often do you want to be contacted?{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </strong>
+                </div>
+              </InputLabel>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -963,17 +1058,16 @@ function ContractGenerate() {
                 <option value={"everythreedays"}>Every 3 Days</option>
                 <option value={"weekly"}>Weekly </option>
               </TextField>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{
-                width: "100%",
-                marginTop: "5vh",
-                marginBottom: "5vh",
-              }}
-            />{" "}
             <Grid item={true} xs={12}>
-              <div
+              {/* <div
                 style={{
                   textAlign: "center",
                   marginBottom: "9px",
@@ -987,7 +1081,25 @@ function ContractGenerate() {
                 <strong>the end of your deadline</strong>. (Don't worry if
                 you're not sure right now, skip this and we will contact you
                 later and make a plan!)
-              </div>
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "5px",
+                    fontSize: "16px",
+                  }}
+                >
+                  <h2 style={{ marginBottom: "6px" }}>
+                    <strong>Suggest A Verification Method (Optional)</strong>
+                  </h2>
+
+                  <div style={{ fontSize: "16px" }}>
+                    How you would like us to verify that you reached your goal
+                    at <strong>the end of your deadline</strong>.
+                  </div>
+                </div>
+              </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
@@ -1004,10 +1116,12 @@ function ContractGenerate() {
                 inputRef={register({})}
               />
             </Grid>
+            <Alert severity="info">
+              (Don't worry if you're not sure how to fill out this last question
+              right now, you can skip this and we will contact you later and
+              make a plan!)
+            </Alert>
             <Grid item={true} xs={12}></Grid>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <i>Continue below...</i>
-            </div>
             <Divider
               style={{
                 width: "100%",
@@ -1015,7 +1129,7 @@ function ContractGenerate() {
                 marginBottom: "5vh",
               }}
             />{" "}
-            <Grid item={true} xs={12}></Grid> <br /> <br />
+            <Grid item={true} xs={12}></Grid>
             <Grid style={{ textAlign: "center" }} item={true} xs={12}>
               <Button
                 variant="contained"
@@ -1033,6 +1147,13 @@ function ContractGenerate() {
             <Grid item={true} xs={12}></Grid>
           </Grid>
         </form>
+        <Divider
+          style={{
+            width: "100%",
+            marginTop: "6vh",
+            marginBottom: "2vh",
+          }}
+        />{" "}
       </Container>
     </>
   );

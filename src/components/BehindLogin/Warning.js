@@ -68,15 +68,16 @@ export default function Warning({ warning }) {
   }
   if (warning === "deferred") {
     output = (
-      <Card>
-        <CardContent>
-          <div style={{ fontSize: "14px", textAlign: "center" }}>
-            <strong>
-              You are only charged if you miss your goal and incur a penalty
-            </strong>
-          </div>
-        </CardContent>
-      </Card>
+      <Alert severity="success">
+        <div style={{ fontSize: "14px", textAlign: "center" }}>
+          You are only charged if you{" "}
+          <strong>
+            <u>miss your goal</u>{" "}
+          </strong>{" "}
+          and therefore incur a penalty. <br />
+          No deposit needed.
+        </div>
+      </Alert>
     );
   }
   if (warning === "charged") {
