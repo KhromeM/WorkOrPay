@@ -66,7 +66,7 @@ function FaqSection(props) {
       answer:
         "A financial penalty lets you put your money where your mouth is. Choose a maximum penalty from $25-$1000. If you achieve your goal before the deadline, you do not lose any money. However, if you fail to do so, we will charge you a penalty and send the money to the charity you picked in your contract.",
       answer2:
-        "We do not profit from you failing. All the money it is donated to the cause you picked.",
+        "We do not profit from your failure. All financial penalties are donated to the cause you picked.",
     },
     // {
     //   question: "Why can't you deduct financial penalties only after I fail?",
@@ -86,7 +86,7 @@ function FaqSection(props) {
       question: "What are social penalties?",
       disclaimer: false,
       answer:
-        "Social penalties let you use your fear of embarassment to motivate you. If you fail, we message people or tag you in a post on social media. Don't want to disappoint your friends and family? Well then you better reach your goals!",
+        "Social penalties let you use your fear of embarrassment to motivate you. If you fail, we message people or tag you in a post on social media. Don't want to disappoint your friends and family? Well, then you better reach your goals!",
     },
     {
       question: "How are daily check-ups done?",

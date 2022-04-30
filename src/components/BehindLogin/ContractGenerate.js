@@ -296,12 +296,12 @@ function ContractGenerate() {
               <p>
                 When you make a social contract you add us on the social media you choose (does not apply if you choose text). 
                 If you fail, we make a post revealing your goal and the fact you failed and tag you. This exposes your failure
-                to friends and family. <strong>Embarassing! </strong>
+                to friends and family. <strong>Embarrassing ! </strong>
               </p>
 
               <strong>
                 Don't want to disappoint your friends and family?
-                <br /> Well then you better reach your goals!
+                <br /> Well, then you better reach your goals!
               </strong>
             </div>
           ) : (
@@ -314,7 +314,7 @@ function ContractGenerate() {
 
               <strong>
                 Don't want to lose your money?
-                <br /> Well then you better reach your goals!
+                <br /> Well, then you better reach your goals!
               </strong>
             </div>
           )}
@@ -391,7 +391,7 @@ function ContractGenerate() {
               <Alert severity="info">
                 <div style={{ fontSize: "16px" }}>
                   This is the amount of money you put on the line in your
-                  contract. If you fail reach your goal by the deadline, the
+                  contract. If you fail to reach your goal by the deadline, the
                   money will be donated to your chosen beneficiary below.{" "}
                 </div>
               </Alert>
@@ -680,11 +680,11 @@ function ContractGenerate() {
               </TextField>
               <Alert severity="info">
                 <div style={{ fontSize: "16px" }}>
-                  This is the way that we will create a post and tag you in it.
-                  If you fail reach your goal by the deadline, the post will go
-                  live. If you do achieve your goal, you can decide to allow us
-                  to make a post to inform your friends that you succeeded or
-                  you can opt out and we won't make a post.{" "}
+                  This is where we will post and tag you.
+                  If you fail to reach your goal by the deadline, the post will go
+                  live. If you achieve your goal, you can allow us
+                  to make a post that you succeeded or
+                  you can opt-out. 
                 </div>
               </Alert>
             </Grid>

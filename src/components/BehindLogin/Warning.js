@@ -13,17 +13,17 @@ export default function Warning({ warning }) {
           <p>
             {" "}
             Instead of being charged the whole penalty as soon as you fail. You
-            are charged a percentage of it twice proportional to how much you
-            missed you goal by.{" "}
+            are charged a percentage of it proportional to how much you
+            missed your goal.{" "}
           </p>{" "}
           <br />
           <strong>Recommendation:</strong> <br />
           <p>
             {" "}
-            Choose progressive penalties for habit forming and lifestyle
+            Choose progressive penalties for habit-forming and lifestyle
             changes. <br />
             When you are forming a habit such as going to the gym every day or
-            switching to a new diet, its hard to stay perfect. Choosing
+            switching to a new diet, it's hard to stay perfect. Choosing
             progressive penalties lets you miss a day, but at a cost. It also
             encourages you to get back on track ASAP before you lose even more
             money.
@@ -31,7 +31,7 @@ export default function Warning({ warning }) {
           <p>
             Example: You form a contract to run every day for 10 days or lose
             $100. Sadly, you miss one day of running. Instead of losing the
-            whole $100, you only lose $20. <em> (1/10 * 2 * $100).</em>{" "}
+            whole $100, you only lose $10. <em> (1/10 * $100).</em>{" "}
           </p>
         </div>
       </Alert>
@@ -47,19 +47,18 @@ export default function Warning({ warning }) {
             You are charged the whole penalty even if you miss your goal by a
             tiny bit.
           </p>{" "}
-          <br /> <br />
           <strong>Recommendation:</strong> <br />
           <p>
             {" "}
-            Choose static penalties for one off goals such as: Launching your
+            Choose static penalties for one-off goals such as: Launching your
             website. Starting a youtube channel. Enrolling in a class. <br />
-            For these goals the difference between almost doing it and acctually
+            For these goals the difference between almost doing it and actually
             doing it is huge. By choosing a static penalty, you force yourself
             to take the final step.
           </p>
           <p>
             Example: You form a contract to launch your website in 10 days or
-            lose $100. Sadly, you only finish 95% of the work, and do not
+            lose $100. Sadly, you only finish 95% of the work and do not
             launch. You are charged the entire penalty.{" "}
           </p>
         </div>

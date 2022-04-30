@@ -94,7 +94,7 @@ function HowItWorks(props) {
 
                       <br/> <br/>
                       <strong>Social Contracts: </strong>
-                      Send us a link to your social media and add us. If you happen to fail, we will make a post about your failure 
+                      Send us a link to your social media and add us. If you don't reach your goal, we will make a post about your failure 
                       and tag you so your friends and family can see.
                     </Typography>
                   </Box>
