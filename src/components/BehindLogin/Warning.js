@@ -9,13 +9,13 @@ export default function Warning({warning}) {
             <strong>Progressive Penalties:</strong> <br/>
                 <p> Instead of being charged the whole penalty
                     as soon as you fail. You are charged a percentage of it twice proportional to 
-                    how much you missed you goal by. </p> <br/> <br/>
+                    how much you missed you goal by. </p> <br/> 
 
             <strong>Recommendation:</strong> <br/>
                 <p> Choose progressive penalties for habit forming and lifestyle changes. <br/>
                     When you are forming a habit such as going to the gym every day or switching to a new diet, its hard to
                     stay perfect. Choosing progressive penalties lets you miss a day, but at a cost.
-                    It also encourages you to get back on track ASAP before you lose even more money.</p> <br/> <br/>
+                    It also encourages you to get back on track ASAP before you lose even more money.</p> 
 
             <p>Example: You form a contract to run every day for 10 days or lose $100.
                 Sadly, you miss one day of running. Instead of losing the whole $100, you only lose $20. <em> (1/10 * 2 * $100).</em> </p>
@@ -31,7 +31,7 @@ export default function Warning({warning}) {
         <strong>Recommendation:</strong> <br/>
             <p> Choose static penalties for one off goals such as: Luanching your website. Starting a youtube channel. Enrolling in a class. <br/>
                 For these goals the difference between almost doing it and acctually doing it is huge. By choosing a static penalty,
-                you force yourself to take the final step.</p> <br/> <br/>
+                you force yourself to take the final step.</p> 
 
         <p>Example: You form a contract to launch your website in 10 days or lose $100.
             Sadly, you only finish 95% of the work, and do not launch. You are charged the entire penalty. </p>
@@ -53,14 +53,14 @@ export default function Warning({warning}) {
         output = (
         <div style={{ fontSize: "14px", lineHeight: 1.3 }}>
             <div style={{ color: "red" }}>
-            Payment Processors Transaction Processing Fees: 3% with
-            credit card. 1% with bank.
-            </div>{" "}
+            <p><strong>Payment processing fees are deducted from your deposit.</strong></p> 
+            <p>
+                Transaction Processing Fees: 3% with
+                credit card. 1% with bank.
+                Extra 2% for outside US.
+            </p>
+            </div>
             <strong>
-            {" "}
-            Deposit <u>$100 with credit card</u>, get back <u>$97.00</u>
-            . <br /> Deposit <u>$100 with bank transfer</u>, get back{" "}
-            <u>$99.20</u>. <br />
             We do not profit from this.
             </strong>
         </div>
