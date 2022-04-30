@@ -33,6 +33,7 @@ import { history } from "./router";
 import PageLoader from "./../components/PageLoader";
 import { getFriendlyPlanId } from "./prices";
 import analytics from "./analytics";
+import { serverTimestamp } from "firebase/firestore";
 
 // Whether to merge extra user data from database into `auth.user`
 const MERGE_DB_USER = true;
@@ -82,7 +83,10 @@ function useAuthProvider() {
 
     // Create the user in the database if they are new
     if (isNewUser) {
-      await createUser(user.uid, { email: user.email });
+      await createUser(user.uid, {
+        email: user.email,
+        createdAt: serverTimestamp(),
+      });
       // Send email verification if enabled
       if (EMAIL_VERIFICATION) {
         sendEmailVerification(auth.currentUser);
