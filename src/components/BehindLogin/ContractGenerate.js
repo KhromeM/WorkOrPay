@@ -25,19 +25,15 @@ import { createContract as createItem, updateUser } from "../../util/db";
 import { useHistory } from "../../util/router";
 import Warning from "./Warning";
 
-
-
 function ContractGenerate() {
-
-  const [type, setType] = useState('f') // f = financial s = social
+  const [type, setType] = useState("f"); // f = financial s = social
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
-  const [warning, setWarning] = useState('deferred')
-  const [warning2, setWarning2] = useState('progressive')
+  const [warning, setWarning] = useState("deferred");
+  const [warning2, setWarning2] = useState("progressive");
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
   const auth = useAuth();
-
 
   if (!auth.user || auth.user.planIsActive == false) {
     return (
@@ -67,34 +63,35 @@ function ContractGenerate() {
     );
   }
 
-  if (auth.user.planId === 'beginner' && auth.user.hasContract >=1) {
-    return(
+  if (auth.user.planId === "beginner" && auth.user.hasContract >= 1) {
+    return (
       <div
-      style={{
-        marginTop: "30vh",
-        marginRight: "10vh",
-        marginLeft: "10vh",
-        marginBottom: "30vh",
-        textAlign: "center",
-        fontSize: "30px",
-      }}
-    >
-      <h3>Pressure Plan Limit: 1 Contract at a time </h3>
-      You currently have 1 contract that is already valid. If you have completed it, please submit for verification and 
-      wait untill an admin refreshes your account. Contact us by email or chat if you
-      believe this message is an error.
-      <br />
-      <Button
-        variant="filled"
-        style={{ backgroundColor: "gray", marginTop: "20px" }}
-        onClick={() => {
-          history.push("/");
+        style={{
+          marginTop: "30vh",
+          marginRight: "10vh",
+          marginLeft: "10vh",
+          marginBottom: "30vh",
+          textAlign: "center",
+          fontSize: "30px",
         }}
       >
-        Home{" "}
-      </Button>
-    </div>
-    )
+        <h3>Pressure Plan Limit: 1 Contract at a time </h3>
+        You currently have 1 contract that is already valid. If you have
+        completed it, please submit for verification and wait untill an admin
+        refreshes your account. Contact us by email or chat if you believe this
+        message is an error.
+        <br />
+        <Button
+          variant="filled"
+          style={{ backgroundColor: "gray", marginTop: "20px" }}
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          Home{" "}
+        </Button>
+      </div>
+    );
   }
 
   if (auth.user.hasContract >= 3) {
@@ -109,9 +106,10 @@ function ContractGenerate() {
           fontSize: "30px",
         }}
       >
-        You currently have 3 contracts that are already valid. If you have completed one, please submit for verification and 
-        wait untill an admin refreshes your account. Contact us by email or chat if you
-        believe this message is an error.
+        You currently have 3 contracts that are already valid. If you have
+        completed one, please submit for verification and wait untill an admin
+        refreshes your account. Contact us by email or chat if you believe this
+        message is an error.
         <br />
         <Button
           variant="filled"
@@ -129,15 +127,20 @@ function ContractGenerate() {
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
-    let hasContract
+    let hasContract;
     if (!auth.user.hasContract) {
-      hasContract = 0
+      hasContract = 0;
     } else {
-      hasContract = auth.user.hasContract}
- 
+      hasContract = auth.user.hasContract;
+    }
+
     data.name = "default";
-    
-    if (data.dollars === "0" || data.contractPayment ==='deferred' || type==='s') {
+
+    if (
+      data.dollars === "0" ||
+      data.contractPayment === "deferred" ||
+      type === "s"
+    ) {
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
           // Clear form
@@ -145,7 +148,8 @@ function ContractGenerate() {
           // Show success alert message
           setFormAlert({
             type: "success",
-            message: "Your contract has been created! Get ready to achieve your goals!"
+            message:
+              "Your contract has been created! Get ready to achieve your goals!",
           });
           fetch(
             "https://v1.nocodeapi.com/envariable/google_sheets/ovhdVhojdGjnmUuz?tabId=Sheet1",
@@ -170,7 +174,7 @@ function ContractGenerate() {
           setTimeout(() => {
             history.push("/dashboard");
             updateUser(auth.user.uid, {
-              hasContract: hasContract+1,
+              hasContract: hasContract + 1,
             });
           }, 1000);
         })
@@ -213,12 +217,11 @@ function ContractGenerate() {
         })
         .finally(() => {
           updateUser(auth.user.uid, {
-            hasContract: hasContract+1,
+            hasContract: hasContract + 1,
           });
           // Hide pending indicator
           setPending(false);
         });
-
   };
 
   if (formAlert)
@@ -247,11 +250,11 @@ function ContractGenerate() {
       <Container maxWidth="sm" style={{ paddingTop: "30px" }}>
         <SectionHeader
           title="Generate your contract"
-          subtitle={(type==='f'? ('Financial Contract') : ('Social Contract'))}
+          subtitle={type === "f" ? "Financial Contract" : "Social Contract"}
           size={4}
           contractcolors={true}
-          money={type == 'f' ? "true" : 'false'}
-          rainbow={type == 's' ? "true" : 'false'}
+          money={type == "f" ? "true" : "false"}
+          rainbow={type == "s" ? "true" : "false"}
           textAlign="center"
         />
         {formAlert && (
@@ -262,21 +265,24 @@ function ContractGenerate() {
             </Alert>
           </Box>
         )}
-
         <Grid style={{ textAlign: "center" }} item={true} xs={12}>
           <Button
             variant="contained"
             color="primary"
             size="large"
             type="submit"
-            onClick={()=> {(type==='s') ? (setType('f')) : (setType('s')) }}
+            onClick={() => {
+              type === "s" ? setType("f") : setType("s");
+            }}
           >
-            {!pending && <span>{`Make A ${(type==='s'? ('Financial Contract') : ('Social Contract'))} Instead`}</span>}
-
+            {!pending && (
+              <span>{`Make A ${
+                type === "s" ? "Financial Contract" : "Social Contract"
+              } Instead`}</span>
+            )}
           </Button>
         </Grid>
-        <br/> <br/>
-   
+        <br /> <br />
         <form>
           <Grid justifyContent="center" container={true} spacing={2}>
             {true && (
@@ -349,7 +355,6 @@ function ContractGenerate() {
                 })}
               />
             </Grid>
-
             <Grid item={true} xs={12} md={12}>
               <InputLabel
                 style={{ marginBottom: "10px", textAlign: "center" }}
@@ -359,7 +364,6 @@ function ContractGenerate() {
                   <h3 style={{ paddingTop: "5px" }}>
                     Days Until Deadline <span style={{ color: "red" }}>*</span>
                   </h3>
-
                 </div>
                 <div style={{ fontSize: "16px" }}>
                   This is how many days you have to complete your goal. Make
@@ -398,7 +402,6 @@ function ContractGenerate() {
                 })}
               />
             </Grid>
-
             {/* <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
               <div
@@ -505,13 +508,12 @@ function ContractGenerate() {
                 }}
               >
                 <div style={{ fontSize: "17px" }}>
-                  <strong>
-                    Suggest A Verification Method (Optional)
-                  </strong>
+                  <strong>Suggest A Verification Method (Optional)</strong>
                 </div>
                 How we would verify that you reached your goal at{" "}
                 <strong>the end of your deadline</strong>. (Don't worry if
-                you're not sure right now, skip this and we will contact you later and make a plan!)
+                you're not sure right now, skip this and we will contact you
+                later and make a plan!)
               </div>
               <TextField
                 variant="outlined"
@@ -533,36 +535,42 @@ function ContractGenerate() {
             <div style={{ display: "flex", flexDirection: "column" }}>
               <i>Continue below...</i>
             </div>
-
-            <div>
-                <h3>What are {type === 's' ? 'social' : 'financial'} contracts?</h3>
-                {type === 's' ? 
+            <div style={{ textAlign: "center" }}>
+              <h2>
+                What are {type === "s" ? "social" : "financial"} contracts?
+              </h2>
+              {type === "s" ? (
                 <div>
                   <p>
-                    Social contracts motivate you using peer pressure. When you make a social contract we post on the platform you choose
-                    and tag you in it. In the post we lay out your goals and the deadline. Once you either achieve your goal or fail, we 
-                    make a follow up post announcing the result. 
+                    Social contracts motivate you using peer pressure. When you
+                    make a social contract we post on the platform you choose
+                    and tag you in it. In the post we lay out your goals and the
+                    deadline. Once you either achieve your goal or fail, we make
+                    a follow up post announcing the result.
                   </p>
-                  
-                  <p>
-                    Don't want to disappoint your friends and family? Well then you had better reach your goals!
-                  </p> 
-                </div> :
+
+                  <strong>
+                    Don't want to disappoint your friends and family?
+                    <br /> Well then you better reach your goals!
+                  </strong>
+                </div>
+              ) : (
                 <div>
-                <p>
-                  Financial contracts motivate you using peer pressure. When you make a social contract we post on the platform you choose
-                  and tag you in it. In the post we lay out your goals and the deadline. Once you either achieve your goal or fail, we 
-                  make a follow up post announcing the result. 
-                </p>
-                
-                <p>
-                  Don't want to disappoint your friends and family? Well then you had better reach your goals!
-                </p> 
-              </div>}
+                  <p>
+                    Financial contracts motivate you using peer pressure. When
+                    you make a social contract we post on the platform you
+                    choose and tag you in it. In the post we lay out your goals
+                    and the deadline. Once you either achieve your goal or fail,
+                    we make a follow up post announcing the result.
+                  </p>
 
-              </div>
-
-
+                  <strong>
+                    Don't want to disappoint your friends and family?
+                    <br /> Well then you better reach your goals!
+                  </strong>
+                </div>
+              )}
+            </div>
             <Divider
               style={{
                 width: "100%",
@@ -570,229 +578,228 @@ function ContractGenerate() {
                 marginBottom: "5vh",
               }}
             />{" "}
+            {type === "f" ? (
+              <>
+                <Grid item={true} xs={12} md={12}>
+                  <InputLabel
+                    style={{ textAlign: "center", marginBottom: "10px" }}
+                    id="dollars"
+                  >
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <h2 style={{ paddingTop: "5px" }}>
+                        Financial Penalty{" "}
+                        <span style={{ color: "red" }}>*</span>
+                      </h2>
+                    </div>
+                    <div style={{ fontSize: "16px" }}>
+                      This is the amount of money you put on the line in your
+                      contract. If you fail reach your goal by the deadline, the
+                      money will be donated to your chosen beneficiary below.{" "}
+                    </div>
+                    <br /> <br />
+                  </InputLabel>
+                  <h4>Dollar amount</h4>
+                  <TextField
+                    // value={minutes}
+                    fullWidth
+                    select
+                    variant="outlined"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    InputLabelProps={{ fontSize: 50 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      style: { fontSize: 25 },
+                    }}
+                    type="text"
+                    name="dollars"
+                    // label="Daily Minutes"
+                    error={errors?.dollars ? true : false}
+                    helperText={errors?.dollars && errors.dollars.message}
+                    // onChange={(e) => setMinutes(e.target.value)}
+                    inputRef={register({
+                      required: "Please select your financial penalty.",
+                    })}
+                  >
+                    <option selected disabled value="">
+                      Select an option{" "}
+                    </option>
+                    <option value={0}>
+                      0 (You don't want a financial penalty as motivation)
+                    </option>
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                    <option value={150}>150</option>
+                    <option value={250}>250</option>
+                    <option value={500}>500</option>
+                    <option value={1000}>1000</option>
+                  </TextField>
+                  <br /> <br /> <br />
+                  <h4>When will you be charged?</h4>
+                  <TextField
+                    // value={minutes}
+                    fullWidth
+                    select
+                    variant="outlined"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    InputLabelProps={{ fontSize: 50 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      ),
+                      style: { fontSize: 25 },
+                    }}
+                    type="text"
+                    name="contractPayment"
+                    error={errors?.dollars ? true : false}
+                    helperText={errors?.dollars && errors.dollars.message}
+                    onChange={(e) => setWarning(e.target.value)}
+                    inputRef={register({
+                      required:
+                        "Please select when you would like to be charged.",
+                    })}
+                  >
+                    <option selected disabled value="">
+                      Select an option{" "}
+                    </option>
+                    <option value={"deferred"} selected>
+                      No payment until you incur a penalty
+                    </option>
+                    <option value={"charged"}>Make the deposit now</option>
+                  </TextField>
+                  <Warning warning={warning} />
+                  <br /> <br />
+                  <h4>Type of penalty</h4>
+                  <TextField
+                    fullWidth
+                    select
+                    variant="outlined"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    InputLabelProps={{ fontSize: 50 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      ),
+                      style: { fontSize: 25 },
+                    }}
+                    type="text"
+                    onChange={(e) => setWarning2(e.target.value)}
+                    name="finPenType"
+                    error={errors?.dollars ? true : false}
+                    helperText={errors?.dollars && errors.dollars.message}
+                    inputRef={register({
+                      required:
+                        "Please select which penalty structure you want",
+                    })}
+                  >
+                    <option disabled value="">
+                      Select an option{" "}
+                    </option>
+                    <option selected value={"progressive"}>
+                      {" "}
+                      Progressive Penalty
+                    </option>
+                    <option value={"static"}> Static Penalty </option>
+                  </TextField>
+                  <Warning warning={warning2} />
+                </Grid>
+                <Grid item={true} xs={12} md={12}>
+                  <InputLabel
+                    style={{ textAlign: "center", marginBottom: "10px" }}
+                    id="beneficiary"
+                  >
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <h3 style={{ paddingTop: "5px" }}>
+                        Beneficiary of Donation{" "}
+                        <span style={{ color: "red" }}>*</span>
+                      </h3>
+                    </div>{" "}
+                    <br />
+                    <div style={{ fontSize: "16px" }}>
+                      This is where your deposit is sent if you fail to reach
+                      your goal by the deadline. Choose a charity if you want
+                      your money going to a good cause. Or choose an{" "}
+                      <strong>anti-charity</strong>, a cause you hate, to
+                      further motivate yourself to not fail.
+                    </div>
+                    <br />
+                  </InputLabel>
+                  <TextField
+                    // value={minutes}
+                    fullWidth
+                    variant="outlined"
+                    select
+                    size="large"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
+                    InputProps={{
+                      inputProps: {
+                        style: {
+                          height: "20px",
+                          fontSize: "18px",
+                          textAlign: "center",
+                        },
+                      },
+                    }}
+                    type="text"
+                    name="beneficiary"
+                    // label="Daily Minutes"
+                    error={errors?.beneficiary ? true : false}
+                    helperText={
+                      errors?.beneficiary && errors.beneficiary.message
+                    }
+                    // onChange={(e) => setMinutes(e.target.value)}
+                    inputRef={register({
+                      required: "Please choose your beneficiary.",
+                    })}
+                  >
+                    <option selected disabled value="">
+                      Select a beneficiary{" "}
+                    </option>
 
-            {(type === 'f') ? 
-            <> 
-            <Grid item={true} xs={12} md={12}>
-              <InputLabel
-                style={{ textAlign: "center", marginBottom: "10px" }}
-                id="dollars"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h2 style={{ paddingTop: "5px" }}>
-                    Financial Penalty <span style={{ color: "red" }}>*</span>
-                  </h2>
-                </div>
-                <div style={{ fontSize: "16px" }}>
-                  This is the amount of money you put on the line in your
-                  contract. If you fail reach your goal by the deadline, the
-                  money will be donated to your chosen beneficiary below.{" "}
-                </div>
-                <br /> <br />
-
-              </InputLabel>
-              <h4>Dollar amount</h4>
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                variant="outlined"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ fontSize: 50 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                  style: { fontSize: 25 },
-                }}
-                type="text"
-                name="dollars"
-                // label="Daily Minutes"
-                error={errors?.dollars ? true : false}
-                helperText={errors?.dollars && errors.dollars.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please select your financial penalty.",
-                })}
-              >
-                <option selected disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={0}>
-                  0 (You don't want a financial penalty as motivation)
-                </option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-                <option value={150}>150</option>
-                <option value={250}>250</option>
-                <option value={500}>500</option>
-                <option value={1000}>1000</option>
-              </TextField>
-              <br/> <br/> <br/>
-              <h4>When will you be charged?</h4>
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                variant="outlined"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ fontSize: 50 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start"></InputAdornment>
-                  ),
-                  style: { fontSize: 25 },
-                }}
-                type="text"
-                name="contractPayment"
-                error={errors?.dollars ? true : false}
-                helperText={errors?.dollars && errors.dollars.message}
-                onChange={ e => setWarning(e.target.value)}
-
-                inputRef={register({
-                  required: "Please select when you would like to be charged.",
-                })}
-              >
-                <option selected disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={'deferred'} selected>No payment until you incur a penalty</option>
-                <option value={'charged'}>Make the deposit now</option>
-
-              </TextField>
-
-              <Warning warning={warning}/>
-
-              <br/> <br/>
-              <h4>Type of penalty</h4>
-              
-              <TextField
-                fullWidth
-                select
-                variant="outlined"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ fontSize: 50 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start"></InputAdornment>
-                  ),
-                  style: { fontSize: 25 },
-                }}
-                type="text"
-                onChange={e => setWarning2(e.target.value)}
-                name="finPenType"
-                error={errors?.dollars ? true : false}
-                helperText={errors?.dollars && errors.dollars.message}
-                inputRef={register({
-                  required: "Please select which penalty structure you want",
-                })}
-              >
-                <option disabled value="">
-                  Select an option{" "}
-                </option>
-                <option selected value={'progressive'}> Progressive Penalty</option>
-                <option value={'static'}> Static Penalty </option>
-                
-                
-
-              </TextField>
-
-              <Warning warning={warning2}/>
-              
-            </Grid>
-
-
-            <Grid item={true} xs={12} md={12}>
-              <InputLabel
-                style={{ textAlign: "center", marginBottom: "10px" }}
-                id="beneficiary"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>
-                    Beneficiary of Donation{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </h3>
-                </div>{" "}
-                <br />
-                <div style={{ fontSize: "16px" }}>
-                  This is where your deposit is sent if you fail to reach your
-                  goal by the deadline. Choose a charity if you want your money
-                  going to a good cause. Or choose an{" "}
-                  <strong>anti-charity</strong>, a cause you hate, to further
-                  motivate yourself to not fail.
-                </div>
-                <br />
-              </InputLabel>
-              <TextField
-                // value={minutes}
-                fullWidth
-                variant="outlined"
-                select
-                size="large"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
-                InputProps={{
-                  inputProps: {
-                    style: {
-                      height: "20px",
-                      fontSize: "18px",
-                      textAlign: "center",
-                    },
-                  },
-                }}
-                type="text"
-                name="beneficiary"
-                // label="Daily Minutes"
-                error={errors?.beneficiary ? true : false}
-                helperText={errors?.beneficiary && errors.beneficiary.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please choose your beneficiary.",
-                })}
-              >
-                <option selected disabled value="">
-                  Select a beneficiary{" "}
-                </option>
-
-                <option value={"Humanitarian: GiveWell Maximum Impact fund"}>
-                  Humanitarian: GiveWell Maximum Impact fund (Top-rated on
-                  Charitywatch.com){" "}
-                </option>
-                {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
+                    <option
+                      value={"Humanitarian: GiveWell Maximum Impact fund"}
+                    >
+                      Humanitarian: GiveWell Maximum Impact fund (Top-rated on
+                      Charitywatch.com){" "}
+                    </option>
+                    {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
                 <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
                 <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
-                <option value={"Enviromental: The Conservation Fund"}>
-                  Enviromental: The Conservation Fund (Top-rated on
-                  Charitywatch.com)
-                </option>
-                <option value={"Animal Welfare Institute"}>
-                  Animal Welfare Institute (Top-rated on Charitywatch.com)
-                </option>
-                <option value={"The Republican National Party"}>
-                  ANTI-CHARITY: The Republican National Party (RNC)
-                </option>
-                <option value={"The Democratic National Party"}>
-                  ANTI-CHARITY: The Democratic National Party (DNC)
-                </option>
-                <option value={"CustomRequest"}>
-                  OTHER: Send us a message and tell us the cause you would like
-                  to send your money to.
-                </option>
-              </TextField>
-            </Grid> </>
-            :
-            // social contract 1111
-            <div>
-                 <Grid item={true} xs={12}>
+                    <option value={"Enviromental: The Conservation Fund"}>
+                      Enviromental: The Conservation Fund (Top-rated on
+                      Charitywatch.com)
+                    </option>
+                    <option value={"Animal Welfare Institute"}>
+                      Animal Welfare Institute (Top-rated on Charitywatch.com)
+                    </option>
+                    <option value={"The Republican National Party"}>
+                      ANTI-CHARITY: The Republican National Party (RNC)
+                    </option>
+                    <option value={"The Democratic National Party"}>
+                      ANTI-CHARITY: The Democratic National Party (DNC)
+                    </option>
+                    <option value={"CustomRequest"}>
+                      OTHER: Send us a message and tell us the cause you would
+                      like to send your money to.
+                    </option>
+                  </TextField>
+                </Grid>{" "}
+              </>
+            ) : (
+              // social contract 1111
+              <div>
+                <Grid item={true} xs={12}>
                   <div
                     style={{
                       textAlign: "center",
@@ -800,16 +807,13 @@ function ContractGenerate() {
                       marginTop: "15px",
                     }}
                   >
-
-                   
                     <div style={{ fontSize: "17px" }}>
-                      <strong>
-                        What message should we post/send?
-                      </strong>
-                      <br/> <br/>
+                      <strong>What message should we post/send?</strong>
+                      <br /> <br />
                     </div>
-                    Choose the message we will text or post. It should state your goal and the fact you failed
-                    to reach it.<br/> <br/>
+                    Choose the message we will text or post. It should state
+                    your goal and the fact you failed to reach it.
+                    <br /> <br />
                   </div>
                   <TextField
                     variant="outlined"
@@ -821,7 +825,8 @@ function ContractGenerate() {
                     rows={5}
                     error={errors.verificationmethod ? true : false}
                     helperText={
-                      errors.verificationmethod && errors.verificationmethod.message
+                      errors.verificationmethod &&
+                      errors.verificationmethod.message
                     }
                     fullWidth={true}
                     inputRef={register({})}
@@ -829,58 +834,58 @@ function ContractGenerate() {
                 </Grid>
 
                 <Grid item={true} xs={12} md={12}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "5px",
-                  fontSize: "16px",
-                }}
-              >
-                <strong>
-                  Which platform should we post on?{" "}
-                  <span style={{ color: "red" }}>*</span>
-                </strong>
-              </div>
-              <TextField
-                // value={minutes}
-                fullWidth
-                variant="outlined"
-                select
-                size="large"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-                InputProps={{
-                  inputProps: {
-                    style: {
-                      height: "20px",
-                      fontSize: "18px",
+                  <div
+                    style={{
                       textAlign: "center",
-                    },
-                  },
-                }}
-                type="text"
-                name="social_platform"
-                // label="Daily Minutes"
-                error={errors?.contactfrequency ? true : false}
-                helperText={
-                  errors?.contactfrequency && errors.contactfrequency.message
-                }
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please choose the platform.",
-                })}
-              >
-                <option selected disabled value="">
-                  Select platform
-                </option>
+                      marginBottom: "5px",
+                      fontSize: "16px",
+                    }}
+                  >
+                    <strong>
+                      Which platform should we post on?{" "}
+                      <span style={{ color: "red" }}>*</span>
+                    </strong>
+                  </div>
+                  <TextField
+                    // value={minutes}
+                    fullWidth
+                    variant="outlined"
+                    select
+                    size="large"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      inputProps: {
+                        style: {
+                          height: "20px",
+                          fontSize: "18px",
+                          textAlign: "center",
+                        },
+                      },
+                    }}
+                    type="text"
+                    name="social_platform"
+                    // label="Daily Minutes"
+                    error={errors?.contactfrequency ? true : false}
+                    helperText={
+                      errors?.contactfrequency &&
+                      errors.contactfrequency.message
+                    }
+                    // onChange={(e) => setMinutes(e.target.value)}
+                    inputRef={register({
+                      required: "Please choose the platform.",
+                    })}
+                  >
+                    <option selected disabled value="">
+                      Select platform
+                    </option>
 
-                <option value={"fb"}>Facebook</option>
-                <option value={"text"}>Text a specific person </option>
-              </TextField>
-            </Grid>
-
+                    <option value={"fb"}>Facebook</option>
+                    <option value={"text"}>Text a specific person </option>
+                  </TextField>
+                </Grid>
 
                 <Grid item={true} xs={12}>
                   <div
@@ -891,12 +896,12 @@ function ContractGenerate() {
                     }}
                   >
                     <div style={{ fontSize: "17px" }}>
-                      <strong>
-                        Add Required Information:
-                      </strong>
-                      <br/> <br/>
+                      <strong>Add Required Information:</strong>
+                      <br /> <br />
                     </div>
-                    For example the link to your Facebook profile if you choose Facebook, or the phone number we have to text.<br/> <br/>
+                    For example the link to your Facebook profile if you choose
+                    Facebook, or the phone number we have to text.
+                    <br /> <br />
                   </div>
                   <TextField
                     variant="outlined"
@@ -908,20 +913,16 @@ function ContractGenerate() {
                     rows={5}
                     error={errors.verificationmethod ? true : false}
                     helperText={
-                      errors.verificationmethod && errors.verificationmethod.message
+                      errors.verificationmethod &&
+                      errors.verificationmethod.message
                     }
                     fullWidth={true}
                     inputRef={register({})}
                   />
                 </Grid>
-
-
-            </div>
-
-            }
-            <Grid item={true} xs={12}></Grid> <br/> <br/>
-            
-
+              </div>
+            )}
+            <Grid item={true} xs={12}></Grid> <br /> <br />
             <Grid style={{ textAlign: "center" }} item={true} xs={12}>
               <Button
                 variant="contained"
@@ -945,8 +946,3 @@ function ContractGenerate() {
 }
 
 export default ContractGenerate;
-
-
-
-
-

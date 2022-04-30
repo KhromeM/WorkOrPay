@@ -84,7 +84,7 @@ function DashboardSection(props) {
         />
         <Dialog
           className={classes.backdrop}
-          BackdropProps={{ style: { backgroundColor: "#cccccc" } }}
+          // BackdropProps={{ style: { backgroundColor: "#cccccc" } }}
           open={open}
           // onClick={() => {
           //   setOpen(false);
@@ -94,9 +94,9 @@ function DashboardSection(props) {
             <div
               style={{
                 // backgroundColor: "lightgray",
-                paddingTop: "80px",
-                paddingBottom: "50px",
-                margin: "10vw",
+                paddingTop: "20px",
+                paddingBottom: "15px",
+                margin: "7vw",
                 borderRadius: "25px",
               }}
             >
