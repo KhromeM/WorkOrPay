@@ -82,7 +82,7 @@ function useAuthProvider() {
 
     // Create the user in the database if they are new
     if (isNewUser) {
-      await createUser(user.uid, { email: user.email });
+      await createUser(user.uid, { email: user.email,  createdAt: serverTimestamp(), });
       // Send email verification if enabled
       if (EMAIL_VERIFICATION) {
         sendEmailVerification(auth.currentUser);
