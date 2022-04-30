@@ -6,7 +6,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
-import contact from "../../util/contact";
 import { useAuth } from "../../util/auth";
 import { ReactComponent as InfoIcon } from "../../resources/infoicon.svg";
 
@@ -66,6 +65,36 @@ function ContractGenerate() {
         </div>
       </>
     );
+  }
+
+  if (auth.user.planId === 'beginner' && auth.user.hasContract >=1) {
+    return(
+      <div
+      style={{
+        marginTop: "30vh",
+        marginRight: "10vh",
+        marginLeft: "10vh",
+        marginBottom: "30vh",
+        textAlign: "center",
+        fontSize: "30px",
+      }}
+    >
+      <h3>Pressure Plan Limit: 1 Contract at a time </h3>
+      You currently have 1 contract that is already valid. If you have completed it, please submit for verification and 
+      wait untill an admin refreshes your account. Contact us by email or chat if you
+      believe this message is an error.
+      <br />
+      <Button
+        variant="filled"
+        style={{ backgroundColor: "gray", marginTop: "20px" }}
+        onClick={() => {
+          history.push("/");
+        }}
+      >
+        Home{" "}
+      </Button>
+    </div>
+    )
   }
 
   if (auth.user.hasContract >= 3) {
