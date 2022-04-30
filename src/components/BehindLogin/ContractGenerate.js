@@ -820,7 +820,7 @@ function ContractGenerate() {
                   inputRef={register({
                     required: "Please enter your name",
                   })}
-                  value={auth.user ? auth.user.displayName : ""}
+                  defaultValue={auth.user ? auth.user.displayName : ""}
                 />
               </Grid>
             )}
@@ -836,7 +836,7 @@ function ContractGenerate() {
                 inputRef={register({
                   required: "Please enter your email",
                 })}
-                value={auth.user ? auth.user.email : ""}
+                defaultValue={auth.user ? auth.user.email : ""}
               />
             </Grid>
             <Divider
