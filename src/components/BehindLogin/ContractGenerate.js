@@ -347,7 +347,9 @@ function ContractGenerate() {
                 id="social_message"
               >
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
-                  <h2 style={{ marginBottom: "11px" }}>Dollar Amount </h2>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Dollar Amount <span style={{ color: "red" }}>*</span>
+                  </h2>
                 </div>
               </InputLabel>
               <TextField
@@ -410,6 +412,7 @@ function ContractGenerate() {
                 >
                   <h2 style={{ marginBottom: "11px" }}>
                     When will you be charged?{" "}
+                    <span style={{ color: "red" }}>*</span>{" "}
                   </h2>
                 </div>
               </InputLabel>
@@ -458,7 +461,9 @@ function ContractGenerate() {
                 id="social_message"
               >
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
-                  <h2 style={{ marginBottom: "11px" }}>Type of Penalty </h2>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Type of Penalty <span style={{ color: "red" }}>*</span>
+                  </h2>
                 </div>
               </InputLabel>
               <TextField
@@ -634,6 +639,7 @@ function ContractGenerate() {
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
                   <h2 style={{ marginBottom: "11px" }}>
                     Which platform should we post on?{" "}
+                    <span style={{ color: "red" }}>*</span>{" "}
                   </h2>
                 </div>
               </InputLabel>
@@ -711,7 +717,8 @@ function ContractGenerate() {
               <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
                   <h2 style={{ marginBottom: "11px" }}>
-                    Add Required Information
+                    Add Required Information{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </h2>
                 </div>
                 <div style={{ fontSize: "16px" }}>
@@ -745,7 +752,9 @@ function ContractGenerate() {
                 id="social_message"
               >
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
-                  <h2 style={{ marginBottom: "11px" }}>Extra Request</h2>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Extra Request <span style={{ color: "red" }}>*</span>
+                  </h2>
                 </div>
                 <div style={{ fontSize: "16px" }}>
                   Choose the message we will text or post. It should state your
