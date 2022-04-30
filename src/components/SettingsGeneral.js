@@ -88,7 +88,6 @@ function SettingsGeneral(props) {
 
   return (
     <>
-    <Grid item={true} xs={12} md={6}>
     <Card>
       <CardContent className={classes.cardContent}>
         <Box>
@@ -130,7 +129,6 @@ function SettingsGeneral(props) {
         </Box>
       </CardContent>
     </Card>
-    </Grid>
     <br/>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container={true} spacing={2}>

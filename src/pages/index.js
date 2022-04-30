@@ -43,7 +43,7 @@ function IndexPage(props) {
         bgImage=""
         bgImageOpacity={1}
         title="We do not profit if you fail"
-        subtitle=""
+        subtitle="Our incentives are aligned"
         buttonText="Pricing"
         buttonColor="primary"
         buttonPath="/pricing"
@@ -72,8 +72,7 @@ function IndexPage(props) {
         title="Frequently Asked Questions"
         subtitle=""
       />
-      {
-        <NewsletterSection
+        {/* <NewsletterSection
           bgColor="default"
           size="medium"
           bgImage=""
@@ -84,8 +83,8 @@ function IndexPage(props) {
           buttonColor="primary"
           inputPlaceholder="Enter your email"
           subscribedMessage="You are now subscribed!"
-        />
-      }
+        /> */}
+
       <ScrollToTop />
     </>
   );

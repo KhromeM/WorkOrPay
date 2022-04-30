@@ -140,7 +140,10 @@ export default function Contract({contract}) {
                           </div>
                         </CardContent>
                         {contract.name ==='social' ? 
+
                         <div>
+
+
                         <CardContent>
                           <div>
                             <ListItemText>
@@ -152,6 +155,20 @@ export default function Contract({contract}) {
                             </ListItemText>
                           </div>
                         </CardContent>
+
+                        <CardContent>
+                          <div>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  Platform: {contract.social_platform === 'fb' ? 'Facebook':'Text Message'}
+                                </strong>
+                              </h3>
+                            </ListItemText>
+                          </div>
+                        </CardContent>
+
+
                         </div>
                         :
                         <div>

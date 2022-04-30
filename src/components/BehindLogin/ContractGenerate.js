@@ -294,11 +294,9 @@ function ContractGenerate() {
           {type === "s" ? (
             <div>
               <p>
-                Social contracts motivate you using peer pressure. When you make
-                a social contract we post on the platform you choose and tag you
-                in it. In the post we lay out your goals and the deadline. Once
-                you either achieve your goal or fail, we make a follow up post
-                announcing the result.
+                When you make a social contract you add us on the social media you choose (does not apply if you choose text). 
+                If you fail, we make a post revealing your goal and the fact you failed and tag you. This exposes your failure
+                to friends and family. <strong>Embarassing! </strong>
               </p>
 
               <strong>
@@ -309,15 +307,13 @@ function ContractGenerate() {
           ) : (
             <div>
               <p>
-                Financial contracts motivate you using peer pressure. When you
-                make a social contract we post on the platform you choose and
-                tag you in it. In the post we lay out your goals and the
-                deadline. Once you either achieve your goal or fail, we make a
-                follow up post announcing the result.
+              A financial penalty lets you put your money where your mouth is. Choose a maximum penalty from $25-$1000. 
+              If you achieve your goal before the deadline, you do not lose any money. 
+              However, if you fail to do so, we will charge you a penalty and send the money to the charity you picked in your contract.
               </p>
 
               <strong>
-                Don't want to disappoint your friends and family?
+                Don't want to lose your money?
                 <br /> Well then you better reach your goals!
               </strong>
             </div>
@@ -752,18 +748,17 @@ function ContractGenerate() {
                 id="social_message"
               >
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
-                  <h2 style={{ marginBottom: "11px" }}>Extra Request</h2>
+                  <h2 style={{ marginBottom: "11px" }}>Extra Request (Optional)</h2>
                 </div>
                 <div style={{ fontSize: "16px" }}>
-                  Choose the message we will text or post. It should state your
-                  goal and the fact you failed to reach it.{" "}
+                  Want us to do anything else? Add a custom message to the post? Request it here.{" "}
                 </div>
               </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
-                label="Example: Jack failed to run one mile every other day even after making a serious commitment to do so."
-                name="social_message"
+                label=""
+                name="social_request"
                 multiline={true}
                 InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
                 rows={5}

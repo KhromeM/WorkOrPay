@@ -51,7 +51,7 @@ export default function Warning({ warning }) {
           <strong>Recommendation:</strong> <br />
           <p>
             {" "}
-            Choose static penalties for one off goals such as: Luanching your
+            Choose static penalties for one off goals such as: Launching your
             website. Starting a youtube channel. Enrolling in a class. <br />
             For these goals the difference between almost doing it and acctually
             doing it is huge. By choosing a static penalty, you force yourself
