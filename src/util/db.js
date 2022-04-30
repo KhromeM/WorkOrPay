@@ -18,6 +18,7 @@ import {
   addDoc,
   deleteDoc,
   serverTimestamp,
+  Timestamp,
 } from "firebase/firestore";
 import { firebaseApp } from "./firebase";
 
@@ -242,6 +243,10 @@ export function createContract(data) {
   return addDoc(collection(db, "contracts"), {
     ...data,
     createdAt: serverTimestamp(),
+    dollarsInt: Number(data.dollars),
+    contractDueDate: Timestamp.fromMillis(
+      Timestamp.now().toMillis() + 86400000 * Number(data.days)
+    ),
   });
 }
 
