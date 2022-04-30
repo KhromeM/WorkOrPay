@@ -58,7 +58,7 @@ function FaqSection(props) {
       question: "What are the contracts?",
       disclaimer: false,
       answer:
-        "Contracts are agreements you form that outline the specifics of your goal, the deadline to meet it, and the amount of money you lose if you fail. You also pick the potential recipient of your money in your contract.",
+        "Contracts are agreements you form that outline the specifics of your goal, the deadline to meet it, and the penalty if you fail.",
     },
     {
       question: "What are financial penalties?",
