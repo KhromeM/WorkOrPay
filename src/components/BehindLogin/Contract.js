@@ -69,7 +69,7 @@ export default function Contract({contract}) {
       minutes = "0" + minutes.toString();
     }
 
-    return month[dMonth] + " " + day.toString() + " " + hours + ":" + minutes;
+    return month[dMonth] + " " + day.toString() ;
   }
 
   const data = {
