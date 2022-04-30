@@ -26,6 +26,7 @@ import {
   updatePassword as authUpdatePassword,
   sendPasswordResetEmail as authSendPasswordResetEmail,
   confirmPasswordReset as authConfirmPasswordReset,
+  serverTimestamp,
 } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 import { useUser, createUser, updateUser } from "./db";
