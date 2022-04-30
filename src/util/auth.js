@@ -41,7 +41,7 @@ const EMAIL_VERIFICATION = true;
 // Whether to connect analytics session to `user.uid`
 const ANALYTICS_IDENTIFY = true;
 
-// Initialize Firebase auth
+// Initialize Firebase auth.
 const auth = getAuth(firebaseApp);
 
 // Create a `useAuth` hook and `AuthProvider` that enables
