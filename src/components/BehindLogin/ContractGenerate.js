@@ -28,10 +28,9 @@ import Warning from "./Warning";
 
 
 
-
 function ContractGenerate() {
 
-  const [type, setType] = useState('s') // f = financial s = social
+  const [type, setType] = useState('f') // f = financial s = social
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
   const [warning, setWarning] = useState(false)
@@ -101,10 +100,15 @@ function ContractGenerate() {
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
+    let hasContract
+    if (!auth.user.hasContract) {
+      hasContract = 0
+    } else {
+      hasContract = auth.user.hasContract}
  
     data.name = "default";
     
-    if (data.dollars === "0" || data.contractPayment ==='deferred') {
+    if (data.dollars === "0" || data.contractPayment ==='deferred' || type==='s') {
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
           // Clear form
@@ -135,17 +139,10 @@ function ContractGenerate() {
           );
 
           setTimeout(() => {
-            let hasContract
-            if (!auth.user.hasContract) {
-              hasContract = 0
-            } else {
-              hasContract = auth.user.hasContract}
-
+            history.push("/dashboard");
             updateUser(auth.user.uid, {
               hasContract: hasContract+1,
-              stripeContractPaidOrNot: "paid",
             });
-            history.push("/dashboard");
           }, 1000);
         })
         .catch((error) => {
@@ -186,9 +183,13 @@ function ContractGenerate() {
           });
         })
         .finally(() => {
+          updateUser(auth.user.uid, {
+            hasContract: hasContract+1,
+          });
           // Hide pending indicator
           setPending(false);
         });
+
   };
 
   if (formAlert)
@@ -219,9 +220,9 @@ function ContractGenerate() {
           title="Generate your contract"
           subtitle={(type==='f'? ('Financial Contract') : ('Social Contract'))}
           size={4}
-          contractcolors={true}
-          money={type == 'f' ? "true" : 'false'}
-          rainbow={type == 's' ? "true" : 'false'}
+          // contractcolors={true}
+          // money={type == 'f' ? "true" : 'false'}
+          // rainbow={type == 's' ? "true" : 'false'}
           textAlign="center"
         />
         {formAlert && (
@@ -232,28 +233,22 @@ function ContractGenerate() {
             </Alert>
           </Box>
         )}
-         <Grid style={{ textAlign: "center" }} item={true} xs={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                type="submit"
-                onClick={()=> {(type==='s') ? (setType('f')) : (setType('s')) }}
-              >
-                {!pending && <span>{`Make A ${(type==='s'? ('Financial Contract') : ('Social Contract'))} Instead`}</span>}
 
-              </Button>
-            </Grid>
+        <Grid style={{ textAlign: "center" }} item={true} xs={12}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            onClick={()=> {(type==='s') ? (setType('f')) : (setType('s')) }}
+          >
+            {!pending && <span>{`Make A ${(type==='s'? ('Financial Contract') : ('Social Contract'))} Instead`}</span>}
 
-            <Divider
-              style={{
-                width: "100%",
-                marginTop: "5vh",
-                marginBottom: "5vh",
-              }}
-            />{" "}
+          </Button>
+        </Grid>
+        <br/> <br/>
    
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
           <Grid justifyContent="center" container={true} spacing={2}>
             {true && (
               <Grid item={true} xs={12} md={6}>
@@ -386,7 +381,7 @@ function ContractGenerate() {
               >
                 <div style={{ fontSize: "17px" }}>
                   <strong>
-                    Preferred Regular Accountability Contact Method{" "}
+                    Preferred Contact Method{" "}
                     <span style={{ color: "red" }}>*</span>
                   </strong>
                 </div>
@@ -482,7 +477,7 @@ function ContractGenerate() {
               >
                 <div style={{ fontSize: "17px" }}>
                   <strong>
-                    Suggest a Final Verification Method (Optional)
+                    Suggest A Verification Method (Optional)
                   </strong>
                 </div>
                 How we would verify that you reached your goal at{" "}
@@ -509,6 +504,36 @@ function ContractGenerate() {
             <div style={{ display: "flex", flexDirection: "column" }}>
               <i>Continue below...</i>
             </div>
+
+            <div>
+                <h3>What are {type === 's' ? 'social' : 'financial'} contracts?</h3>
+                {type === 's' ? 
+                <div>
+                  <p>
+                    Social contracts motivate you using peer pressure. When you make a social contract we post on the platform you choose
+                    and tag you in it. In the post we lay out your goals and the deadline. Once you either achieve your goal or fail, we 
+                    make a follow up post announcing the result. 
+                  </p>
+                  
+                  <p>
+                    Don't want to disappoint your friends and family? Well then you had better reach your goals!
+                  </p> 
+                </div> :
+                <div>
+                <p>
+                  Financial contracts motivate you using peer pressure. When you make a social contract we post on the platform you choose
+                  and tag you in it. In the post we lay out your goals and the deadline. Once you either achieve your goal or fail, we 
+                  make a follow up post announcing the result. 
+                </p>
+                
+                <p>
+                  Don't want to disappoint your friends and family? Well then you had better reach your goals!
+                </p> 
+              </div>}
+
+              </div>
+
+
             <Divider
               style={{
                 width: "100%",
@@ -736,7 +761,7 @@ function ContractGenerate() {
               </TextField>
             </Grid> </>
             :
-            // social contract 
+            // social contract 1111
             <div>
                  <Grid item={true} xs={12}>
                   <div
@@ -746,6 +771,8 @@ function ContractGenerate() {
                       marginTop: "15px",
                     }}
                   >
+
+                   
                     <div style={{ fontSize: "17px" }}>
                       <strong>
                         What message should we post/send?
@@ -759,7 +786,7 @@ function ContractGenerate() {
                     variant="outlined"
                     type="text"
                     label="Example: Jack failed to run one mile every other day even after making a serious commitment to do so."
-                    name="sMessage"
+                    name="social_message"
                     multiline={true}
                     InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
                     rows={5}
@@ -772,6 +799,60 @@ function ContractGenerate() {
                   />
                 </Grid>
 
+                <Grid item={true} xs={12} md={12}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "5px",
+                  fontSize: "16px",
+                }}
+              >
+                <strong>
+                  Which platform should we post on?{" "}
+                  <span style={{ color: "red" }}>*</span>
+                </strong>
+              </div>
+              <TextField
+                // value={minutes}
+                fullWidth
+                variant="outlined"
+                select
+                size="large"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: {
+                      height: "20px",
+                      fontSize: "18px",
+                      textAlign: "center",
+                    },
+                  },
+                }}
+                type="text"
+                name="social_platform"
+                // label="Daily Minutes"
+                error={errors?.contactfrequency ? true : false}
+                helperText={
+                  errors?.contactfrequency && errors.contactfrequency.message
+                }
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please choose the platform.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select platform
+                </option>
+
+                <option value={"fb"}>Facebook</option>
+                <option value={"text"}>Text a specific person </option>
+              </TextField>
+            </Grid>
+
+
                 <Grid item={true} xs={12}>
                   <div
                     style={{
@@ -782,18 +863,17 @@ function ContractGenerate() {
                   >
                     <div style={{ fontSize: "17px" }}>
                       <strong>
-                        If you fail, where should we share it?
+                        Add Required Information:
                       </strong>
                       <br/> <br/>
                     </div>
-                    Choose the message we will text or post. It should state your goal and the fact you failed
-                    to reach it.<br/> <br/>
+                    For example the link to your Facebook profile if you choose Facebook, or the phone number we have to text.<br/> <br/>
                   </div>
                   <TextField
                     variant="outlined"
                     type="text"
-                    label="Example: Jack failed to run one mile every other day even after making a serious commitment to do so."
-                    name="sPlatform"
+                    label="Example: Text 123-456-7890, my mom, if I fail to run everyday."
+                    name="social_method"
                     multiline={true}
                     InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
                     rows={5}
@@ -820,6 +900,7 @@ function ContractGenerate() {
                 size="large"
                 type="submit"
                 disabled={pending}
+                onClick={handleSubmit(onSubmit)}
               >
                 {!pending && <span>{"Generate Contract"}</span>}
 
