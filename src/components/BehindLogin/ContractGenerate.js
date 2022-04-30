@@ -678,8 +678,8 @@ function ContractGenerate() {
               </TextField>
               <Alert severity="info">
                 <div style={{ fontSize: "16px" }}>
-                  This is the way that we will create a post and tag you on. If
-                  you fail reach your goal by the deadline, the post will go
+                  This is the way that we will create a post and tag you in it.
+                  If you fail reach your goal by the deadline, the post will go
                   live. If you do achieve your goal, you can decide to allow us
                   to make a post to inform your friends that you succeeded or
                   you can opt out and we won't make a post.{" "}
