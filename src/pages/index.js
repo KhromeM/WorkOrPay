@@ -11,7 +11,7 @@ import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
 import ScrollToTop from "../components/ScrollToTop";
-
+import ForMe from "../components/ForMe.js";
 function IndexPage(props) {
   const darkMode = useDarkMode();
   return (
@@ -62,6 +62,8 @@ function IndexPage(props) {
         title="Here's what people are saying"
         subtitle=""
       /> */}
+      <ForMe/>
+
       <FaqSection
         bgColor="default"
         size="medium"
