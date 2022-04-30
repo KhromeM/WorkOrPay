@@ -56,7 +56,7 @@ function PricingSection(props) {
   const items = [
     {
       id: "beginner",
-      name: "Tier 1: Dipping Your Toes",
+      name: "Tier 1: Pressure",
       price: "9.99",
       perks: [
         //"Daily check-ins via text",
@@ -73,7 +73,7 @@ function PricingSection(props) {
     },
     {
       id: "starter",
-      name: "Tier 2: Pressure",
+      name: "Tier 2: Propel",
       price: "19.99",
       perks: [
         "Everything from Tier 1",
@@ -85,11 +85,11 @@ function PricingSection(props) {
     },
     {
       id: "business",
-      name: "Tier 3: Metamorphosis",
+      name: "Tier 3: Perform",
       price: false,
       perks: [
         "Everything from Tier 2",
-        "Social Media Penalties",
+        // "Social Media Penalties",
         //"Only offered in select locations",
         "Facetime / Phone calls / Zoom check ins",
         "Customized plan",
