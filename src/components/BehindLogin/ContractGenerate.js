@@ -752,9 +752,7 @@ function ContractGenerate() {
                 id="social_message"
               >
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
-                  <h2 style={{ marginBottom: "11px" }}>
-                    Extra Request <span style={{ color: "red" }}>*</span>
-                  </h2>
+                  <h2 style={{ marginBottom: "11px" }}>Extra Request</h2>
                 </div>
                 <div style={{ fontSize: "16px" }}>
                   Choose the message we will text or post. It should state your
