@@ -814,6 +814,7 @@ function ContractGenerate() {
                   type="text"
                   label="Name"
                   name="displayName"
+                  required
                   error={errors.displayName ? true : false}
                   helperText={errors.displayName && errors.displayName.message}
                   fullWidth={true}
@@ -830,6 +831,7 @@ function ContractGenerate() {
                 type="email"
                 label="Email"
                 name="email"
+                required
                 error={errors.email ? true : false}
                 helperText={errors.email && errors.email.message}
                 fullWidth={true}

@@ -98,6 +98,14 @@ const themeConfig = {
           },
         },
       },
+      MuiFormLabel: {
+        asterisk: {
+          color: "#db3131",
+          "&$error": {
+            color: "#db3131",
+          },
+        },
+      },
     },
   },
 };
