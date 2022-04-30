@@ -86,7 +86,7 @@ function FaqSection(props) {
       question: "What are social penalties?",
       disclaimer: false,
       answer:
-        "Social penalties let you make a public commitment on social media. After you either succeed or fail, the result is posted for your friends or family to see.",
+        "Social penalties let you use your fear of embarassment to motivate you. If you fail, we message people or tag you in a post on social media. Don't want to disappoint your friends and family? Well then you better reach your goals!",
     },
     {
       question: "How are daily check-ups done?",

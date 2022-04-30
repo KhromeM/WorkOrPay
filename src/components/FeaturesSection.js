@@ -157,7 +157,9 @@ function FeaturesSection(props) {
             </Grid>
           ))}
         </Container>
-          <Box sx={{ mt: "20px" }} textAlign={{ xs: "center", md: "center" }}>
+        
+          { //Pricing button 
+          /* <Box sx={{ mt: "20px" }} textAlign={{ xs: "center", md: "center" }}>
             <Button
               style={{ width: 160, height: 60, fontSize: "27px" }}
               component={Link}
@@ -168,7 +170,7 @@ function FeaturesSection(props) {
             >
               {props.buttonText}
             </Button>
-          </Box>
+          </Box> */}
 
       </Container>
     </Section>

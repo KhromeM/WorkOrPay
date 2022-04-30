@@ -31,7 +31,7 @@ function SectionHeader(props) {
   if (!title && !subtitle) {
     return null;
   }
-  console.log(money, 'money', rainbow, 'rainbow')
+  // console.log(money, 'money', rainbow, 'rainbow')
 
   return (
     <Box

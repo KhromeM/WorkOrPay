@@ -139,6 +139,33 @@ export default function Contract({contract}) {
                             </ListItemText>
                           </div>
                         </CardContent>
+                        {contract.name ==='social' ? 
+                        <div>
+                        <CardContent>
+                          <div>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  Social Contract
+                                </strong>
+                              </h3>
+                            </ListItemText>
+                          </div>
+                        </CardContent>
+                        </div>
+                        :
+                        <div>
+                           <CardContent>
+                          <div>
+                            <ListItemText>
+                              <h3>
+                                <strong>
+                                  Financial Contract
+                                </strong>
+                              </h3>
+                            </ListItemText>
+                          </div>
+                        </CardContent>
                         <CardContent>
                           <div>
                             <ListItemText>
@@ -214,6 +241,7 @@ export default function Contract({contract}) {
                             </ListItemText>
 
                         </CardContent>
+                      </div> }
 
                         
                         <CardContent>

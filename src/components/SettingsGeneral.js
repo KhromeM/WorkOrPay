@@ -5,9 +5,27 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import { useAuth } from "./../util/auth";
-import { useHistory, useRouter } from "../util/router";
+import { useHistory, useRouter, Link } from "../util/router";
+import Box from "@material-ui/core/Box";
+import Alert from "@material-ui/lab/Alert";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import LinkMui from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  cardContent: {
+    padding: theme.spacing(3),
+  },
+  backdrop: {
+    color: "#fff",
+    zIndex: theme.zIndex.drawer + 1,
+  },
+}));
 
 function SettingsGeneral(props) {
+  const classes = useStyles();
   const auth = useAuth();
   const history = useHistory();
   const router = useRouter();
@@ -69,6 +87,51 @@ function SettingsGeneral(props) {
   };
 
   return (
+    <>
+    <Grid item={true} xs={12} md={6}>
+    <Card>
+      <CardContent className={classes.cardContent}>
+        <Box>
+          <Typography variant="h6" paragraph={true}>
+            <strong>
+              {auth.user.displayName
+                ? `Welcome back, ${auth.user.displayName}`
+                : "Welcome stranger! Go to settings to add your name!"}
+            </strong>
+          </Typography>
+          <Typography paragraph={true}></Typography>
+          <Box mt={3}>
+            <Typography variant="h6" paragraph={true}>
+              <strong>User info:</strong>
+            </Typography>
+            <Typography component="div">
+              <div>
+                You are signed in as: <strong>{auth.user.email}</strong>
+                .
+              </div>
+
+              {auth.user.stripeSubscriptionId && (
+                <>
+                  <div>
+                    You are subscribed to the{" "}
+                    <strong>{auth.user.planId} plan</strong>.
+                  </div>
+                  <div>
+                    Your plan status is{" "}
+                    <strong>
+                      {auth.user.stripeSubscriptionStatus}
+                    </strong>
+                    .
+                  </div>
+                </>
+              )}
+            </Typography>
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
+    </Grid>
+    <br/>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container={true} spacing={2}>
         <Grid item={true} xs={12}>
@@ -119,6 +182,9 @@ function SettingsGeneral(props) {
         </Grid>
       </Grid>
     </form>
+    </>
+
+    
   );
 }
 
