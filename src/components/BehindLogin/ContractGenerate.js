@@ -133,8 +133,13 @@ function ContractGenerate() {
     } else {
       hasContract = auth.user.hasContract;
     }
-
-    data.name = "default";
+    
+    if (type==='s'){
+      data.name = 'social'
+    }
+    else {
+      data.name ='financial'
+    }
 
     if (
       data.dollars === "0" ||

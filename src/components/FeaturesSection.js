@@ -49,39 +49,49 @@ function FeaturesSection(props) {
 
   const items = [
     {
-      title: "Form a Contract",
+      title: "1) Form a Contract",
       description:
-        "Some days you can run a marathon. On other days it's a struggle to get out of bed. Our contracts provide an external source of motivation so you stay on track to meet your goals.",
+        // "Some days you can run a marathon. On other days it's a struggle to get out of bed. Our contracts provide an external source of motivation so you stay on track to meet your goals.",
+        "Our contracts provide external motivation, keeping you on track to meet your goals.",
+
       image: contract,
     },
     {
-      title: "Choose a Goal",
+      title: " 2) Choose a Goal",
       description:
-        "Want to be more productive? Exercise daily? Study more? We will help you pick a concrete goal that can be tracked.",
+        // "Want to be more productive? Exercise daily? Study more? We will help you pick a concrete goal that can be tracked.",
+        "Want to be more productive? Exercise daily? Launch your business?",
       image: runner,
     },
     {
-      title: "Set a Deadline",
+      title: "3) Set a Deadline",
       description:
-        "How long do you have to achieve your goal? Choose a deadline as short as 3 days or as long as a month!",
+        // "How long do you have to achieve your goal? Choose a deadline as short as a day or as long as a month!",
+        "Choose a deadline as short as a day or as long as a month.",
+
       image: clock,
     },
     {
-      title: "Set the Stakes",
+      title: "4) Set the Stakes",
       description:
-        "If you are serious about your goal, then put some stakes on it! Wager from $25 to $1000. If you fail to reach your target, your money is donated to a charity of your choosing.",
+        // "If you are serious about your goal, then put some stakes on it! Choose a financial or social penalty!",
+        "Put some stakes on it! Choose a financial or social penalty!",
       image: cash,
     },
     {
-      title: "Daily Check Ups",
+      title: "5) Daily Check Ups",
       description:
-        "We check up on you every day to encourage you and make sure you are staying on track. Having someone hold you accountable significantly increases the chances of you hitting your targets.",
+        // "We check up on you every day to encourage you and make sure you are staying on track. Having someone hold you accountable significantly increases the chances of you hitting your targets.",
+        "We check up on you every day to keep you on track.",
+
       image: checkup,
     },
     {
-      title: "Verification",
+      title: "6) Verification",
       description:
-        "If you report you have achieved your goal, we verify your claims. We are committed to providing actual accountability.",
+        // "If you report you have achieved your goal, we verify your claims. We are committed to providing actual accountability.",
+        "When you report you have achieved your goal, we verify your claim.",
+
       image: selfie,
     },
     // {
