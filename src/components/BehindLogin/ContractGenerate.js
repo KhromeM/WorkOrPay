@@ -33,8 +33,8 @@ function ContractGenerate() {
   const [type, setType] = useState('f') // f = financial s = social
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
-  const [warning, setWarning] = useState(false)
-  const [warning2, setWarning2] = useState(false)
+  const [warning, setWarning] = useState('deferred')
+  const [warning2, setWarning2] = useState('progressive')
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
   const auth = useAuth();
@@ -220,9 +220,9 @@ function ContractGenerate() {
           title="Generate your contract"
           subtitle={(type==='f'? ('Financial Contract') : ('Social Contract'))}
           size={4}
-          // contractcolors={true}
-          // money={type == 'f' ? "true" : 'false'}
-          // rainbow={type == 's' ? "true" : 'false'}
+          contractcolors={true}
+          money={type == 'f' ? "true" : 'false'}
+          rainbow={type == 's' ? "true" : 'false'}
           textAlign="center"
         />
         {formAlert && (
