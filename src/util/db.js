@@ -28,7 +28,7 @@ const db = getFirestore(firebaseApp);
 // React Query client
 const client = new QueryClient();
 
-/**** USERS ****/
+/**** USERS  ****/
 
 // Subscribe to user data
 // Note: This is called automatically in `auth.js` and data is merged into `auth.user`
