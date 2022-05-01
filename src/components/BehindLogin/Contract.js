@@ -561,7 +561,7 @@ export default function Contract({ contract, items }) {
                   md={6}
                 >
                   <Button
-                    style={{ marginTop: "20px" }}
+                    style={{ marginTop: "20px", marginBottom: "17px" }}
                     variant="contained"
                     size="medium"
                     color="primary"
