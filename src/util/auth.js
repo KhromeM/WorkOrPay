@@ -35,7 +35,7 @@ import PageLoader from "./../components/PageLoader";
 import { getFriendlyPlanId } from "./prices";
 import analytics from "./analytics";
 
-// Whether to merge extra user data from database into `auth.user`
+// Whether to merge extra user data from database into `auth.user`,
 const MERGE_DB_USER = true;
 // Whether to send email verification on signup
 const EMAIL_VERIFICATION = true;
