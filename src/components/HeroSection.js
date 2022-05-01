@@ -48,7 +48,7 @@ function HeroSection(props) {
 
               <Button
                 component={Link}
-                style={{ width: 140, height: 56, fontSize: "24px" }}
+                style={{ width: 190, height: 56, fontSize: "24px" }}
                 to={props.buttonPath}
                 variant="contained"
                 size="large"

@@ -22,12 +22,12 @@ function IndexPage(props) {
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-        title="Meet Your Goals Or Pay The Price!"
+        title="Meet Your Goals Or Pay The Price"
         subtitle="Set goals. Form contracts. Pay the penalty if you fail."
         image={logo}
-        buttonText="Pricing"
+        buttonText="Start Now"
         buttonColor="primary"
-        buttonPath="/pricing"
+        buttonPath="/auth/signup"
       />
       {/* <ClientsSection
         bgColor="light"
@@ -44,9 +44,9 @@ function IndexPage(props) {
         bgImageOpacity={1}
         title="We do not profit if you fail"
         subtitle="Our incentives are aligned"
-        buttonText="Pricing"
+        buttonText="Sign Up"
         buttonColor="primary"
-        buttonPath="/pricing"
+        buttonPath="/auth/signup"
       />
       {/* <HowItWorks
         bgColor="default"

@@ -8,7 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
-
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     // Add border that contrasts lightly with background color.
@@ -23,7 +24,7 @@ export default function ForMe() {
     const classes = useStyles()
   return (
     <div>
-               <Container>
+      <Container>
           <SectionHeader
             title="Is this for me?"
             size={2}
@@ -85,6 +86,19 @@ export default function ForMe() {
                       often.
                     </Typography>
                   </Box>
+
+                  <Button
+                    component={Link}
+                    style={{ width: 190, height: 56, fontSize: "24px", backgroundColor:'#00B0FF' }}
+                    to={'/auth/signup'}
+                    variant="contained"
+                    size="large"
+
+                  >
+                    Start Now
+                  </Button>
+
+
                 </Box>
               </Grid>
             </Grid>
