@@ -552,37 +552,38 @@ export default function Contract({ contract, items }) {
                 }
               />
             </Snackbar>
-
-            {!contract.verificationRequested ? (
-              <Grid
-                style={{ paddingTop: "80px", textAlign: "center" }}
-                item={true}
-                xs={12}
-                md={6}
-              >
-                <Button
-                  style={{ marginTop: "20px" }}
-                  variant="contained"
-                  size="medium"
-                  color="#00B0FF"
-                  onClick={onSubmit}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {!contract.verificationRequested ? (
+                <Grid
+                  style={{ paddingTop: "12px", textAlign: "center" }}
+                  item={true}
+                  xs={12}
+                  md={6}
                 >
-                  {pending ? (
-                    <CircularProgress color="success" />
-                  ) : (
-                    <div>
-                      <strong>Submit for verification</strong>
-                    </div>
-                  )}
-                </Button>
-              </Grid>
-            ) : (
-              <div style={{ marginTop: "10px", textAlign: "center" }}>
-                <b>Congratulations for completing your goal!</b>
-                <br /> We will soon verify that you have completed the contract
-                and return your deposit if you made one.
-              </div>
-            )}
+                  <Button
+                    style={{ marginTop: "20px" }}
+                    variant="contained"
+                    size="medium"
+                    color="primary"
+                    onClick={onSubmit}
+                  >
+                    {pending ? (
+                      <CircularProgress color="success" />
+                    ) : (
+                      <div>
+                        <strong>Submit for verification</strong>
+                      </div>
+                    )}
+                  </Button>
+                </Grid>
+              ) : (
+                <div style={{ marginTop: "10px", textAlign: "center" }}>
+                  <b>Congratulations for completing your goal!</b>
+                  <br /> We will soon verify that you have completed the
+                  contract and return your deposit if you made one.
+                </div>
+              )}
+            </div>
           </Box>
         </CardContent>
       </Card>{" "}
