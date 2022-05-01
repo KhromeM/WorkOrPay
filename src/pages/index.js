@@ -12,6 +12,8 @@ import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
 import ScrollToTop from "../components/ScrollToTop";
 import ForMe from "../components/ForMe.js";
+import Odometer from "../components/Odometer";
+import { Divider } from "@material-ui/core";
 function IndexPage(props) {
   const darkMode = useDarkMode();
   return (
@@ -37,6 +39,9 @@ function IndexPage(props) {
         title=""
         subtitle=""
       /> */}
+      <Odometer />
+      <Divider style={{ marginTop: "5vh" }} />
+
       <FeaturesSection
         bgColor="default"
         size="medium"
@@ -62,7 +67,7 @@ function IndexPage(props) {
         title="Here's what people are saying"
         subtitle=""
       /> */}
-      <ForMe/>
+      <ForMe />
 
       <FaqSection
         bgColor="default"
@@ -72,7 +77,7 @@ function IndexPage(props) {
         title="Frequently Asked Questions"
         subtitle=""
       />
-        {/* <NewsletterSection
+      {/* <NewsletterSection
           bgColor="default"
           size="medium"
           bgImage=""
