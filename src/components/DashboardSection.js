@@ -58,8 +58,8 @@ function DashboardSection(props) {
     error: itemsError,
   } = useItemsByOwner(auth.user.uid);
 
-  console.log(theme.palette.type, "theme");
-  console.log(theme.palette.type == "light", "light theme true?");
+  // console.log(theme.palette.type, "theme");
+  // console.log(theme.palette.type == "light", "light theme true?");
   const message = `You are now subscribed to the ${auth.user.planId} plan `;
   const message2 = "You have formed a contract. Good Luck!";
   // const milestoneText = `Milestones let you add mini goals and targets on the path towards your end goal.`;
