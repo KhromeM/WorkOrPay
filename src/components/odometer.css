@@ -1,0 +1,20 @@
+.timer-part {
+  overflow-y: hidden;
+  background-image: linear-gradient(white, #e0e0e0);
+  border: 1px solid #dfdfdf !important;
+  height: 77px;
+  margin: 1px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.15em;
+}
+
+/* make media query */
+/* .contodo {
+  flex-wrap: wrap;
+}
+.ododollar {
+  margin-left: 30px;
+} */
