@@ -26,7 +26,6 @@ import {
   updatePassword as authUpdatePassword,
   sendPasswordResetEmail as authSendPasswordResetEmail,
   confirmPasswordReset as authConfirmPasswordReset,
-  serverTimestamp,
 } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 import { useUser, createUser, updateUser } from "./db";
@@ -34,6 +33,8 @@ import { history } from "./router";
 import PageLoader from "./../components/PageLoader";
 import { getFriendlyPlanId } from "./prices";
 import analytics from "./analytics";
+import { serverTimestamp } from "firebase/firestore";
+
 
 // Whether to merge extra user data from database into `auth.user`,
 const MERGE_DB_USER = true;
