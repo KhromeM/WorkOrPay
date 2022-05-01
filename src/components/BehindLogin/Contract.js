@@ -330,10 +330,10 @@ export default function Contract({ contract, items }) {
                                     </Tooltip>
                                   </TableCell>
                                   <TableCell align="center">
-                                    {contract.finPenType
+                                    {contract.finPenType ? (contract.finPenType
                                       .charAt(0)
                                       .toUpperCase() +
-                                      contract.finPenType.slice(1)}
+                                      contract.finPenType.slice(1)) : 'Static'}
                                   </TableCell>
                                 </TableRow>
                                 <TableRow key={data.name}>
@@ -376,10 +376,10 @@ export default function Contract({ contract, items }) {
                                     </Tooltip>
                                   </TableCell>
                                   <TableCell align="center">
-                                    {contract.contractPayment
+                                    {contract.contractPayment ? (contract.contractPayment
                                       .charAt(0)
                                       .toUpperCase() +
-                                      contract.contractPayment.slice(1)}
+                                      contract.contractPayment.slice(1)) : 'Charged'}
                                   </TableCell>
                                 </TableRow>
                                 <TableRow key={data.name}>
