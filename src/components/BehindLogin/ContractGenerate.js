@@ -893,24 +893,7 @@ function ContractGenerate() {
               <br />
             </Grid>
             <Grid item={true} xs={12} md={12}>
-              {/* <InputLabel
-                style={{ marginBottom: "10px", textAlign: "center" }}
-                id="days"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>
-                    Days Until Deadline <span style={{ color: "red" }}>*</span>
-                  </h3>
-                </div>
-                <div style={{ fontSize: "16px" }}>
-                  This is how many days you have to complete your goal. Make
-                  sure to give yourself adequate time, but not enough for you to
-                  procrastinate. The countdown starts as soon as you submit the
-                  contract!
-                </div>
 
-                
-              </InputLabel> */}
               <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
                   <h2 style={{ marginBottom: "11px" }}>
@@ -960,23 +943,7 @@ function ContractGenerate() {
             </Grid>
             {/* <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
-              {/* <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "3px",
-                  marginTop: "35px",
-                }}
-              >
-                <div style={{ fontSize: "17px" }}>
-                  <strong>
-                    Preferred Contact Method{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </strong>
-                </div>
-                We're going to try to contact you regularly (daily or every few
-                days) <strong>in the midst of your contract period.</strong>{" "}
-                Include your number or profile link or email.
-              </div> */}
+
               <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
                 <div style={{ textAlign: "center", paddingTop: "15px" }}>
                   <h2 style={{ marginBottom: "11px" }}>
@@ -1007,7 +974,9 @@ function ContractGenerate() {
                 })}
               />
             </Grid>
+
             <Grid item={true} xs={12} md={12}>
+            <br/> 
               <InputLabel style={{ textAlign: "center", marginBottom: "10px" }}>
                 <div
                   style={{
@@ -1061,31 +1030,64 @@ function ContractGenerate() {
 
                 <option value={"everythreedays"}>Every 3 Days</option>
                 <option value={"weekly"}>Weekly </option>
-              </TextField>
-              <br />
-              <br />
-              <br />
-              <br />
+              </TextField> <br/> <br/>
+
+
+              <Grid item={true} xs={12}>
+              <InputLabel
+                style={{ textAlign: "center", marginBottom: "10px" }}
+                id="phone"
+              >
+                <div
+                  style={{
+                    marginLeft: "22px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <h3 style={{ paddingTop: "5px" }}>Phone Number (Optional)</h3>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  Most of our methods of checking in require a phone number.
+                </div>
+                <br />
+              </InputLabel>
+
+              <TextField
+                variant="outlined"
+                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+
+                name="phone"
+                multiline={true}
+                rows={1}
+                error={errors.phone ? true : false}
+                // value={dollars}
+                // onChange={(e) => setDollars(e.target.value)}
+                helperText={errors.phone && errors.phone.message}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
+                fullWidth={true}
+                // defaultValue={8008008000}
+                inputRef={register({
+                  // required: "Must enter a phone number",
+                  // not required
+                  pattern: {
+                    value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
+                    message: "You must enter a valid 10 digit phone number.",
+                  },
+                })}
+              />
+            </Grid>
               <br />
               <br />
             </Grid>
             <Grid item={true} xs={12}></Grid>
             <Grid item={true} xs={12}>
-              {/* <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "9px",
-                  marginTop: "15px",
-                }}
-              >
-                <div style={{ fontSize: "17px" }}>
-                  <strong>Suggest A Verification Method (Optional)</strong>
-                </div>
-                How we would verify that you reached your goal at{" "}
-                <strong>the end of your deadline</strong>. (Don't worry if
-                you're not sure right now, skip this and we will contact you
-                later and make a plan!)
-              </div> */}
+
               <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
                 <div
                   style={{
