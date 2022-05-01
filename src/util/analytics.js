@@ -1,5 +1,6 @@
 import Analytics from "analytics";
 import googleAnalyticsPlugin from "@analytics/google-analytics";
+import mixpanelPlugin from "@analytics/mixpanel";
 import { history } from "./router.js";
 
 // Initialize analytics and plugins
@@ -9,6 +10,9 @@ const analytics = Analytics({
   plugins: [
     googleAnalyticsPlugin({
       trackingId: process.env.REACT_APP_GA_TRACKING_ID,
+    }),
+    mixpanelPlugin({
+      token: process.env.REACT_APP_MIXPANEL_TOKEN,
     }),
   ],
 });

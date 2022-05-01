@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import "./rainbow.css"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
 function SectionHeader(props) {
   const classes = useStyles();
 
-  const { subtitle, title, size, className, ...otherProps } = props;
+  const { subtitle, title, size, className, contractcolors, rainbow, money, ...otherProps } = props;
 
   // Render nothing if no title or subtitle
   if (!title && !subtitle) {
     return null;
   }
+  // console.log(money, 'money', rainbow, 'rainbow')
 
   return (
     <Box
@@ -45,12 +47,17 @@ function SectionHeader(props) {
           {title}
         </Typography>
       )}
-
-      {subtitle && (
+      {!contractcolors && subtitle && (
         <Typography variant="h5" className={classes.subtitle}>
           {subtitle}
         </Typography>
       )}
+      {contractcolors && rainbow && subtitle && (
+        <Typography variant="h5" className={classes.subtitle}>
+          {subtitle == 'Social Contract' ? <div><span className="borderontext" style={{fontSize: '1.25em', color: '#6495ED'}}>Social Contract</span> </div>  : <div className="borderontext" style={{fontSize: '1.25em', color: '#00cc00'}}>{subtitle}</div>}
+        </Typography>
+      )}
+      
     </Box>
   );
 }

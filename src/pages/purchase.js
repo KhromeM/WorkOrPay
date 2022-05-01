@@ -16,7 +16,7 @@ function PurchasePage(props) {
       // If user already has an active plan
       // then take them to Stripe billing
       console.log(router.query);
-      if (auth.user.planIsActive && router.query.plan === "starter")
+      if (auth.user.planIsActive && (router.query.plan === "starter" || router.query.plan === "beginner"))
         router.push("/settings/billing");
       // If user already has an active plan
       // then take them to Stripe billing

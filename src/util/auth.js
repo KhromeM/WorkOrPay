@@ -35,7 +35,6 @@ import { getFriendlyPlanId } from "./prices";
 import analytics from "./analytics";
 import { serverTimestamp } from "firebase/firestore";
 
-
 // Whether to merge extra user data from database into `auth.user`,
 const MERGE_DB_USER = true;
 // Whether to send email verification on signup
@@ -46,7 +45,7 @@ const ANALYTICS_IDENTIFY = true;
 // Initialize Firebase auth.
 const auth = getAuth(firebaseApp);
 
-// Create a `useAuth` hook and `AuthProvider` that enables
+// Create a `useAuth` hook and `AuthProvider` that enable
 // any component to subscribe to auth and re-render when it changes.
 const authContext = createContext();
 export const useAuth = () => useContext(authContext);
@@ -84,7 +83,10 @@ function useAuthProvider() {
 
     // Create the user in the database if they are new
     if (isNewUser) {
-      await createUser(user.uid, { email: user.email,  createdAt: serverTimestamp(), });
+      await createUser(user.uid, {
+        email: user.email,
+        createdAt: serverTimestamp(),
+      });
       // Send email verification if enabled
       if (EMAIL_VERIFICATION) {
         sendEmailVerification(auth.currentUser);

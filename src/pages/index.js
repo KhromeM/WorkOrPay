@@ -11,7 +11,9 @@ import "../resources/index.css";
 import FaqSection from "../components/FaqSection";
 import HowItWorks from "../components/HowItWorks";
 import ScrollToTop from "../components/ScrollToTop";
-
+import ForMe from "../components/ForMe.js";
+import Odometer from "../components/Odometer";
+import { Divider } from "@material-ui/core";
 function IndexPage(props) {
   const darkMode = useDarkMode();
   return (
@@ -22,12 +24,12 @@ function IndexPage(props) {
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-        title="Meet Your Goals Or Pay The Price!"
+        title="Meet Your Goals Or Pay The Price"
         subtitle="Set goals. Form contracts. Pay the penalty if you fail."
         image={logo}
-        buttonText="Pricing"
+        buttonText="Start Now"
         buttonColor="primary"
-        buttonPath="/pricing"
+        buttonPath="/auth/signup"
       />
       {/* <ClientsSection
         bgColor="light"
@@ -37,23 +39,26 @@ function IndexPage(props) {
         title=""
         subtitle=""
       /> */}
+      <Odometer />
+      <Divider style={{ marginTop: "5vh" }} />
+
       <FeaturesSection
         bgColor="default"
         size="medium"
         bgImage=""
         bgImageOpacity={1}
         title="We do not profit if you fail"
-        subtitle=""
-        buttonText="Pricing"
+        subtitle="Our incentives are aligned"
+        buttonText="Sign Up"
         buttonColor="primary"
-        buttonPath="/pricing"
+        buttonPath="/auth/signup"
       />
-      <HowItWorks
+      {/* <HowItWorks
         bgColor="default"
         size="medium"
         bgImage=""
         bgImageOpacity={1}
-      />
+      /> */}
       {/* <TestimonialsSection
         bgColor="light"
         size="medium"
@@ -62,6 +67,8 @@ function IndexPage(props) {
         title="Here's what people are saying"
         subtitle=""
       /> */}
+      <ForMe />
+
       <FaqSection
         bgColor="default"
         size="medium"
@@ -70,8 +77,7 @@ function IndexPage(props) {
         title="Frequently Asked Questions"
         subtitle=""
       />
-      {
-        <NewsletterSection
+      {/* <NewsletterSection
           bgColor="default"
           size="medium"
           bgImage=""
@@ -82,8 +88,8 @@ function IndexPage(props) {
           buttonColor="primary"
           inputPlaceholder="Enter your email"
           subscribedMessage="You are now subscribed!"
-        />
-      }
+        /> */}
+
       <ScrollToTop />
     </>
   );

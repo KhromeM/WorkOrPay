@@ -44,15 +44,15 @@ export default async (req, res) => {
           console.log(datetime.toISOString().slice(0, 10));
           console.log(session.line_items.data[0].price);
           await updateUserByCustomerId(object.customer, {
-            hasContract: "true",
+            //hasContract: hasContract,
             // payment intent id (stripe.com > payments > descriptions)
-            stripeContractPaymentIntentId: object.id,
+            //stripeContractPaymentIntentId: object.id,
             // Store the Price ID for this subscription (env variable for your product)
-            stripeContractPriceId: session.line_items.data[0].price.id,
+            //stripeContractPriceId: session.line_items.data[0].price.id,
             // Store the date of this purchase (so you can know when the contract started)
-            stripeContractPurchaseDate: datetime.toISOString().slice(0, 10),
+            //stripeContractPurchaseDate: datetime.toISOString().slice(0, 10),
             // paid? mutafa warning: don't change shit though, this is cosmetic
-            stripeContractPaidOrNot: object.payment_status,
+            //stripeContractPaidOrNot: object.payment_status,
           });
           console.log(object, "realobjectforcontract");
           await fetch(

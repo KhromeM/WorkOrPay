@@ -1,7 +1,7 @@
 // Map our custom plan IDs ("basic", "premium", etc) to Stripe price IDs
 const stripePriceIds = {
   starter: process.env.REACT_APP_STRIPE_PRICE_STARTER,
-  pro: process.env.REACT_APP_STRIPE_PRICE_PRO,
+  beginner: process.env.REACT_APP_STRIPE_PRICE_BEGINNER,
   business: process.env.REACT_APP_STRIPE_PRICE_BUSINESS,
   contract25: process.env.REACT_APP_STRIPE_PRICE_CONTRACT25,
   contract50: process.env.REACT_APP_STRIPE_PRICE_CONTRACT50,

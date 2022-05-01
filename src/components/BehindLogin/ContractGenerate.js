@@ -6,11 +6,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
-import contact from "../../util/contact";
 import { useAuth } from "../../util/auth";
 import { ReactComponent as InfoIcon } from "../../resources/infoicon.svg";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 import {
+  Card,
+  CardContent,
   Container,
   Divider,
   FormControl,
@@ -24,18 +26,17 @@ import {
 import SectionHeader from "../SectionHeader";
 import { createContract as createItem, updateUser } from "../../util/db";
 import { useHistory } from "../../util/router";
+import Warning from "./Warning";
 
-function Contact(props) {
+function ContractGenerate() {
+  const [type, setType] = useState("f"); // f = financial s = social
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
-  const [minutes, setMinutes] = useState("");
-  const [hours, setHours] = useState("");
-  const [penalty, setPenalty] = useState("");
+  const [warning, setWarning] = useState("deferred");
+  const [warning2, setWarning2] = useState("progressive");
   const { handleSubmit, register, errors, reset } = useForm();
   const history = useHistory();
   const auth = useAuth();
-
-  // console.log(auth.user.displayName);
 
   if (!auth.user || auth.user.planIsActive == false) {
     return (
@@ -65,19 +66,53 @@ function Contact(props) {
     );
   }
 
-  if (auth.user.hasContract) {
+  if (auth.user.planId === "beginner" && auth.user.hasContract >= 1) {
     return (
       <div
         style={{
           marginTop: "30vh",
+          marginRight: "10vh",
+          marginLeft: "10vh",
           marginBottom: "30vh",
           textAlign: "center",
           fontSize: "30px",
         }}
       >
-        You currently have a contract that is already valid. Please wait till a
-        site admin refreshes your account or contact us by email or chat if you
-        believe this message is an error.
+        <h3>Pressure Plan Limit: 1 Contract at a time </h3>
+        You currently have 1 contract that is already valid. If you have
+        completed it, please submit for verification and wait untill an admin
+        refreshes your account. Contact us by email or chat if you believe this
+        message is an error.
+        <br />
+        <Button
+          variant="filled"
+          style={{ backgroundColor: "gray", marginTop: "20px" }}
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          Home{" "}
+        </Button>
+      </div>
+    );
+  }
+
+  if (auth.user.hasContract >= 3) {
+    return (
+      <div
+        style={{
+          marginTop: "30vh",
+          marginRight: "10vh",
+          marginLeft: "10vh",
+          marginBottom: "30vh",
+          textAlign: "center",
+          fontSize: "30px",
+        }}
+      >
+        You currently have 3 contracts that are already valid. If you have
+        completed one, please submit for verification and wait untill an admin
+        refreshes your account. Contact us by email or chat if you believe this
+        message is an error.
         <br />
         <Button
           variant="filled"
@@ -95,17 +130,24 @@ function Contact(props) {
   const onSubmit = (data) => {
     // Show pending indicator
     setPending(true);
-    console.log(data);
-    // data.minutes = minutes.toString();
-    // data.hours = hours.toString();
-    data.type = "contract";
-    data.name = "default";
-    console.log(data);
+    let hasContract;
+    if (!auth.user.hasContract) {
+      hasContract = 0;
+    } else {
+      hasContract = auth.user.hasContract;
+    }
 
-    // remove google sheets
-    //
-    //
-    if (data.dollars === "0") {
+    if (type === "s") {
+      data.name = "social";
+    } else {
+      data.name = "financial";
+    }
+
+    if (
+      data.dollars === "0" ||
+      data.contractPayment === "deferred" ||
+      type === "s"
+    ) {
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
           // Clear form
@@ -115,8 +157,6 @@ function Contact(props) {
             type: "success",
             message:
               "Your contract has been created! Get ready to achieve your goals!",
-            message2:
-              "No payment since you chose a $0 penalty. Redirecting you to your dashboard...",
           });
           fetch(
             "https://v1.nocodeapi.com/envariable/google_sheets/ovhdVhojdGjnmUuz?tabId=Sheet1",
@@ -139,11 +179,10 @@ function Contact(props) {
           );
 
           setTimeout(() => {
-            updateUser(auth.user.uid, {
-              hasContract: "true",
-              stripeContractPaidOrNot: "paid",
-            });
             history.push("/dashboard");
+            updateUser(auth.user.uid, {
+              hasContract: hasContract + 1,
+            });
           }, 1000);
         })
         .catch((error) => {
@@ -159,7 +198,7 @@ function Contact(props) {
         });
       return;
     }
-    console.log(data.dollars === "0", "dollars data");
+
     if (data.dollars !== "0")
       createItem({ owner: auth.user.uid, ...data })
         .then(() => {
@@ -184,6 +223,9 @@ function Contact(props) {
           });
         })
         .finally(() => {
+          updateUser(auth.user.uid, {
+            hasContract: hasContract + 1,
+          });
           // Hide pending indicator
           setPending(false);
         });
@@ -215,8 +257,11 @@ function Contact(props) {
       <Container maxWidth="sm" style={{ paddingTop: "30px" }}>
         <SectionHeader
           title="Generate your contract"
-          subtitle="Contract stuff"
+          subtitle={type === "f" ? "Financial Contract" : "Social Contract"}
           size={4}
+          contractcolors={true}
+          money={type == "f" ? "true" : "false"}
+          rainbow={type == "s" ? "true" : "false"}
           textAlign="center"
         />
         {formAlert && (
@@ -227,8 +272,535 @@ function Contact(props) {
             </Alert>
           </Box>
         )}
+        <Grid style={{ textAlign: "center" }} item={true} xs={12}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            onClick={() => {
+              type === "s" ? setType("f") : setType("s");
+            }}
+          >
+            {!pending && (
+              <span>{`Make A ${
+                type === "s" ? "Financial Contract" : "Social Contract"
+              } Instead`}</span>
+            )}
+          </Button>
+        </Grid>
+        <div style={{ textAlign: "center" }}>
+          <h2>What are {type === "s" ? "social" : "financial"} contracts?</h2>
+          {type === "s" ? (
+            <div>
+              <p>
+                When you make a social contract you add us on the social media you choose (does not apply if you choose text). 
+                If you fail, we make a post revealing your goal and the fact you failed and tag you. This exposes your failure
+                to friends and family. <strong>Embarrassing ! </strong>
+              </p>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+              <strong>
+                Don't want to disappoint your friends and family?
+                <br /> Well, then you better reach your goals!
+              </strong>
+            </div>
+          ) : (
+            <div>
+              <p>
+              A financial penalty lets you put your money where your mouth is. Choose a maximum penalty from $25-$1000. 
+              If you achieve your goal before the deadline, you do not lose any money. 
+              However, if you fail to do so, we will charge you a penalty and send the money to the charity you picked in your contract.
+              </p>
+
+              <strong>
+                Don't want to lose your money?
+                <br /> Well, then you better reach your goals!
+              </strong>
+            </div>
+          )}
+        </div>
+        {type === "f" ? (
+          <>
+            <Grid item={true} xs={12} md={12}>
+              <br />
+              <br />
+              <br />
+              <InputLabel
+                style={{ textAlign: "center", marginBottom: "10px" }}
+                id="dollars"
+              >
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <h1 style={{ paddingTop: "5px" }}>Financial Penalty</h1>
+                </div>
+                <br /> <br />
+              </InputLabel>
+              {/* <h2 style={{ textAlign: "center" }}>Dollar amount</h2> */}
+              <InputLabel
+                style={{
+                  textAlign: "center",
+                  marginBottom: "15px",
+                }}
+                id="social_message"
+              >
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Dollar Amount <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>
+              </InputLabel>
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                variant="outlined"
+                style={{ marginBottom: "15px" }}
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ fontSize: 50 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                  style: { fontSize: 25 },
+                }}
+                type="text"
+                name="dollars"
+                // label="Daily Minutes"
+                error={errors?.dollars ? true : false}
+                helperText={errors?.dollars && errors.dollars.message}
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please select your financial penalty.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select an option{" "}
+                </option>
+                <option value={0}>
+                  0 (You don't want a financial penalty as motivation)
+                </option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+                <option value={150}>150</option>
+                <option value={250}>250</option>
+                <option value={500}>500</option>
+                <option value={1000}>1000</option>
+              </TextField>
+              <Alert severity="info">
+                <div style={{ fontSize: "16px" }}>
+                  This is the amount of money you put on the line in your
+                  contract. If you fail to reach your goal by the deadline, the
+                  money will be donated to your chosen beneficiary below.{" "}
+                </div>
+              </Alert>
+              <br /> <br /> <br />
+              <br /> <br /> <br />
+              {/* <h2 style={{ textAlign: "center" }}>When will you be charged?</h2>
+               */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    paddingTop: "15px",
+                  }}
+                >
+                  <h2 style={{ marginBottom: "11px" }}>
+                    When will you be charged?{" "}
+                    <span style={{ color: "red" }}>*</span>{" "}
+                  </h2>
+                </div>
+              </InputLabel>
+              <TextField
+                // value={minutes}
+                fullWidth
+                select
+                variant="outlined"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ fontSize: 50 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start"></InputAdornment>
+                  ),
+                  style: { fontSize: 25 },
+                }}
+                type="text"
+                name="contractPayment"
+                error={errors?.dollars ? true : false}
+                helperText={errors?.dollars && errors.dollars.message}
+                onChange={(e) => setWarning(e.target.value)}
+                inputRef={register({
+                  required: "Please select when you would like to be charged.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select an option{" "}
+                </option>
+                <option value={"deferred"} selected>
+                  No payment until you incur a penalty
+                </option>
+                <option value={"charged"}>Make the deposit now</option>
+              </TextField>
+              <Warning warning={warning} />
+              <br /> <br />
+              <br /> <br /> <br />
+              {/* <h4>Type of penalty</h4>
+               */}
+              <InputLabel
+                style={{
+                  textAlign: "center",
+                  marginBottom: "15px",
+                }}
+                id="social_message"
+              >
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Type of Penalty <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>
+              </InputLabel>
+              <TextField
+                fullWidth
+                select
+                variant="outlined"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{ fontSize: 50 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start"></InputAdornment>
+                  ),
+                  style: { fontSize: 25 },
+                }}
+                type="text"
+                onChange={(e) => setWarning2(e.target.value)}
+                name="finPenType"
+                error={errors?.dollars ? true : false}
+                helperText={errors?.dollars && errors.dollars.message}
+                inputRef={register({
+                  required: "Please select which penalty structure you want",
+                })}
+              >
+                <option disabled value="">
+                  Select an option{" "}
+                </option>
+                <option selected value={"progressive"}>
+                  {" "}
+                  Progressive Penalty
+                </option>
+                <option value={"static"}> Static Penalty </option>
+              </TextField>
+              <Warning warning={warning2} />
+            </Grid>
+            <br />
+            <br />
+            <br /> <br /> <br />
+            <Grid item={true} xs={12} md={12}>
+              <InputLabel
+                style={{
+                  textAlign: "center",
+                  marginBottom: "10px",
+                }}
+                id="beneficiary"
+              >
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <h2 style={{ paddingTop: "5px", marginBottom: "3px" }}>
+                    Beneficiary of Donation{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>{" "}
+              </InputLabel>
+              <TextField
+                // value={minutes}
+                fullWidth
+                variant="outlined"
+                select
+                size="large"
+                SelectProps={{
+                  native: true,
+                }}
+                style={{ marginBottom: "15px" }}
+                InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
+                InputProps={{
+                  inputProps: {
+                    style: {
+                      height: "20px",
+                      fontSize: "18px",
+                      textAlign: "center",
+                    },
+                  },
+                }}
+                type="text"
+                name="beneficiary"
+                // label="Daily Minutes"
+                error={errors?.beneficiary ? true : false}
+                helperText={errors?.beneficiary && errors.beneficiary.message}
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please choose your beneficiary.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select a beneficiary{" "}
+                </option>
+
+                <option value={"Humanitarian: GiveWell Maximum Impact fund"}>
+                  Humanitarian: GiveWell Maximum Impact fund (Top-rated on
+                  Charitywatch.com){" "}
+                </option>
+                {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
+                <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
+                <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
+                <option value={"Environmental: The Conservation Fund"}>
+                  Enviromental: The Conservation Fund (Top-rated on
+                  Charitywatch.com)
+                </option>
+                <option value={"Animal Welfare Institute"}>
+                  Animal Welfare Institute (Top-rated on Charitywatch.com)
+                </option>
+                <option value={"The Republican National Party"}>
+                  ANTI-CHARITY: The Republican National Party (RNC)
+                </option>
+                <option value={"The Democratic National Party"}>
+                  ANTI-CHARITY: The Democratic National Party (DNC)
+                </option>
+                <option value={"CustomRequest"}>
+                  OTHER: Send us a message and tell us the cause you would like
+                  to send your money to.
+                </option>
+              </TextField>
+              <Alert severity="info">
+                <div style={{ fontSize: "16px" }}>
+                  This is where your deposit is sent if you fail to reach your
+                  goal by the deadline. Choose a charity if you want your money
+                  going to a good cause. Or choose an{" "}
+                  <strong>anti-charity</strong>, a cause you hate, to further
+                  motivate yourself to not fail.
+                </div>
+              </Alert>
+            </Grid>{" "}
+          </>
+        ) : (
+          // social contract 1111
+          <div>
+            <br />
+            <br />
+            <br />
+            <Grid item={true} xs={12}>
+              {/* <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "9px",
+                  marginTop: "15px",
+                }}
+              >
+                <div style={{ fontSize: "17px" }}>
+                  <strong>What message should we post/send?</strong>
+                  <br /> <br />
+                </div>
+                Choose the message we will text or post. It should state your
+                goal and the fact you failed to reach it.
+                <br /> <br />
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "10px" }}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <h1 style={{ paddingTop: "5px" }}>Social Penalty</h1>
+                </div>
+                {/* <div style={{ fontSize: "16px" }}>
+                  Choose the message we will text or post. It should state your
+                  goal and the fact you failed to reach it.{" "}
+                </div> */}
+                <br /> <br />
+              </InputLabel>
+            </Grid>
+
+            <Grid item={true} xs={12} md={12}>
+              {/* <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "5px",
+                  fontSize: "16px",
+                }}
+              >
+                <strong>
+                  Which platform should we post on?{" "}
+                  <span style={{ color: "red" }}>*</span>
+                </strong>
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Which platform should we post on?{" "}
+                    <span style={{ color: "red" }}>*</span>{" "}
+                  </h2>
+                </div>
+              </InputLabel>
+              <TextField
+                // value={minutes}
+                fullWidth
+                variant="outlined"
+                select
+                size="large"
+                SelectProps={{
+                  native: true,
+                }}
+                style={{ marginBottom: "15px" }}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: {
+                      height: "20px",
+                      fontSize: "18px",
+                      textAlign: "center",
+                    },
+                  },
+                }}
+                type="text"
+                name="social_platform"
+                // label="Daily Minutes"
+                error={errors?.contactfrequency ? true : false}
+                helperText={
+                  errors?.contactfrequency && errors.contactfrequency.message
+                }
+                // onChange={(e) => setMinutes(e.target.value)}
+                inputRef={register({
+                  required: "Please choose the platform.",
+                })}
+              >
+                <option selected disabled value="">
+                  Select platform
+                </option>
+
+                <option value={"fb"}>Facebook</option>
+                <option value={"text"}>Text a specific person </option>
+              </TextField>
+              <Alert severity="info">
+                <div style={{ fontSize: "16px" }}>
+                  This is where we will post and tag you.
+                  If you fail to reach your goal by the deadline, the post will go
+                  live. If you achieve your goal, you can allow us
+                  to make a post that you succeeded or
+                  you can opt-out. 
+                </div>
+              </Alert>
+            </Grid>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <Grid item={true} xs={12}>
+              {/* <div
+                style={{
+                  textAlign: "center",
+                  marginBottom: "9px",
+                  marginTop: "15px",
+                }}
+              >
+                <div style={{ fontSize: "17px" }}>
+                  <strong>Add Required Information:</strong>
+                  <br /> <br />
+                </div>
+                For example the link to your Facebook profile if you choose
+                Facebook, or the phone number we have to text.
+                <br /> <br />
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Add Required Information{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  For example the link to your Facebook profile if you choose
+                  Facebook, or the phone number we have to text.{" "}
+                </div>
+              </InputLabel>
+              <TextField
+                variant="outlined"
+                type="text"
+                label="Example: Text 123-456-7890, my mom, if I fail to run everyday."
+                name="social_method"
+                multiline={true}
+                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                rows={5}
+                error={errors.verificationmethod ? true : false}
+                helperText={
+                  errors.verificationmethod && errors.verificationmethod.message
+                }
+                fullWidth={true}
+                inputRef={register({})}
+              />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              {/* <h2 style={{ textAlign: "center" }}>Extra Request</h2> */}
+              <InputLabel
+                style={{ textAlign: "center", marginBottom: "15px" }}
+                id="social_message"
+              >
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>Extra Request (Optional)</h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  Want us to do anything else? Add a custom message to the post? Request it here.{" "}
+                </div>
+              </InputLabel>
+              <TextField
+                variant="outlined"
+                type="text"
+                label=""
+                name="social_request"
+                multiline={true}
+                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                rows={5}
+                error={errors.verificationmethod ? true : false}
+                helperText={
+                  errors.verificationmethod && errors.verificationmethod.message
+                }
+                fullWidth={true}
+                inputRef={register({})}
+              />
+            </Grid>
+          </div>
+        )}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <Divider
+          style={{
+            width: "100%",
+            marginTop: "4vh",
+            marginBottom: "4vh",
+          }}
+        />
+        <form>
+          <Card
+            style={{
+              textAlign: "center",
+              marginBottom: "3vh",
+              paddingBottom: "8px",
+            }}
+          >
+            <CardContent style={{ paddingBottom: "2px", marginBottom: "10px" }}>
+              {" "}
+              <span style={{ fontSize: "20px" }}>
+                Just a few more details... You're almost done.
+              </span>{" "}
+            </CardContent>
+            <KeyboardDoubleArrowDownIcon />
+          </Card>
+          <br /> <br />
           <Grid justifyContent="center" container={true} spacing={2}>
             {true && (
               <Grid item={true} xs={12} md={6}>
@@ -237,13 +809,14 @@ function Contact(props) {
                   type="text"
                   label="Name"
                   name="displayName"
+                  required
                   error={errors.displayName ? true : false}
                   helperText={errors.displayName && errors.displayName.message}
                   fullWidth={true}
                   inputRef={register({
                     required: "Please enter your name",
                   })}
-                  value={auth.user ? auth.user.displayName : ""}
+                  defaultValue={auth.user ? auth.user.displayName : ""}
                 />
               </Grid>
             )}
@@ -253,32 +826,16 @@ function Contact(props) {
                 type="email"
                 label="Email"
                 name="email"
+                required
                 error={errors.email ? true : false}
                 helperText={errors.email && errors.email.message}
                 fullWidth={true}
                 inputRef={register({
                   required: "Please enter your email",
                 })}
-                value={auth.user ? auth.user.email : ""}
+                defaultValue={auth.user ? auth.user.email : ""}
               />
             </Grid>
-            {/* <Grid item={true} xs={12}>
-              <TextField
-                variant="outlined"
-                type="text"
-                label="Message"
-                name="message"
-                multiline={true}
-                rows={5}
-                error={errors.message ? true : false}
-                helperText={errors.message && errors.message.message}
-                fullWidth={true}
-                inputRef={register({
-                  required: "Please enter a message",
-                })}
-              />
-            </Grid>
-            <Grid item={true} xs={12}></Grid> */}
             <Divider
               style={{
                 width: "100%",
@@ -287,7 +844,10 @@ function Contact(props) {
               }}
             />
             <Grid item={true} xs={12}>
-              <div
+              <br />
+              <br />
+              <br />
+              {/* <div
                 style={{
                   textAlign: "center",
                   marginBottom: "3px",
@@ -300,11 +860,21 @@ function Contact(props) {
                   </strong>
                 </div>
                 (The thing that you want to accomplish with us.)
-              </div>
+              </div> */}
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Your Goal <span style={{ color: "red" }}>*</span>{" "}
+                  </h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  (The thing that you want to accomplish with us.)
+                </div>
+              </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
-                label="Try to be specific! Make it measureable. Don't just say 'I want to lose weight', instead, say 'I want to lose 7.5 pounds'."
+                label="Try to be specific! Make it measurable. Don't just say 'I want to lose weight', instead, say 'I want to lose 7.5 pounds'."
                 name="goal"
                 InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
                 multiline={true}
@@ -316,26 +886,78 @@ function Contact(props) {
                   required: "Please enter your goal",
                 })}
               />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+            </Grid>
+            <Grid item={true} xs={12} md={12}>
+
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Days Until Deadline <span style={{ color: "red" }}>*</span>
+                  </h2>
+                </div>
+                <div style={{ fontSize: "16px" }}>
+                  This is how many days you have to complete your goal. Make
+                  sure to give yourself adequate time, but not enough for you to
+                  procrastinate. The countdown starts as soon as you submit the
+                  contract!
+                </div>
+              </InputLabel>
+
+              <TextField
+                variant="outlined"
+                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+
+                name="days"
+                multiline={true}
+                rows={1}
+                error={errors.days ? true : false}
+                // value={dollars}
+                // onChange={(e) => setDollars(e.target.value)}
+                helperText={errors.days && errors.days.message}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
+                fullWidth={true}
+                defaultValue={7}
+                inputRef={register({
+                  required: "Must enter a value from 1 - 30 days",
+                  pattern: {
+                    value: /\b([1-9]|[12][0-9]|3[0])\b/,
+                    message: "You must enter a number from 1 days to 30 days.",
+                  },
+                })}
+              />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </Grid>
             {/* <Grid item={true} xs={12}></Grid> */}
             <Grid item={true} xs={12}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "3px",
-                  marginTop: "35px",
-                }}
-              >
-                <div style={{ fontSize: "17px" }}>
-                  <strong>
-                    Preferred Regular Accountability Contact Method{" "}
+
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div style={{ textAlign: "center", paddingTop: "15px" }}>
+                  <h2 style={{ marginBottom: "11px" }}>
+                    Preferred Contact Method{" "}
                     <span style={{ color: "red" }}>*</span>
-                  </strong>
+                  </h2>
                 </div>
-                We're gonna try to contact you regularly (daily or every few
-                days) <strong>in the midst of your contract period.</strong>{" "}
-                Include your number or profile link or email.
-              </div>
+                <div style={{ fontSize: "16px" }}>
+                  We're going to try to contact you regularly (daily or every
+                  few days){" "}
+                  <strong>in the midst of your contract period.</strong> Include
+                  your number or profile link or email.
+                </div>
+              </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
@@ -352,19 +974,23 @@ function Contact(props) {
                 })}
               />
             </Grid>
+
             <Grid item={true} xs={12} md={12}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "5px",
-                  fontSize: "16px",
-                }}
-              >
-                <strong>
-                  How often do you want to be contacted?{" "}
-                  <span style={{ color: "red" }}>*</span>
-                </strong>
-              </div>
+            <br/> 
+              <InputLabel style={{ textAlign: "center", marginBottom: "10px" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "5px",
+                    fontSize: "16px",
+                  }}
+                >
+                  <strong>
+                    How often do you want to be contacted?{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </strong>
+                </div>
+              </InputLabel>
               <TextField
                 // value={minutes}
                 fullWidth
@@ -404,354 +1030,10 @@ function Contact(props) {
 
                 <option value={"everythreedays"}>Every 3 Days</option>
                 <option value={"weekly"}>Weekly </option>
-                <option value={"everymilestone"}>
-                  Only after hitting a milestone (mini goals){" "}
-                </option>
-              </TextField>
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{
-                width: "100%",
-                marginTop: "5vh",
-                marginBottom: "5vh",
-              }}
-            />{" "}
-            <Grid item={true} xs={12}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "9px",
-                  marginTop: "15px",
-                }}
-              >
-                <div style={{ fontSize: "17px" }}>
-                  <strong>
-                    Suggest a Final Verification Method (Optional)
-                  </strong>
-                </div>
-                How we would verify that you reached your goal at{" "}
-                <strong>the end of your deadline</strong>. (Don't worry if
-                you're not sure right now, skip this and we will contact you by
-                email later and make a plan together!)
-              </div>
-              <TextField
-                variant="outlined"
-                type="text"
-                label=" Examples: Picture of you on the weight scale if your goal is weight related, Strava running app data if you want to run..."
-                name="verificationmethod"
-                multiline={true}
-                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
-                rows={5}
-                error={errors.verificationmethod ? true : false}
-                helperText={
-                  errors.verificationmethod && errors.verificationmethod.message
-                }
-                fullWidth={true}
-                inputRef={register({})}
-              />
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <i>Continue below...</i>
-            </div>
-            <Divider
-              style={{
-                width: "100%",
-                marginTop: "5vh",
-                marginBottom: "5vh",
-              }}
-            />{" "}
-            <Grid item={true} xs={12} md={12}>
-              <InputLabel
-                style={{ textAlign: "center", marginBottom: "10px" }}
-                id="dollars"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h2 style={{ paddingTop: "5px" }}>
-                    Financial Penalty <span style={{ color: "red" }}>*</span>
-                  </h2>
-                  <Tooltip
-                    placement="right"
-                    style={{}}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      >
-                        Stripe's US Transaction Processing Fees: 0.8% fee if
-                        paid using bank. 3% with all other payment methods. We
-                        do not profit from this.
-                        <br />
-                        <br />
-                        <strong>
-                          Depositing $100 means you will get back $97.00 upon
-                          reaching your goals if you paid with credit card, and
-                          you will get back $99.20 if you paid with bank.
-                        </strong>
-                        <br />
-                        <br />
-                        We really, really, didn't want to have a fee at all!
-                        It's completely out of our control- banks and payment
-                        processors have to make money off of their services.
-                        <br />
-                        Questions? Ask us using the chat icon located in the
-                        bottom right of your screen.
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
-                </div>
-                <div style={{ fontSize: "16px" }}>
-                  This is the amount of money you put on the line in your
-                  contract. If you pass your goals, you will get your deposit
-                  back (besides the transaction processing fee from our payment
-                  processor). If you fail reach your goal by the deadline, the
-                  money will be donated to your chosen beneficiary below.{" "}
-                </div>
-                <br /> <br />
-                <div style={{ fontSize: "14px", lineHeight: 1.3 }}>
-                  <div style={{ color: "red" }}>
-                    Payment Processors Transaction Processing Fees: 3% with
-                    credit card. 1% with bank.
-                  </div>{" "}
-                  <strong>
-                    {" "}
-                    Deposit <u>$100 with credit card</u>, get back <u>$97.00</u>
-                    . <br /> Deposit <u>$100 with bank transfer</u>, get back{" "}
-                    <u>$99.20</u>. <br />
-                    We do not profit from this.
-                  </strong>
-                </div>
-              </InputLabel>
+              </TextField> <br/> <br/>
 
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                variant="outlined"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ fontSize: 50 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                  style: { fontSize: 25 },
-                }}
-                type="text"
-                name="dollars"
-                // label="Daily Minutes"
-                error={errors?.dollars ? true : false}
-                helperText={errors?.dollars && errors.dollars.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please enter your financial penalty.",
-                })}
-              >
-                <option selected disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={0}>
-                  0 (You don't want a financial penalty as motivation)
-                </option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-                <option value={150}>150</option>
-                <option value={250}>250</option>
-                <option value={500}>500</option>
-                <option value={1000}>1000</option>
-              </TextField>
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />{" "}
-            <Grid item={true} xs={12} md={12}>
-              <InputLabel
-                style={{ marginBottom: "10px", textAlign: "center" }}
-                id="days"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>
-                    Days Until Deadline <span style={{ color: "red" }}>*</span>
-                  </h3>
-                  <Tooltip
-                    placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
-                    title={
-                      <p
-                        style={{
-                          fontSize: "17px",
-                        }}
-                      >
-                        This is how many days you have to complete your goal.
-                        Make sure to give yourself adequate time, but not enough
-                        for you to procrastinate!
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
-                </div>
-                <div style={{ fontSize: "16px" }}>
-                  This is how many days you have to complete your goal. Make
-                  sure to give yourself adequate time, but not enough for you to
-                  procrastinate. The countdown starts as soon as you submit the
-                  contract!
-                </div>
-              </InputLabel>
 
-              <br />
-              <TextField
-                variant="outlined"
-                // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-
-                name="days"
-                multiline={true}
-                rows={1}
-                error={errors.days ? true : false}
-                // value={dollars}
-                // onChange={(e) => setDollars(e.target.value)}
-                helperText={errors.days && errors.days.message}
-                InputLabelProps={{ shrink: true }}
-                InputProps={{
-                  inputProps: {
-                    style: { textAlign: "center" },
-                  },
-                }}
-                fullWidth={true}
-                defaultValue={7}
-                inputRef={register({
-                  required: "Must enter a value from 3 - 30 days",
-                  pattern: {
-                    value: /\b([3-9]|[12][0-9]|3[0])\b/,
-                    message: "You must enter a number from 3 days to 30 days.",
-                  },
-                })}
-              />
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />
-            <Grid item={true} xs={12} md={12}>
-              <InputLabel
-                style={{ textAlign: "center", marginBottom: "10px" }}
-                id="beneficiary"
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h3 style={{ paddingTop: "5px" }}>
-                    Beneficiary of Donation{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </h3>
-                  {/* <Tooltip
-                    placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      ></p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip> */}
-                </div>{" "}
-                <br />
-                <div style={{ fontSize: "16px" }}>
-                  This is where your deposit is sent if you fail to reach your
-                  goal by the deadline. Choose a charity if you want your money
-                  going to a good cause. Or choose an{" "}
-                  <strong>anti-charity</strong>, a cause you hate, to further
-                  motivate yourself to not fail.
-                </div>
-                <br />
-              </InputLabel>
-              <TextField
-                // value={minutes}
-                fullWidth
-                variant="outlined"
-                select
-                size="large"
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true, style: { fontSize: 50 } }}
-                InputProps={{
-                  inputProps: {
-                    style: {
-                      height: "20px",
-                      fontSize: "18px",
-                      textAlign: "center",
-                    },
-                  },
-                }}
-                type="text"
-                name="beneficiary"
-                // label="Daily Minutes"
-                error={errors?.beneficiary ? true : false}
-                helperText={errors?.beneficiary && errors.beneficiary.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please choose your beneficiary.",
-                })}
-              >
-                <option selected disabled value="">
-                  Select a beneficiary{" "}
-                </option>
-
-                <option value={"Humanitarian: GiveWell Maximum Impact fund"}>
-                  Humanitarian: GiveWell Maximum Impact fund (Top-rated on
-                  Charitywatch.com){" "}
-                </option>
-                {/* <option value={100}>GiveDirectly (Highly rated on Givewell.com)</option>
-                <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
-                <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
-                <option value={"Enviromental: The Conservation Fund"}>
-                  Enviromental: The Conservation Fund (Top-rated on
-                  Charitywatch.com)
-                </option>
-                <option value={"Animal Welfare Institute"}>
-                  Animal Welfare Institute (Top-rated on Charitywatch.com)
-                </option>
-                <option value={"The Republican National Party"}>
-                  ANTI-CHARITY: The Republican National Party (RNC)
-                </option>
-                <option value={"The Democratic National Party"}>
-                  ANTI-CHARITY: The Democratic National Party (DNC)
-                </option>
-                <option value={"CustomRequest"}>
-                  OTHER: Send us a message and tell us the cause you would like
-                  to send your money to.
-                </option>
-              </TextField>
-            </Grid>
-            <Grid item={true} xs={12}></Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />
-            <Grid item={true} xs={10} md={8}>
+              <Grid item={true} xs={12}>
               <InputLabel
                 style={{ textAlign: "center", marginBottom: "10px" }}
                 id="phone"
@@ -763,44 +1045,10 @@ function Contact(props) {
                     justifyContent: "center",
                   }}
                 >
-                  <h3 style={{ paddingTop: "5px" }}>Phone Number</h3>
-                  <Tooltip
-                    placement="right"
-                    style={{
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                      paddingTop: "4px",
-                    }}
-                    title={
-                      <p
-                        style={{
-                          fontFamily: "Inter",
-                          lineHeight: "1.5",
-                          fontSize: "17px",
-                        }}
-                      >
-                        Remember that entering your Phone Number is OPTIONAL.
-                        <strong>
-                          Don't enter your phone if you don't want to talk via
-                          phone or text.
-                        </strong>
-                        You can keep in touch with us with email, Whatsapp,
-                        Messenger, or any other messaging app you have.
-                      </p>
-                    }
-                    arrow
-                  >
-                    <InfoIcon />
-                  </Tooltip>
-                </div>{" "}
-                <div>(Optional)</div>
-                <br />
+                  <h3 style={{ paddingTop: "5px" }}>Phone Number (Optional)</h3>
+                </div>
                 <div style={{ fontSize: "16px" }}>
-                  We check in with you daily via text to make sure you are
-                  staying on track. You can opt out of this by simply leaving
-                  this blank. <br />
-                  <br></br>If you want to opt-in later, just send us a message
-                  using chat or the contact us page.
+                  Most of our methods of checking in require a phone number.
                 </div>
                 <br />
               </InputLabel>
@@ -834,183 +1082,59 @@ function Contact(props) {
                 })}
               />
             </Grid>
-            <Divider
-              style={{ width: "100%", marginTop: "5vh", marginBottom: "5vh" }}
-            />
-            {/* save below
-            <Grid item={true} xs={8} md={4}>
-               <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-                type="text"
-                name="dailyminutes"
-                label="Daily Minutes"
-                error={errors?.dailyminutes ? true : false}
-                helperText={errors?.dailyminutes && errors.dailyminutes.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please enter your goal",
-                })}
-              >
-                <option disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={10}>10 Minutes</option>
-                <option value={20}>20 Minutes</option>
-                <MenuItem value={30}>30 Minutes</MenuItem>
-                <MenuItem value={40}>40 Minutes</MenuItem>
-                <MenuItem value={50}>50 Minutes</MenuItem>
-                <MenuItem value={60}>60 Minutes</MenuItem>
-                <MenuItem value={70}>70 Minutes</MenuItem>
-                <MenuItem value={80}>80 Minutes</MenuItem>
-                <MenuItem value={90}>90 Minutes</MenuItem>
-              </TextField>
+              <br />
+              <br />
             </Grid>
             <Grid item={true} xs={12}></Grid>
-            <Grid item={true} xs={8} md={4}>
-               <InputLabel name id="dailyminutes">Daily Minutes</InputLabel> 
-              <TextField
-                // value={minutes}
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                InputLabelProps={{ shrink: true }}
-                type="text"
-                name="monthlyhours"
-                label="Monthly Hours"
-                error={errors?.dailyminutes ? true : false}
-                helperText={errors?.dailyminutes && errors.dailyminutes.message}
-                // onChange={(e) => setMinutes(e.target.value)}
-                inputRef={register({
-                  required: "Please enter your goal",
-                })}
-              >
-                <option disabled value="">
-                  Select an option{" "}
-                </option>
-                <option value={10}>10 Minutes</option>
-                <option value={20}>20 Minutes</option>
-                <MenuItem value={30}>30 Minutes</MenuItem>
-                <MenuItem value={40}>40 Minutes</MenuItem>
-                <MenuItem value={50}>50 Minutes</MenuItem>
-                <MenuItem value={60}>60 Minutes</MenuItem>
-                <MenuItem value={70}>70 Minutes</MenuItem>
-                <MenuItem value={80}>80 Minutes</MenuItem>
-                <MenuItem value={90}>90 Minutes</MenuItem>
-              </TextField>
-            </Grid> 
-            */}
-            {/* save above */}
-            {/* 
-            <Grid item={true} xs={8} md={4}>
-              <FormControl size="small" variant="filled" fullWidth>
-                <InputLabel id="monthlyhours">Total Monthly Hours</InputLabel>
-                <Select
-                  required
-                  // value={hours}
-                  type="text"
-                  name="monthlyhours"
-                  label="monthlyhours"
-                  // onChange={(e) => setHours(e.target.value)}
+            <Grid item={true} xs={12}>
+
+              <InputLabel style={{ textAlign: "center", marginBottom: "15px" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "5px",
+                    fontSize: "16px",
+                  }}
                 >
-                  <MenuItem value={10}>10 Hours</MenuItem>
-                  <MenuItem value={20}>20 Hours</MenuItem>
-                  <MenuItem value={30}>30 Hours</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}></Grid>
-            <Grid item={true} xs={8} md={4}>
-              <FormControl size="small" variant="filled" fullWidth>
-                <InputLabel id="hours">Type of Penalty</InputLabel>
-                <Select
-                  required
-                  // value={penalty}
-                  type="text"
-                  name="penalty"
-                  label="penalty"
-                  // onChange={(e) => setPenalty(e.target.value)}
-                >
-                  <MenuItem value={"financial"}>Financial</MenuItem>
-                  <MenuItem value={"social"}>Social Media Post</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            {penalty &&
-              (penalty === "social" ? (
-                <Grid item={true} xs={10}>
-                  <TextField
-                    variant="outlined"
-                    type="text"
-                    label="Please enter what type of social media post we should post if you fail to reach your goal."
-                    name="socialmediapenalty"
-                    multiline={true}
-                    rows={3}
-                    error={errors.socialmediapenalty ? true : false}
-                    helperText={
-                      errors.socialmediapenalty &&
-                      errors.socialmediapenalty.message
-                    }
-                    fullWidth={true}
-                    inputRef={register({
-                      required:
-                        "Please enter what social media post we will post if you fail to reach your goal.",
-                    })}
-                  />
-                </Grid>
-              ) : (
-                <Grid item={true} xs={4}>
-                  <TextField
-                    variant="outlined"
-                    // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                    }}
-                    label="Dollars"
-                    name="financialpenalty"
-                    multiline={true}
-                    rows={1}
-                    error={errors.financialpenalty ? true : false}
-                    // value={dollars}
-                    // onChange={(e) => setDollars(e.target.value)}
-                    helperText={
-                      errors.financialpenalty && errors.financialpenalty.message
-                    }
-                    fullWidth={true}
-                    inputRef={register({
-                      required: "Must enter a dollar amount",
-                      pattern: /^[0-9]+(\.[0-9][0-9])?$/,
-                    })}
-                  />
-                </Grid> */}
-            {/* ))} */}
-            {/* <Grid item={true} xs={12}>
+                  <h2 style={{ marginBottom: "6px" }}>
+                    <strong>Suggest A Verification Method (Optional)</strong>
+                  </h2>
+
+                  <div style={{ fontSize: "16px" }}>
+                    How you would like us to verify that you reached your goal
+                    at <strong>the end of your deadline</strong>.
+                  </div>
+                </div>
+              </InputLabel>
               <TextField
                 variant="outlined"
                 type="text"
-                label="Penalty"
-                name="penalty"
+                label=" Examples: Picture of you on the weight scale if your goal is weight related, Strava running app data if you want to run..."
+                name="verificationmethod"
                 multiline={true}
-                rows={3}
-                error={errors.message ? true : false}
-                helperText={errors.message && errors.message.message}
+                InputLabelProps={{ style: { fontSize: 13, width: "95%" } }} // font size of input label
+                rows={5}
+                error={errors.verificationmethod ? true : false}
+                helperText={
+                  errors.verificationmethod && errors.verificationmethod.message
+                }
                 fullWidth={true}
-                inputRef={register({
-                  required: "Please enter your penalty for failing.",
-                })}
+                inputRef={register({})}
               />
-            </Grid> */}
-            {/* button below */}
+            </Grid>
+            <Alert severity="info">
+              (Don't worry if you're not sure how to fill out this last question
+              right now, you can skip this and we will contact you later and
+              make a plan!)
+            </Alert>
+            <Grid item={true} xs={12}></Grid>
+            <Divider
+              style={{
+                width: "100%",
+                marginTop: "5vh",
+                marginBottom: "5vh",
+              }}
+            />{" "}
             <Grid item={true} xs={12}></Grid>
             <Grid style={{ textAlign: "center" }} item={true} xs={12}>
               <Button
@@ -1019,6 +1143,7 @@ function Contact(props) {
                 size="large"
                 type="submit"
                 disabled={pending}
+                onClick={handleSubmit(onSubmit)}
               >
                 {!pending && <span>{"Generate Contract"}</span>}
 
@@ -1028,9 +1153,16 @@ function Contact(props) {
             <Grid item={true} xs={12}></Grid>
           </Grid>
         </form>
+        <Divider
+          style={{
+            width: "100%",
+            marginTop: "6vh",
+            marginBottom: "2vh",
+          }}
+        />{" "}
       </Container>
     </>
   );
 }
 
-export default Contact;
+export default ContractGenerate;

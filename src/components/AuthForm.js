@@ -15,15 +15,16 @@ function AuthForm(props) {
     signin: ({ email, pass }) => {
       return auth.signin(email, pass).then((user) => {
         // Call auth complete handler
-        props.onAuth(user);
+        props.onAuth(user, "signin");
       });
     },
     signup: ({ email, pass }) => {
       //hardcoded send email and pass to Signups google sheets via nocodeapi
+      // test
 
       return auth.signup(email, pass).then((user) => {
         // Call auth complete handler
-        props.onAuth(user);
+        props.onAuth(user, "signup");
         fetch(
           "https://v1.nocodeapi.com/envariable/google_sheets/GFMtUOtoKAupgdIf?tabId=Sheet1",
           {

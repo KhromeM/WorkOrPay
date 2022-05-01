@@ -8,7 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
-
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     // Add border that contrasts lightly with background color.
@@ -19,20 +20,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HowItWorks(props) {
-  const classes = useStyles();
-
+export default function ForMe() {
+    const classes = useStyles()
   return (
-    <div id="howitworks">
-      <Section
-        bgColor={props.bgColor}
-        size={props.size}
-        bgImage={props.bgImage}
-        bgImageOpacity={props.bgImageOpacity}
-      >
-        <Container>
+    <div>
+      <Container>
           <SectionHeader
-            title="How It Works"
+            title="Is this for me?"
             size={2}
             textAlign="center"
           />
@@ -45,8 +39,8 @@ function HowItWorks(props) {
               className={classes.row}
               container={true}
               item={true}
-              justifyContent="center"
               alignItems="center"
+              justifyContent="center"
               spacing={4}
             >
               <Grid item={true} xs={12} md={10}>
@@ -58,65 +52,58 @@ function HowItWorks(props) {
                 >
                   <Box style={{ marginTop: "30px", marginBottom: "60px" }}>
                     <Typography variant="h4" gutterBottom={true}>
-                      1) Sign Up
+                      You are ambitious but lazy
                     </Typography>
                     <Typography className={classes.description} variant="h6">
-                      First, sign up for an account and purchase a monthly
-                      membership. Once you have a membership you will be able to
-                      form contracts.
+                      You have temporary bursts of motivation where you set out
+                      to accomplish challenging tasks. Unfortunately, you lose
+                      motivation after a few days and give up. We remove the
+                      option of giving up without consequences.
                     </Typography>
                   </Box>
-                  <Box style={{ marginBottom: "60px" }}>
-                    <Typography variant="h4" gutterBottom={true}>
-                      2) Form A Contract
-                    </Typography>
-                    <Typography className={classes.description} variant="h6">
-                      Concretely define your goal. Make it measurable. Set a
-                      hard deadline. Give yourself enough time to complete your
-                      objectives, but not enough time for you to slack off.
-                      Example: "I will finish creating and launch my website in
-                      8 days!"
-                    </Typography>
-                  </Box>
-                  <Box style={{ marginBottom: "60px" }}>
-                    <Typography variant="h4" gutterBottom={true}>
-                      3) Set Penalties
-                    </Typography>
-                    <Typography className={classes.description} variant="h6">
-                      If just making goals was enough, you wouldn't be here.
-                      Create extra motivation for yourself by wagering your
-                      money or reputation. 
-                      <br/> <br/>
-                      <strong>Financial Contracts: </strong>
-                      Choose an amount from $25-$1000 to set as your maximum penalty. 
-                      Then pick the charity
-                      or anti-charity that gets your money if you fail.
 
-                      <br/> <br/>
-                      <strong>Social Contracts: </strong>
-                      Send us a link to your social media and add us. If you don't reach your goal, we will make a post about your failure 
-                      and tag you so your friends and family can see.
+                  <Box style={{ marginBottom: "60px" }}>
+                    <Typography variant="h4" gutterBottom={true}>
+                      You procrastinate
+                    </Typography>
+                    <Typography className={classes.description} variant="h6">
+                      You always wait until the last minute to start working.
+                      It's almost impossible for you to start working on
+                      something that isn't due in a couple of days. WorkOrPay
+                      allows you to set deadlines as short as a day to
+                      eliminate procrastination.
                     </Typography>
                   </Box>
                   <Box style={{ marginBottom: "60px" }}>
                     <Typography variant="h4" gutterBottom={true}>
-                      4) Follow Through
+                      Deadlines make you superhuman
                     </Typography>
                     <Typography className={classes.description} variant="h6">
-                      Now you have until your deadline to reach your goal. Once
-                      you do, send us the proof so we can verify it. If you fail to complete your goal by the
-                      deadline, you suffer the penalty.
+                      Ever notice just how efficient you become once deadlines
+                      start approaching? What usually took you a day to do, now
+                      takes only an hour. Create consequential
+                      deadlines so you can go into superhuman mode more
+                      often.
                     </Typography>
                   </Box>
+
+                  <Button
+                    component={Link}
+                    style={{ width: 190, height: 56, fontSize: "24px", backgroundColor:'#00B0FF' }}
+                    to={'/auth/signup'}
+                    variant="contained"
+                    size="large"
+
+                  >
+                    Start Now
+                  </Button>
+
+
                 </Box>
               </Grid>
             </Grid>
           </Container>
         </Container>
-        <br /> <br /> <br /> <br />
-      </Section>
     </div>
-  );
+  )
 }
-
-export default HowItWorks;
