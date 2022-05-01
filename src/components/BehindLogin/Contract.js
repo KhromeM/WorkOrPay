@@ -577,7 +577,7 @@ export default function Contract({ contract, items }) {
                   </Button>
                 </Grid>
               ) : (
-                <div style={{ marginTop: "10px", textAlign: "center" }}>
+                <div style={{ marginTop: "26px", textAlign: "center" }}>
                   <b>Congratulations for completing your goal!</b>
                   <br /> We will soon verify that you have completed the
                   contract and return your deposit if you made one.
