@@ -74,7 +74,7 @@ function useAuthProvider() {
   useIdentifyUser(finalUser, { enabled: ANALYTICS_IDENTIFY });
 
   // Handle response from auth functions (`signup`, `signin`, and `signinWithProvider`)
-  const handleAuth = async (response) => {
+  const handleAuth = async (response, returnInfo) => {
     const { user } = response;
     const { isNewUser } = getAdditionalUserInfo(response);
 
@@ -105,6 +105,10 @@ function useAuthProvider() {
 
     // Update user in state
     setUser(user);
+    console.log("does before");
+    if (isNewUser) return { auth: auth, isNewUser: true };
+
+    console.log("doesnt go here");
     return user;
   };
 

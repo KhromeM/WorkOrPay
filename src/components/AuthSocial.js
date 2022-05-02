@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "./../util/auth";
+import { getAdditionalUserInfo } from "firebase/auth";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -57,9 +58,13 @@ function AuthSocial(props) {
     setPending(provider);
     auth
       .signinWithProvider(provider)
-      .then((user) => {
+      .then(({ user, isNewUser }) => {
+        // console.log(getAdditionalUserInfo(user));
+        console.log(isNewUser, "isnewuser");
+        //undefined isnewuser if not
+        if (isNewUser) isNewUser = "signup";
         localStorage.setItem("lastUsedAuthProvider", provider);
-        props.onAuth(user);
+        props.onAuth(user, isNewUser);
       })
       .catch((error) => {
         setPending(null);
