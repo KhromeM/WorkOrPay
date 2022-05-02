@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Section from "./Section";
 import SectionHeader from "./SectionHeader";
 import { Link } from "./../util/router";
+import { useAuth } from ".././util/auth";
 
 const useStyles = makeStyles((theme) => ({
   // Increase <Container> padding so it's
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HeroSection(props) {
   const classes = useStyles();
+  const auth = useAuth();
 
   return (
     <Section
@@ -49,12 +51,12 @@ function HeroSection(props) {
               <Button
                 component={Link}
                 style={{ width: 190, height: 56, fontSize: "24px" }}
-                to={props.buttonPath}
+                to={auth.user ? "/dashboard" : props.buttonPath}
                 variant="contained"
                 size="large"
                 color={props.buttonColor}
               >
-                {props.buttonText}
+                {auth.user ? "Dashboard" : props.buttonText}
               </Button>
             </Box>
           </Grid>
