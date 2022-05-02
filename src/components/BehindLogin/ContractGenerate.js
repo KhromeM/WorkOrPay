@@ -556,7 +556,7 @@ function ContractGenerate() {
                 <option value={100}>Helen Keller International (Highly rated on Givewell.com)</option>
                 <option value={150}>Malaria Consortium (Highly rated on Givewell.com)</option> */}
                 <option value={"Environmental: The Conservation Fund"}>
-                  Enviromental: The Conservation Fund (Top-rated on
+                  Environmental: The Conservation Fund (Top-rated on
                   Charitywatch.com)
                 </option>
                 <option value={"Animal Welfare Institute"}>
