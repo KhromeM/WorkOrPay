@@ -17,6 +17,7 @@ import SectionHeader from "./SectionHeader";
 import { Link } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { ScatterPlot } from "@material-ui/icons";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -70,6 +71,7 @@ function PricingSection(props) {
         // "Facetime / Phone calls / Zoom check ins",
         "30-day refund policy. No questions asked",
       ],
+      negatives: ["Daily Human check-ins via text"],
     },
     {
       id: "starter",
@@ -157,6 +159,24 @@ function PricingSection(props) {
                               <CheckIcon />
                             </ListItemIcon>
                             <ListItemText>{perk}</ListItemText>
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  )}
+                  {item.negatives && (
+                    <Box mt={1}>
+                      <List aria-label="negatives">
+                        {item.negatives.map((negative, index) => (
+                          <ListItem
+                            className={classes.listItem}
+                            disableGutters={true}
+                            key={index}
+                          >
+                            <ListItemIcon className={classes.perkIcon}>
+                              <ClearIcon style={{ color: "red" }} />
+                            </ListItemIcon>
+                            <ListItemText>{negative}</ListItemText>
                           </ListItem>
                         ))}
                       </List>
