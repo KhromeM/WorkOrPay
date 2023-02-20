@@ -37,9 +37,10 @@ Work or Pay lets you write concrete goals and a deadline to complete it, then al
 
 ## Stack
 This project uses the following libraries and services:
-- Hosting and Cloud Functions - [Vercel](https://vercel.com)
+- Hosting - [Vercel](https://vercel.com)
 - Payments - [Stripe](https://stripe.com)
 - Authentication - [Firebase Auth](https://firebase.google.com/products/auth)
 - Database - [Cloud Firestore](https://firebase.google.com/products/firestore)
+- Backend - [Express](https://expressjs.com)
 
 
