@@ -1,9 +1,9 @@
 ## WorkOrPay.com
 Live: https://workorpay.com
 
-##Authors:
-[Khurram Mustafa](https://github.com/KhromeM)
-[William Chan](https://github.com/wc2184)
+## Authors:
+- [Khurram Mustafa](https://github.com/KhromeM)
+- [William Chan](https://github.com/wc2184)
 
 
 ---
