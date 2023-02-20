@@ -8,7 +8,7 @@ Live: https://workorpay.com
 
 ---
 
-## Who we are
+## What is this?
 Work or Pay lets you write concrete goals and a deadline to complete it, then allows you to deposit money that we hold until the deadline passes. We act as a middleman to decide whether you achieved the goal or not 
 1) Form a Contract
 
