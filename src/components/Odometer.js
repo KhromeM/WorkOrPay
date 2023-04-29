@@ -5,7 +5,7 @@ import "./odometer.css";
 function Odometer() {
   const matches = useMediaQuery("(max-width:692px)");
   const matches2 = useMediaQuery("(max-width:426px");
-  return (
+  return ( true ? <> </> :
     <div>
       <div className="container">
         <div
